@@ -1,0 +1,117 @@
+import 'package:flutter/material.dart';
+
+import '../generated/l10n.dart';
+import '../screens/landing-page.dart';
+import 'textform_card.dart';
+
+class LogInCard extends StatefulWidget {
+  LogInCard({
+    super.key,
+    required this.deviceSize,
+  });
+
+  final Size deviceSize;
+
+  @override
+  State<LogInCard> createState() => _LogInCardState();
+}
+
+class _LogInCardState extends State<LogInCard> {
+  var _rememberMe = false;
+  var _isLoading = false;
+  Map<String, String> _logInData = {
+    'email': '',
+    'password': '',
+  };
+  final GlobalKey<FormState> _formKey = GlobalKey();
+
+  Future<void> _submit() async {
+    _formKey.currentState?.save();
+    setState(() {
+      _isLoading = true;
+    });
+    // print(_logInData);
+
+    try {
+      // login logic
+      // await Provider.of<Auth>(context).logIn(
+      //       _authData['email'].toString(), _authData['password'].toString());
+      Navigator.of(context).pushReplacementNamed(LandingPage.routeName);
+    } catch (error) {}
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: widget.deviceSize.width * 0.95,
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: <Widget>[
+            TextFormFieldCard(
+              labelText: S.of(context).email,
+              icon: Icons.mail,
+              onSaved: (value) {
+                _logInData['email'] = value.toString();
+              },
+              keyboardType: TextInputType.emailAddress,
+              textInputAction: TextInputAction.next,
+            ),
+            //                                    INSERT PASSWORD RECIEVER
+            TextFormFieldCard(
+              obscureText: true,
+              labelText: S.of(context).password,
+              icon: Icons.lock,
+              onSaved: (value) {
+                _logInData['password'] = value.toString();
+              },
+            ),
+            Row(
+              children: [
+                const SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  S.of(context).staySignedIn,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Checkbox(
+                    value: _rememberMe,
+                    onChanged: (value) {
+                      setState(() {
+                        _rememberMe = !_rememberMe;
+                      });
+                    }),
+                const Spacer(),
+                TextButton(
+                  child: Text(
+                    S.of(context).forgotPassword,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            _isLoading
+                ? const CircularProgressIndicator()
+                : ElevatedButton(
+                    onPressed: () {
+                      _submit();
+                    },
+                    child: Text(
+                      S.of(context).logIn,
+                      style: const TextStyle(
+                        color: Color(0xffDEA568),
+                      ),
+                    ),
+                  ),
+          ],
+        ),
+      ),
+    );
+  }
+}

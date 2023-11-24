@@ -1,0 +1,789 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'intl/messages_all.dart';
+
+// **************************************************************************
+// Generator: Flutter Intl IDE plugin
+// Made by Localizely
+// **************************************************************************
+
+// ignore_for_file: non_constant_identifier_names, lines_longer_than_80_chars
+// ignore_for_file: join_return_with_assignment, prefer_final_in_for_each
+// ignore_for_file: avoid_redundant_argument_values, avoid_escaping_inner_quotes
+
+class S {
+  S();
+
+  static S? _current;
+
+  static S get current {
+    assert(_current != null,
+        'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
+    return _current!;
+  }
+
+  static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
+
+  static Future<S> load(Locale locale) {
+    final name = (locale.countryCode?.isEmpty ?? false)
+        ? locale.languageCode
+        : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name);
+    return initializeMessages(localeName).then((_) {
+      Intl.defaultLocale = localeName;
+      final instance = S();
+      S._current = instance;
+
+      return instance;
+    });
+  }
+
+  static S of(BuildContext context) {
+    final instance = S.maybeOf(context);
+    assert(instance != null,
+        'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
+    return instance!;
+  }
+
+  static S? maybeOf(BuildContext context) {
+    return Localizations.of<S>(context, S);
+  }
+
+  /// `Welcome to tamweeny`
+  String get welcome {
+    return Intl.message(
+      'Welcome to tamweeny',
+      name: 'welcome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `welcome subtitle`
+  String get welcomeSubtitle {
+    return Intl.message(
+      'welcome subtitle',
+      name: 'welcomeSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `logInTitle`
+  String get logInTitle {
+    return Intl.message(
+      'logInTitle',
+      name: 'logInTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `E-Mail`
+  String get email {
+    return Intl.message(
+      'E-Mail',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `password`
+  String get password {
+    return Intl.message(
+      'password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stay signed in?`
+  String get staySignedIn {
+    return Intl.message(
+      'Stay signed in?',
+      name: 'staySignedIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot password?`
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot password?',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log in`
+  String get logIn {
+    return Intl.message(
+      'Log in',
+      name: 'logIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have an account?`
+  String get noAccount {
+    return Intl.message(
+      'Don\'t have an account?',
+      name: 'noAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up`
+  String get signUp {
+    return Intl.message(
+      'Sign up',
+      name: 'signUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `yes`
+  String get yes {
+    return Intl.message(
+      'yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `no`
+  String get no {
+    return Intl.message(
+      'no',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you own a Tamween card?`
+  String get ownCard {
+    return Intl.message(
+      'Do you own a Tamween card?',
+      name: 'ownCard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Conditions for Obtaining a New Food Card:`
+  String get foodCardConditions {
+    return Intl.message(
+      'Conditions for Obtaining a New Food Card:',
+      name: 'foodCardConditions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1) According to sociological research, the applicant for the new food card must be educated, unemployed, and have a monthly income not exceeding 800 Egyptian Pounds.`
+  String get condition1 {
+    return Intl.message(
+      '1) According to sociological research, the applicant for the new food card must be educated, unemployed, and have a monthly income not exceeding 800 Egyptian Pounds.',
+      name: 'condition1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2) Be a retiree working in the public sector or private sector receiving a maximum salary of 1200 Egyptian Pounds monthly.`
+  String get condition2 {
+    return Intl.message(
+      '2) Be a retiree working in the public sector or private sector receiving a maximum salary of 1200 Egyptian Pounds monthly.',
+      name: 'condition2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3) Work in the public sector or private sector with a monthly salary of up to 1500 Egyptian Pounds.`
+  String get condition3 {
+    return Intl.message(
+      '3) Work in the public sector or private sector with a monthly salary of up to 1500 Egyptian Pounds.',
+      name: 'condition3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Categories Eligible for the New Food Card:`
+  String get eligibleCategories {
+    return Intl.message(
+      'Categories Eligible for the New Food Card:',
+      name: 'eligibleCategories',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There are several categories deserving of the new food card, and these are the following:`
+  String get categoriesList {
+    return Intl.message(
+      'There are several categories deserving of the new food card, and these are the following:',
+      name: 'categoriesList',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1) Individuals receiving social assistance.`
+  String get category1 {
+    return Intl.message(
+      '1) Individuals receiving social assistance.',
+      name: 'category1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2) Divorced individuals.`
+  String get category2 {
+    return Intl.message(
+      '2) Divorced individuals.',
+      name: 'category2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3) Citizens receiving a blessed and Sadat pension.`
+  String get category3 {
+    return Intl.message(
+      '3) Citizens receiving a blessed and Sadat pension.',
+      name: 'category3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `4) Individuals without a fixed income or supporter.`
+  String get category4 {
+    return Intl.message(
+      '4) Individuals without a fixed income or supporter.',
+      name: 'category4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `5) Casual and temporary labor, such as agricultural workers, street vendors, and drivers.`
+  String get category5 {
+    return Intl.message(
+      '5) Casual and temporary labor, such as agricultural workers, street vendors, and drivers.',
+      name: 'category5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `6) Craftsmen and low-income or unemployed workers.`
+  String get category6 {
+    return Intl.message(
+      '6) Craftsmen and low-income or unemployed workers.',
+      name: 'category6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `7) Qualified youth who have not been employed yet.`
+  String get category7 {
+    return Intl.message(
+      '7) Qualified youth who have not been employed yet.',
+      name: 'category7',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `8) Employee's salary not exceeding 1500 Egyptian Pounds monthly.`
+  String get category8 {
+    return Intl.message(
+      '8) Employee\'s salary not exceeding 1500 Egyptian Pounds monthly.',
+      name: 'category8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `9) Citizens with chronic illnesses and disabilities.`
+  String get category9 {
+    return Intl.message(
+      '9) Citizens with chronic illnesses and disabilities.',
+      name: 'category9',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `10) Retirees working in both the public and private sectors.`
+  String get category10 {
+    return Intl.message(
+      '10) Retirees working in both the public and private sectors.',
+      name: 'category10',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Procedures at the Office to Obtain a New Card:`
+  String get proceduresForNewCard {
+    return Intl.message(
+      'Procedures at the Office to Obtain a New Card:',
+      name: 'proceduresForNewCard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1) Head to the nearest Ministry of Supply office to obtain the card.`
+  String get procedure1 {
+    return Intl.message(
+      '1) Head to the nearest Ministry of Supply office to obtain the card.',
+      name: 'procedure1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2) Submit all the mentioned documents and papers as discussed in this topic.`
+  String get procedure2 {
+    return Intl.message(
+      '2) Submit all the mentioned documents and papers as discussed in this topic.',
+      name: 'procedure2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3) Wait until the card is received.`
+  String get procedure3 {
+    return Intl.message(
+      '3) Wait until the card is received.',
+      name: 'procedure3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Required Documents for a New Food Card:`
+  String get requiredDocuments {
+    return Intl.message(
+      'Required Documents for a New Food Card:',
+      name: 'requiredDocuments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1) Bring a copy of the marriage contract for the cardholder.`
+  String get document1 {
+    return Intl.message(
+      '1) Bring a copy of the marriage contract for the cardholder.',
+      name: 'document1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2) Copy of the national ID for the head of the family.`
+  String get document2 {
+    return Intl.message(
+      '2) Copy of the national ID for the head of the family.',
+      name: 'document2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3) Copies of national IDs for all cardholders.`
+  String get document3 {
+    return Intl.message(
+      '3) Copies of national IDs for all cardholders.',
+      name: 'document3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `4) The cardholder must attach a copy of the salary statement if there is any document indicating the monthly salary.`
+  String get document4 {
+    return Intl.message(
+      '4) The cardholder must attach a copy of the salary statement if there is any document indicating the monthly salary.',
+      name: 'document4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `5) Attach birth certificates for minor children.`
+  String get document5 {
+    return Intl.message(
+      '5) Attach birth certificates for minor children.',
+      name: 'document5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Process for Obtaining a Replacement Food Card:`
+  String get replacementCardProcess {
+    return Intl.message(
+      'Process for Obtaining a Replacement Food Card:',
+      name: 'replacementCardProcess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1) Copy of the national ID for the cardholder.`
+  String get replacementDocument1 {
+    return Intl.message(
+      '1) Copy of the national ID for the cardholder.',
+      name: 'replacementDocument1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2) Send a postal transfer of 20 Egyptian Pounds.`
+  String get replacementDocument2 {
+    return Intl.message(
+      '2) Send a postal transfer of 20 Egyptian Pounds.',
+      name: 'replacementDocument2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3) Enter the mobile phone number of the cardholder.`
+  String get replacementDocument3 {
+    return Intl.message(
+      '3) Enter the mobile phone number of the cardholder.',
+      name: 'replacementDocument3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `4) Bring the latest electricity bill.`
+  String get replacementDocument4 {
+    return Intl.message(
+      '4) Bring the latest electricity bill.',
+      name: 'replacementDocument4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `National Number`
+  String get national_number {
+    return Intl.message(
+      'National Number',
+      name: 'national_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Telephone Number`
+  String get telephone_number {
+    return Intl.message(
+      'Telephone Number',
+      name: 'telephone_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `City`
+  String get city {
+    return Intl.message(
+      'City',
+      name: 'city',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Building Number/Street Name`
+  String get building_number_street_name {
+    return Intl.message(
+      'Building Number/Street Name',
+      name: 'building_number_street_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Birth Date`
+  String get birth_date {
+    return Intl.message(
+      'Birth Date',
+      name: 'birth_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name Registered on the Tamween Card`
+  String get name_registered_on_tamween_card {
+    return Intl.message(
+      'Name Registered on the Tamween Card',
+      name: 'name_registered_on_tamween_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue`
+  String get resume {
+    return Intl.message(
+      'Continue',
+      name: 'resume',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register`
+  String get register {
+    return Intl.message(
+      'Register',
+      name: 'register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `National Number on Tamween Card`
+  String get national_number_on_tamween_card {
+    return Intl.message(
+      'National Number on Tamween Card',
+      name: 'national_number_on_tamween_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tamween Card Number`
+  String get tamween_card_number {
+    return Intl.message(
+      'Tamween Card Number',
+      name: 'tamween_card_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tamween Card Password`
+  String get tamween_password {
+    return Intl.message(
+      'Tamween Card Password',
+      name: 'tamween_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password`
+  String get confirm_password {
+    return Intl.message(
+      'Confirm Password',
+      name: 'confirm_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Customer Information`
+  String get customer_information {
+    return Intl.message(
+      'Customer Information',
+      name: 'customer_information',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tamween Card Information`
+  String get tamween_card_information {
+    return Intl.message(
+      'Tamween Card Information',
+      name: 'tamween_card_information',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passwords must match`
+  String get passwords_must_match {
+    return Intl.message(
+      'Passwords must match',
+      name: 'passwords_must_match',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error in entering data`
+  String get data_entry_error {
+    return Intl.message(
+      'Error in entering data',
+      name: 'data_entry_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Information`
+  String get account_information {
+    return Intl.message(
+      'Account Information',
+      name: 'account_information',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order History`
+  String get order_history {
+    return Intl.message(
+      'Order History',
+      name: 'order_history',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Offers`
+  String get offers {
+    return Intl.message(
+      'Offers',
+      name: 'offers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wallet Balance`
+  String get wallet_balance {
+    return Intl.message(
+      'Wallet Balance',
+      name: 'wallet_balance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Previous Month Balance`
+  String get previous_month_balance {
+    return Intl.message(
+      'Previous Month Balance',
+      name: 'previous_month_balance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Month Balance`
+  String get current_month_balance {
+    return Intl.message(
+      'Current Month Balance',
+      name: 'current_month_balance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get Help`
+  String get get_help {
+    return Intl.message(
+      'Get Help',
+      name: 'get_help',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About the App`
+  String get about_the_app {
+    return Intl.message(
+      'About the App',
+      name: 'about_the_app',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Out`
+  String get sign_out {
+    return Intl.message(
+      'Sign Out',
+      name: 'sign_out',
+      desc: '',
+      args: [],
+    );
+  }
+}
+
+class AppLocalizationDelegate extends LocalizationsDelegate<S> {
+  const AppLocalizationDelegate();
+
+  List<Locale> get supportedLocales {
+    return const <Locale>[
+      Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ar'),
+    ];
+  }
+
+  @override
+  bool isSupported(Locale locale) => _isSupported(locale);
+  @override
+  Future<S> load(Locale locale) => S.load(locale);
+  @override
+  bool shouldReload(AppLocalizationDelegate old) => false;
+
+  bool _isSupported(Locale locale) {
+    for (var supportedLocale in supportedLocales) {
+      if (supportedLocale.languageCode == locale.languageCode) {
+        return true;
+      }
+    }
+    return false;
+  }
+}
