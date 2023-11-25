@@ -12,21 +12,37 @@ class CustomBottomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void slideInPage(
+        {required String routeName,
+        required Widget page,
+        required Offset beginOffset}) {
+      Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) {
+            return page;
+          },
+          settings: RouteSettings(name: routeName),
+          transitionDuration: const Duration(milliseconds: 150),
+          reverseTransitionDuration: const Duration(milliseconds: 150),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return SlideTransition(
+                position: Tween<Offset>(begin: beginOffset, end: Offset.zero)
+                    .animate(animation),
+                child: child);
+            // return FadeTransition(opacity: animation, child: child,);
+          },
+        ),
+      );
+    }
+
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       height: isVisible ? 50.0 : 0,
       child: BottomAppBar(
         shape: const CircularNotchedRectangle(),
-        // AutomaticNotchedShape(
-        //   RoundedRectangleBorder(
-        //       borderRadius: BorderRadius.all(
-        //     Radius.circular(25),
-        //   )),
-        //   StadiumBorder(),
-        // ),
         notchMargin: 7.0,
         color: Colors.white,
-
         child: Row(
           children: <Widget>[
             IconButton(
@@ -39,8 +55,11 @@ class CustomBottomAppBar extends StatelessWidget {
               onPressed: () {
                 if (ModalRoute.of(context)?.settings.name !=
                     ProfileScreen.routeName) {
-                  Navigator.of(context)
-                      .pushReplacementNamed(ProfileScreen.routeName);
+                  slideInPage(
+                    routeName: ProfileScreen.routeName,
+                    page: ProfileScreen(),
+                    beginOffset: const Offset(1, 0),
+                  );
                 }
               },
             ),
@@ -60,8 +79,11 @@ class CustomBottomAppBar extends StatelessWidget {
               onPressed: () {
                 if (ModalRoute.of(context)?.settings.name !=
                     LandingPage.routeName) {
-                  Navigator.of(context)
-                      .pushReplacementNamed(LandingPage.routeName);
+                  slideInPage(
+                    routeName: LandingPage.routeName,
+                    page: LandingPage(),
+                    beginOffset: const Offset(-1, 0),
+                  );
                 }
               },
             ),

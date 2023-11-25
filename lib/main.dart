@@ -166,11 +166,6 @@ class MyApp extends StatelessWidget {
               titleTextStyle: GoogleFonts.lateef().copyWith(fontSize: 26),
             )),
         color: Colors.white,
-        //
-        //
-        //
-        //
-        //
         home: const SplashBody(),
         routes: {
           ProfileScreen.routeName: (ctx) => ProfileScreen(),
