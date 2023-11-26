@@ -67,6 +67,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Customer Information"),
         "data_entry_error":
             MessageLookupByLibrary.simpleMessage("Error in entering data"),
+        "dependents_id_and_birth_certificate":
+            MessageLookupByLibrary.simpleMessage(
+                "Dependents\' ID and Birth Certificate"),
+        "divorced": MessageLookupByLibrary.simpleMessage("Divorced"),
         "document1": MessageLookupByLibrary.simpleMessage(
             "1) Bring a copy of the marriage contract for the cardholder."),
         "document2": MessageLookupByLibrary.simpleMessage(
@@ -80,13 +84,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "eligibleCategories": MessageLookupByLibrary.simpleMessage(
             "Categories Eligible for the New Food Card:"),
         "email": MessageLookupByLibrary.simpleMessage("E-Mail"),
+        "female": MessageLookupByLibrary.simpleMessage("Female"),
         "foodCardConditions": MessageLookupByLibrary.simpleMessage(
             "Conditions for Obtaining a New Food Card:"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password?"),
+        "gender": MessageLookupByLibrary.simpleMessage("Gender"),
         "get_help": MessageLookupByLibrary.simpleMessage("Get Help"),
+        "id_and_birth_certificate":
+            MessageLookupByLibrary.simpleMessage("ID and Birth Certificate"),
         "logIn": MessageLookupByLibrary.simpleMessage("Log in"),
-        "logInTitle": MessageLookupByLibrary.simpleMessage("logInTitle"),
+        "logInTitle":
+            MessageLookupByLibrary.simpleMessage("Log in to your account"),
+        "male": MessageLookupByLibrary.simpleMessage("Male"),
+        "marital_status":
+            MessageLookupByLibrary.simpleMessage("Marital Status"),
+        "married": MessageLookupByLibrary.simpleMessage("Married"),
+        "minimum_salary":
+            MessageLookupByLibrary.simpleMessage("Minimum Salary"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "name_registered_on_tamween_card": MessageLookupByLibrary.simpleMessage(
             "Name Registered on the Tamween Card"),
@@ -102,7 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "order_history": MessageLookupByLibrary.simpleMessage("Order History"),
         "ownCard":
             MessageLookupByLibrary.simpleMessage("Do you own a Tamween card?"),
-        "password": MessageLookupByLibrary.simpleMessage("password"),
+        "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwords_must_match":
             MessageLookupByLibrary.simpleMessage("Passwords must match"),
         "previous_month_balance":
@@ -131,7 +146,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "resume": MessageLookupByLibrary.simpleMessage("Continue"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
         "sign_out": MessageLookupByLibrary.simpleMessage("Sign Out"),
-        "staySignedIn": MessageLookupByLibrary.simpleMessage("Stay signed in?"),
+        "single": MessageLookupByLibrary.simpleMessage("Single"),
+        "staySignedIn": MessageLookupByLibrary.simpleMessage("Remember me"),
         "tamween_card_information":
             MessageLookupByLibrary.simpleMessage("Tamween Card Information"),
         "tamween_card_number":
@@ -142,9 +158,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Telephone Number"),
         "wallet_balance":
             MessageLookupByLibrary.simpleMessage("Wallet Balance"),
-        "welcome": MessageLookupByLibrary.simpleMessage("Welcome to tamweeny"),
+        "welcome": MessageLookupByLibrary.simpleMessage("Welcome to Tamweeny"),
         "welcomeSubtitle":
-            MessageLookupByLibrary.simpleMessage("welcome subtitle"),
+            MessageLookupByLibrary.simpleMessage("For Food Supply"),
         "yes": MessageLookupByLibrary.simpleMessage("yes")
       };
 }

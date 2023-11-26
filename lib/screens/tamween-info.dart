@@ -98,7 +98,7 @@ class TamweenInfo extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pushNamed(TamweenSignUpScreen.routeName);
                 },
-                child: Text(S.of(context).apply_for_tamween_card),
+                child: Text(S.of(context).apply_for_tamween_card, textAlign: TextAlign.center,),
               )),
               const SizedBox(height: 30),
             ],

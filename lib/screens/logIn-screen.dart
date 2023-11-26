@@ -41,6 +41,7 @@ class LogInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return CustomScaffold(
+      fadeBackground: false,
       body: Container(
         constraints: BoxConstraints(
           maxHeight: deviceSize.height,

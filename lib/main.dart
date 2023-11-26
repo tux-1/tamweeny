@@ -54,7 +54,8 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        locale: const Locale('ar'),
+        themeMode: ThemeMode.dark,
+        // locale: const Locale('ar'),
         localizationsDelegates: const [
           S.delegate,
           GlobalMaterialLocalizations.delegate,
@@ -167,15 +168,17 @@ class MyApp extends StatelessWidget {
               iconColor: Colors.white,
               titleTextStyle: GoogleFonts.lateef().copyWith(fontSize: 26),
             ),
-            ),
-            
+            radioTheme: const RadioThemeData(
+                fillColor: MaterialStatePropertyAll(
+              Color(0xffDEA568),
+            ))),
         color: Colors.white,
         home: const SplashBody(),
         routes: {
           ProfileScreen.routeName: (ctx) => ProfileScreen(),
           LandingPage.routeName: (ctx) => LandingPage(),
           SignUpScreen.routeName: (ctx) => const SignUpScreen(),
-          TamweenSignUpScreen.routeName:(ctx) => TamweenSignUpScreen(),
+          TamweenSignUpScreen.routeName: (ctx) => TamweenSignUpScreen(),
           TamweenInfo.routeName: (ctx) => const TamweenInfo(),
           LogInScreen.routeName: (ctx) => LogInScreen(),
         },

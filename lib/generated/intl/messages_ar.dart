@@ -66,6 +66,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("معلومات عن العميل"),
         "data_entry_error":
             MessageLookupByLibrary.simpleMessage("خطأ في إدخال البيانات"),
+        "dependents_id_and_birth_certificate":
+            MessageLookupByLibrary.simpleMessage(
+                "بطاقة هوية وشهادة ميلاد التابعين"),
+        "divorced": MessageLookupByLibrary.simpleMessage("مطلق"),
         "document1": MessageLookupByLibrary.simpleMessage(
             "1) على مستخرج البطاقة إحضار صورة عقد الزواج."),
         "document2": MessageLookupByLibrary.simpleMessage(
@@ -79,14 +83,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "eligibleCategories": MessageLookupByLibrary.simpleMessage(
             "الفئات المقابلة لبطاقة الطعام الجديدة:"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكتروني"),
+        "female": MessageLookupByLibrary.simpleMessage("أنثى"),
         "foodCardConditions": MessageLookupByLibrary.simpleMessage(
             "شروط الحصول على بطاقة طعام جديدة:"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("هل نسيت كلمة السر؟"),
+        "gender": MessageLookupByLibrary.simpleMessage("النوع"),
         "get_help": MessageLookupByLibrary.simpleMessage("احصل على المساعدة"),
+        "id_and_birth_certificate":
+            MessageLookupByLibrary.simpleMessage("بطاقة الهوية وشهادة الميلاد"),
         "logIn": MessageLookupByLibrary.simpleMessage("تسجيل دخول"),
         "logInTitle":
             MessageLookupByLibrary.simpleMessage("تسجيل دخول الى حسابك"),
+        "male": MessageLookupByLibrary.simpleMessage("ذكر"),
+        "marital_status":
+            MessageLookupByLibrary.simpleMessage("الحالة الإجتماعية"),
+        "married": MessageLookupByLibrary.simpleMessage("متزوج"),
+        "minimum_salary":
+            MessageLookupByLibrary.simpleMessage("الحد الأدنى للراتب"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "name_registered_on_tamween_card": MessageLookupByLibrary.simpleMessage(
             "الاسم المسجل على بطاقة التموين"),
@@ -129,6 +143,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resume": MessageLookupByLibrary.simpleMessage("متابعة"),
         "signUp": MessageLookupByLibrary.simpleMessage("إنشاء حساب جديد"),
         "sign_out": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
+        "single": MessageLookupByLibrary.simpleMessage("أعزب"),
         "staySignedIn": MessageLookupByLibrary.simpleMessage("تذكرني"),
         "tamween_card_information":
             MessageLookupByLibrary.simpleMessage("معلومات عن بطاقة التموين"),

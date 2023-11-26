@@ -50,30 +50,30 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Welcome to tamweeny`
+  /// `Welcome to Tamweeny`
   String get welcome {
     return Intl.message(
-      'Welcome to tamweeny',
+      'Welcome to Tamweeny',
       name: 'welcome',
       desc: '',
       args: [],
     );
   }
 
-  /// `welcome subtitle`
+  /// `For Food Supply`
   String get welcomeSubtitle {
     return Intl.message(
-      'welcome subtitle',
+      'For Food Supply',
       name: 'welcomeSubtitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `logInTitle`
+  /// `Log in to your account`
   String get logInTitle {
     return Intl.message(
-      'logInTitle',
+      'Log in to your account',
       name: 'logInTitle',
       desc: '',
       args: [],
@@ -90,20 +90,20 @@ class S {
     );
   }
 
-  /// `password`
+  /// `Password`
   String get password {
     return Intl.message(
-      'password',
+      'Password',
       name: 'password',
       desc: '',
       args: [],
     );
   }
 
-  /// `Stay signed in?`
+  /// `Remember me`
   String get staySignedIn {
     return Intl.message(
-      'Stay signed in?',
+      'Remember me',
       name: 'staySignedIn',
       desc: '',
       args: [],
@@ -765,6 +765,106 @@ class S {
     return Intl.message(
       'Apply for Tamween Card',
       name: 'apply_for_tamween_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gender`
+  String get gender {
+    return Intl.message(
+      'Gender',
+      name: 'gender',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Marital Status`
+  String get marital_status {
+    return Intl.message(
+      'Marital Status',
+      name: 'marital_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Minimum Salary`
+  String get minimum_salary {
+    return Intl.message(
+      'Minimum Salary',
+      name: 'minimum_salary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ID and Birth Certificate`
+  String get id_and_birth_certificate {
+    return Intl.message(
+      'ID and Birth Certificate',
+      name: 'id_and_birth_certificate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dependents' ID and Birth Certificate`
+  String get dependents_id_and_birth_certificate {
+    return Intl.message(
+      'Dependents\' ID and Birth Certificate',
+      name: 'dependents_id_and_birth_certificate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Male`
+  String get male {
+    return Intl.message(
+      'Male',
+      name: 'male',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Female`
+  String get female {
+    return Intl.message(
+      'Female',
+      name: 'female',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Single`
+  String get single {
+    return Intl.message(
+      'Single',
+      name: 'single',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Married`
+  String get married {
+    return Intl.message(
+      'Married',
+      name: 'married',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Divorced`
+  String get divorced {
+    return Intl.message(
+      'Divorced',
+      name: 'divorced',
       desc: '',
       args: [],
     );

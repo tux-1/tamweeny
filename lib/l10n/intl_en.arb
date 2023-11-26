@@ -1,10 +1,10 @@
 {
-    "welcome": "Welcome to tamweeny",
-    "welcomeSubtitle": "welcome subtitle",
-    "logInTitle" : "logInTitle",
+    "welcome": "Welcome to Tamweeny",
+    "welcomeSubtitle": "For Food Supply",
+    "logInTitle": "Log in to your account",
     "email" : "E-Mail",
-    "password":"password",
-    "staySignedIn" :  "Stay signed in?",
+    "password":"Password",
+    "staySignedIn" :  "Remember me",
     "forgotPassword" : "Forgot password?",
     "logIn": "Log in",
     "noAccount" : "Don't have an account?",
@@ -70,5 +70,15 @@
     "get_help": "Get Help",
     "about_the_app": "About the App",
     "sign_out": "Sign Out",
-    "apply_for_tamween_card": "Apply for Tamween Card"
+    "apply_for_tamween_card": "Apply for Tamween Card",
+    "gender": "Gender",
+    "marital_status": "Marital Status",
+    "minimum_salary": "Minimum Salary",
+    "id_and_birth_certificate": "ID and Birth Certificate",
+    "dependents_id_and_birth_certificate": "Dependents' ID and Birth Certificate",
+    "male": "Male",
+    "female": "Female",
+    "single": "Single",
+    "married": "Married",
+    "divorced": "Divorced"
 }

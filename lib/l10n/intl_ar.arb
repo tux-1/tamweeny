@@ -71,5 +71,15 @@
     "get_help": "احصل على المساعدة",
     "about_the_app": "حول التطبيق",
     "sign_out": "تسجيل خروج",
-    "apply_for_tamween_card": "التقديم على بطاقة التموين"
+    "apply_for_tamween_card": "التقديم على بطاقة التموين",
+    "gender": "النوع",
+    "marital_status": "الحالة الإجتماعية",
+    "minimum_salary": "الحد الأدنى للراتب",
+    "id_and_birth_certificate": "بطاقة الهوية وشهادة الميلاد",
+    "dependents_id_and_birth_certificate": "بطاقة هوية وشهادة ميلاد التابعين",
+    "male": "ذكر",
+    "female": "أنثى",
+    "single": "أعزب",
+    "married": "متزوج",
+    "divorced": "مطلق"
 }

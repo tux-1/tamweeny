@@ -20,6 +20,7 @@ class CustomScaffold extends StatelessWidget {
   final double? drawerEdgeDragWidth;
   final Drawer? drawer;
   final Widget? bottomNavigationBar;
+  final bool fadeBackground;
 
   const CustomScaffold({
     Key? key,
@@ -39,6 +40,7 @@ class CustomScaffold extends StatelessWidget {
     this.drawerScrimColor,
     this.drawerEdgeDragWidth,
     this.bottomNavigationBar,
+    this.fadeBackground = true,
   }) : super(key: key);
 
   @override
@@ -75,10 +77,10 @@ class CustomScaffold extends StatelessWidget {
               ),
             ),
           ),
-          // BackdropFilter(
-          //   filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-          //   child: Container(),
-          // ),
+          fadeBackground ? BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+            child: Container(),
+          ): const SizedBox() ,
           body,
         ],
       ),
