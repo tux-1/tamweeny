@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -58,20 +60,25 @@ class CustomScaffold extends StatelessWidget {
       drawerEdgeDragWidth: drawerEdgeDragWidth,
       body: Stack(
         children: [
-          Padding(
+          Container(
+            alignment: Alignment.topCenter,
             padding: EdgeInsets.only(
               top: deviceSize.height / 10,
               left: 20,
               right: 20,
             ),
             child: Opacity(
-              opacity: 0.3,
+              opacity: 0.4,
               child: Image.asset(
                 'assets/images/Logo.png',
                 fit: BoxFit.cover,
               ),
             ),
           ),
+          // BackdropFilter(
+          //   filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+          //   child: Container(),
+          // ),
           body,
         ],
       ),

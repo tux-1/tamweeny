@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../generated/l10n.dart';
 import '../screens/landing-page.dart';
-import 'textform_card.dart';
+import 'textformfield_card.dart';
 
 class LogInCard extends StatefulWidget {
   LogInCard({
@@ -104,9 +104,6 @@ class _LogInCardState extends State<LogInCard> {
                     },
                     child: Text(
                       S.of(context).logIn,
-                      style: const TextStyle(
-                        color: Color(0xffDEA568),
-                      ),
                     ),
                   ),
           ],

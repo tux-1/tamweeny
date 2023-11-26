@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../generated/l10n.dart';
 import '../widgets/custom_scaffold.dart';
+import 'tamween-signUp-screen.dart';
 
 class TamweenInfo extends StatelessWidget {
   static const routeName = '/tamween-info';
@@ -91,6 +92,15 @@ class TamweenInfo extends StatelessWidget {
               Text(S.of(context).replacementDocument2),
               Text(S.of(context).replacementDocument3),
               Text(S.of(context).replacementDocument4),
+              const SizedBox(height: 15),
+              Center(
+                  child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(TamweenSignUpScreen.routeName);
+                },
+                child: Text(S.of(context).apply_for_tamween_card),
+              )),
+              const SizedBox(height: 30),
             ],
           ),
         ),

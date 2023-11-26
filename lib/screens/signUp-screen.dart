@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../generated/l10n.dart';
-import '../widgets/textform_card.dart';
+import '../widgets/textformfield_card.dart';
 import '../widgets/custom_scaffold.dart';
 
 class SignUpScreen extends StatefulWidget {

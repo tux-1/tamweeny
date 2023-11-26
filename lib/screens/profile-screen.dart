@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/screens/logIn-screen.dart';
 import '../generated/l10n.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_scaffold.dart';
@@ -78,6 +79,13 @@ class ProfileScreen extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.info_outline),
             title: Text(S.of(context).about_the_app),
+          ),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: Text(S.of(context).sign_out),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(LogInScreen.routeName);
+            },
           ),
         ],
       ),

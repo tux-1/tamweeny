@@ -14,6 +14,7 @@ import 'providers/auth.dart';
 import 'providers/products.dart';
 import 'screens/logIn-screen.dart';
 import 'screens/profile-screen.dart';
+import 'screens/tamween-signUp-screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -108,11 +109,12 @@ class MyApp extends StatelessWidget {
             ),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
+                foregroundColor:
+                    const MaterialStatePropertyAll(Color(0xffDEA568)),
                 backgroundColor:
                     const MaterialStatePropertyAll(Color(0xff335145)),
                 textStyle: MaterialStateProperty.all<TextStyle>(TextStyle(
                   fontFamily: GoogleFonts.lateef().fontFamily,
-                  color: Colors.white,
                   fontSize: 30,
                   fontWeight: FontWeight.w500,
                 )),
@@ -164,13 +166,16 @@ class MyApp extends StatelessWidget {
             listTileTheme: ListTileThemeData(
               iconColor: Colors.white,
               titleTextStyle: GoogleFonts.lateef().copyWith(fontSize: 26),
-            )),
+            ),
+            ),
+            
         color: Colors.white,
         home: const SplashBody(),
         routes: {
           ProfileScreen.routeName: (ctx) => ProfileScreen(),
           LandingPage.routeName: (ctx) => LandingPage(),
           SignUpScreen.routeName: (ctx) => const SignUpScreen(),
+          TamweenSignUpScreen.routeName:(ctx) => TamweenSignUpScreen(),
           TamweenInfo.routeName: (ctx) => const TamweenInfo(),
           LogInScreen.routeName: (ctx) => LogInScreen(),
         },

@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "about_the_app": MessageLookupByLibrary.simpleMessage("حول التطبيق"),
         "account_information":
             MessageLookupByLibrary.simpleMessage("معلومات الحساب"),
+        "apply_for_tamween_card":
+            MessageLookupByLibrary.simpleMessage("التقديم على بطاقة التموين"),
         "birth_date": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
         "building_number_street_name":
             MessageLookupByLibrary.simpleMessage("رقم المبنى / اسم الشارع"),

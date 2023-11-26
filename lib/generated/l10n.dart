@@ -759,6 +759,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Apply for Tamween Card`
+  String get apply_for_tamween_card {
+    return Intl.message(
+      'Apply for Tamween Card',
+      name: 'apply_for_tamween_card',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
