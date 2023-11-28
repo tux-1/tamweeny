@@ -37,6 +37,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
       if (img != null) _depsImages.add(img);
     });
   }
+
   void selectOwnerImages() async {
     Uint8List? img = await pickImage(ImageSource.gallery);
     setState(() {
@@ -224,48 +225,96 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                   textInputAction: TextInputAction.done,
                   // onSaved: ,
                 ),
-                Text(S.of(context).id_and_birth_certificate),
-                CustomTextField(
-                  readOnly: true,
-                  onTap: selectOwnerImages,
+                Row(
+                  children: [
+                    Text(S.of(context).id_and_birth_certificate),
+                    IconButton(
+                        onPressed: selectOwnerImages,
+                        icon: const Icon(Icons.add)),
+                    const Spacer(),
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _ownerImages.clear();
+                          });
+                        },
+                        icon: const Icon(Icons.delete))
+                  ],
                 ),
-                _ownerImages.isNotEmpty
-                    ? SizedBox(
-                        height: 35,
-                        child: ListView.builder(
-                            padding: const EdgeInsets.all(1),
-                            shrinkWrap: true,
-                            physics: const BouncingScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            itemCount: _ownerImages.length,
-                            itemBuilder: (ctx, i) {
-                              return CircleAvatar(
-                                backgroundImage: MemoryImage(_ownerImages[i]),
-                              );
-                            }),
-                      )
-                    : const SizedBox(),
-                Text(S.of(context).dependents_id_and_birth_certificate),
-                CustomTextField(
-                  readOnly: true,
-                  onTap: selectDepsImages,
+                Container(
+                  constraints: const BoxConstraints(
+                      minHeight: 50, minWidth: double.infinity),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(color: Colors.white),
+                  ),
+                  child: _ownerImages.isNotEmpty
+                      ? SizedBox(
+                          height: 35,
+                          child: ListView.builder(
+                              padding: const EdgeInsets.all(1),
+                              shrinkWrap: true,
+                              physics: const BouncingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: _ownerImages.length,
+                              itemBuilder: (ctx, i) {
+                                return Container(
+                                  margin:
+                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  child: CircleAvatar(
+                                    backgroundImage:
+                                        MemoryImage(_ownerImages[i]),
+                                  ),
+                                );
+                              }),
+                        )
+                      : null,
                 ),
-                _depsImages.isNotEmpty
-                    ? SizedBox(
-                        height: 35,
-                        child: ListView.builder(
-                            padding: const EdgeInsets.all(1),
-                            shrinkWrap: true,
-                            physics: const BouncingScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            itemCount: _depsImages.length,
-                            itemBuilder: (ctx, i) {
-                              return CircleAvatar(
-                                backgroundImage: MemoryImage(_depsImages[i]),
-                              );
-                            }),
-                      )
-                    : const SizedBox(),
+                Row(
+                  children: [
+                    Text(S.of(context).dependents_id_and_birth_certificate),
+                    IconButton(
+                        onPressed: selectDepsImages,
+                        icon: const Icon(Icons.add)),
+                    const Spacer(),
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _depsImages.clear();
+                          });
+                        },
+                        icon: const Icon(Icons.delete))
+                  ],
+                ),
+                Container(
+                  constraints: const BoxConstraints(
+                      minHeight: 50, minWidth: double.infinity),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(color: Colors.white),
+                  ),
+                  child: _depsImages.isNotEmpty
+                      ? SizedBox(
+                          height: 35,
+                          child: ListView.builder(
+                              padding: const EdgeInsets.all(1),
+                              shrinkWrap: true,
+                              physics: const BouncingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: _depsImages.length,
+                              itemBuilder: (ctx, i) {
+                                return Container(
+                                  margin:
+                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  child: CircleAvatar(
+                                    backgroundImage:
+                                        MemoryImage(_depsImages[i]),
+                                  ),
+                                );
+                              }),
+                        )
+                      : null,
+                ),
                 const SizedBox(height: 30),
                 Center(
                   child: ElevatedButton(
@@ -289,16 +338,14 @@ class CustomTextField extends StatelessWidget {
   final Function(String?)? onSaved;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
-  final bool readOnly;
+
   final int? maxLength;
-  final Function()? onTap;
+
   CustomTextField({
     this.onSaved,
     this.keyboardType = TextInputType.emailAddress,
     this.textInputAction = TextInputAction.next,
     this.maxLength,
-    this.readOnly = false,
-    this.onTap,
   });
 
   @override
@@ -309,9 +356,6 @@ class CustomTextField extends StatelessWidget {
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: const Color(0xffDEA568),
             ),
-        readOnly: readOnly,
-        onTap: onTap,
-        onSaved: onSaved,
         keyboardType: keyboardType,
         textInputAction: textInputAction,
         maxLines: 1,
