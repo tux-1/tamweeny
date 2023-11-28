@@ -66,7 +66,7 @@ class LogInScreen extends StatelessWidget {
                   ),
                   //Spacing between title and login
                   SizedBox(
-                    height: deviceSize.height * 0.3,
+                    height: deviceSize.height * 0.29,
                   ),
                   Text(
                     S.of(context).logInTitle,
@@ -77,7 +77,6 @@ class LogInScreen extends StatelessWidget {
                   LogInCard(
                     deviceSize: deviceSize,
                   ),
-                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

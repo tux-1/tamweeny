@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '/screens/logIn-screen.dart';
 import '../generated/l10n.dart';
@@ -14,6 +15,7 @@ class ProfileScreen extends StatelessWidget {
         isVisible: true,
       ),
       body: ListView(
+        physics: ScrollPhysics(),
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

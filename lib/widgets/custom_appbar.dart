@@ -38,12 +38,13 @@ class CustomBottomAppBar extends StatelessWidget {
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
-      height: isVisible ? 50.0 : 0,
+      height: isVisible ? 50 : 0,
       child: BottomAppBar(
+        padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 5),
         shape: const CircularNotchedRectangle(),
         notchMargin: 7.0,
         color: Colors.white,
-        child: Row(
+        child: Wrap(
           children: <Widget>[
             IconButton(
               iconSize: 30,

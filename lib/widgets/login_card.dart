@@ -71,31 +71,27 @@ class _LogInCardState extends State<LogInCard> {
             ),
             Row(
               children: [
-                const SizedBox(
-                  width: 5,
-                ),
+                const SizedBox(width: 5),
                 Text(
                   S.of(context).staySignedIn,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Checkbox(
+                    fillColor: MaterialStateProperty.resolveWith((states) {
+                      if (states.contains(MaterialState.selected)) {
+                        return const Color(0xffDEA568);
+                      }
+                      return null;
+                    }),
                     value: _rememberMe,
                     onChanged: (value) {
                       setState(() {
                         _rememberMe = !_rememberMe;
                       });
                     }),
-                const Spacer(),
-                TextButton(
-                  child: Text(
-                    S.of(context).forgotPassword,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                  onPressed: () {},
-                ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             _isLoading
                 ? const CircularProgressIndicator()
                 : ElevatedButton(
@@ -106,6 +102,14 @@ class _LogInCardState extends State<LogInCard> {
                       S.of(context).logIn,
                     ),
                   ),
+            const SizedBox(height: 10),
+            TextButton(
+              child: Text(
+                S.of(context).forgotPassword,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              onPressed: () {},
+            ),
           ],
         ),
       ),

@@ -65,6 +65,8 @@ class _LandingPageState extends State<LandingPage> {
     return CustomScaffold(
         floatingActionButtonLocation: _fabLocation,
         floatingActionButton: FloatingActionButton(
+          shape: const CircleBorder(),
+          backgroundColor: const Color(0xffD6965F),
           child: const Icon(Icons.shopping_cart),
           onPressed: () {},
         ),

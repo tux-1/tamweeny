@@ -1,7 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../generated/l10n.dart';
+import '../helpers/utils.dart';
 import '../widgets/custom_scaffold.dart';
 
 class TamweenSignUpScreen extends StatefulWidget {
@@ -14,6 +16,33 @@ class TamweenSignUpScreen extends StatefulWidget {
 
 class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  List<String> genders = [
+    'Male',
+    'Female',
+  ];
+  String? genderOption;
+
+  List<String> maritalStatus = [
+    'Single',
+    'Married',
+    'Divorced',
+  ];
+  String? maritalStatusOption;
+  List<Uint8List> _depsImages = [];
+  List<Uint8List> _ownerImages = [];
+
+  void selectDepsImages() async {
+    Uint8List? img = await pickImage(ImageSource.gallery);
+    setState(() {
+      if (img != null) _depsImages.add(img);
+    });
+  }
+  void selectOwnerImages() async {
+    Uint8List? img = await pickImage(ImageSource.gallery);
+    setState(() {
+      if (img != null) _ownerImages.add(img);
+    });
+  }
 
   Future<void> register(BuildContext context) async {
     final navigator = Navigator.of(context);
@@ -47,19 +76,6 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
       });
     }
   }
-
-  List<String> genders = [
-    'Male',
-    'Female',
-  ];
-  String? genderOption;
-
-  List<String> maritalStatus = [
-    'Single',
-    'Married',
-    'Divorced',
-  ];
-  String? maritalStatusOption;
 
   @override
   Widget build(BuildContext context) {
@@ -210,12 +226,46 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                 ),
                 Text(S.of(context).id_and_birth_certificate),
                 CustomTextField(
-                    // onSaved: ,
-                    ),
+                  readOnly: true,
+                  onTap: selectOwnerImages,
+                ),
+                _ownerImages.isNotEmpty
+                    ? SizedBox(
+                        height: 35,
+                        child: ListView.builder(
+                            padding: const EdgeInsets.all(1),
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: _ownerImages.length,
+                            itemBuilder: (ctx, i) {
+                              return CircleAvatar(
+                                backgroundImage: MemoryImage(_ownerImages[i]),
+                              );
+                            }),
+                      )
+                    : const SizedBox(),
                 Text(S.of(context).dependents_id_and_birth_certificate),
                 CustomTextField(
-                    // onSaved: ,
-                    ),
+                  readOnly: true,
+                  onTap: selectDepsImages,
+                ),
+                _depsImages.isNotEmpty
+                    ? SizedBox(
+                        height: 35,
+                        child: ListView.builder(
+                            padding: const EdgeInsets.all(1),
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: _depsImages.length,
+                            itemBuilder: (ctx, i) {
+                              return CircleAvatar(
+                                backgroundImage: MemoryImage(_depsImages[i]),
+                              );
+                            }),
+                      )
+                    : const SizedBox(),
                 const SizedBox(height: 30),
                 Center(
                   child: ElevatedButton(
@@ -236,15 +286,19 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
 }
 
 class CustomTextField extends StatelessWidget {
-  Function(String?)? onSaved;
-  TextInputType? keyboardType;
-  TextInputAction? textInputAction;
-  int? maxLength;
+  final Function(String?)? onSaved;
+  final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
+  final bool readOnly;
+  final int? maxLength;
+  final Function()? onTap;
   CustomTextField({
     this.onSaved,
     this.keyboardType = TextInputType.emailAddress,
     this.textInputAction = TextInputAction.next,
     this.maxLength,
+    this.readOnly = false,
+    this.onTap,
   });
 
   @override
@@ -255,6 +309,8 @@ class CustomTextField extends StatelessWidget {
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: const Color(0xffDEA568),
             ),
+        readOnly: readOnly,
+        onTap: onTap,
         onSaved: onSaved,
         keyboardType: keyboardType,
         textInputAction: textInputAction,
