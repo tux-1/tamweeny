@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import '../generated/l10n.dart';
 import '../helpers/utils.dart';
 import '../widgets/custom_scaffold.dart';
+import '../widgets/custom_textformfield.dart';
 
 class TamweenSignUpScreen extends StatefulWidget {
   const TamweenSignUpScreen({super.key});
@@ -20,33 +21,111 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
     'Male',
     'Female',
   ];
-  String? genderOption;
+  String? chosenGender;
 
   List<String> maritalStatus = [
     'Single',
     'Married',
     'Divorced',
   ];
-  String? maritalStatusOption;
-  List<Uint8List> _depsImages = [];
+  String? chosenMaritalStatus;
+  // ignore: prefer_final_fields
+  List<Uint8List> _dependentsImages = [];
+  // ignore: prefer_final_fields
   List<Uint8List> _ownerImages = [];
+// ignore: prefer_final_fields
+  Map<String, String> _signUpData = {
+    'name': '',
+    'gender': '',
+    'email': '',
+    'telephoneNumber': '',
+    'maritalStatus': '',
+    'minimumSalary': '',
+  };
 
-  void selectDepsImages() async {
+  void pickDependentsImages() async {
     Uint8List? img = await pickImage(ImageSource.gallery);
     setState(() {
-      if (img != null) _depsImages.add(img);
+      if (img != null) _dependentsImages.add(img);
     });
   }
 
-  void selectOwnerImages() async {
+  void pickOwnerImages() async {
     Uint8List? img = await pickImage(ImageSource.gallery);
     setState(() {
       if (img != null) _ownerImages.add(img);
     });
   }
 
+  Widget imagesPickerField(
+    String title,
+    List<Uint8List> imagesList,
+    Function() selecter,
+  ) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Text(title),
+            IconButton(onPressed: selecter, icon: const Icon(Icons.add)),
+            const Spacer(),
+            IconButton(
+                onPressed: () {
+                  setState(() {
+                    imagesList.clear();
+                  });
+                },
+                icon: const Icon(Icons.delete))
+          ],
+        ),
+        Container(
+          constraints:
+              const BoxConstraints(minHeight: 50, minWidth: double.infinity),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: Colors.white),
+          ),
+          child: imagesList.isNotEmpty
+              ? SizedBox(
+                  height: 35,
+                  child: ListView.builder(
+                      padding: const EdgeInsets.all(1),
+                      shrinkWrap: true,
+                      physics: const BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: imagesList.length,
+                      itemBuilder: (ctx, i) {
+                        return Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 5),
+                          child: CircleAvatar(
+                            backgroundImage: MemoryImage(imagesList[i]),
+                          ),
+                        );
+                      }),
+                )
+              : null,
+        ),
+      ],
+    );
+  }
+
   Future<void> register(BuildContext context) async {
     final navigator = Navigator.of(context);
+    if (chosenGender == null ||
+        chosenMaritalStatus == null ||
+        _ownerImages.isEmpty) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text(
+                S.of(context).data_entry_error,
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            );
+          });
+      return;
+    }
     if (_formKey.currentState?.validate() == false) {
       showDialog(
           context: context,
@@ -60,7 +139,8 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
           });
     }
     if (_formKey.currentState?.validate() == true) {
-      // print(_password.text);
+      _formKey.currentState?.save();
+      print(_signUpData);
       // sign up function that'll send data to backend
       await showDialog(
           context: context,
@@ -73,7 +153,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
             );
           }).then((_) {
         navigator.pop();
-        // navigator.pop();
+        navigator.pop();
       });
     }
   }
@@ -102,7 +182,13 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                 Text(S.of(context).name),
                 CustomTextField(
                   textInputAction: TextInputAction.next,
-                  // onSaved: ,
+                  onSaved: (name) => _signUpData['name'] = name.toString(),
+                  validator: (name) {
+                    if (name!.isEmpty) {
+                      return S.of(context).please_fill_out_this_field;
+                    }
+                    return null;
+                  },
                 ),
                 Text(S.of(context).gender),
                 Container(
@@ -114,12 +200,11 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                     children: [
                       RadioMenuButton(
                         value: genders[0],
-                        groupValue: genderOption,
-                        onChanged: (value) {
-                          setState(() {
-                            genderOption = value.toString();
-                          });
-                        },
+                        groupValue: chosenGender,
+                        onChanged: (value) => setState(() {
+                          chosenGender = value.toString();
+                          _signUpData['gender'] = chosenGender.toString();
+                        }),
                         child: Text(
                           S.of(context).male,
                           style:
@@ -130,12 +215,11 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                       ),
                       RadioMenuButton(
                         value: genders[1],
-                        groupValue: genderOption,
-                        onChanged: (value) {
-                          setState(() {
-                            genderOption = value.toString();
-                          });
-                        },
+                        groupValue: chosenGender,
+                        onChanged: (value) => setState(() {
+                          chosenGender = value.toString();
+                          _signUpData['gender'] = chosenGender.toString();
+                        }),
                         child: Text(
                           S.of(context).female,
                           style:
@@ -149,33 +233,48 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                 ),
                 Text(S.of(context).email),
                 CustomTextField(
-                    // onSaved: ,
-                    ),
+                  onSaved: (email) => _signUpData['email'] = email.toString(),
+                  validator: (emailText) {
+                    if (emailText!.isEmpty) {
+                      return S.of(context).please_fill_out_this_field;
+                    }
+                    return null;
+                  },
+                ),
                 Text(S.of(context).telephone_number),
                 CustomTextField(
                   keyboardType: TextInputType.number,
                   maxLength: 11,
-                  // onSaved: ,
+                  onSaved: (telephoneNumber) => _signUpData['telephoneNumber'] =
+                      telephoneNumber.toString(),
+                  validator: (telephoneNumber) {
+                    if (int.tryParse(telephoneNumber.toString()) == null &&
+                        telephoneNumber!.isNotEmpty) {
+                      return S.of(context).please_enter_valid_number;
+                    }
+                    if (telephoneNumber!.isEmpty) {
+                      return S.of(context).please_fill_out_this_field;
+                    }
+                    return null;
+                  },
                 ),
                 Text(S.of(context).marital_status),
                 Container(
-                  // constraints: const BoxConstraints(maxHeight: 70),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     border: Border.all(color: Colors.white),
                   ),
                   child: Wrap(
                     alignment: WrapAlignment.spaceEvenly,
-                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       RadioMenuButton(
                         value: maritalStatus[0],
-                        groupValue: maritalStatusOption,
-                        onChanged: (value) {
-                          setState(() {
-                            maritalStatusOption = value.toString();
-                          });
-                        },
+                        groupValue: chosenMaritalStatus,
+                        onChanged: (value) => setState(() {
+                          chosenMaritalStatus = value.toString();
+                          _signUpData['maritalStatus'] =
+                              chosenMaritalStatus.toString();
+                        }),
                         child: Text(
                           S.of(context).single,
                           style:
@@ -186,10 +285,12 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                       ),
                       RadioMenuButton(
                         value: maritalStatus[1],
-                        groupValue: maritalStatusOption,
+                        groupValue: chosenMaritalStatus,
                         onChanged: (value) {
                           setState(() {
-                            maritalStatusOption = value.toString();
+                            chosenMaritalStatus = value.toString();
+                            _signUpData['maritalStatus'] =
+                                chosenMaritalStatus.toString();
                           });
                         },
                         child: Text(
@@ -202,10 +303,12 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                       ),
                       RadioMenuButton(
                         value: maritalStatus[2],
-                        groupValue: maritalStatusOption,
+                        groupValue: chosenMaritalStatus,
                         onChanged: (value) {
                           setState(() {
-                            maritalStatusOption = value.toString();
+                            chosenMaritalStatus = value.toString();
+                            _signUpData['maritalStatus'] =
+                                chosenMaritalStatus.toString();
                           });
                         },
                         child: Text(
@@ -223,97 +326,29 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                 CustomTextField(
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.done,
-                  // onSaved: ,
+                  onSaved: (minimumSalary) {
+                    _signUpData['minimumSalary'] = minimumSalary.toString();
+                  },
+                  validator: (minimumSalary) {
+                    if (double.tryParse(minimumSalary.toString()) == null &&
+                        minimumSalary!.isNotEmpty) {
+                      return S.of(context).please_enter_valid_number;
+                    }
+                    if (minimumSalary!.isEmpty) {
+                      return S.of(context).please_fill_out_this_field;
+                    }
+                    return null;
+                  },
                 ),
-                Row(
-                  children: [
-                    Text(S.of(context).id_and_birth_certificate),
-                    IconButton(
-                        onPressed: selectOwnerImages,
-                        icon: const Icon(Icons.add)),
-                    const Spacer(),
-                    IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _ownerImages.clear();
-                          });
-                        },
-                        icon: const Icon(Icons.delete))
-                  ],
+                imagesPickerField(
+                  S.of(context).id_and_birth_certificate,
+                  _ownerImages,
+                  pickOwnerImages,
                 ),
-                Container(
-                  constraints: const BoxConstraints(
-                      minHeight: 50, minWidth: double.infinity),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: Colors.white),
-                  ),
-                  child: _ownerImages.isNotEmpty
-                      ? SizedBox(
-                          height: 35,
-                          child: ListView.builder(
-                              padding: const EdgeInsets.all(1),
-                              shrinkWrap: true,
-                              physics: const BouncingScrollPhysics(),
-                              scrollDirection: Axis.horizontal,
-                              itemCount: _ownerImages.length,
-                              itemBuilder: (ctx, i) {
-                                return Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(horizontal: 5),
-                                  child: CircleAvatar(
-                                    backgroundImage:
-                                        MemoryImage(_ownerImages[i]),
-                                  ),
-                                );
-                              }),
-                        )
-                      : null,
-                ),
-                Row(
-                  children: [
-                    Text(S.of(context).dependents_id_and_birth_certificate),
-                    IconButton(
-                        onPressed: selectDepsImages,
-                        icon: const Icon(Icons.add)),
-                    const Spacer(),
-                    IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _depsImages.clear();
-                          });
-                        },
-                        icon: const Icon(Icons.delete))
-                  ],
-                ),
-                Container(
-                  constraints: const BoxConstraints(
-                      minHeight: 50, minWidth: double.infinity),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: Colors.white),
-                  ),
-                  child: _depsImages.isNotEmpty
-                      ? SizedBox(
-                          height: 35,
-                          child: ListView.builder(
-                              padding: const EdgeInsets.all(1),
-                              shrinkWrap: true,
-                              physics: const BouncingScrollPhysics(),
-                              scrollDirection: Axis.horizontal,
-                              itemCount: _depsImages.length,
-                              itemBuilder: (ctx, i) {
-                                return Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(horizontal: 5),
-                                  child: CircleAvatar(
-                                    backgroundImage:
-                                        MemoryImage(_depsImages[i]),
-                                  ),
-                                );
-                              }),
-                        )
-                      : null,
+                imagesPickerField(
+                  S.of(context).dependents_id_and_birth_certificate,
+                  _dependentsImages,
+                  pickDependentsImages,
                 ),
                 const SizedBox(height: 30),
                 Center(
@@ -327,58 +362,6 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                 const SizedBox(height: 30),
               ],
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class CustomTextField extends StatelessWidget {
-  final Function(String?)? onSaved;
-  final TextInputType? keyboardType;
-  final TextInputAction? textInputAction;
-
-  final int? maxLength;
-
-  CustomTextField({
-    this.onSaved,
-    this.keyboardType = TextInputType.emailAddress,
-    this.textInputAction = TextInputAction.next,
-    this.maxLength,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 5),
-      child: TextFormField(
-        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: const Color(0xffDEA568),
-            ),
-        keyboardType: keyboardType,
-        textInputAction: textInputAction,
-        maxLines: 1,
-        maxLength: maxLength,
-        onTapOutside: (event) {
-          FocusScope.of(context).unfocus();
-        },
-        decoration: InputDecoration(
-          counterText: "",
-          constraints: const BoxConstraints(maxHeight: 70),
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 1, horizontal: 20),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(7),
-            borderSide: const BorderSide(color: Colors.white, width: 1),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
-            borderSide: const BorderSide(color: Colors.white, width: 1),
-          ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(7),
-            borderSide: const BorderSide(color: Colors.white, width: 1),
           ),
         ),
       ),

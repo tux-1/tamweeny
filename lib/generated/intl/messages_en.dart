@@ -120,6 +120,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwords_must_match":
             MessageLookupByLibrary.simpleMessage("Passwords must match"),
+        "please_enter_valid_number": MessageLookupByLibrary.simpleMessage(
+            "Please enter a valid number."),
+        "please_fill_out_this_field":
+            MessageLookupByLibrary.simpleMessage("Please fill out this field."),
         "previous_month_balance":
             MessageLookupByLibrary.simpleMessage("Previous Month Balance"),
         "procedure1": MessageLookupByLibrary.simpleMessage(

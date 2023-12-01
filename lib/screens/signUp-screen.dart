@@ -19,6 +19,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _confirmPassword = TextEditingController();
   final TextEditingController _date = TextEditingController();
 
+  //the Map that'll contain the data we'll take from form
   Map<String, String> _signUpData = {
     'email': '',
     'password': '',
@@ -39,7 +40,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           });
     }
     if (_formKey.currentState?.validate() == true) {
-      // print(_password.text);
       // sign up function that'll send data to backend
       await showDialog(
           context: context,

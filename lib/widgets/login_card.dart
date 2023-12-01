@@ -17,7 +17,7 @@ class LogInCard extends StatefulWidget {
 }
 
 class _LogInCardState extends State<LogInCard> {
-  var _rememberMe = false;
+  bool? _rememberMe = false;
   var _isLoading = false;
   Map<String, String> _logInData = {
     'email': '',
@@ -86,7 +86,7 @@ class _LogInCardState extends State<LogInCard> {
                     value: _rememberMe,
                     onChanged: (value) {
                       setState(() {
-                        _rememberMe = !_rememberMe;
+                        _rememberMe = value;
                       });
                     }),
               ],

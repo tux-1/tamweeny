@@ -869,6 +869,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Please enter a valid number.`
+  String get please_enter_valid_number {
+    return Intl.message(
+      'Please enter a valid number.',
+      name: 'please_enter_valid_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please fill out this field.`
+  String get please_fill_out_this_field {
+    return Intl.message(
+      'Please fill out this field.',
+      name: 'please_fill_out_this_field',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
