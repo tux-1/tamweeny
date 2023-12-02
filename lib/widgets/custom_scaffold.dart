@@ -77,10 +77,11 @@ class CustomScaffold extends StatelessWidget {
               ),
             ),
           ),
-          fadeBackground ? BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-            child: Container(),
-          ): const SizedBox() ,
+          if (fadeBackground)
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+              child: Container(),
+            ),
           body,
         ],
       ),

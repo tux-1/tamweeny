@@ -10,9 +10,8 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      bottomNavigationBar: const CustomBottomAppBar(
-        isVisible: true,
-      ),
+      bottomNavigationBar: const CustomBottomAppBar(isVisible: true),
+      
       body: ListView(
         physics: ScrollPhysics(),
         children: [

@@ -140,7 +140,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
     }
     if (_formKey.currentState?.validate() == true) {
       _formKey.currentState?.save();
-      print(_signUpData);
+      // print(_signUpData);
       // sign up function that'll send data to backend
       await showDialog(
           context: context,

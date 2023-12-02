@@ -180,7 +180,7 @@ class MyApp extends StatelessWidget {
             actionsIconTheme: IconThemeData(color: Colors.black),
           ),
           listTileTheme: ListTileThemeData(
-            visualDensity: VisualDensity.comfortable,
+            
             iconColor: Colors.white,
             titleTextStyle: GoogleFonts.lateef().copyWith(fontSize: 26),
             leadingAndTrailingTextStyle:
