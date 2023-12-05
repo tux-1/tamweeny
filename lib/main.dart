@@ -149,14 +149,13 @@ class MyApp extends StatelessWidget {
               color: Colors.white,
               fontFamily: GoogleFonts.lateef().fontFamily,
             ),
-            yearStyle: Lang.lateefBlack,
+            yearStyle: Language.lateefBlack,
             headerBackgroundColor: Colors.black,
             backgroundColor: Colors.teal,
-            weekdayStyle: Lang.lateefBlack,
-            dayStyle: Lang.lateefBlack,
-            // headerBackgroundColor: Colors.black,
+            weekdayStyle: Language.lateefBlack,
+            dayStyle: Language.lateefBlack,
           ),
-          primaryColor: const Color(0xFF335145),
+          // primaryColor: const Color(0xFF335145),
           iconTheme: const IconThemeData(
             color: Color(0xffDEA568),
           ),
@@ -180,7 +179,6 @@ class MyApp extends StatelessWidget {
             actionsIconTheme: IconThemeData(color: Colors.black),
           ),
           listTileTheme: ListTileThemeData(
-            
             iconColor: Colors.white,
             titleTextStyle: GoogleFonts.lateef().copyWith(fontSize: 26),
             leadingAndTrailingTextStyle:

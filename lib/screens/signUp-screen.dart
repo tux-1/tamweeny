@@ -69,11 +69,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: deviceSize.height * 0.05),
-              Text(
+              AppBar(
+              backgroundColor: Colors.transparent,
+              surfaceTintColor: Colors.transparent,
+              centerTitle: true,
+              title: Text(
                 S.of(context).signUp,
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
+            ),
               const SizedBox(height: 20),
               Text(
                 S.of(context).customer_information,

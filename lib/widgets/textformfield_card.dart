@@ -32,7 +32,6 @@ class TextFormFieldCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // constraints: const BoxConstraints(maxHeight: 70),
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
@@ -52,14 +51,18 @@ class TextFormFieldCard extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                  topLeft:
-                      Lang.isArabic() ? const Radius.circular(15) : Radius.zero,
-                  topRight:
-                      Lang.isArabic() ? Radius.zero : const Radius.circular(15),
-                  bottomLeft:
-                      Lang.isArabic() ? const Radius.circular(15) : Radius.zero,
-                  bottomRight:
-                      Lang.isArabic() ? Radius.zero : const Radius.circular(15),
+                  topLeft: Language.isArabic()
+                      ? const Radius.circular(15)
+                      : Radius.zero,
+                  topRight: Language.isArabic()
+                      ? Radius.zero
+                      : const Radius.circular(15),
+                  bottomLeft: Language.isArabic()
+                      ? const Radius.circular(15)
+                      : Radius.zero,
+                  bottomRight: Language.isArabic()
+                      ? Radius.zero
+                      : const Radius.circular(15),
                 ),
                 color: Theme.of(context).scaffoldBackgroundColor,
               ),
@@ -80,16 +83,15 @@ class TextFormFieldCard extends StatelessWidget {
                 decoration: InputDecoration(
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   enabledBorder: null,
-                  hintText: '       $labelText',
+                  hintText: ' $labelText',
                   hintStyle: Theme.of(context)
                       .textTheme
                       .bodyMedium
                       ?.copyWith(color: const Color(0xffD99D63)),
                   focusColor: Colors.white,
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Color.fromARGB(244, 217, 156, 99)),
-                  ),
+                  border: InputBorder.none,
+                  disabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
                 ),
               ),
             ),

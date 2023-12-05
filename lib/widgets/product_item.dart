@@ -33,7 +33,11 @@ class _ProductItemState extends State<ProductItem> {
                     return const Center(child: CircularProgressIndicator());
                   },
                   errorBuilder: (context, error, stackTrace) {
-                    return const Center(child: Text('Couldn\'t load image'));
+                    return const Center(
+                        child: Text(
+                      "Couldn't load image",
+                      textAlign: TextAlign.center,
+                    ));
                   },
                 ),
               ),

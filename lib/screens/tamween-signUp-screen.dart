@@ -57,17 +57,17 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
     });
   }
 
-  Widget imagesPickerField(
+  Widget imagesPicker(
     String title,
     List<Uint8List> imagesList,
-    Function() selecter,
+    Function() picker,
   ) {
     return Column(
       children: [
         Row(
           children: [
             Text(title),
-            IconButton(onPressed: selecter, icon: const Icon(Icons.add)),
+            IconButton(onPressed: picker, icon: const Icon(Icons.add)),
             const Spacer(),
             IconButton(
                 onPressed: () {
@@ -160,6 +160,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final deviceSize = MediaQuery.of(context).size;
     return CustomScaffold(
       body: SingleChildScrollView(
         child: Form(
@@ -169,7 +170,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 40),
+                SizedBox(height: deviceSize.height*0.05),
                 Center(
                   child: Text(
                     S.of(context).apply_for_tamween_card,
@@ -340,12 +341,14 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                     return null;
                   },
                 ),
-                imagesPickerField(
+                //Owner Images Picker
+                imagesPicker(
                   S.of(context).id_and_birth_certificate,
                   _ownerImages,
                   pickOwnerImages,
                 ),
-                imagesPickerField(
+                //Dependents Images Picker
+                imagesPicker(
                   S.of(context).dependents_id_and_birth_certificate,
                   _dependentsImages,
                   pickDependentsImages,

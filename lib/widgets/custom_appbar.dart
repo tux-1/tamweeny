@@ -35,7 +35,6 @@ class CustomBottomAppBar extends StatelessWidget {
         ),
       );
     }
-
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       height: isVisible ? 50 : 0,
@@ -67,7 +66,7 @@ class CustomBottomAppBar extends StatelessWidget {
             IconButton(
               iconSize: 30,
               tooltip: 'Locations',
-              icon: const Icon(Icons.location_on_outlined),
+              icon: const Icon(Icons.location_on_outlined,),
               onPressed: () {},
             ),
             IconButton(
