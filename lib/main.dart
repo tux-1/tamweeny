@@ -12,6 +12,7 @@ import './screens/splash-body.dart';
 import 'helpers/lang.dart';
 import 'providers/auth.dart';
 import 'providers/products.dart';
+import 'screens/locations-screen.dart';
 import 'screens/logIn-screen.dart';
 import 'screens/profile-screen.dart';
 import 'screens/tamween-signUp-screen.dart';
@@ -145,13 +146,21 @@ class MyApp extends StatelessWidget {
           ),
           // Define the primary color for the app buttons
           datePickerTheme: DatePickerThemeData(
+            headerForegroundColor: Colors.white,
             headerHelpStyle: TextStyle(
               color: Colors.white,
               fontFamily: GoogleFonts.lateef().fontFamily,
             ),
             yearStyle: Language.lateefBlack,
             headerBackgroundColor: Colors.black,
-            backgroundColor: Colors.teal,
+            todayBorder: BorderSide.none,
+            todayForegroundColor: MaterialStateProperty.resolveWith((states) {
+              if (states.isNotEmpty) {
+                return Colors.white;
+              }
+              return Colors.black;
+            }),
+            backgroundColor: Colors.blueGrey,
             weekdayStyle: Language.lateefBlack,
             dayStyle: Language.lateefBlack,
           ),
@@ -170,13 +179,15 @@ class MyApp extends StatelessWidget {
           ),
           appBarTheme: const AppBarTheme(
             iconTheme: IconThemeData(color: Colors.orange),
+            surfaceTintColor: Colors.transparent,
+            centerTitle: true,
             titleTextStyle: TextStyle(
               color: Colors.black,
               fontSize: 22,
               fontWeight: FontWeight.w500,
             ),
-            color: Colors.white,
-            actionsIconTheme: IconThemeData(color: Colors.black),
+            color: Colors.transparent,
+            // actionsIconTheme: const IconThemeData(color: Colors.black),
           ),
           listTileTheme: ListTileThemeData(
             iconColor: Colors.white,
@@ -201,6 +212,7 @@ class MyApp extends StatelessWidget {
           TamweenSignUpScreen.routeName: (ctx) => TamweenSignUpScreen(),
           TamweenInfo.routeName: (ctx) => const TamweenInfo(),
           LogInScreen.routeName: (ctx) => LogInScreen(),
+          LocationsScreen.routeName: (ctx) => LocationsScreen(),
         },
       ),
     );

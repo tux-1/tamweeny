@@ -15,8 +15,6 @@ class TamweenInfo extends StatelessWidget {
         child: Column(
           children: [
             AppBar(
-              backgroundColor: Colors.transparent,
-              surfaceTintColor: Colors.transparent,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
