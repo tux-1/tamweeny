@@ -18,15 +18,25 @@ class LocationsScreen extends StatefulWidget {
 }
 
 class _LocationsScreenState extends State<LocationsScreen> {
-  List<LatLng> routePoints = [LatLng(30.033333, 31.233334)];
+  List<LatLng> routePoints = [];
   LatLng? userLocation;
 
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
+  Widget attributionWidget = const SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    physics: NeverScrollableScrollPhysics(),
+    child: SimpleAttributionWidget(
+      source: Text(
+        'OpenStreetMap contributors',
+        overflow: TextOverflow.fade,
+        softWrap: true,
+      ),
+      onTap: null,
+    ),
+  );
 
+  Future<Position> _getCurrentLocation() async {
     // Test if location services are enabled.
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       // Location services are not enabled don't continue
       // accessing the position and request users of the
@@ -34,7 +44,7 @@ class _LocationsScreenState extends State<LocationsScreen> {
       return Future.error('Location services are disabled.');
     }
 
-    permission = await Geolocator.checkPermission();
+    LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
@@ -55,25 +65,30 @@ class _LocationsScreenState extends State<LocationsScreen> {
 
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
-    var currentPosition = await Geolocator.getCurrentPosition();
-    userLocation = LatLng(currentPosition.longitude, currentPosition.latitude);
+
     return await Geolocator.getCurrentPosition();
   }
 
   Marker buildTrackableMarker(
     LatLng markerLocation,
-    LatLng userLocation,
   ) {
     return Marker(
         rotate: true,
         point: markerLocation,
         child: InkWell(
           onTap: () async {
-            //Current location, must be a LatLng
-            final LatLng startLocation = userLocation;
+            final location = await _getCurrentLocation();
+            LatLng startLocation =
+                LatLng(30.094435768097608, 31.20311443602142);
+            // Replace the LatLng above with the one below in production
+            // LatLng(location.latitude, location.longitude);
 
             //Marker location
             final LatLng endLocation = markerLocation;
+
+            if (startLocation == null) {
+              return;
+            }
 
             //For reference, See:
             //https://project-osrm.org/docs/v5.24.0/api/?language=cURL#general-options
@@ -81,7 +96,20 @@ class _LocationsScreenState extends State<LocationsScreen> {
             var url = Uri.parse(
                 'http://router.project-osrm.org/route/v1/driving/${startLocation.longitude},${startLocation.latitude};${endLocation.longitude},${endLocation.latitude}?steps=true&annotations=true&geometries=geojson');
             var response = await http.get(url);
-
+            if (jsonDecode(response.body)["code"] != 'Ok') {
+              // Means there's no available route
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  showCloseIcon: true,
+                  duration: Duration(seconds: 1),
+                  content: SizedBox(
+                      height: 20,
+                      child: Wrap(children: [
+                        Text(
+                          'No available route',
+                        )
+                      ]))));
+              return;
+            }
             setState(() {
               routePoints = [];
               var router = jsonDecode(response.body)['routes'][0]['geometry']
@@ -93,10 +121,9 @@ class _LocationsScreenState extends State<LocationsScreen> {
                 var routePoint = routePointString.split(',');
 
                 routePoints.add(LatLng(
-                    double.parse(routePoint[1]),
-                    double.parse(
-                      routePoint[0],
-                    )));
+                  double.parse(routePoint[1]),
+                  double.parse(routePoint[0]),
+                ));
               }
             });
           },
@@ -108,45 +135,70 @@ class _LocationsScreenState extends State<LocationsScreen> {
         ));
   }
 
+  void getUserLocation() async {
+    final location = await _getCurrentLocation();
+    userLocation = LatLng(location.latitude, location.longitude);
+  }
+
+  Marker userLocationMarker() {
+    getUserLocation();
+    if (userLocation != null) {
+      return Marker(
+        point: userLocation!,
+        child: const Icon(
+          Icons.person_pin_circle,
+          color: Colors.blue,
+          size: 35,
+        ),
+      );
+    }
+    return const Marker(
+        point: LatLng(0, 0),
+        child: Icon(
+          Icons.abc,
+          color: Colors.transparent,
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: const CustomBottomAppBar(isVisible: true),
       body: FlutterMap(
-        options: MapOptions(
-          initialCenter: routePoints[0],
-          initialZoom: 14,
+        options: const MapOptions(
+          initialCenter: LatLng(30.035658, 31.268681),
+          initialZoom: 11.5,
         ),
         children: [
+          attributionWidget,
           TileLayer(
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
             userAgentPackageName: 'com.example.app',
           ),
-          const SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            physics: NeverScrollableScrollPhysics(),
-            child: SimpleAttributionWidget(
-              source: Text(
-                'OpenStreetMap contributors',
-                overflow: TextOverflow.fade,
-                softWrap: true,
-              ),
-              onTap: null,
-            ),
-          ),
           PolylineLayer(
             polylineCulling: false,
             polylines: [
-              Polyline(points: routePoints, color: Colors.blue, strokeWidth: 7)
+              Polyline(
+                points: routePoints,
+                color: Colors.blueGrey,
+                strokeWidth: 7,
+              )
             ],
           ),
           MarkerLayer(markers: [
             // ADD MARKERS HERE ..
             // ..
-            // Demo Marker
+            // Demo Markers
+            userLocationMarker(),
+            //Random location in cairo
+            buildTrackableMarker(const LatLng(30.035658, 31.268681)),
             buildTrackableMarker(
-                LatLng(30.035658, 31.268681), LatLng(30.033333, 31.233334)),
-            
+                const LatLng(30.094435768097608, 31.20311443602142)),
+            buildTrackableMarker(
+                const LatLng(30.093710249529067, 31.218426854554092)),
+            buildTrackableMarker(LatLng(30.08334314582945, 31.203597825718397)),
+            // Random place near google (default location)
+            buildTrackableMarker(const LatLng(37.423490, -122.078074)),
           ])
         ],
       ),
