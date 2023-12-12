@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../generated/l10n.dart';
-import '../screens/landing-page.dart';
+import '../screens/landing_page.dart';
 import 'textformfield_card.dart';
 
 class LogInCard extends StatefulWidget {
   LogInCard({
     super.key,
-    required this.deviceSize,
   });
-
-  final Size deviceSize;
 
   @override
   State<LogInCard> createState() => _LogInCardState();
@@ -30,14 +27,15 @@ class _LogInCardState extends State<LogInCard> {
     setState(() {
       _isLoading = true;
     });
-    // print(_logInData);
 
     try {
       // login logic
-      // await Provider.of<Auth>(context).logIn(
-      //       _authData['email'].toString(), _authData['password'].toString());
+      // await Provider.of<Auth>(context)
+      // .logIn(_authData['email'].toString(), _authData['password'].toString());
       Navigator.of(context).pushReplacementNamed(LandingPage.routeName);
-    } catch (error) {}
+    } catch (error) {
+      //error detection
+    }
     setState(() {
       _isLoading = false;
     });
@@ -45,8 +43,9 @@ class _LogInCardState extends State<LogInCard> {
 
   @override
   Widget build(BuildContext context) {
+    final Size deviceSize = MediaQuery.of(context).size;
     return SizedBox(
-      width: widget.deviceSize.width * 0.95,
+      width: deviceSize.width * 0.95,
       child: Form(
         key: _formKey,
         child: Column(

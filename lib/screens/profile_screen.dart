@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/screens/logIn-screen.dart';
+import 'logIn_screen.dart';
 import '../generated/l10n.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_scaffold.dart';

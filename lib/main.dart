@@ -4,18 +4,18 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import './screens/landing-page.dart';
-import './screens/signUp-screen.dart';
-import './screens/tamween-info.dart';
+import 'screens/landing_page.dart';
+import 'screens/signUp_screen.dart';
+import 'screens/tamween_info.dart';
 import 'generated/l10n.dart';
-import './screens/splash-body.dart';
+import 'screens/splash_body.dart';
 import 'helpers/lang.dart';
 import 'providers/auth.dart';
 import 'providers/products.dart';
-import 'screens/locations-screen.dart';
-import 'screens/logIn-screen.dart';
-import 'screens/profile-screen.dart';
-import 'screens/tamween-signUp-screen.dart';
+import 'screens/locations_screen.dart';
+import 'screens/logIn_screen.dart';
+import 'screens/profile_screen.dart';
+import 'screens/tamween-signUp_screen.dart';
 
 void main() {
   runApp(MyApp());

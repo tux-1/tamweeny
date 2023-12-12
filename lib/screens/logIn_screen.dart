@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../screens/tamween-info.dart';
+import 'tamween_info.dart';
 import '../generated/l10n.dart';
 import '../widgets/login_card.dart';
 import '../widgets/custom_scaffold.dart';
-import 'signUp-screen.dart';
+import 'signUp_screen.dart';
 
 class LogInScreen extends StatelessWidget {
   static const routeName = '/login-screen';
@@ -54,7 +54,6 @@ class LogInScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  //Some spacing from the top
                   SizedBox(height: deviceSize.height * 0.05),
                   Text(
                     S.of(context).welcome,
@@ -73,9 +72,9 @@ class LogInScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                   const SizedBox(height: 10),
-                  //The login box until the button
+                  //Login Card + Login Button
                   LogInCard(
-                    deviceSize: deviceSize,
+                    
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

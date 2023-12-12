@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../helpers/lang.dart';
-import '../screens/landing-page.dart';
-import '../screens/locations-screen.dart';
-import '../screens/profile-screen.dart';
+import '../screens/landing_page.dart';
+import '../screens/locations_screen.dart';
+import '../screens/profile_screen.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
   const CustomBottomAppBar({
     required this.isVisible,
+    super.key,
   });
 
   final bool isVisible;

@@ -65,7 +65,6 @@ class _LocationsScreenState extends State<LocationsScreen> {
 
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
-
     return await Geolocator.getCurrentPosition();
   }
 
@@ -79,8 +78,11 @@ class _LocationsScreenState extends State<LocationsScreen> {
         child: InkWell(
           onTap: () async {
             final location = await _getCurrentLocation();
-            LatLng startLocation =
-                LatLng(30.094435768097608, 31.20311443602142);
+            LatLng startLocation = //3enwan salama
+                LatLng(
+              30.094435768097608,
+              31.20311443602142,
+            );
             // Replace the LatLng above with the one below in production
             // LatLng(location.latitude, location.longitude);
 
@@ -139,7 +141,9 @@ class _LocationsScreenState extends State<LocationsScreen> {
 
   void getUserLocation() async {
     final location = await _getCurrentLocation();
-    userLocation = LatLng(location.latitude, location.longitude);
+    setState(() {
+      userLocation = LatLng(location.latitude, location.longitude);
+    });
   }
 
   Marker userLocationMarker() {
@@ -149,7 +153,7 @@ class _LocationsScreenState extends State<LocationsScreen> {
         point: userLocation!,
         child: const Icon(
           Icons.person_pin_circle,
-          color: Colors.blue,
+          color: Color(0xff335145),
           size: 35,
         ),
       );
@@ -166,6 +170,7 @@ class _LocationsScreenState extends State<LocationsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: const CustomBottomAppBar(isVisible: true),
+      
       body: FlutterMap(
         options: const MapOptions(
           initialCenter: LatLng(30.035658, 31.268681),

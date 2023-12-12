@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'logIn-screen.dart';
+import 'logIn_screen.dart';
 
 class SplashBody extends StatefulWidget {
   const SplashBody({super.key});
