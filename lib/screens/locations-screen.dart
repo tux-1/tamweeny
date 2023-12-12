@@ -72,6 +72,7 @@ class _LocationsScreenState extends State<LocationsScreen> {
   Marker buildTrackableMarker(
     LatLng markerLocation,
   ) {
+    var scaffoldMessenger = ScaffoldMessenger.of(context);
     return Marker(
         rotate: true,
         point: markerLocation,
@@ -98,7 +99,8 @@ class _LocationsScreenState extends State<LocationsScreen> {
             var response = await http.get(url);
             if (jsonDecode(response.body)["code"] != 'Ok') {
               // Means there's no available route
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              scaffoldMessenger.hideCurrentSnackBar();
+              scaffoldMessenger.showSnackBar(const SnackBar(
                   showCloseIcon: true,
                   duration: Duration(seconds: 1),
                   content: SizedBox(
@@ -170,7 +172,6 @@ class _LocationsScreenState extends State<LocationsScreen> {
           initialZoom: 11.5,
         ),
         children: [
-          attributionWidget,
           TileLayer(
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
             userAgentPackageName: 'com.example.app',
@@ -185,19 +186,26 @@ class _LocationsScreenState extends State<LocationsScreen> {
               )
             ],
           ),
+          attributionWidget,
           MarkerLayer(markers: [
-            // ADD MARKERS HERE ..
+            // ADD MARKERS HERE
             // ..
-            // Demo Markers
+
+            // DEMO MARKERS:
+
+            // For emulator this location will be at Google HQ
             userLocationMarker(),
-            //Random location in cairo
+
+            // Random locations in Cairo
             buildTrackableMarker(const LatLng(30.035658, 31.268681)),
             buildTrackableMarker(
                 const LatLng(30.094435768097608, 31.20311443602142)),
             buildTrackableMarker(
                 const LatLng(30.093710249529067, 31.218426854554092)),
-            buildTrackableMarker(LatLng(30.08334314582945, 31.203597825718397)),
-            // Random place near google (default location)
+            buildTrackableMarker(
+                const LatLng(30.08334314582945, 31.203597825718397)),
+
+            // Random location near Google HQ
             buildTrackableMarker(const LatLng(37.423490, -122.078074)),
           ])
         ],
