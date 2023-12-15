@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../generated/l10n.dart';
-import '../screens/landing_page.dart';
-import 'textformfield_card.dart';
+import '../../generated/l10n.dart';
+import '../../screens/landing_page.dart';
+import '../../widgets/textformfield_card.dart';
 
 class LogInCard extends StatefulWidget {
   LogInCard({

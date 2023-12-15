@@ -21,10 +21,12 @@ class CustomScaffold extends StatelessWidget {
   final Drawer? drawer;
   final Widget? bottomNavigationBar;
   final bool fadeBackground;
+  final Color? backgroundColor;
 
   const CustomScaffold({
     Key? key,
     required this.body,
+    this.backgroundColor,
     this.backgroundImageAsset = 'assets/images/Logo.png',
     this.appBar,
     this.resizeToAvoidBottomInset = true,
@@ -47,6 +49,7 @@ class CustomScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: backgroundColor,
       bottomNavigationBar: bottomNavigationBar,
       appBar: appBar,
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,

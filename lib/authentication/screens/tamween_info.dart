@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../generated/l10n.dart';
-import '../widgets/custom_scaffold.dart';
+import '../../generated/l10n.dart';
+import '../../widgets/custom_scaffold.dart';
 import 'tamween-signUp_screen.dart';
 
 class TamweenInfo extends StatelessWidget {

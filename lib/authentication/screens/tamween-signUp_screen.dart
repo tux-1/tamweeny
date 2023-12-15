@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../generated/l10n.dart';
-import '../helpers/utils.dart';
-import '../widgets/custom_scaffold.dart';
-import '../widgets/custom_textformfield.dart';
+import '../../generated/l10n.dart';
+import '../../utils/utils.dart';
+import '../../widgets/custom_scaffold.dart';
+import '../../widgets/custom_textformfield.dart';
 
 class TamweenSignUpScreen extends StatefulWidget {
   const TamweenSignUpScreen({super.key});

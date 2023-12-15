@@ -5,17 +5,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/landing_page.dart';
-import 'screens/signUp_screen.dart';
-import 'screens/tamween_info.dart';
+import 'authentication/screens/app_signup_screen.dart';
+import 'authentication/screens/tamween_info.dart';
 import 'generated/l10n.dart';
-import 'screens/splash_body.dart';
-import 'helpers/lang.dart';
+import 'authentication/screens/splash_body.dart';
+import 'utils/lang.dart';
 import 'providers/auth.dart';
 import 'providers/products.dart';
 import 'screens/locations_screen.dart';
-import 'screens/logIn_screen.dart';
+import 'authentication/screens/logIn_screen.dart';
 import 'screens/profile_screen.dart';
-import 'screens/tamween-signUp_screen.dart';
+import 'authentication/screens/tamween-signUp_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.dark,
-        locale: const Locale('ar'),
+        // locale: const Locale('ar'),
         localizationsDelegates: const [
           S.delegate,
           GlobalMaterialLocalizations.delegate,

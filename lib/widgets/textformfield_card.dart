@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../helpers/lang.dart';
+import '../utils/lang.dart';
 
 class TextFormFieldCard extends StatelessWidget {
   final IconData icon;
@@ -15,7 +15,8 @@ class TextFormFieldCard extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool readOnly;
 
-  TextFormFieldCard({
+  const TextFormFieldCard({
+    super.key,
     required this.icon,
     required this.onSaved,
     this.readOnly = false,
