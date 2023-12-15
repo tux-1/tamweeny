@@ -17,7 +17,7 @@ class _ProductItemState extends State<ProductItem> {
     // final deviceSize = MediaQuery.of(context).size;
     return Center(
       child: Card(
-        color: Color.fromARGB(44, 255, 255, 255),
+        color: Color.fromARGB(255, 224, 224, 224),
         elevation: 10,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: ClipRRect(
@@ -44,7 +44,7 @@ class _ProductItemState extends State<ProductItem> {
               Container(
                 constraints: const BoxConstraints(minWidth: double.maxFinite),
                 height: 87,
-                color: Theme.of(context).scaffoldBackgroundColor,
+                color: Color(0xff1E352F),
                 child: Column(
                   children: [
                     Expanded(

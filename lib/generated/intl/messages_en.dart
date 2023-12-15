@@ -148,6 +148,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "requiredDocuments": MessageLookupByLibrary.simpleMessage(
             "Required Documents for a New Food Card:"),
         "resume": MessageLookupByLibrary.simpleMessage("Continue"),
+        "search": MessageLookupByLibrary.simpleMessage("Search"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
         "sign_out": MessageLookupByLibrary.simpleMessage("Sign Out"),
         "single": MessageLookupByLibrary.simpleMessage("Single"),

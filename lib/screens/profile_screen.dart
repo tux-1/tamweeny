@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../authentication/screens/logIn_screen.dart';
 import '../generated/l10n.dart';
-import '../widgets/custom_appbar.dart';
+import '../widgets/navbar.dart';
 import '../widgets/custom_scaffold.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -10,7 +10,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      bottomNavigationBar: const CustomBottomAppBar(isVisible: true),
+      bottomNavigationBar: const NavBar(isVisible: true),
       body: ListView(
         physics: const ScrollPhysics(),
         children: [
@@ -71,12 +71,14 @@ class ProfileScreen extends StatelessWidget {
                 ListTile(
                   leading: const Icon(Icons.credit_score),
                   title: Text(S.of(context).current_month_balance),
-                  trailing: Text('500'), //Numbers should be fetched from backend here
+                  trailing:
+                      Text('500'), //Numbers should be fetched from backend here
                 ),
                 ListTile(
                   leading: const Icon(Icons.credit_score),
                   title: Text(S.of(context).previous_month_balance),
-                  trailing: Text('500'), //Numbers should be fetched from backend here
+                  trailing:
+                      Text('500'), //Numbers should be fetched from backend here
                 ),
                 ListTile(
                   leading: const Icon(Icons.question_mark_rounded),
@@ -90,7 +92,8 @@ class ProfileScreen extends StatelessWidget {
                   leading: const Icon(Icons.logout),
                   title: Text(S.of(context).sign_out),
                   onTap: () {
-                    Navigator.of(context).pushReplacementNamed(LogInScreen.routeName);
+                    Navigator.of(context)
+                        .pushReplacementNamed(LogInScreen.routeName);
                   },
                 ),
               ],

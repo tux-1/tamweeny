@@ -5,8 +5,8 @@ import '../screens/landing_page.dart';
 import '../screens/locations_screen.dart';
 import '../screens/profile_screen.dart';
 
-class CustomBottomAppBar extends StatelessWidget {
-  const CustomBottomAppBar({
+class NavBar extends StatelessWidget {
+  const NavBar({
     required this.isVisible,
     super.key,
   });
@@ -108,7 +108,6 @@ class CustomBottomAppBar extends StatelessWidget {
                       }
                     }),
                 IconButton(
-                  tooltip: 'Cart',
                   icon: const Icon(Icons.shopping_cart_outlined),
                   onPressed: () {},
                 ),

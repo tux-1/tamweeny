@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
 
-import '../widgets/custom_appbar.dart';
+import '../widgets/navbar.dart';
 
 class LocationsScreen extends StatefulWidget {
   static const routeName = '/locations-screen';
@@ -169,8 +169,8 @@ class _LocationsScreenState extends State<LocationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const CustomBottomAppBar(isVisible: true),
-      
+      backgroundColor: Colors.white,
+      bottomNavigationBar: const NavBar(isVisible: true),
       body: FlutterMap(
         options: const MapOptions(
           initialCenter: LatLng(30.035658, 31.268681),

@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.dark,
-        // locale: const Locale('ar'),
+        locale: const Locale('ar'),
         localizationsDelegates: const [
           S.delegate,
           GlobalMaterialLocalizations.delegate,
@@ -180,6 +180,7 @@ class MyApp extends StatelessWidget {
           appBarTheme: const AppBarTheme(
             iconTheme: IconThemeData(color: Colors.orange),
             surfaceTintColor: Colors.transparent,
+            
             centerTitle: true,
             titleTextStyle: TextStyle(
               color: Colors.black,

@@ -145,6 +145,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "requiredDocuments": MessageLookupByLibrary.simpleMessage(
             "هناك بعض الأوراق والمستندات المعتمدة من وزارة التموين لبطاقة غذائية جديدة ، ويجب على أخصائي استرجاع البطاقات معرفتها وإعدادها قبل التقديم ، وهذه الأوراق والمستندات هي:"),
         "resume": MessageLookupByLibrary.simpleMessage("متابعة"),
+        "search": MessageLookupByLibrary.simpleMessage("بحث"),
         "signUp": MessageLookupByLibrary.simpleMessage("إنشاء حساب جديد"),
         "sign_out": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
         "single": MessageLookupByLibrary.simpleMessage("أعزب"),

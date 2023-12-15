@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
+import 'package:tamweeny/generated/l10n.dart';
 
-import '../widgets/custom_appbar.dart';
-import '../widgets/custom_scaffold.dart';
+import '../widgets/navbar.dart';
+
 import '../providers/products.dart';
 import '../widgets/product_item.dart';
 
@@ -18,8 +19,6 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   late ScrollController _controller;
   bool _isVisible = true;
-
-  
 
   void _listen() {
     final ScrollDirection direction = _controller.position.userScrollDirection;
@@ -61,42 +60,135 @@ class _LandingPageState extends State<LandingPage> {
     final productsData = Provider.of<Products>(context);
     final products = productsData.items;
     return Scaffold(
-        backgroundColor: const Color.fromARGB(204, 187, 204, 187),
-        
-        bottomNavigationBar: CustomBottomAppBar(isVisible: _isVisible),
-        body: ListView(
-          controller: _controller,
-          children: [
-            Container(height: 1000,)
-          ],
-        )
-        // ListView(
-        //   controller: _controller,
-        //   children: [
-        //     GridView.builder(
-        //       shrinkWrap: true,
-        //       physics: const NeverScrollableScrollPhysics(),
-        //       padding: const EdgeInsets.all(10),
-        //       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        //         crossAxisCount: 2,
-        //         childAspectRatio: 0.85,
-        //         crossAxisSpacing: 10,
-        //         mainAxisSpacing: 10,
-        //       ),
-        //       itemCount: products.length,
-        //       itemBuilder: (context, index) {
-        //         return ChangeNotifierProvider.value(
-        //           value: products[index],
-        //           child: ProductItem(),
-        //         );
-        //       },
-        //     ),
-        //     Container(
-        //       height: 300,
-        //       color: Colors.transparent,
-        //     )
-        //   ],
-        // ),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: CustomSearchDelegate(hintText: S.of(context).search),
+              );
+            },
+            icon: const Icon(Icons.search),
+          )
+        ],
+      ),
+      backgroundColor: const Color.fromARGB(204, 187, 204, 187),
+      bottomNavigationBar: NavBar(isVisible: _isVisible),
+      body: ListView(
+        controller: _controller,
+        children: [
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.all(10),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 0.85,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+            ),
+            itemCount: products.length,
+            itemBuilder: (context, index) {
+              return ChangeNotifierProvider.value(
+                value: products[index],
+                child: const ProductItem(),
+              );
+            },
+          ),
+          Container(
+            height: 300,
+            color: Colors.transparent,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class CustomSearchDelegate extends SearchDelegate {
+  List<String> searchTerms = [
+    //Should be queried from database
+    'Apple',
+    'Banana',
+    'Pear',
+    'Salama',
+    'Mahnod',
+    'Strawberry',
+    'Watermelon',
+  ];
+
+  CustomSearchDelegate({
+    hintText,
+  }) : super(
+          searchFieldLabel: hintText,
+          keyboardType: TextInputType.text,
+          textInputAction: TextInputAction.search,
         );
+
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+          onPressed: () {
+            query = '';
+          },
+          icon: const Icon(
+            Icons.clear,
+          )),
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+        onPressed: () {
+          close(context, null);
+        },
+        icon: const Icon(Icons.arrow_back));
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    List<String> matchQuery = [];
+
+    for (var item in searchTerms) {
+      if (item.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(item);
+      }
+    }
+    return ListView.builder(
+        itemCount: matchQuery.length,
+        itemBuilder: (context, index) {
+          var result = matchQuery[index];
+          return ListTile(
+            title: Text(result),
+          );
+        });
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> matchQuery = [];
+
+    for (var item in searchTerms) {
+      if (item.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(item);
+      }
+    }
+    return ListView.builder(
+        itemCount: matchQuery.length,
+        itemBuilder: (context, index) {
+          var result = matchQuery[index];
+          if (query.isNotEmpty) {
+            return ListTile(
+              title: Text(result),
+            );
+          }
+          else{
+            // Add recent searches here
+          }
+        });
   }
 }
