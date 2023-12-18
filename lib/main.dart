@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import './screens/tab_bar_view.dart';
 import 'screens/landing_page.dart';
 import 'authentication/screens/app_signup_screen.dart';
 import 'authentication/screens/tamween_info.dart';
@@ -16,25 +17,11 @@ import 'screens/locations_screen.dart';
 import 'authentication/screens/logIn_screen.dart';
 import 'screens/profile_screen.dart';
 import 'authentication/screens/tamween-signUp_screen.dart';
+import 'utils/utils.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
-
-Map<int, Color> color = {
-  50: const Color.fromRGBO(51, 81, 69, .1),
-  100: const Color.fromRGBO(51, 81, 69, .2),
-  200: const Color.fromRGBO(51, 81, 69, .3),
-  300: const Color.fromRGBO(51, 81, 69, .4),
-  400: const Color.fromRGBO(51, 81, 69, .5),
-  500: const Color.fromRGBO(51, 81, 69, .6),
-  600: const Color.fromRGBO(51, 81, 69, .7),
-  700: const Color.fromRGBO(51, 81, 69, .8),
-  800: const Color.fromRGBO(51, 81, 69, .9),
-  900: const Color.fromRGBO(51, 81, 69, 1),
-};
-
-MaterialColor colorCustom = MaterialColor(0x335145, color);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -170,7 +157,7 @@ class MyApp extends StatelessWidget {
           ),
           // Define the accent color used for icons, n stuff
           colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: MaterialColor(0x335145, color),
+            primarySwatch: const MaterialColor(0x335145, kColorMap),
             accentColor: const Color(0xffDEA568),
             // backgroundColor: const Color(0xFF335145),
           ),
@@ -180,7 +167,7 @@ class MyApp extends StatelessWidget {
           appBarTheme: const AppBarTheme(
             iconTheme: IconThemeData(color: Colors.orange),
             surfaceTintColor: Colors.transparent,
-            
+
             centerTitle: true,
             titleTextStyle: TextStyle(
               color: Colors.black,
@@ -207,11 +194,12 @@ class MyApp extends StatelessWidget {
             ),
         home: const SplashBody(),
         routes: {
+          NavigationScreen.routeName: (ctx) => NavigationScreen(),
           ProfileScreen.routeName: (ctx) => ProfileScreen(),
           LandingPage.routeName: (ctx) => LandingPage(),
-          SignUpScreen.routeName: (ctx) => const SignUpScreen(),
+          SignUpScreen.routeName: (ctx) => SignUpScreen(),
           TamweenSignUpScreen.routeName: (ctx) => TamweenSignUpScreen(),
-          TamweenInfo.routeName: (ctx) => const TamweenInfo(),
+          TamweenInfo.routeName: (ctx) => TamweenInfo(),
           LogInScreen.routeName: (ctx) => LogInScreen(),
           LocationsScreen.routeName: (ctx) => LocationsScreen(),
         },

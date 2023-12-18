@@ -3,8 +3,6 @@ import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:tamweeny/generated/l10n.dart';
 
-import '../widgets/navbar.dart';
-
 import '../providers/products.dart';
 import '../widgets/product_item.dart';
 
@@ -60,25 +58,27 @@ class _LandingPageState extends State<LandingPage> {
     final productsData = Provider.of<Products>(context);
     final products = productsData.items;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        actions: [
-          IconButton(
-            onPressed: () {
-              showSearch(
-                context: context,
-                delegate: CustomSearchDelegate(hintText: S.of(context).search),
-              );
-            },
-            icon: const Icon(Icons.search),
-          )
-        ],
-      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+      floatingActionButton: _isVisible
+          ? FloatingActionButton(
+              backgroundColor: Color.fromARGB(255, 218, 218, 218),
+              foregroundColor: Color.fromARGB(255, 30, 53, 47),
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate:
+                      CustomSearchDelegate(hintText: S.of(context).search),
+                );
+              },
+              child: const Icon(Icons.search),
+            )
+          : null,
       backgroundColor: const Color.fromARGB(204, 187, 204, 187),
-      bottomNavigationBar: NavBar(isVisible: _isVisible),
+      
       body: ListView(
         controller: _controller,
         children: [
+          const SizedBox(height: 30),
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -98,8 +98,9 @@ class _LandingPageState extends State<LandingPage> {
             },
           ),
           Container(
-            height: 300,
-            color: Colors.transparent,
+            height: 500,
+            color: const Color.fromARGB(122, 96, 125, 139),
+            child: Text('Test'),
           )
         ],
       ),
@@ -185,8 +186,7 @@ class CustomSearchDelegate extends SearchDelegate {
             return ListTile(
               title: Text(result),
             );
-          }
-          else{
+          } else {
             // Add recent searches here
           }
         });

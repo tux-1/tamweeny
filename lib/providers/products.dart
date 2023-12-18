@@ -22,8 +22,8 @@ class Products with ChangeNotifier {
     Product(
       id: '7',
       price: 7,
-      title: 'title7ssssssssssssssssssssssssssssssssssssssss',
-      subtitle: '1book',
+      title: 'Title name longer than 2 lines (Overflow)',
+      subtitle: '1 Book',
       imageUrl:
           'https://static.vecteezy.com/system/resources/previews/009/399/398/non_2x/old-vintage-book-clipart-design-illustration-free-png.png',
     ),

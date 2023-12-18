@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../authentication/screens/logIn_screen.dart';
 import '../generated/l10n.dart';
-import '../widgets/navbar.dart';
+
 import '../widgets/custom_scaffold.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -10,7 +10,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      bottomNavigationBar: const NavBar(isVisible: true),
+      
       body: ListView(
         physics: const ScrollPhysics(),
         children: [

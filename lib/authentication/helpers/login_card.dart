@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../screens/tab_bar_view.dart';
 import '../../generated/l10n.dart';
-import '../../screens/landing_page.dart';
 import '../../widgets/textformfield_card.dart';
 
 class LogInCard extends StatefulWidget {
@@ -32,7 +32,7 @@ class _LogInCardState extends State<LogInCard> {
       // login logic
       // await Provider.of<Auth>(context)
       // .logIn(_authData['email'].toString(), _authData['password'].toString());
-      Navigator.of(context).pushReplacementNamed(LandingPage.routeName);
+      Navigator.of(context).pushReplacementNamed(NavigationScreen.routeName);
     } catch (error) {
       //error detection
     }

@@ -27,8 +27,8 @@ class NavBar extends StatelessWidget {
             return page;
           },
           settings: RouteSettings(name: routeName),
-          transitionDuration: const Duration(milliseconds: 150),
-          reverseTransitionDuration: const Duration(milliseconds: 150),
+          transitionDuration: const Duration(milliseconds: 1200),
+          reverseTransitionDuration: const Duration(milliseconds: 1200),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return SlideTransition(
                 position: Tween<Offset>(begin: beginOffset, end: Offset.zero)
@@ -46,7 +46,7 @@ class NavBar extends StatelessWidget {
           style: ButtonStyle(
               iconSize: MaterialStatePropertyAll(32),
               iconColor:
-                  MaterialStatePropertyAll(Color.fromARGB(209, 30, 53, 47))),
+                  MaterialStatePropertyAll(Color.fromARGB(255, 30, 53, 47))),
         ),
       ),
       child: AnimatedContainer(
@@ -140,7 +140,7 @@ class NavIconButton extends StatelessWidget {
       decoration: BoxDecoration(
           border: Border(
               top: currentRouteName == routeName
-                  ? const BorderSide()
+                  ? const BorderSide(color: Color.fromARGB(255, 25, 44, 39))
                   : BorderSide.none)),
       child: IconButton(
         icon: currentRouteName == routeName ? icon : selectedIcon,
