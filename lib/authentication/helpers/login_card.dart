@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../screens/tab_bar_view.dart';
+import '../../screens/navigation_screen.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/textformfield_card.dart';
 

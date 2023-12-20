@@ -61,8 +61,8 @@ class _LandingPageState extends State<LandingPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
       floatingActionButton: _isVisible
           ? FloatingActionButton(
-              backgroundColor: Color.fromARGB(255, 218, 218, 218),
-              foregroundColor: Color.fromARGB(255, 30, 53, 47),
+              backgroundColor: const Color.fromARGB(255, 218, 218, 218),
+              foregroundColor: const Color.fromARGB(255, 30, 53, 47),
               onPressed: () {
                 showSearch(
                   context: context,
@@ -74,7 +74,6 @@ class _LandingPageState extends State<LandingPage> {
             )
           : null,
       backgroundColor: const Color.fromARGB(204, 187, 204, 187),
-      
       body: ListView(
         controller: _controller,
         children: [
@@ -100,7 +99,7 @@ class _LandingPageState extends State<LandingPage> {
           Container(
             height: 500,
             color: const Color.fromARGB(122, 96, 125, 139),
-            child: Text('Test'),
+            child: const Text('Test', textAlign: TextAlign.center,),
           )
         ],
       ),
@@ -187,7 +186,8 @@ class CustomSearchDelegate extends SearchDelegate {
               title: Text(result),
             );
           } else {
-            // Add recent searches here
+            return null;
+            // Add recent searches here ??
           }
         });
   }

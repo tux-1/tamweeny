@@ -24,7 +24,6 @@ class _NavigationScreenState extends State<NavigationScreen>
     _tabController?.addListener(() {
       setState(() {
         _currentIndex = _tabController!.index;
-        print(_currentIndex);
       });
     });
   }
@@ -37,6 +36,7 @@ class _NavigationScreenState extends State<NavigationScreen>
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       extendBody: true,
       bottomNavigationBar: Container(
@@ -50,8 +50,9 @@ class _NavigationScreenState extends State<NavigationScreen>
         child: TabBar(
             dividerColor: Colors.transparent,
             indicatorColor: Colors.black,
-            labelColor: Color.fromARGB(255, 30, 53, 47), //Selected icon color
-            unselectedLabelColor: Color.fromARGB(255, 30, 53, 47),
+            labelColor:
+                const Color.fromARGB(255, 30, 53, 47), //Selected icon color
+            unselectedLabelColor: const Color.fromARGB(255, 30, 53, 47),
             controller: _tabController,
             tabs: [
               Tab(
@@ -89,8 +90,8 @@ class _NavigationScreenState extends State<NavigationScreen>
           physics: const NeverScrollableScrollPhysics(),
           children: [
             Container(),
-            LandingPage(),
-            LocationsScreen(),
+            const LandingPage(),
+            const LocationsScreen(),
             ProfileScreen(),
           ]),
     );
