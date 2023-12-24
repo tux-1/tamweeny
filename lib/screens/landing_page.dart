@@ -57,6 +57,7 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
     final products = productsData.items;
+    // final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
       floatingActionButton: _isVisible
@@ -85,8 +86,8 @@ class _LandingPageState extends State<LandingPage> {
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 0.85,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
+              crossAxisSpacing: 15,
+              mainAxisSpacing: 15,
             ),
             itemCount: products.length,
             itemBuilder: (context, index) {
@@ -99,7 +100,10 @@ class _LandingPageState extends State<LandingPage> {
           Container(
             height: 500,
             color: const Color.fromARGB(122, 96, 125, 139),
-            child: const Text('Test', textAlign: TextAlign.center,),
+            child: const Text(
+              'Test',
+              textAlign: TextAlign.center,
+            ),
           )
         ],
       ),

@@ -7,7 +7,10 @@ import '../../widgets/custom_scaffold.dart';
 import 'app_signup_screen.dart';
 
 class LogInScreen extends StatelessWidget {
+  
   static const routeName = '/login-screen';
+
+  const LogInScreen({super.key});
 
   void signUpQuestion(BuildContext context) {
     showDialog(
