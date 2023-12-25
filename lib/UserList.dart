@@ -5,17 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:tamweeny/UserLogin.dart' as user_login;
 
-class User {
-  int Id;
-  String Name;
-  String email;
-
-  User({required this.Id, required this.Name, required this.email});
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(Id: json['Id'], Name: json['Name'], email: json['email']);
-  }
-}
-
 Future<List<User>> fetchUsers() async {
   String token = '1|bWQFTsPNBpHL5BqXC0pJFzHU0hZFm4fZFGJmk7vt22f81538';
 // Replace with your actual token
