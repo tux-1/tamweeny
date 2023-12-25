@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
 
+
+
 class LocationsScreen extends StatefulWidget {
   static const routeName = '/locations-screen';
 
@@ -69,28 +71,29 @@ class _LocationsScreenState extends State<LocationsScreen> {
   Marker buildTrackableMarker(
     LatLng markerLocation,
   ) {
+    
     var scaffoldMessenger = ScaffoldMessenger.of(context);
     return Marker(
         rotate: true,
         point: markerLocation,
         child: InkWell(
           onTap: () async {
-            // ignore: unused_local_variable
+            
             final location = await _getCurrentLocation();
-            LatLng startLocation = const LatLng(
+            LatLng startLocation = //3enwan salama
+                LatLng(
               30.094435768097608,
               31.20311443602142,
             );
-            //3enwan salama
-            //     LatLng(
-            //   30.094435768097608,
-            //   31.20311443602142,
-            // );
-            // In production, put the LatLng below:
+            // Replace the LatLng above with the one below in production
             // LatLng(location.latitude, location.longitude);
 
             //Marker location
             final LatLng endLocation = markerLocation;
+
+            if (startLocation == null) {
+              return;
+            }
 
             //For reference, See:
             //https://project-osrm.org/docs/v5.24.0/api/?language=cURL#general-options
@@ -168,6 +171,7 @@ class _LocationsScreenState extends State<LocationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: FlutterMap(
         options: const MapOptions(
           initialCenter: LatLng(30.035658, 31.268681),

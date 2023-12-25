@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -70,12 +69,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               AppBar(
-              centerTitle: true,
-              title: Text(
-                S.of(context).signUp,
-                style: Theme.of(context).textTheme.headlineLarge,
+                centerTitle: true,
+                title: Text(
+                  S.of(context).signUp,
+                  style: Theme.of(context).textTheme.headlineLarge,
+                ),
               ),
-            ),
               const SizedBox(height: 20),
               Text(
                 S.of(context).customer_information,

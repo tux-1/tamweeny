@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tamweeny/services/api.dart';
 
 import '../../screens/navigation_screen.dart';
 import '../../generated/l10n.dart';
@@ -96,6 +97,8 @@ class _LogInCardState extends State<LogInCard> {
                 : ElevatedButton(
                     onPressed: () {
                       _submit();
+                      api().loginUser(_logInData['email'].toString(),
+                          _logInData['password'].toString());
                     },
                     child: Text(
                       S.of(context).logIn,

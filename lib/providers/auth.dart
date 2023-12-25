@@ -27,7 +27,7 @@ class Auth with ChangeNotifier {
     }
     return null;
   }
-  
+
   // Future<void> _authenticate(
   //     String email, String password, String urlSegment) async {
   //   //const is a compilation time constant, final is a runtime constant

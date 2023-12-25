@@ -17,13 +17,14 @@ import 'authentication/screens/logIn_screen.dart';
 import 'screens/profile_screen.dart';
 import 'authentication/screens/tamween-signUp_screen.dart';
 import 'utils/lang.dart';
+import 'utils/utils.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   final Map<int, Color> kColorMap = const {
     50: Color.fromRGBO(51, 81, 69, .1),
@@ -207,14 +208,14 @@ class MyApp extends StatelessWidget {
         scrollBehavior: ScrollConfiguration.of(context).copyWith(),
         home: const SplashBody(),
         routes: {
-          NavigationScreen.routeName: (ctx) => const NavigationScreen(),
-          ProfileScreen.routeName: (ctx) => const ProfileScreen(),
-          LandingPage.routeName: (ctx) => const LandingPage(),
-          SignUpScreen.routeName: (ctx) => const SignUpScreen(),
-          TamweenSignUpScreen.routeName: (ctx) => const TamweenSignUpScreen(),
-          TamweenInfo.routeName: (ctx) => const TamweenInfo(),
-          LogInScreen.routeName: (ctx) => const LogInScreen(),
-          LocationsScreen.routeName: (ctx) => const LocationsScreen(),
+          NavigationScreen.routeName: (ctx) => NavigationScreen(),
+          ProfileScreen.routeName: (ctx) => ProfileScreen(),
+          LandingPage.routeName: (ctx) => LandingPage(),
+          SignUpScreen.routeName: (ctx) => SignUpScreen(),
+          TamweenSignUpScreen.routeName: (ctx) => TamweenSignUpScreen(),
+          TamweenInfo.routeName: (ctx) => TamweenInfo(),
+          LogInScreen.routeName: (ctx) => LogInScreen(),
+          LocationsScreen.routeName: (ctx) => LocationsScreen(),
         },
       ),
     );

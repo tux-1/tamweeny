@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tamweeny/services/api.dart';
 import '../authentication/screens/logIn_screen.dart';
 import '../generated/l10n.dart';
 
@@ -7,12 +8,9 @@ import '../widgets/custom_scaffold.dart';
 class ProfileScreen extends StatelessWidget {
   static const routeName = '/profile-screen';
 
-  const ProfileScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      
       body: ListView(
         physics: const ScrollPhysics(),
         children: [
@@ -96,6 +94,7 @@ class ProfileScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context)
                         .pushReplacementNamed(LogInScreen.routeName);
+                    api().logout();
                   },
                 ),
               ],
