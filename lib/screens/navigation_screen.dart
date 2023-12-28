@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tamweeny/screens/landing_page.dart';
+import 'package:flutter/rendering.dart';
+import 'package:tamweeny/screens/home_page.dart';
 import 'package:tamweeny/screens/locations_screen.dart';
 import 'package:tamweeny/screens/profile_screen.dart';
 
@@ -16,6 +17,31 @@ class _NavigationScreenState extends State<NavigationScreen>
     with TickerProviderStateMixin {
   TabController? _tabController;
   int _currentIndex = 0;
+  late ScrollController scrollController;
+
+  bool _isVisible = true;
+
+  void _listen() {
+    final ScrollDirection direction =
+        scrollController.position.userScrollDirection;
+    if (direction == ScrollDirection.forward) {
+      _show();
+    } else if (direction == ScrollDirection.reverse) {
+      _hide();
+    }
+  }
+
+  void _show() {
+    if (!_isVisible) {
+      setState(() => _isVisible = true);
+    }
+  }
+
+  void _hide() {
+    if (_isVisible) {
+      setState(() => _isVisible = false);
+    }
+  }
 
   @override
   void initState() {
@@ -26,20 +52,25 @@ class _NavigationScreenState extends State<NavigationScreen>
         _currentIndex = _tabController!.index;
       });
     });
+    scrollController = ScrollController();
+    scrollController.addListener(_listen);
   }
 
   @override
   void dispose() {
-    super.dispose();
     _tabController!.dispose();
+    scrollController.removeListener(_listen);
+    scrollController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       extendBody: true,
-      bottomNavigationBar: Container(
+      bottomNavigationBar: AnimatedContainer(
+        height: _isVisible ? 50 : 0,
+        duration: const Duration(milliseconds: 200),
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -49,7 +80,7 @@ class _NavigationScreenState extends State<NavigationScreen>
         ),
         child: TabBar(
             dividerColor: Colors.transparent,
-            indicatorColor: Colors.black,
+            indicatorColor: _isVisible ? Colors.black : Colors.transparent,
             labelColor:
                 const Color.fromARGB(255, 30, 53, 47), //Selected icon color
             unselectedLabelColor: const Color.fromARGB(255, 30, 53, 47),
@@ -90,8 +121,8 @@ class _NavigationScreenState extends State<NavigationScreen>
           physics: const NeverScrollableScrollPhysics(),
           children: [
             Container(),
-            const LandingPage(),
-            const LocationsScreen(),
+            HomePage(scrollController: scrollController),
+            LocationsScreen(),
             ProfileScreen(),
           ]),
     );

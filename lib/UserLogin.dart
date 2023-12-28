@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:tamweeny/models/user.dart';
-import 'package:tamweeny/models/token_manager.dart';
-import 'package:tamweeny/UserList.dart';
-import 'package:tamweeny/services/api.dart';
+
+import '/authentication/services/api.dart';
+import 'UserList.dart';
+
 
 class AuthPage extends StatefulWidget {
   @override
@@ -19,7 +19,7 @@ class _AuthPageState extends State<AuthPage> with ChangeNotifier {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -27,21 +27,21 @@ class _AuthPageState extends State<AuthPage> with ChangeNotifier {
           children: [
             TextField(
               controller: emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+              decoration: const InputDecoration(labelText: 'Email'),
             ),
             TextField(
               controller: passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: const InputDecoration(labelText: 'Password'),
               obscureText: false,
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                api().loginUser(emailController.text, passwordController.text);
+                Api().loginUser(emailController.text, passwordController.text);
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const UserList()));
               },
-              child: Text('Login'),
+              child: const Text('Login'),
             ),
           ],
         ),

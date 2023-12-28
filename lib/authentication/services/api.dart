@@ -89,7 +89,7 @@ class Api {
   }) async {
     const String registerApiUrl = 'http://10.0.2.2:8000/api/register';
 
-    User newUser = User(
+    User adduser = User(
       email: email.trim(),
       password: pass.trim(),
       passwordConfirmation: pass2.trim(),
@@ -114,7 +114,7 @@ class Api {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: jsonEncode(newUser.toJson()),
+        body: jsonEncode(adduser.toJson()),
       );
 
       if (response.statusCode == 200) {

@@ -6,20 +6,22 @@ import 'package:tamweeny/generated/l10n.dart';
 import '../providers/products.dart';
 import '../widgets/product_item.dart';
 
-class LandingPage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   static const routeName = '/landing-page';
-  const LandingPage({super.key});
+  const HomePage({super.key, this.scrollController});
+  final ScrollController? scrollController;
 
   @override
-  State<LandingPage> createState() => _LandingPageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _LandingPageState extends State<LandingPage> {
+class _HomePageState extends State<HomePage> {
   late ScrollController _controller;
   bool _isVisible = true;
 
   void _listen() {
     final ScrollDirection direction = _controller.position.userScrollDirection;
+
     if (direction == ScrollDirection.forward) {
       _show();
     } else if (direction == ScrollDirection.reverse) {
@@ -28,13 +30,13 @@ class _LandingPageState extends State<LandingPage> {
   }
 
   void _show() {
-    if (!_isVisible) {
+    if (!_isVisible && mounted) {
       setState(() => _isVisible = true);
     }
   }
 
   void _hide() {
-    if (_isVisible) {
+    if (_isVisible && mounted) {
       setState(() => _isVisible = false);
     }
   }
@@ -42,14 +44,13 @@ class _LandingPageState extends State<LandingPage> {
   @override
   void initState() {
     super.initState();
-    _controller = ScrollController();
+    _controller = widget.scrollController!;
     _controller.addListener(_listen);
   }
 
   @override
   void dispose() {
     _controller.removeListener(_listen);
-    _controller.dispose();
     super.dispose();
   }
 
@@ -99,7 +100,10 @@ class _LandingPageState extends State<LandingPage> {
           Container(
             height: 500,
             color: const Color.fromARGB(122, 96, 125, 139),
-            child: const Text('Test', textAlign: TextAlign.center,),
+            child: const Text(
+              'Test',
+              textAlign: TextAlign.center,
+            ),
           )
         ],
       ),

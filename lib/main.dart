@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/navigation_screen.dart';
-import 'screens/landing_page.dart';
+import 'screens/home_page.dart';
 import 'authentication/screens/app_signup_screen.dart';
 import 'authentication/screens/tamween_info.dart';
 import 'generated/l10n.dart';
@@ -209,7 +209,7 @@ class MyApp extends StatelessWidget {
         routes: {
           NavigationScreen.routeName: (ctx) => NavigationScreen(),
           ProfileScreen.routeName: (ctx) => ProfileScreen(),
-          LandingPage.routeName: (ctx) => LandingPage(),
+          HomePage.routeName: (ctx) => HomePage(),
           SignUpScreen.routeName: (ctx) => SignUpScreen(),
           TamweenSignUpScreen.routeName: (ctx) => TamweenSignUpScreen(),
           TamweenInfo.routeName: (ctx) => TamweenInfo(),

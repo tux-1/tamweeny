@@ -1,8 +1,10 @@
-// import 'dart:async';
-// import 'dart:convert';
+import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
-// import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as http;
+
+import '../services/api.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 class Auth with ChangeNotifier {
@@ -28,8 +30,6 @@ class Auth with ChangeNotifier {
     }
     return null;
   }
-
-  
 
   // Future<void> _authenticate(
   //     String email, String password, String urlSegment) async {
@@ -87,6 +87,14 @@ class Auth with ChangeNotifier {
   // Future<void> logIn(String email, String password) async {
   //   return _authenticate(email, password, 'signInWithPassword');
   // }
+  
+  Future<void> loginUser(String email, String pass,
+      {String device = 'android'}) async {
+    const String apiUrl = 'http://10.0.2.2:8000/api/login';
+
+    await Api().loginUser(email, pass, device: device);
+
+  }
 
   // Future<bool> tryAutoLogin() async {
   //   final prefs = await SharedPreferences.getInstance();

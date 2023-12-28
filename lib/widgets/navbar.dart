@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../utils/lang.dart';
-import '../screens/landing_page.dart';
+import '../screens/home_page.dart';
 import '../screens/locations_screen.dart';
 import '../screens/profile_screen.dart';
 
@@ -88,21 +88,21 @@ class NavBar extends StatelessWidget {
                         slideInPage(
                           routeName: LocationsScreen.routeName,
                           page: const LocationsScreen(),
-                          beginOffset: currentRouteName == LandingPage.routeName
+                          beginOffset: currentRouteName == HomePage.routeName
                               ? const Offset(1, 0)
                               : const Offset(-1, 0),
                         );
                       }
                     }),
                 NavIconButton(
-                    routeName: LandingPage.routeName,
+                    routeName: HomePage.routeName,
                     icon: const Icon(Icons.home),
                     selectedIcon: const Icon(Icons.home_outlined),
                     onPressed: () {
-                      if (currentRouteName != LandingPage.routeName) {
+                      if (currentRouteName != HomePage.routeName) {
                         slideInPage(
-                          routeName: LandingPage.routeName,
-                          page: const LandingPage(),
+                          routeName: HomePage.routeName,
+                          page:  HomePage(),
                           beginOffset: const Offset(-1, 0),
                         );
                       }

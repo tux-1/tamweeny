@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:tamweeny/models/user.dart';
 
-import 'package:tamweeny/services/api.dart';
+import 'authentication/services/api.dart';
 
 class UserList extends StatefulWidget {
   const UserList({Key? key}) : super(key: key);
@@ -13,13 +13,13 @@ class UserList extends StatefulWidget {
 }
 
 class _UserListState extends State<UserList> {
-  Future<List<User>> futureUsers = api().fetchUsers();
+  Future<List<User>> futureUsers = Api().fetchUsers();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Users'),
+        title: const Text('Users'),
       ),
       body: FutureBuilder<List<User>>(
         future: futureUsers,
@@ -31,9 +31,9 @@ class _UserListState extends State<UserList> {
                   onPressed: () {
                     // Trigger the logout function when the button is pressed
                     Navigator.pop(context);
-                    api().logout();
+                    Api().logout();
                   },
-                  child: Text('Logout'),
+                  child: const Text('Logout'),
                 ),
                 Expanded(
                   child: ListView.builder(
@@ -49,9 +49,9 @@ class _UserListState extends State<UserList> {
               ],
             );
           } else if (snapshot.hasError) {
-            return Text('Something went wrong');
+            return const Text('Something went wrong');
           }
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         },
       ),
     );

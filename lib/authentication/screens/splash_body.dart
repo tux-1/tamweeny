@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:tamweeny/models/token_manager.dart';
 
 import 'logIn_screen.dart';
 

@@ -6,7 +6,7 @@ import '../../widgets/textformfield_card.dart';
 import '../services/api.dart';
 
 class LogInCard extends StatefulWidget {
-  LogInCard({
+  const LogInCard({
     super.key,
   });
 
@@ -55,6 +55,7 @@ class _LogInCardState extends State<LogInCard> {
             TextFormFieldCard(
               labelText: S.of(context).email,
               icon: Icons.mail,
+              
               onSaved: (value) {
                 _logInData['email'] = value.toString();
               },

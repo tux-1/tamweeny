@@ -79,9 +79,10 @@ class _LocationsScreenState extends State<LocationsScreen> {
         child: InkWell(
           onTap: () async {
             
+            // ignore: unused_local_variable
             final location = await _getCurrentLocation();
             LatLng startLocation = //3enwan salama
-                LatLng(
+                const LatLng(
               30.094435768097608,
               31.20311443602142,
             );
@@ -90,10 +91,6 @@ class _LocationsScreenState extends State<LocationsScreen> {
 
             //Marker location
             final LatLng endLocation = markerLocation;
-
-            if (startLocation == null) {
-              return;
-            }
 
             //For reference, See:
             //https://project-osrm.org/docs/v5.24.0/api/?language=cURL#general-options
