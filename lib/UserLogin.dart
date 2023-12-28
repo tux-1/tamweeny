@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:tamweeny/Models/User.dart';
-import 'package:tamweeny/Models/TokenManager.dart';
+import 'package:tamweeny/models/user.dart';
+import 'package:tamweeny/models/token_manager.dart';
 import 'package:tamweeny/UserList.dart';
 import 'package:tamweeny/services/api.dart';
 

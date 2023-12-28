@@ -20,10 +20,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _date = TextEditingController();
 
   //the Map that'll contain the data we'll take from form
-  Map<String, String> _signUpData = {
-    'email': '',
-    'password': '',
-  };
+  // Map<String, String> _signUpData = {
+  //   'email': '',
+  //   'password': '',
+  // };
 
   Future<void> register(BuildContext context) async {
     final navigator = Navigator.of(context);

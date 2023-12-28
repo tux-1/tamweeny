@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tamweeny/services/api.dart';
 
 import '../../screens/navigation_screen.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/textformfield_card.dart';
+import '../services/api.dart';
 
 class LogInCard extends StatefulWidget {
   LogInCard({
@@ -30,9 +30,10 @@ class _LogInCardState extends State<LogInCard> {
     });
 
     try {
-      // login logic
-      // await Provider.of<Auth>(context)
-      // .logIn(_authData['email'].toString(), _authData['password'].toString());
+      Api().loginUser(
+          _logInData['email'].toString(), _logInData['password'].toString());
+      
+      //Move the pushReplacement into a then() clause of the above action?
       Navigator.of(context).pushReplacementNamed(NavigationScreen.routeName);
     } catch (error) {
       //error detection
@@ -97,8 +98,6 @@ class _LogInCardState extends State<LogInCard> {
                 : ElevatedButton(
                     onPressed: () {
                       _submit();
-                      api().loginUser(_logInData['email'].toString(),
-                          _logInData['password'].toString());
                     },
                     child: Text(
                       S.of(context).logIn,

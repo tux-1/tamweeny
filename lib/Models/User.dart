@@ -1,21 +1,21 @@
 class User {
-  int? Id;
-  String? NationalId;
-  String? Phone_number;
-  String? Name;
+  int? id;
+  String? nationalId;
+  String? phoneNumber;
+  String? name;
   String? email;
   String? password;
-  String? password_confirmation;
+  String? passwordConfirmation;
   String? deviceName;
   String? token;
-  String? City;
-  String? State;
-  String? Street;
-  DateTime? BirthDate;
-  String? CardName;
-  String? CardNumber;
-  String? CardNationalId;
-  String? CardPassword;
+  String? city;
+  String? state;
+  String? street;
+  DateTime? birthDate;
+  String? cardName;
+  String? cardNumber;
+  String? cardNationalId;
+  String? cardPassword;
 
   // Singleton instance
   static final User _instance = User._();
@@ -25,51 +25,51 @@ class User {
 
   // Named constructor for creating a User instance with required fields
   User(
-      {this.Id,
-      this.Name,
+      {this.id,
+      this.name,
       this.email,
       this.password,
-      this.password_confirmation,
+      this.passwordConfirmation,
       this.deviceName,
       this.token,
-      this.BirthDate,
-      this.CardName,
-      this.CardNationalId,
-      this.CardNumber,
-      this.CardPassword,
-      this.City,
-      this.NationalId,
-      this.Phone_number,
-      this.State,
-      this.Street});
+      this.birthDate,
+      this.cardName,
+      this.cardNationalId,
+      this.cardNumber,
+      this.cardPassword,
+      this.city,
+      this.nationalId,
+      this.phoneNumber,
+      this.state,
+      this.street});
 
   //Named constructor for creating a User instance from JSON
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-        Id: json['Id'],
-        Name: json['Name'],
+        id: json['id'],
+        name: json['name'],
         email: json['email'],
         password: json['password'],
-        deviceName: json['device_name']);
+        deviceName: json['deviceName']);
   }
 
   Map<String, dynamic> toJson() {
     return {
       'email': email,
       'password': password,
-      'Name': Name,
-      'password_confirmation': password_confirmation,
-      'device_name': deviceName,
-      'NationalId': NationalId,
-      'Phone_number': Phone_number,
-      'City': City,
-      'State': State,
-      'Street': Street,
-      'BirthDate': BirthDate?.toIso8601String(), // Corrected line
-      'CardName': CardName,
-      'CardNumber': CardNumber,
-      'CardNationalId': CardNationalId,
-      'CardPassword': CardPassword,
+      'name': name,
+      'passwordConfirmation': passwordConfirmation,
+      'deviceName': deviceName,
+      'nationalId': nationalId,
+      'phoneNumber': phoneNumber,
+      'city': city,
+      'state': state,
+      'street': street,
+      'birthDate': birthDate?.toIso8601String(), // Corrected line
+      'cardName': cardName,
+      'cardNumber': cardNumber,
+      'cardNationalId': cardNationalId,
+      'cardPassword': cardPassword,
     };
   }
 

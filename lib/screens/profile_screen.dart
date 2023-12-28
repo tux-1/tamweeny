@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tamweeny/services/api.dart';
+
 import '../authentication/screens/logIn_screen.dart';
+import '../authentication/services/api.dart';
 import '../generated/l10n.dart';
 
 import '../widgets/custom_scaffold.dart';
@@ -94,7 +95,7 @@ class ProfileScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context)
                         .pushReplacementNamed(LogInScreen.routeName);
-                    api().logout();
+                    Api().logout();
                   },
                 ),
               ],

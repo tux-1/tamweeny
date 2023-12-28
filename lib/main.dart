@@ -10,14 +10,13 @@ import 'authentication/screens/app_signup_screen.dart';
 import 'authentication/screens/tamween_info.dart';
 import 'generated/l10n.dart';
 import 'authentication/screens/splash_body.dart';
-import 'providers/auth.dart';
+import 'authentication/provider/auth.dart';
 import 'providers/products.dart';
 import 'screens/locations_screen.dart';
 import 'authentication/screens/logIn_screen.dart';
 import 'screens/profile_screen.dart';
 import 'authentication/screens/tamween-signUp_screen.dart';
 import 'utils/lang.dart';
-import 'utils/utils.dart';
 
 void main() {
   runApp(MyApp());

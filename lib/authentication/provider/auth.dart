@@ -1,15 +1,15 @@
-import 'dart:async';
-import 'dart:convert';
+// import 'dart:async';
+// import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
 // import 'package:shared_preferences/shared_preferences.dart';
 
 class Auth with ChangeNotifier {
   String? _token;
-  DateTime? _expiryDate;
+  // DateTime? _expiryDate;
   String? _userId;
-  Timer? _authTimer;
+  // Timer? _authTimer;
 
   String get userId {
     return _userId.toString();
@@ -20,13 +20,16 @@ class Auth with ChangeNotifier {
   }
 
   String? get token {
-    if (_expiryDate != null &&
-        _expiryDate!.isAfter(DateTime.now()) &&
+    if (
+        // _expiryDate != null &&
+        //   _expiryDate!.isAfter(DateTime.now()) &&
         _token != null) {
       return _token;
     }
     return null;
   }
+
+  
 
   // Future<void> _authenticate(
   //     String email, String password, String urlSegment) async {

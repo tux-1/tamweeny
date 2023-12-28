@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tamweeny/services/api.dart';
+
+import 'authentication/services/api.dart';
 
 class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({super.key});
+
   @override
   _RegistrationPageState createState() => _RegistrationPageState();
 }
@@ -45,7 +48,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Registration'),
+        title: const Text('Registration'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -54,89 +57,89 @@ class _RegistrationPageState extends State<RegistrationPage> {
             children: [
               TextField(
                 controller: emailController,
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: const InputDecoration(labelText: 'Email'),
               ),
               TextField(
                 controller: passwordController,
-                decoration: InputDecoration(labelText: 'Password'),
+                decoration: const InputDecoration(labelText: 'Password'),
                 obscureText: false,
               ),
               TextField(
                 controller: passwordController2,
-                decoration: InputDecoration(labelText: 'Password_confirm'),
+                decoration: const InputDecoration(labelText: 'Password_confirm'),
                 obscureText: false,
               ),
               TextField(
                 controller: nameController,
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: const InputDecoration(labelText: 'Name'),
               ),
               TextField(
                 controller: nationalIdController,
-                decoration: InputDecoration(labelText: 'National ID'),
+                decoration: const InputDecoration(labelText: 'National ID'),
               ),
               GestureDetector(
                 onTap: () => _selectDate(context),
                 child: AbsorbPointer(
                   child: TextField(
                     controller: birthDateController,
-                    decoration: InputDecoration(labelText: 'Birth Date'),
+                    decoration: const InputDecoration(labelText: 'Birth Date'),
                   ),
                 ),
               ),
               TextField(
                 controller: cardNameController,
-                decoration: InputDecoration(labelText: 'Card Name'),
+                decoration: const InputDecoration(labelText: 'Card Name'),
               ),
               TextField(
                 controller: cityController,
-                decoration: InputDecoration(labelText: 'City'),
+                decoration: const InputDecoration(labelText: 'City'),
               ),
               TextField(
                 controller: stateController,
-                decoration: InputDecoration(labelText: 'State'),
+                decoration: const InputDecoration(labelText: 'State'),
               ),
               TextField(
                 controller: streetController,
-                decoration: InputDecoration(labelText: 'Street'),
+                decoration: const InputDecoration(labelText: 'Street'),
               ),
               TextField(
                 controller: phoneController,
-                decoration: InputDecoration(labelText: 'Phone'),
+                decoration: const InputDecoration(labelText: 'Phone'),
               ),
               TextField(
                 controller: cardNumberController,
-                decoration: InputDecoration(labelText: 'Card Number'),
+                decoration: const InputDecoration(labelText: 'Card Number'),
               ),
               TextField(
                 controller: cardNationalIdController,
-                decoration: InputDecoration(labelText: 'Card National ID'),
+                decoration: const InputDecoration(labelText: 'Card National ID'),
               ),
               TextField(
                 controller: cardPasswordController,
-                decoration: InputDecoration(labelText: 'Card Password'),
+                decoration: const InputDecoration(labelText: 'Card Password'),
                 obscureText: false,
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
                   // Call your CreateUser function with the provided data
-                  api().CreateUser(
+                  Api().createUser(
                       email: emailController.text,
                       pass: passwordController.text,
                       pass2: passwordController2.text,
-                      Name: nameController.text,
-                      NaitionalId: nationalIdController.text,
+                      name: nameController.text,
+                      nationalId: nationalIdController.text,
                       bdate: (selectedDate ?? DateTime.now()),
                       cardName: cardNameController.text,
-                      City: cityController.text,
-                      State: stateController.text,
-                      Street: streetController.text,
-                      Phone: phoneController.text,
-                      CardNumber: cardNumberController.text,
-                      CardNationalId: cardNationalIdController.text,
-                      CardPassword: cardPasswordController.text);
+                      city: cityController.text,
+                      state: stateController.text,
+                      street: streetController.text,
+                      phone: phoneController.text,
+                      cardNumber: cardNumberController.text,
+                      cardNationalId: cardNationalIdController.text,
+                      cardPassword: cardPasswordController.text);
                 },
-                child: Text('Register'),
+                child: const Text('Register'),
               ),
             ],
           ),

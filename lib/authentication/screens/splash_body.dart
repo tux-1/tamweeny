@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:tamweeny/models/token_manager.dart';
 
 import 'logIn_screen.dart';
 
@@ -19,6 +20,7 @@ class _SplashBodyState extends State<SplashBody>
 
   void goToNextView() {
     Navigator.of(context).pushReplacementNamed(LogInScreen.routeName);
+    // Or go to landing page if you have a token?
   }
 
   @override

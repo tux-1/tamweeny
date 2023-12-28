@@ -1,8 +1,8 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import 'package:tamweeny/Models/User.dart';
-import 'package:tamweeny/Models/TokenManager.dart';
+
+import '../../models/user.dart';
+import '../../models/token_manager.dart';
 
 class LoginResponse {
   String token;
@@ -14,14 +14,13 @@ class LoginResponse {
   }
 }
 
-class api {
+class Api {
   // Function to get the stored token
-
   Future<void> loginUser(String email, String pass,
-      {String device = 'andorid'}) async {
-    final String apiUrl = 'http://10.0.2.2:8000/api/login';
+      {String device = 'android'}) async {
+    const String apiUrl = 'http://10.0.2.2:8000/api/login';
 
-    User userLogin = User(
+    User userLoginData = User(
       email: email.trim(),
       password: pass.trim(),
       deviceName: "android", // Replace with the actual device name
@@ -33,9 +32,9 @@ class api {
         'Content-Type': 'application/json',
         'Accept': 'application/json', // Add this line to specify JSON response
       },
-      body: jsonEncode(userLogin.toJson()),
+      body: jsonEncode(userLoginData.toJson()),
     );
-    print('Request Body: ${jsonEncode(userLogin.toJson())}');
+    print('Request Body: ${jsonEncode(userLoginData.toJson())}');
 
     if (response.statusCode == 302) {
       // If the response is a redirect, follow the redirect URL
@@ -71,60 +70,55 @@ class api {
     }
   }
 
-  Future<void> CreateUser(
-      {required String email,
-      required String pass,
-      required String pass2,
-      required String Name,
-      required String NaitionalId,
-      required DateTime bdate,
-      required String cardName,
-      required String City,
-      required String State,
-      required String Street,
-      required String Phone,
-      required String CardNumber,
-      required String CardNationalId,
-      required String CardPassword,
-      String device = 'andorid'}) async {
-    final String apiUrl = 'http://10.0.2.2:8000/api/register';
+  Future<void> createUser({
+    required String email,
+    required String pass,
+    required String pass2,
+    required String name,
+    required String nationalId,
+    required DateTime bdate,
+    required String cardName,
+    required String city,
+    required String state,
+    required String street,
+    required String phone,
+    required String cardNumber,
+    required String cardNationalId,
+    required String cardPassword,
+    String device = 'android',
+  }) async {
+    const String registerApiUrl = 'http://10.0.2.2:8000/api/register';
 
-    User adduser = new User(
+    User newUser = User(
       email: email.trim(),
       password: pass.trim(),
-      password_confirmation: pass2.trim(),
+      passwordConfirmation: pass2.trim(),
       deviceName: "android", // Replace with the actual device name
-      BirthDate: bdate,
-      CardName: cardName.trim(),
-      CardNationalId: CardNationalId.trim(),
-      CardNumber: CardNumber.trim(),
-      CardPassword: CardPassword.trim(),
-      City: City.trim(),
-      Name: Name.trim(),
-      NationalId: NaitionalId.trim(),
-      Phone_number: Phone.trim(),
-      State: State.trim(),
-      Street: Street.trim(),
+      birthDate: bdate,
+      cardName: cardName.trim(),
+      cardNationalId: cardNationalId.trim(),
+      cardNumber: cardNumber.trim(),
+      cardPassword: cardPassword.trim(),
+      city: city.trim(),
+      name: name.trim(),
+      nationalId: nationalId.trim(),
+      phoneNumber: phone.trim(),
+      state: state.trim(),
+      street: street.trim(),
     );
 
     try {
       final http.Response response = await http.post(
-        Uri.parse(apiUrl),
+        Uri.parse(registerApiUrl),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: jsonEncode(adduser.toJson()),
+        body: jsonEncode(newUser.toJson()),
       );
 
       if (response.statusCode == 200) {
-        final LoginResponse loginResponse = LoginResponse.fromJson(
-          {'token': response.body},
-        );
-
-        String userToken = loginResponse.token;
-        //TokenManager().setToken(userToken);
-        print('User Token: $userToken');
+        print('Registration succeful');
       } else {
         print('Registration failed. Status code: ${response.statusCode}');
         print('Response body: ${response.body}');

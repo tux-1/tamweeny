@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'tamween_info.dart';
 import '../../generated/l10n.dart';
-import '../helpers/login_card.dart';
+import '../widgets/login_card.dart';
 import '../../widgets/custom_scaffold.dart';
 import 'app_signup_screen.dart';
 
