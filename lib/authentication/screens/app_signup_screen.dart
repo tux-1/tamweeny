@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../generated/l10n.dart';
-import '../../widgets/textformfield_card.dart';
+import '../widgets/textformfield_card.dart';
 import '../../widgets/custom_scaffold.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -56,15 +56,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final deviceSize = MediaQuery.of(context).size;
+    // final deviceSize = MediaQuery.of(context).size;
     return CustomScaffold(
         body: Form(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       key: _formKey,
-      child: Container(
-        constraints: BoxConstraints(maxHeight: deviceSize.height),
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: SingleChildScrollView(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -89,7 +88,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   // _authData['password'] = value.toString();
                 },
               ),
-
+                
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.number,
@@ -99,7 +98,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   // _authData['password'] = value.toString();
                 },
               ),
-
+                
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.number,
@@ -109,7 +108,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   // _authData['password'] = value.toString();
                 },
               ),
-
+                
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
                 labelText: S.of(context).city,
@@ -118,7 +117,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   // _authData['password'] = value.toString();
                 },
               ),
-
+                
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
                 labelText: S.of(context).building_number_street_name,
@@ -169,7 +168,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   // _authData['password'] = value.toString();
                 },
               ),
-
+                
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
                 labelText: S.of(context).tamween_card_number,
@@ -179,7 +178,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   // _authData['password'] = value.toString();
                 },
               ),
-
+                
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
                 labelText: S.of(context).national_number_on_tamween_card,
@@ -189,7 +188,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   // _authData['password'] = value.toString();
                 },
               ),
-
+                
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
                 labelText: S.of(context).tamween_password,
@@ -213,7 +212,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   // _authData['password'] = value.toString();
                 },
               ),
-
+                
               // PASSWORD FIELD
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
@@ -224,7 +223,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   // _authData['password'] = value.toString();
                 },
               ),
-
+                
               // CONFIRM PASSWORD FIELD
               TextFormFieldCard(
                 controller: _confirmPassword,

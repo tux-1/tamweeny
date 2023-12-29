@@ -46,26 +46,26 @@ class User {
   //Named constructor for creating a User instance from JSON
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-        id: json['id'],
-        name: json['name'],
+        id: json['Id'],
+        name: json['Name'],
         email: json['email'],
         password: json['password'],
-        deviceName: json['deviceName']);
+        deviceName: json['device_name']);
   }
 
   Map<String, dynamic> toJson() {
     return {
       'email': email,
       'password': password,
-      'name': name,
+      'Name': name,
       'passwordConfirmation': passwordConfirmation,
-      'deviceName': deviceName,
-      'nationalId': nationalId,
-      'phoneNumber': phoneNumber,
-      'city': city,
-      'state': state,
-      'street': street,
-      'birthDate': birthDate?.toIso8601String(), // Corrected line
+      'device_name': deviceName,
+      'NationalId': nationalId,
+      'Phone_number': phoneNumber,
+      'City': city,
+      'State': state,
+      'Street': street,
+      'BirthDate': birthDate?.toIso8601String(), // Corrected line
       'cardName': cardName,
       'cardNumber': cardNumber,
       'cardNationalId': cardNationalId,
