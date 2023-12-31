@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../authentication/provider/auth.dart';
 import '../authentication/screens/logIn_screen.dart';
-import '../authentication/services/api.dart';
 import '../generated/l10n.dart';
 
 import '../widgets/custom_scaffold.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const routeName = '/profile-screen';
+
+  void logOut() async {
+    
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,10 +97,10 @@ class ProfileScreen extends StatelessWidget {
                 ListTile(
                   leading: const Icon(Icons.logout),
                   title: Text(S.of(context).sign_out),
-                  onTap: () {
-                    Navigator.of(context)
-                        .pushReplacementNamed(LogInScreen.routeName);
-                    Api().logout();
+                  onTap: () async {
+                    final navigator = Navigator.of(context);
+                    await Provider.of<Auth>(context, listen: false).logOut();
+                    navigator.pushReplacementNamed(LogInScreen.routeName);
                   },
                 ),
               ],

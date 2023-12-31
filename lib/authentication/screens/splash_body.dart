@@ -1,7 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../screens/navigation_screen.dart';
+import '../provider/auth.dart';
 import 'logIn_screen.dart';
 
 class SplashBody extends StatefulWidget {
@@ -17,9 +18,15 @@ class _SplashBodyState extends State<SplashBody>
   AnimationController? animationController;
   Animation<double>? fadingAnimation;
 
-  void goToNextView() {
-    Navigator.of(context).pushReplacementNamed(LogInScreen.routeName);
-    // Or go to landing page if you have a token?
+  void goToNextView() async {
+    final auth = Provider.of<Auth>(context, listen: false);
+    final navigator = Navigator.of(context);
+    await auth.tryAutoLogin();
+    if (auth.isAuth) {
+      navigator.pushReplacementNamed(NavigationScreen.routeName);
+    } else {
+      navigator.pushReplacementNamed(LogInScreen.routeName);
+    }
   }
 
   @override
@@ -29,10 +36,9 @@ class _SplashBodyState extends State<SplashBody>
         vsync: this, duration: const Duration(milliseconds: 700));
     fadingAnimation =
         Tween<double>(begin: .2, end: 1).animate(animationController!);
-
     animationController?.repeat(reverse: true);
-    //loading time could be set here in duration using await?
-    Timer(const Duration(seconds: 1), () {
+    //This function runs goToNextView() after initState is done initializing?
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       goToNextView();
     });
   }
@@ -43,6 +49,7 @@ class _SplashBodyState extends State<SplashBody>
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color(0xff1E352F),

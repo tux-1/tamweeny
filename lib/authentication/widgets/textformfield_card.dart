@@ -35,8 +35,14 @@ class TextFormFieldCard extends StatefulWidget {
 }
 
 class _TextFormFieldCardState extends State<TextFormFieldCard> {
-  bool obscureText = true;
+  late bool obscureText;
   bool showIcon = false;
+
+  @override
+  void initState() {
+    obscureText = widget.obscureText;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,27 +55,29 @@ class _TextFormFieldCardState extends State<TextFormFieldCard> {
           color: const Color.fromARGB(4, 255, 255, 255)),
       child: Row(
         children: [
-          Container(
+          SizedBox(
             height: double.maxFinite,
             width: 55,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: !Language.isArabic()
-                    ? const Radius.circular(15)
-                    : Radius.zero,
-                topRight: !Language.isArabic()
-                    ? Radius.zero
-                    : const Radius.circular(15),
-                bottomLeft: !Language.isArabic()
-                    ? const Radius.circular(15)
-                    : Radius.zero,
-                bottomRight: !Language.isArabic()
-                    ? Radius.zero
-                    : const Radius.circular(15),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: !Language.isArabic()
+                      ? const Radius.circular(15)
+                      : Radius.zero,
+                  topRight: !Language.isArabic()
+                      ? Radius.zero
+                      : const Radius.circular(15),
+                  bottomLeft: !Language.isArabic()
+                      ? const Radius.circular(15)
+                      : Radius.zero,
+                  bottomRight: !Language.isArabic()
+                      ? Radius.zero
+                      : const Radius.circular(15),
+                ),
+                color: const Color.fromARGB(255, 51, 81, 69),
               ),
-              color: const Color.fromARGB(255, 51, 81, 69),
+              child: Icon(widget.icon),
             ),
-            child: Icon(widget.icon),
           ),
           Expanded(
             child: Padding(
@@ -89,8 +97,16 @@ class _TextFormFieldCardState extends State<TextFormFieldCard> {
                     showIcon = true;
                   });
                 },
+                onChanged: (_){
+                  setState(() {
+                    showIcon = true;
+                  });
+                },
                 onTapOutside: (event) {
                   FocusScope.of(context).unfocus();
+                  setState(() {
+                    showIcon = false;
+                  });
                 },
                 controller: widget.controller,
                 validator: widget.validator,

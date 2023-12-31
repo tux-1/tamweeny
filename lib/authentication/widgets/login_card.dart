@@ -20,7 +20,7 @@ class LogInCard extends StatefulWidget {
 class _LogInCardState extends State<LogInCard> {
   // bool? _rememberMe = false;
   var _isLoading = false;
-  Map<String, String> _logInData = {
+  final Map<String, String> _logInData = {
     'email': '',
     'password': '',
   };
@@ -59,21 +59,34 @@ class _LogInCardState extends State<LogInCard> {
     setState(() {
       _isLoading = true;
     });
-
-    try {
-      // Api().loginUser(
-      //     _logInData['email'].toString(), _logInData['password'].toString());
-
-      Provider.of<Auth>(context, listen: false).logIn(
-        _logInData['email'].toString(),
-        _logInData['password'].toString(),
-      );
-
-      //Move the pushReplacement into a then() clause of the above action?
-      // Navigator.of(context).pushReplacementNamed(NavigationScreen.routeName);
-    } catch (error) {
-      //error detection
-    }
+    final auth = Provider.of<Auth>(context, listen: false);
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+    await auth
+        .logIn(
+      _logInData['email'].toString(),
+      _logInData['password'].toString(),
+    )
+        .then((value) {
+      scaffoldMessenger.showSnackBar(const SnackBar(
+        content: Text('Successful Login'),
+      ));
+      Navigator.of(context).pushReplacementNamed(NavigationScreen.routeName);
+    }).onError((error, _) {
+      showDialog(
+          context: context,
+          builder: (ctx) {
+            String errorText;
+            if (error.toString().contains('timed out')) {
+              errorText = 'Request timed out.';
+            } else {
+              errorText = error.toString();
+            }
+            return AlertDialog(
+              title: Text(errorText),
+            );
+          });
+      return null;
+    });
     setState(() {
       _isLoading = false;
     });
@@ -84,7 +97,6 @@ class _LogInCardState extends State<LogInCard> {
     final Size deviceSize = MediaQuery.of(context).size;
     return SizedBox(
       width: deviceSize.width * 0.95,
-      // height: deviceSize.height * 0.4,
       child: Form(
         key: _formKey,
         child: Column(
@@ -133,16 +145,20 @@ class _LogInCardState extends State<LogInCard> {
             //   ],
             // ),
             const SizedBox(height: 20),
-            _isLoading
-                ? const CircularProgressIndicator()
-                : ElevatedButton(
-                    onPressed: () {
+
+            ElevatedButton(
+              onPressed: _isLoading
+                  ? null
+                  : () {
                       _submit();
                     },
-                    child: Text(
-                      S.of(context).logIn,
-                    ),
-                  ),
+              child: _isLoading
+                  ? const LinearProgressIndicator(
+                      color: Colors.orange,
+                    )
+                  : Text(S.of(context).logIn),
+            ),
+
             const SizedBox(height: 10),
             TextButton(
               child: Text(

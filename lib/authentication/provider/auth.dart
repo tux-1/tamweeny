@@ -3,7 +3,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../models/exceptions.dart';
 import '../../models/user.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
@@ -89,26 +91,43 @@ class Auth with ChangeNotifier {
   // }
 
   Future<void> logIn(String email, String pass,
-      {String device = 'android'}) async {
+      {String device = 'Unknown Device'}) async {
     const String apiUrl = 'http://10.0.2.2:8000/api/login';
 
-    User userLoginData = User(
-      email: email.trim(),
-      password: pass.trim(),
-      deviceName: "android", // Replace with the actual device name
-    );
+    try {
+      User userLoginData = User(
+        email: email.trim(),
+        password: pass.trim(),
+        deviceName: "android", // Replace with the actual device name
+      );
 
-    final http.Response response = await http.post(
-      Uri.parse(apiUrl),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json', // Add this line to specify JSON response
-      },
-      body: jsonEncode(userLoginData.toJson()),
-    );
-    // jsonDecode(source);
-    print('Response ${response.body}');
-    
+      final http.Response response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept':
+              'application/json', // Add this line to specify JSON response
+        },
+        body: jsonEncode(userLoginData.toJson()),
+      );
+
+      print('Response ${response.body}');
+      final responseData = jsonDecode(response.body);
+      final responseToken = responseData['token'];
+      print(response);
+      if (responseToken == null) {
+        throw HttpException(responseData['message']);
+      }
+      _token = responseToken;
+      _userId = responseData['id'].toString();
+
+      notifyListeners();
+      final prefs = await SharedPreferences.getInstance();
+      final userData = json.encode({'token': _token, 'userId': _userId});
+      prefs.setString('userData', userData);
+    } catch (error) {
+      rethrow;
+    }
   }
 
   Future<void> register({
@@ -159,38 +178,38 @@ class Auth with ChangeNotifier {
     print(response);
   }
 
-  // Future<bool> tryAutoLogin() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   if (!prefs.containsKey('userData')) {
-  //     return false;
-  //   }
-  //   final extractedData = json.decode(prefs.getString('userData').toString())
-  //       as Map<String, dynamic>;
-  //   final expiryDate = DateTime.parse(extractedData['expiryDate']);
-  //   if (expiryDate.isBefore(DateTime.now())) {
-  //     return false;
-  //   }
-  //   _token = extractedData['token'];
-  //   _userId = extractedData['userId'];
-  //   _expiryDate = expiryDate;
-  //   notifyListeners();
-  //   _autoLogout();
-  //   return true;
-  // }
+  Future<void> tryAutoLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!prefs.containsKey('userData')) {
+      return;
+    }
+    final extractedData = json.decode(prefs.getString('userData').toString())
+        as Map<String, dynamic>;
 
-  // Future<void> logOut() async {
-  //   _token = null;
-  //   _userId = null;
-  //   _expiryDate = null;
-  //   if (_authTimer != null) {
-  //     _authTimer!.cancel();
-  //     _authTimer = null;
-  //   }
-  //   notifyListeners();
-  //   final prefs = await SharedPreferences.getInstance();
-  //   prefs.remove('userData');
-  //   //prefs.clear(); //is also ok bc we only stored userData
-  // }
+    _token = extractedData['token'].toString();
+    _userId = extractedData['userId'].toString();
+    notifyListeners();
+  }
+
+  Future<void> logOut() async {
+    const String apiUrl = 'http://10.0.2.2:8000/api/logout';
+
+    try {
+      await http.post(
+        Uri.parse(apiUrl),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token', // Include the user's access token
+        },
+      );
+      _token = null;
+      _userId = null;
+      notifyListeners();
+      final prefs = await SharedPreferences.getInstance();
+      prefs.remove('userData');
+      //prefs.clear(); //is also ok bc we only stored userData
+    } catch (error) {}
+  }
 
   // void _autoLogout() {
   //   if (_authTimer != null) {
