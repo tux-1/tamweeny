@@ -208,7 +208,9 @@ class Auth with ChangeNotifier {
       final prefs = await SharedPreferences.getInstance();
       prefs.remove('userData');
       //prefs.clear(); //is also ok bc we only stored userData
-    } catch (error) {}
+    } catch (error) {
+      rethrow;
+    }
   }
 
   // void _autoLogout() {

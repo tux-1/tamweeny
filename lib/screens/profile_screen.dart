@@ -10,9 +10,7 @@ import '../widgets/custom_scaffold.dart';
 class ProfileScreen extends StatelessWidget {
   static const routeName = '/profile-screen';
 
-  void logOut() async {
-    
-  }
+  void logOut() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -99,8 +97,19 @@ class ProfileScreen extends StatelessWidget {
                   title: Text(S.of(context).sign_out),
                   onTap: () async {
                     final navigator = Navigator.of(context);
-                    await Provider.of<Auth>(context, listen: false).logOut();
-                    navigator.pushReplacementNamed(LogInScreen.routeName);
+                    await Provider.of<Auth>(context, listen: false)
+                        .logOut()
+                        .then((value) {
+                      navigator.pushReplacementNamed(LogInScreen.routeName);
+                    }).onError((error, _) {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const AlertDialog(
+                              title: Text('Request timed out.'),
+                            );
+                          });
+                    });
                   },
                 ),
               ],

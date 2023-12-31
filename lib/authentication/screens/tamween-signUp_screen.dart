@@ -29,12 +29,12 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
     'Divorced',
   ];
   String? chosenMaritalStatus;
-  // ignore: prefer_final_fields
-  List<Uint8List> _dependentsImages = [];
-  // ignore: prefer_final_fields
-  List<Uint8List> _ownerImages = [];
-// ignore: prefer_final_fields
-  Map<String, String> _signUpData = {
+  
+  final List<Uint8List> _dependentsImages = [];
+  
+  final List<Uint8List> _ownerImages = [];
+
+  final Map<String, String> _signUpData = {
     'name': '',
     'gender': '',
     'email': '',
@@ -78,7 +78,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                 icon: const Icon(Icons.delete))
           ],
         ),
-        Container(
+        Container(  //images holder
             constraints:
                 const BoxConstraints(minHeight: 50, minWidth: double.infinity),
             decoration: BoxDecoration(
@@ -157,211 +157,229 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final deviceSize = MediaQuery.of(context).size;
     return CustomScaffold(
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: deviceSize.height * 0.05),
-                Center(
-                  child: Text(
-                    S.of(context).apply_for_tamween_card,
-                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                          color: const Color(0xffDEA568),
-                        ),
-                  ),
+          child: Column(
+            children: [
+              AppBar(
+                title: Text(
+                  S.of(context).apply_for_tamween_card,
+                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                        color: const Color(0xffDEA568),
+                      ),
                 ),
-                const SizedBox(height: 10),
-                Text(S.of(context).name),
-                CustomTextField(
-                  textInputAction: TextInputAction.next,
-                  onSaved: (name) => _signUpData['name'] = name.toString(),
-                  validator: (name) {
-                    if (name!.isEmpty) {
-                      return S.of(context).please_fill_out_this_field;
-                    }
-                    return null;
-                  },
-                ),
-                Text(S.of(context).gender),
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: Colors.white),
-                  ),
-                  child: Wrap(
-                    children: [
-                      RadioMenuButton(
-                        value: genders[0],
-                        groupValue: chosenGender,
-                        onChanged: (value) => setState(() {
-                          chosenGender = value.toString();
-                          _signUpData['gender'] = chosenGender.toString();
-                        }),
-                        child: Text(
-                          S.of(context).male,
-                          style:
-                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 10),
+                    Text(S.of(context).name),
+                    CustomTextField(
+                      textInputAction: TextInputAction.next,
+                      onSaved: (name) => _signUpData['name'] = name.toString(),
+                      validator: (name) {
+                        if (name!.isEmpty) {
+                          return S.of(context).please_fill_out_this_field;
+                        }
+                        return null;
+                      },
+                    ),
+                    Text(S.of(context).gender),
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.white),
+                      ),
+                      child: Wrap(
+                        children: [
+                          RadioMenuButton(
+                            value: genders[0],
+                            groupValue: chosenGender,
+                            onChanged: (value) => setState(() {
+                              chosenGender = value.toString();
+                              _signUpData['gender'] = chosenGender.toString();
+                            }),
+                            child: Text(
+                              S.of(context).male,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(
                                     color: const Color(0xffDEA568),
                                   ),
-                        ),
-                      ),
-                      RadioMenuButton(
-                        value: genders[1],
-                        groupValue: chosenGender,
-                        onChanged: (value) => setState(() {
-                          chosenGender = value.toString();
-                          _signUpData['gender'] = chosenGender.toString();
-                        }),
-                        child: Text(
-                          S.of(context).female,
-                          style:
-                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            ),
+                          ),
+                          RadioMenuButton(
+                            value: genders[1],
+                            groupValue: chosenGender,
+                            onChanged: (value) => setState(() {
+                              chosenGender = value.toString();
+                              _signUpData['gender'] = chosenGender.toString();
+                            }),
+                            child: Text(
+                              S.of(context).female,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(
                                     color: const Color(0xffDEA568),
                                   ),
-                        ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-                Text(S.of(context).email),
-                CustomTextField(
-                  onSaved: (email) => _signUpData['email'] = email.toString(),
-                  validator: (emailText) {
-                    if (emailText!.isEmpty) {
-                      return S.of(context).please_fill_out_this_field;
-                    }
-                    return null;
-                  },
-                ),
-                Text(S.of(context).telephone_number),
-                CustomTextField(
-                  keyboardType: TextInputType.number,
-                  maxLength: 11,
-                  onSaved: (telephoneNumber) => _signUpData['telephoneNumber'] =
-                      telephoneNumber.toString(),
-                  validator: (telephoneNumber) {
-                    if (int.tryParse(telephoneNumber.toString()) == null &&
-                        telephoneNumber!.isNotEmpty) {
-                      return S.of(context).please_enter_valid_number;
-                    }
-                    if (telephoneNumber!.isEmpty) {
-                      return S.of(context).please_fill_out_this_field;
-                    }
-                    return null;
-                  },
-                ),
-                Text(S.of(context).marital_status),
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: Colors.white),
-                  ),
-                  child: Wrap(
-                    alignment: WrapAlignment.spaceEvenly,
-                    children: [
-                      RadioMenuButton(
-                        value: maritalStatus[0],
-                        groupValue: chosenMaritalStatus,
-                        onChanged: (value) => setState(() {
-                          chosenMaritalStatus = value.toString();
-                          _signUpData['maritalStatus'] =
-                              chosenMaritalStatus.toString();
-                        }),
-                        child: Text(
-                          S.of(context).single,
-                          style:
-                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    ),
+                    Text(S.of(context).email),
+                    CustomTextField(
+                      onSaved: (email) =>
+                          _signUpData['email'] = email.toString(),
+                      validator: (emailText) {
+                        if (emailText!.isEmpty) {
+                          return S.of(context).please_fill_out_this_field;
+                        }
+                        return null;
+                      },
+                    ),
+                    Text(S.of(context).telephone_number),
+                    CustomTextField(
+                      keyboardType: TextInputType.number,
+                      maxLength: 11,
+                      onSaved: (telephoneNumber) =>
+                          _signUpData['telephoneNumber'] =
+                              telephoneNumber.toString(),
+                      validator: (telephoneNumber) {
+                        if (int.tryParse(telephoneNumber.toString()) == null &&
+                            telephoneNumber!.isNotEmpty) {
+                          return S.of(context).please_enter_valid_number;
+                        }
+                        if (telephoneNumber!.isEmpty) {
+                          return S.of(context).please_fill_out_this_field;
+                        }
+                        return null;
+                      },
+                    ),
+                    Text(S.of(context).marital_status),
+
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.white),
+                      ),
+                      child: Wrap(
+                        alignment: WrapAlignment.spaceEvenly,
+                        children: [
+                          RadioMenuButton(
+                            value: maritalStatus[0],
+                            groupValue: chosenMaritalStatus,
+                            onChanged: (value) => setState(() {
+                              chosenMaritalStatus = value.toString();
+                              _signUpData['maritalStatus'] =
+                                  chosenMaritalStatus.toString();
+                            }),
+                            child: Text(
+                              S.of(context).single,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(
                                     color: const Color(0xffDEA568),
                                   ),
-                        ),
+                            ),
+                          ),
+                          RadioMenuButton(
+                            value: maritalStatus[1],
+                            groupValue: chosenMaritalStatus,
+                            onChanged: (value) {
+                              setState(() {
+                                chosenMaritalStatus = value.toString();
+                                _signUpData['maritalStatus'] =
+                                    chosenMaritalStatus.toString();
+                              });
+                            },
+                            child: Text(
+                              S.of(context).married,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(
+                                    color: const Color(0xffDEA568),
+                                  ),
+                            ),
+                          ),
+                          RadioMenuButton(
+                            value: maritalStatus[2],
+                            groupValue: chosenMaritalStatus,
+                            onChanged: (value) {
+                              setState(() {
+                                chosenMaritalStatus = value.toString();
+                                _signUpData['maritalStatus'] =
+                                    chosenMaritalStatus.toString();
+                              });
+                            },
+                            child: Text(
+                              S.of(context).divorced,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(
+                                    color: const Color(0xffDEA568),
+                                  ),
+                            ),
+                          ),
+                        ],
                       ),
-                      RadioMenuButton(
-                        value: maritalStatus[1],
-                        groupValue: chosenMaritalStatus,
-                        onChanged: (value) {
-                          setState(() {
-                            chosenMaritalStatus = value.toString();
-                            _signUpData['maritalStatus'] =
-                                chosenMaritalStatus.toString();
-                          });
+                    ),
+
+                    Text(S.of(context).minimum_salary),
+                    CustomTextField(
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
+                      onSaved: (minimumSalary) {
+                        _signUpData['minimumSalary'] = minimumSalary.toString();
+                      },
+                      validator: (minimumSalary) {
+                        if (double.tryParse(minimumSalary.toString()) == null &&
+                            minimumSalary!.isNotEmpty) {
+                          return S.of(context).please_enter_valid_number;
+                        }
+                        if (minimumSalary!.isEmpty) {
+                          return S.of(context).please_fill_out_this_field;
+                        }
+                        return null;
+                      },
+                    ),
+
+                    //Owner Images Picker
+                    imagesPicker(
+                      S.of(context).id_and_birth_certificate,
+                      _ownerImages,
+                      pickOwnerImages,
+                    ),
+
+                    //Dependents Images Picker
+                    imagesPicker(
+                      S.of(context).dependents_id_and_birth_certificate,
+                      _dependentsImages,
+                      pickDependentsImages,
+                    ),
+                    const SizedBox(height: 30),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          register(context);
                         },
-                        child: Text(
-                          S.of(context).married,
-                          style:
-                              Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                    color: const Color(0xffDEA568),
-                                  ),
-                        ),
+                        child: Text(S.of(context).register),
                       ),
-                      RadioMenuButton(
-                        value: maritalStatus[2],
-                        groupValue: chosenMaritalStatus,
-                        onChanged: (value) {
-                          setState(() {
-                            chosenMaritalStatus = value.toString();
-                            _signUpData['maritalStatus'] =
-                                chosenMaritalStatus.toString();
-                          });
-                        },
-                        child: Text(
-                          S.of(context).divorced,
-                          style:
-                              Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                    color: const Color(0xffDEA568),
-                                  ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 30),
+                  ],
                 ),
-                Text(S.of(context).minimum_salary),
-                CustomTextField(
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.done,
-                  onSaved: (minimumSalary) {
-                    _signUpData['minimumSalary'] = minimumSalary.toString();
-                  },
-                  validator: (minimumSalary) {
-                    if (double.tryParse(minimumSalary.toString()) == null &&
-                        minimumSalary!.isNotEmpty) {
-                      return S.of(context).please_enter_valid_number;
-                    }
-                    if (minimumSalary!.isEmpty) {
-                      return S.of(context).please_fill_out_this_field;
-                    }
-                    return null;
-                  },
-                ),
-                //Owner Images Picker
-                imagesPicker(
-                  S.of(context).id_and_birth_certificate,
-                  _ownerImages,
-                  pickOwnerImages,
-                ),
-                //Dependents Images Picker
-                imagesPicker(
-                  S.of(context).dependents_id_and_birth_certificate,
-                  _dependentsImages,
-                  pickDependentsImages,
-                ),
-                const SizedBox(height: 30),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      register(context);
-                    },
-                    child: Text(S.of(context).register),
-                  ),
-                ),
-                const SizedBox(height: 30),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

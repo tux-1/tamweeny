@@ -18,6 +18,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
   final TextEditingController _date = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _nationalNumberController =
+      TextEditingController();
+  final TextEditingController _telephoneNumberController =
+      TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _buildingNumberStreetNameController =
+      TextEditingController();
+  final TextEditingController _nameOnTamweenCardController =
+      TextEditingController();
+  final TextEditingController _tamweenCardNumberController =
+      TextEditingController();
+  final TextEditingController _nationalNumberOnTamweenCardController =
+      TextEditingController();
+  final TextEditingController _tamweenPasswordController =
+      TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
   //the Map that'll contain the data we'll take from form
   // Map<String, String> _signUpData = {
@@ -41,6 +58,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
     if (_formKey.currentState?.validate() == true) {
       // sign up function that'll send data to backend
+      print("Name: ${_nameController.text}");
+      print("National Number: ${_nationalNumberController.text}");
+      print("Telephone Number: ${_telephoneNumberController.text}");
+      print("City: ${_cityController.text}");
+      print(
+          "Building Number/Street Name: ${_buildingNumberStreetNameController.text}");
+      print("Date: ${_date.text}");
+      print("Name on Tamween Card: ${_nameOnTamweenCardController.text}");
+      print("Tamween Card Number: ${_tamweenCardNumberController.text}");
+      print(
+          "National Number on Tamween Card: ${_nationalNumberOnTamweenCardController.text}");
+      print("Tamween Password: ${_tamweenPasswordController.text}");
+      print("Email: ${_emailController.text}");
+      print("Password: ${_password.text}");
+      print("Confirm Password: ${_confirmPassword.text}");
       await showDialog(
           context: context,
           builder: (context) {
@@ -84,47 +116,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 textInputAction: TextInputAction.next,
                 labelText: S.of(context).name,
                 icon: Icons.person,
-                onSaved: (value) {
-                  // _authData['password'] = value.toString();
-                },
+                controller: _nameController,
               ),
-                
+
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.number,
                 labelText: S.of(context).national_number,
                 icon: Icons.contacts_rounded,
-                onSaved: (value) {
-                  // _authData['password'] = value.toString();
-                },
+                controller: _nationalNumberController,
               ),
-                
+
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.number,
                 labelText: S.of(context).telephone_number,
                 icon: Icons.numbers,
-                onSaved: (value) {
-                  // _authData['password'] = value.toString();
-                },
+                maxLength: 11,
+                controller: _telephoneNumberController,
               ),
-                
+
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
                 labelText: S.of(context).city,
                 icon: Icons.location_on,
-                onSaved: (value) {
-                  // _authData['password'] = value.toString();
-                },
+                controller: _cityController,
               ),
-                
+
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
                 labelText: S.of(context).building_number_street_name,
                 icon: Icons.location_on,
-                onSaved: (value) {
-                  // _authData['password'] = value.toString();
-                },
+                controller: _buildingNumberStreetNameController,
               ),
               //BIRTH DATE FIELD
               TextFormFieldCard(
@@ -138,16 +161,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       lastDate: DateTime.now());
                   if (pickedDate != null) {
                     setState(() {
-                      _date.text = DateFormat('yyyy-MM-dd').format(pickedDate);
+                      _date.text = DateFormat.yMd('en').format(pickedDate);
                     });
                   }
                 },
                 labelText: S.of(context).birth_date,
                 readOnly: true,
                 icon: Icons.calendar_month_outlined,
-                onSaved: (value) {
-                  // _authData['password'] = value.toString();
-                },
               ),
               const Divider(
                 color: Colors.white,
@@ -164,38 +184,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 textInputAction: TextInputAction.next,
                 labelText: S.of(context).name_registered_on_tamween_card,
                 icon: Icons.person,
-                onSaved: (value) {
-                  // _authData['password'] = value.toString();
-                },
+                controller: _nameOnTamweenCardController,
               ),
-                
+
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
                 labelText: S.of(context).tamween_card_number,
                 keyboardType: TextInputType.number,
                 icon: Icons.contacts_rounded,
-                onSaved: (value) {
-                  // _authData['password'] = value.toString();
-                },
+                controller: _tamweenCardNumberController,
               ),
-                
+
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
                 labelText: S.of(context).national_number_on_tamween_card,
                 keyboardType: TextInputType.number,
                 icon: Icons.numbers,
-                onSaved: (value) {
-                  // _authData['password'] = value.toString();
-                },
+                controller: _nationalNumberOnTamweenCardController,
               ),
-                
+
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
                 labelText: S.of(context).tamween_password,
                 icon: Icons.lock,
-                onSaved: (value) {
-                  // _authData['password'] = value.toString();
-                },
+                controller: _tamweenPasswordController,
               ),
               const Divider(
                 color: Colors.white,
@@ -208,22 +220,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 textInputAction: TextInputAction.next,
                 labelText: S.of(context).email,
                 icon: Icons.email_rounded,
-                onSaved: (value) {
-                  // _authData['password'] = value.toString();
-                },
+                controller: _emailController,
               ),
-                
+
               // PASSWORD FIELD
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
                 labelText: S.of(context).password,
                 controller: _password,
                 icon: Icons.lock,
-                onSaved: (value) {
-                  // _authData['password'] = value.toString();
-                },
               ),
-                
+
               // CONFIRM PASSWORD FIELD
               TextFormFieldCard(
                 controller: _confirmPassword,
@@ -235,9 +242,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     return S.of(context).passwords_must_match;
                   }
                   return null;
-                },
-                onSaved: (value) {
-                  // _authData['password'] = value.toString();
                 },
               ),
               const SizedBox(height: 10),

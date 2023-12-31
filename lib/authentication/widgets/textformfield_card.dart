@@ -4,7 +4,7 @@ import '../../utils/lang.dart';
 
 class TextFormFieldCard extends StatefulWidget {
   final IconData icon;
-  final Function(String?) onSaved;
+  final Function(String?)? onSaved;
   final int? maxLength;
   final String? labelText;
   final TextInputType? keyboardType;
@@ -18,7 +18,7 @@ class TextFormFieldCard extends StatefulWidget {
   const TextFormFieldCard({
     super.key,
     required this.icon,
-    required this.onSaved,
+    this.onSaved,
     this.readOnly = false,
     this.labelText,
     this.keyboardType,
@@ -37,6 +37,20 @@ class TextFormFieldCard extends StatefulWidget {
 class _TextFormFieldCardState extends State<TextFormFieldCard> {
   late bool obscureText;
   bool showIcon = false;
+
+  final _borderRadius1 = BorderRadius.only(
+    topLeft: !Language.isArabic() ? const Radius.circular(15) : Radius.zero,
+    topRight: !Language.isArabic() ? Radius.zero : const Radius.circular(15),
+    bottomLeft: !Language.isArabic() ? const Radius.circular(15) : Radius.zero,
+    bottomRight: !Language.isArabic() ? Radius.zero : const Radius.circular(15),
+  );
+
+  final _borderRadius2 = BorderRadius.only(
+    topLeft: Language.isArabic() ? const Radius.circular(15) : Radius.zero,
+    topRight: Language.isArabic() ? Radius.zero : const Radius.circular(15),
+    bottomLeft: Language.isArabic() ? const Radius.circular(15) : Radius.zero,
+    bottomRight: Language.isArabic() ? Radius.zero : const Radius.circular(15),
+  );
 
   @override
   void initState() {
@@ -60,87 +74,85 @@ class _TextFormFieldCardState extends State<TextFormFieldCard> {
             width: 55,
             child: DecoratedBox(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: !Language.isArabic()
-                      ? const Radius.circular(15)
-                      : Radius.zero,
-                  topRight: !Language.isArabic()
-                      ? Radius.zero
-                      : const Radius.circular(15),
-                  bottomLeft: !Language.isArabic()
-                      ? const Radius.circular(15)
-                      : Radius.zero,
-                  bottomRight: !Language.isArabic()
-                      ? Radius.zero
-                      : const Radius.circular(15),
-                ),
+                borderRadius: _borderRadius1,
                 color: const Color.fromARGB(255, 51, 81, 69),
               ),
               child: Icon(widget.icon),
             ),
           ),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
-              child: TextFormField(
-                style: Theme.of(context).textTheme.bodyMedium,
-                maxLength: widget.maxLength,
-                cursorColor: Colors.white,
-                textAlignVertical: TextAlignVertical.center,
-                keyboardType: widget.keyboardType,
-                textInputAction: widget.textInputAction,
-                onSaved: widget.onSaved,
-                obscureText: obscureText,
-                onTap: () {
-                  widget.onTap;
-                  setState(() {
-                    showIcon = true;
-                  });
-                },
-                onChanged: (_){
-                  setState(() {
-                    showIcon = true;
-                  });
-                },
-                onTapOutside: (event) {
-                  FocusScope.of(context).unfocus();
-                  setState(() {
-                    showIcon = false;
-                  });
-                },
-                controller: widget.controller,
-                validator: widget.validator,
-                readOnly: widget.readOnly,
-                decoration: InputDecoration(
-                  suffixIcon: widget.obscureText && showIcon
-                      ? IconButton(
-                          onPressed: () {
-                            setState(() {
-                              obscureText = !obscureText;
-                            });
-                          },
-                          icon: obscureText
-                              ? const Icon(
-                                  Icons.visibility,
-                                  color: Colors.white,
-                                )
-                              : const Icon(
-                                  Icons.visibility_off,
-                                  color: Colors.white,
-                                ))
-                      : null,
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  enabledBorder: null,
-                  hintText: ' ${widget.labelText}',
-                  hintStyle: Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(color: const Color(0xffD99D63)),
-                  focusColor: Colors.white,
-                  border: InputBorder.none,
-                  disabledBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
+            child: TextFormField(
+              style: Theme.of(context).textTheme.bodyMedium,
+              maxLength: widget.maxLength,
+              cursorColor: Colors.white,
+              textAlignVertical: TextAlignVertical.center,
+              keyboardType: widget.keyboardType,
+              textInputAction: widget.textInputAction,
+              onSaved: widget.onSaved,
+              obscureText: obscureText,
+              onTap: () {
+                if (widget.onTap != null) {
+                  widget.onTap!();
+                }
+                setState(() {
+                  showIcon = true;
+                });
+              },
+              onChanged: (_) {
+                setState(() {
+                  showIcon = true;
+                });
+              },
+              onTapOutside: (event) {
+                FocusScope.of(context).unfocus();
+                setState(() {
+                  showIcon = false;
+                });
+              },
+              controller: widget.controller,
+              validator: widget.validator,
+              readOnly: widget.readOnly,
+              decoration: InputDecoration(
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 11, horizontal: 10),
+                errorBorder: OutlineInputBorder(
+                    borderRadius: _borderRadius2,
+                    borderSide:
+                        BorderSide(color: Theme.of(context).colorScheme.error)),
+                isDense: true,
+                errorMaxLines: 1,
+                errorStyle: const TextStyle(
+                  fontSize: 0,
                 ),
+                suffixIcon: widget.obscureText && showIcon
+                    ? IconButton(
+                        onPressed: () {
+                          setState(() {
+                            obscureText = !obscureText;
+                          });
+                        },
+                        icon: obscureText
+                            ? const Icon(
+                                Icons.visibility,
+                                color: Colors.white,
+                              )
+                            : const Icon(
+                                Icons.visibility_off,
+                                color: Colors.white,
+                              ))
+                    : null,
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                enabledBorder: null,
+                counterText: "",
+                hintText: '${widget.labelText}',
+                hintStyle: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(color: const Color(0xffD99D63)),
+                focusColor: Colors.white,
+                border: InputBorder.none,
+                disabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
               ),
             ),
           ),
