@@ -1,12 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
-
-
 
 class LocationsScreen extends StatefulWidget {
   static const routeName = '/locations-screen';
@@ -65,20 +62,24 @@ class _LocationsScreenState extends State<LocationsScreen> {
 
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
-    return await Geolocator.getCurrentPosition();
+    final geoLocation = await Geolocator.getCurrentPosition();
+    if (mounted) {
+      setState(() {
+        userLocation = LatLng(geoLocation.latitude, geoLocation.longitude);
+      });
+    }
+    return geoLocation;
   }
 
   Marker buildTrackableMarker(
     LatLng markerLocation,
   ) {
-    
     var scaffoldMessenger = ScaffoldMessenger.of(context);
     return Marker(
         rotate: true,
         point: markerLocation,
         child: InkWell(
           onTap: () async {
-            
             // ignore: unused_local_variable
             final location = await _getCurrentLocation();
             LatLng startLocation = //3enwan salama
@@ -113,22 +114,24 @@ class _LocationsScreenState extends State<LocationsScreen> {
                       ]))));
               return;
             }
-            setState(() {
-              routePoints = [];
-              var router = jsonDecode(response.body)['routes'][0]['geometry']
-                  ['coordinates'];
-              for (int i = 0; i < router.length; i++) {
-                var routePointString = router[i].toString();
-                routePointString = routePointString.replaceAll('[', '');
-                routePointString = routePointString.replaceAll(']', '');
-                var routePoint = routePointString.split(',');
+            if (mounted) {
+              setState(() {
+                routePoints = [];
+                var router = jsonDecode(response.body)['routes'][0]['geometry']
+                    ['coordinates'];
+                for (int i = 0; i < router.length; i++) {
+                  var routePointString = router[i].toString();
+                  routePointString = routePointString.replaceAll('[', '');
+                  routePointString = routePointString.replaceAll(']', '');
+                  var routePoint = routePointString.split(',');
 
-                routePoints.add(LatLng(
-                  double.parse(routePoint[1]),
-                  double.parse(routePoint[0]),
-                ));
-              }
-            });
+                  routePoints.add(LatLng(
+                    double.parse(routePoint[1]),
+                    double.parse(routePoint[0]),
+                  ));
+                }
+              });
+            }
           },
           child: const Icon(
             Icons.location_on,
@@ -138,15 +141,7 @@ class _LocationsScreenState extends State<LocationsScreen> {
         ));
   }
 
-  void getUserLocation() async {
-    final location = await _getCurrentLocation();
-    setState(() {
-      userLocation = LatLng(location.latitude, location.longitude);
-    });
-  }
-
   Marker userLocationMarker() {
-    getUserLocation();
     if (userLocation != null) {
       return Marker(
         point: userLocation!,
@@ -168,7 +163,6 @@ class _LocationsScreenState extends State<LocationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: FlutterMap(
         options: const MapOptions(
           initialCenter: LatLng(30.035658, 31.268681),

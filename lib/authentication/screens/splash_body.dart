@@ -53,7 +53,7 @@ class _SplashBodyState extends State<SplashBody>
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color(0xff1E352F),
-        body: Container(
+        body: Padding(
           padding: const EdgeInsets.all(5.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -7,6 +7,8 @@ import '../../widgets/custom_scaffold.dart';
 class LogInScreen extends StatelessWidget {
   static const routeName = '/login-screen';
 
+  const LogInScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;

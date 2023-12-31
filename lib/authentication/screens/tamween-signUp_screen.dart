@@ -79,32 +79,29 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
           ],
         ),
         Container(
-          constraints:
-              const BoxConstraints(minHeight: 50, minWidth: double.infinity),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(color: Colors.white),
-          ),
-          child: imagesList.isNotEmpty
-              ? SizedBox(
-                  height: 35,
-                  child: ListView.builder(
-                      padding: const EdgeInsets.all(1),
-                      shrinkWrap: true,
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: imagesList.length,
-                      itemBuilder: (ctx, i) {
-                        return Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 5),
-                          child: CircleAvatar(
-                            backgroundImage: MemoryImage(imagesList[i]),
-                          ),
-                        );
-                      }),
-                )
-              : null,
-        ),
+            constraints:
+                const BoxConstraints(minHeight: 50, minWidth: double.infinity),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: Colors.white),
+            ),
+            child: SizedBox(
+              height: 40,
+              child: ListView.builder(
+                  padding: const EdgeInsets.all(1),
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: imagesList.length,
+                  itemBuilder: (ctx, i) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 5),
+                      child: CircleAvatar(
+                        backgroundImage: MemoryImage(imagesList[i]),
+                      ),
+                    );
+                  }),
+            )),
       ],
     );
   }
@@ -170,7 +167,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: deviceSize.height*0.05),
+                SizedBox(height: deviceSize.height * 0.05),
                 Center(
                   child: Text(
                     S.of(context).apply_for_tamween_card,
@@ -192,7 +189,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                   },
                 ),
                 Text(S.of(context).gender),
-                Container(
+                DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     border: Border.all(color: Colors.white),
@@ -260,7 +257,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                   },
                 ),
                 Text(S.of(context).marital_status),
-                Container(
+                DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     border: Border.all(color: Colors.white),
