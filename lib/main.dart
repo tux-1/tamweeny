@@ -19,11 +19,11 @@ import 'authentication/screens/tamween-signUp_screen.dart';
 import 'utils/lang.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   final Map<int, Color> kColorMap = const {
     50: Color.fromRGBO(51, 81, 69, .1),

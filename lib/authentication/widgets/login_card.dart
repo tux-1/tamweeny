@@ -19,6 +19,8 @@ class LogInCard extends StatefulWidget {
 
 class _LogInCardState extends State<LogInCard> {
   // bool? _rememberMe = false;
+
+  var _obscureText = true;
   var _isLoading = false;
   final Map<String, String> _logInData = {
     'email': '',
@@ -87,6 +89,7 @@ class _LogInCardState extends State<LogInCard> {
           });
       return null;
     });
+    // Navigator.of(context).pushReplacementNamed(NavigationScreen.routeName);
     setState(() {
       _isLoading = false;
     });
@@ -95,6 +98,22 @@ class _LogInCardState extends State<LogInCard> {
   @override
   Widget build(BuildContext context) {
     final Size deviceSize = MediaQuery.of(context).size;
+    var iconButton = IconButton(
+        onPressed: () {
+          setState(() {
+            _obscureText = !_obscureText;
+          });
+        },
+        icon: _obscureText
+            ? const Icon(
+                Icons.visibility,
+                color: Colors.white,
+              )
+            : const Icon(
+                Icons.visibility_off,
+                color: Colors.white,
+              ));
+
     return SizedBox(
       width: deviceSize.width * 0.95,
       child: Form(
@@ -113,7 +132,8 @@ class _LogInCardState extends State<LogInCard> {
             ),
 
             TextFormFieldCard(
-              obscureText: true,
+              obscureText: _obscureText,
+              suffixIcon: iconButton,
               labelText: S.of(context).password,
               icon: Icons.lock,
               onSaved: (value) {
@@ -147,11 +167,7 @@ class _LogInCardState extends State<LogInCard> {
             const SizedBox(height: 20),
 
             ElevatedButton(
-              onPressed: _isLoading
-                  ? null
-                  : () {
-                      _submit();
-                    },
+              onPressed: _isLoading ? null : _submit,
               child: _isLoading
                   ? const LinearProgressIndicator(
                       color: Colors.orange,

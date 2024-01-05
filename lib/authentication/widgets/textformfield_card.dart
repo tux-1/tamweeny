@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../utils/lang.dart';
 
-class TextFormFieldCard extends StatefulWidget {
+class TextFormFieldCard extends StatelessWidget {
   final IconData icon;
   final Function(String?)? onSaved;
   final int? maxLength;
@@ -14,8 +14,10 @@ class TextFormFieldCard extends StatefulWidget {
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final bool readOnly;
+  final Widget? suffixIcon;
+  final Function(String)? onChanged;
 
-  const TextFormFieldCard({
+  TextFormFieldCard({
     super.key,
     required this.icon,
     this.onSaved,
@@ -28,15 +30,9 @@ class TextFormFieldCard extends StatefulWidget {
     this.validator,
     this.maxLength,
     this.onTap,
+    this.suffixIcon,
+    this.onChanged,
   });
-
-  @override
-  State<TextFormFieldCard> createState() => _TextFormFieldCardState();
-}
-
-class _TextFormFieldCardState extends State<TextFormFieldCard> {
-  late bool obscureText;
-  bool showIcon = false;
 
   final _borderRadius1 = BorderRadius.only(
     topLeft: !Language.isArabic() ? const Radius.circular(15) : Radius.zero,
@@ -51,12 +47,6 @@ class _TextFormFieldCardState extends State<TextFormFieldCard> {
     bottomLeft: Language.isArabic() ? const Radius.circular(15) : Radius.zero,
     bottomRight: Language.isArabic() ? Radius.zero : const Radius.circular(15),
   );
-
-  @override
-  void initState() {
-    obscureText = widget.obscureText;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,41 +67,27 @@ class _TextFormFieldCardState extends State<TextFormFieldCard> {
                 borderRadius: _borderRadius1,
                 color: const Color.fromARGB(255, 51, 81, 69),
               ),
-              child: Icon(widget.icon),
+              child: Icon(icon),
             ),
           ),
           Expanded(
             child: TextFormField(
               style: Theme.of(context).textTheme.bodyMedium,
-              maxLength: widget.maxLength,
+              maxLength: maxLength,
               cursorColor: Colors.white,
               textAlignVertical: TextAlignVertical.center,
-              keyboardType: widget.keyboardType,
-              textInputAction: widget.textInputAction,
-              onSaved: widget.onSaved,
+              keyboardType: keyboardType,
+              textInputAction: textInputAction,
+              onSaved: onSaved,
               obscureText: obscureText,
-              onTap: () {
-                if (widget.onTap != null) {
-                  widget.onTap!();
-                }
-                setState(() {
-                  showIcon = true;
-                });
-              },
-              onChanged: (_) {
-                setState(() {
-                  showIcon = true;
-                });
-              },
+              onTap: onTap,
+              onChanged: onChanged,
               onTapOutside: (event) {
                 FocusScope.of(context).unfocus();
-                setState(() {
-                  showIcon = false;
-                });
               },
-              controller: widget.controller,
-              validator: widget.validator,
-              readOnly: widget.readOnly,
+              controller: controller,
+              validator: validator,
+              readOnly: readOnly,
               decoration: InputDecoration(
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 11, horizontal: 10),
@@ -124,27 +100,11 @@ class _TextFormFieldCardState extends State<TextFormFieldCard> {
                 errorStyle: const TextStyle(
                   fontSize: 0,
                 ),
-                suffixIcon: widget.obscureText && showIcon
-                    ? IconButton(
-                        onPressed: () {
-                          setState(() {
-                            obscureText = !obscureText;
-                          });
-                        },
-                        icon: obscureText
-                            ? const Icon(
-                                Icons.visibility,
-                                color: Colors.white,
-                              )
-                            : const Icon(
-                                Icons.visibility_off,
-                                color: Colors.white,
-                              ))
-                    : null,
+                suffixIcon: suffixIcon,
                 floatingLabelBehavior: FloatingLabelBehavior.never,
                 enabledBorder: null,
                 counterText: "",
-                hintText: '${widget.labelText}',
+                hintText: '$labelText',
                 hintStyle: Theme.of(context)
                     .textTheme
                     .bodyMedium
