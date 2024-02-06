@@ -11,44 +11,38 @@ class LogInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final deviceSize = MediaQuery.of(context).size;
     return CustomScaffold(
       fadeBackground: false,
-      body: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxHeight: deviceSize.height,
-          maxWidth: deviceSize.width,
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: deviceSize.height * 0.05,
-                width: deviceSize.width,
-              ),
-              Text(
-                S.of(context).welcome,
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
-              Text(
-                S.of(context).welcomeSubtitle,
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              //Spacing between title and login
-              SizedBox(
-                height: deviceSize.height * 0.29,
-              ),
-              Text(
-                S.of(context).logInTitle,
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              const SizedBox(height: 20),
-              
-              //Login Card + Login Button
-              const LogInCard(),
-            ],
-          ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                SafeArea(
+                  child: Text(
+                    S.of(context).welcome,
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
+                ),
+                Text(
+                  S.of(context).welcomeSubtitle,
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Text(
+                  S.of(context).logInTitle,
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                const SizedBox(height: 10),
+                //Login Card + Login Button
+                const LogInCard(),
+              ],
+            ),
+          ],
         ),
       ),
     );

@@ -47,6 +47,7 @@ class Api {
 
       if (redirectResponse.statusCode == 200) {
         // Process the successful response after redirect
+        // ignore: unused_local_variable
         final LoginResponse loginResponse = LoginResponse.fromJson(
           {'token': redirectResponse.body},
         );

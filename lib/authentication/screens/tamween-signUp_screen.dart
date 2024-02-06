@@ -207,7 +207,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                               S.of(context).male,
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodyLarge
+                                  .headlineSmall
                                   ?.copyWith(
                                     color: const Color(0xffDEA568),
                                   ),
@@ -224,7 +224,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                               S.of(context).female,
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodyLarge
+                                  .headlineSmall
                                   ?.copyWith(
                                     color: const Color(0xffDEA568),
                                   ),
@@ -284,7 +284,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                               S.of(context).single,
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodyLarge
+                                  .headlineSmall
                                   ?.copyWith(
                                     color: const Color(0xffDEA568),
                                   ),
@@ -304,7 +304,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                               S.of(context).married,
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodyLarge
+                                  .headlineSmall
                                   ?.copyWith(
                                     color: const Color(0xffDEA568),
                                   ),
@@ -324,7 +324,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                               S.of(context).divorced,
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodyLarge
+                                  .headlineSmall
                                   ?.copyWith(
                                     color: const Color(0xffDEA568),
                                   ),

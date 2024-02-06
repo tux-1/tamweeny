@@ -46,38 +46,41 @@ class MyApp extends StatelessWidget {
       dialogBackgroundColor: const Color(0xff1E352F),
       // Define text theme to control the text color
       textTheme: const TextTheme(
+        displayLarge: TextStyle(
+          color: Colors.white,
+        ),
+        displayMedium:  TextStyle(
+          color: Colors.white,
+        ),
+        displaySmall:  TextStyle(
+          color: Colors.white,
+        ),
         headlineSmall: TextStyle(
           color: Colors.white,
-          fontSize: 30,
           fontWeight: FontWeight.w500,
         ),
         headlineLarge: TextStyle(
           color: Colors.white,
-          fontSize: 40,
           fontWeight: FontWeight.w700,
         ),
         headlineMedium: TextStyle(
           color: Colors.white,
-          fontSize: 32,
           fontWeight: FontWeight.w500,
-          height: 0.9,
         ),
         bodyLarge: TextStyle(
           color: Colors.white,
-          fontSize: 27,
           fontWeight: FontWeight.w500,
         ),
         bodyMedium: TextStyle(
           color: Colors.white,
-          fontSize: 26,
+          fontSize: 25,
           fontWeight: FontWeight.w500,
         ),
       ),
       snackBarTheme: const SnackBarThemeData(
-        backgroundColor:  Color.fromARGB(187, 158, 158, 158),
-        showCloseIcon: true,
-        behavior: SnackBarBehavior.floating
-      ),
+          backgroundColor: Color.fromARGB(187, 158, 158, 158),
+          showCloseIcon: true,
+          behavior: SnackBarBehavior.floating),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           textStyle: GoogleFonts.lateef().copyWith(fontSize: 24),
@@ -203,6 +206,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.dark,
         locale: const Locale('ar'),

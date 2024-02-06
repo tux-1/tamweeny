@@ -179,14 +179,17 @@ class _LogInCardState extends State<LogInCard> {
             TextButton(
               child: Text(
                 S.of(context).forgotPassword,
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               onPressed: () {},
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(S.of(context).noAccount),
+                Text(
+                  S.of(context).noAccount,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
                 const SizedBox(width: 10),
                 TextButton(
                   onPressed: () {

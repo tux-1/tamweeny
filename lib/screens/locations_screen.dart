@@ -59,7 +59,6 @@ class _LocationsScreenState extends State<LocationsScreen> {
       return Future.error(
           'Location permissions are permanently denied, we cannot request permissions.');
     }
-
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
     final geoLocation = await Geolocator.getCurrentPosition();
@@ -185,9 +184,6 @@ class _LocationsScreenState extends State<LocationsScreen> {
           ),
           attributionWidget,
           MarkerLayer(markers: [
-            // ADD MARKERS HERE
-            // ..
-
             // DEMO MARKERS:
 
             // For emulator this location will be at Google HQ
@@ -203,7 +199,7 @@ class _LocationsScreenState extends State<LocationsScreen> {
                 const LatLng(30.08334314582945, 31.203597825718397)),
 
             // Random location near Google HQ
-            buildTrackableMarker(const LatLng(37.423490, -122.078074)),
+            // buildTrackableMarker(const LatLng(37.423490, -122.078074)),
           ])
         ],
       ),

@@ -107,7 +107,7 @@ class TextFormFieldCard extends StatelessWidget {
                 hintText: '$labelText',
                 hintStyle: Theme.of(context)
                     .textTheme
-                    .bodyMedium
+                    .headlineMedium
                     ?.copyWith(color: const Color(0xffD99D63)),
                 focusColor: Colors.white,
                 border: InputBorder.none,
