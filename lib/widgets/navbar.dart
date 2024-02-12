@@ -61,7 +61,7 @@ class NavBar extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 5),
             shape: const CircularNotchedRectangle(),
             notchMargin: 7.0,
-            color: Colors.white,
+            color: Color(0xffDEA568),
             child: Wrap(
               textDirection: Language.isArabic() ? null : TextDirection.rtl,
               alignment: WrapAlignment.spaceEvenly,
@@ -102,7 +102,7 @@ class NavBar extends StatelessWidget {
                       if (currentRouteName != HomePage.routeName) {
                         slideInPage(
                           routeName: HomePage.routeName,
-                          page:  HomePage(),
+                          page: HomePage(),
                           beginOffset: const Offset(-1, 0),
                         );
                       }

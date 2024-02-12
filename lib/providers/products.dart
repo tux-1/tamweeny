@@ -10,7 +10,7 @@ class Products with ChangeNotifier {
       price: 5,
       title: 'title5',
       imageUrl:
-          'https://static.vecteezy.com/system/resources/previews/009/399/398/non_2x/old-vintage-book-clipart-design-illustration-free-png.png',
+          'https://media.istockphoto.com/id/153737841/photo/rice.jpg?s=612x612&w=0&k=20&c=lfO7iLT0UsDDzra0uBOsN1rvr2d5OEtrG2uwbts33_c=',
     ),
     Product(
       id: '6',
@@ -25,7 +25,7 @@ class Products with ChangeNotifier {
       title: 'Title name longer than 2 lines (Overflow)',
       subtitle: '1 Book',
       imageUrl:
-          'https://static.vecteezy.com/system/resources/previews/009/399/398/non_2x/old-vintage-book-clipart-design-illustration-free-png.png',
+          'https://media.istockphoto.com/id/153737841/photo/rice.jpg?s=612x612&w=0&k=20&c=lfO7iLT0UsDDzra0uBOsN1rvr2d5OEtrG2uwbts33_c=',
     ),
     Product(
       id: '7',

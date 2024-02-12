@@ -84,5 +84,8 @@
     "divorced": "مطلق",
     "please_enter_valid_number": "الرجاء إدخال رقم صحيح",
     "please_fill_out_this_field": "الرجاء تعبئة هذا البيان",
-    "search": "بحث"
+    "search": "بحث",
+    "remaining": "المتبقي لك",
+    "recommended_foods": "الأغذية المقترحة",
+    "most_popular": "الأكثر رواجًا"
 }

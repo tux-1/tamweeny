@@ -83,5 +83,8 @@
     "divorced": "Divorced",
     "please_enter_valid_number": "Please enter a valid number.",
     "please_fill_out_this_field": "Please fill out this field.",
-    "search": "Search"
+    "search": "Search",
+    "remaining": "Remaining",
+    "recommended_foods": "Recommended Foods",
+    "most_popular": "Most Popular"
 }

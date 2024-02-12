@@ -4,6 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:tamweeny/generated/l10n.dart';
 
 import '../providers/products.dart';
+import '../widgets/custom_scaffold.dart';
+import '../widgets/custom_search_bar.dart';
+import '../widgets/offer_item.dart';
 import '../widgets/product_item.dart';
 
 class HomePage extends StatefulWidget {
@@ -58,141 +61,115 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
     final products = productsData.items;
-    return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
-      floatingActionButton: _isVisible
-          ? FloatingActionButton(
-              backgroundColor: const Color.fromARGB(255, 218, 218, 218),
-              foregroundColor: const Color.fromARGB(255, 30, 53, 47),
-              onPressed: () {
-                showSearch(
-                  context: context,
-                  delegate:
-                      CustomSearchDelegate(hintText: S.of(context).search),
-                );
-              },
-              child: const Icon(Icons.search),
-            )
-          : null,
-      backgroundColor: const Color.fromARGB(204, 187, 204, 187),
-      body: ListView(
-        controller: _controller,
-        children: [
-          const SizedBox(height: 30),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            padding: const EdgeInsets.all(10),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.85,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
+    return CustomScaffold(
+      body: SafeArea(
+        child: CustomScrollView(
+          physics: const ClampingScrollPhysics(),
+          controller: _controller,
+          slivers: [
+            const CustomSearchBar(),
+
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Text(
+                  S.of(context).recommended_foods,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displaySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
-            itemCount: products.length,
-            itemBuilder: (context, index) {
-              return ChangeNotifierProvider.value(
-                value: products[index],
-                child: const ProductItem(),
-              );
-            },
-          ),
-          Container(
-            height: 500,
-            color: const Color.fromARGB(122, 96, 125, 139),
-            child: const Text(
-              'Test',
-              textAlign: TextAlign.center,
+
+            // Recommended (horizontal scrollable sliver)
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 225,
+                child: ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: products.length,
+                  itemBuilder: (context, index) {
+                    return ChangeNotifierProvider.value(
+                      value: products[index],
+                      child: Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 5),
+                          constraints: BoxConstraints(
+                            minWidth: MediaQuery.of(context).size.width * 0.45,
+                            maxWidth: MediaQuery.of(context).size.width * 0.45,
+                          ),
+                          child: const ProductItem()),
+                    );
+                  },
+                ),
+              ),
             ),
-          )
-        ],
+
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Text(
+                  S.of(context).offers,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displaySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            // Offers (horizontal scrollable sliver)
+            SliverToBoxAdapter(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxHeight: 200),
+                child: ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: products.length,
+                  itemBuilder: (context, index) {
+                    return ChangeNotifierProvider.value(
+                      value: products[index],
+                      child: OfferItem(),
+                    );
+                  },
+                ),
+              ),
+            ),
+
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Text(
+                  S.of(context).most_popular,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displaySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 11),
+              sliver: SliverGrid.builder(
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  childAspectRatio: 0.7,
+                  crossAxisSpacing: 11,
+                  mainAxisSpacing: 11,
+                  maxCrossAxisExtent: 300,
+                ),
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  return ChangeNotifierProvider.value(
+                    value: products[index],
+                    child: const ProductItem(),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
-  }
-}
-
-class CustomSearchDelegate extends SearchDelegate {
-  List<String> searchTerms = [
-    //Should be queried from database
-    'Apple',
-    'Banana',
-    'Pear',
-    'Salama',
-    'Mahnod',
-    'Strawberry',
-    'Watermelon',
-  ];
-
-  CustomSearchDelegate({
-    hintText,
-  }) : super(
-          searchFieldLabel: hintText,
-          keyboardType: TextInputType.text,
-          textInputAction: TextInputAction.search,
-        );
-
-  @override
-  List<Widget>? buildActions(BuildContext context) {
-    return [
-      IconButton(
-          onPressed: () {
-            query = '';
-          },
-          icon: const Icon(
-            Icons.clear,
-          )),
-    ];
-  }
-
-  @override
-  Widget? buildLeading(BuildContext context) {
-    return IconButton(
-        onPressed: () {
-          close(context, null);
-        },
-        icon: const Icon(Icons.arrow_back));
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    List<String> matchQuery = [];
-
-    for (var item in searchTerms) {
-      if (item.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(item);
-      }
-    }
-    return ListView.builder(
-        itemCount: matchQuery.length,
-        itemBuilder: (context, index) {
-          var result = matchQuery[index];
-          return ListTile(
-            title: Text(result),
-          );
-        });
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
-
-    for (var item in searchTerms) {
-      if (item.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(item);
-      }
-    }
-    return ListView.builder(
-        itemCount: matchQuery.length,
-        itemBuilder: (context, index) {
-          var result = matchQuery[index];
-          if (query.isNotEmpty) {
-            return ListTile(
-              title: Text(result),
-            );
-          } else {
-            return null;
-            // Add recent searches here ??
-          }
-        });
   }
 }

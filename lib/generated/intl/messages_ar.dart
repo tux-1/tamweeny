@@ -101,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "married": MessageLookupByLibrary.simpleMessage("متزوج"),
         "minimum_salary":
             MessageLookupByLibrary.simpleMessage("الحد الأدنى للراتب"),
+        "most_popular": MessageLookupByLibrary.simpleMessage("الأكثر رواجًا"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "name_registered_on_tamween_card": MessageLookupByLibrary.simpleMessage(
             "الاسم المسجل على بطاقة التموين"),
@@ -131,7 +132,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "3) انتظر حتى يتم استلام البطاقة."),
         "proceduresForNewCard": MessageLookupByLibrary.simpleMessage(
             "إجراءات المكتب للحصول على بطاقة جديدة:"),
+        "recommended_foods":
+            MessageLookupByLibrary.simpleMessage("الأغذية المقترحة"),
         "register": MessageLookupByLibrary.simpleMessage("تسجيل"),
+        "remaining": MessageLookupByLibrary.simpleMessage("المتبقي لك"),
         "replacementCardProcess": MessageLookupByLibrary.simpleMessage(
             "من أجل الحصول على بطاقة طعام بدلاً من البطاقة المفقودة أو التالفة ، يجب على المواطن الذي يرغب في الحصول على بطاقة إحضار بعض الأوراق والمستندات لإتمام هذه العملية، وتشمل هذه الأوراق والمستندات"),
         "replacementDocument1": MessageLookupByLibrary.simpleMessage(

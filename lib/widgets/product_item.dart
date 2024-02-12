@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tamweeny/generated/l10n.dart';
 
 import '../providers/product.dart';
 
@@ -15,19 +16,18 @@ class _ProductItemState extends State<ProductItem> {
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context);
     // final deviceSize = MediaQuery.of(context).size;
-    return Center(
-      child: Card(
-        color: Color.fromARGB(255, 224, 224, 224),
-        elevation: 10,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(15),
-          child: Column(
-            children: [
-              Expanded(
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(15),
+      child: Column(
+        children: [
+          Flexible(
+            fit: FlexFit.loose,
+            child: ColoredBox(
+              color: Colors.white,
+              child: SizedBox.expand(
                 child: Image.network(
                   product.imageUrl,
-                  fit: BoxFit.contain,
+                  fit: BoxFit.cover,
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
                     return const Center(child: CircularProgressIndicator());
@@ -41,40 +41,77 @@ class _ProductItemState extends State<ProductItem> {
                   },
                 ),
               ),
-              Container(
-                constraints: const BoxConstraints(minWidth: double.maxFinite),
-                height: 87,
-                color: Color(0xff1E352F),
-                child: Column(
+            ),
+          ),
+          ColoredBox(
+            color: const Color(0xffDEA568).withOpacity(0.85),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Expanded(
-                      child: Text(
-                        product.title,
-                        maxLines: 2,
-                        softWrap: true,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              height: 1.05,
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0,
+                          vertical: 0,
+                        ),
+                        child: Text(
+                          product.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          product.price.toString(),
-                        ),
-                        Text(product.subtitle == null
-                            ? ''
-                            : product.subtitle.toString()),
-                      ],
-                    ),
+                    IconButton(
+                      onPressed: () {},
+                      padding: EdgeInsets.zero,
+                      icon: Icon(Icons.favorite_border, color: Colors.white),
+                    )
                   ],
                 ),
-              ),
-            ],
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0,
+                          vertical: 0,
+                        ),
+                        child: Text(
+                          product.price.toString(),
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      padding: EdgeInsets.zero,
+                      icon: Icon(Icons.add_box_outlined, color: Colors.white),
+                    )
+                  ],
+                ),
+                Center(
+                  child: Text(
+                    S.of(context).remaining,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(color: const Color(0xff335145)),
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

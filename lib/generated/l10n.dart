@@ -899,6 +899,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Remaining`
+  String get remaining {
+    return Intl.message(
+      'Remaining',
+      name: 'remaining',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recommended Foods`
+  String get recommended_foods {
+    return Intl.message(
+      'Recommended Foods',
+      name: 'recommended_foods',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Most Popular`
+  String get most_popular {
+    return Intl.message(
+      'Most Popular',
+      name: 'most_popular',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

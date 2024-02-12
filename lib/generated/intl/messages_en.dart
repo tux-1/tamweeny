@@ -102,6 +102,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "married": MessageLookupByLibrary.simpleMessage("Married"),
         "minimum_salary":
             MessageLookupByLibrary.simpleMessage("Minimum Salary"),
+        "most_popular": MessageLookupByLibrary.simpleMessage("Most Popular"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "name_registered_on_tamween_card": MessageLookupByLibrary.simpleMessage(
             "Name Registered on the Tamween Card"),
@@ -134,7 +135,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "3) Wait until the card is received."),
         "proceduresForNewCard": MessageLookupByLibrary.simpleMessage(
             "Procedures at the Office to Obtain a New Card:"),
+        "recommended_foods":
+            MessageLookupByLibrary.simpleMessage("Recommended Foods"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "remaining": MessageLookupByLibrary.simpleMessage("Remaining"),
         "replacementCardProcess": MessageLookupByLibrary.simpleMessage(
             "Process for Obtaining a Replacement Food Card:"),
         "replacementDocument1": MessageLookupByLibrary.simpleMessage(
