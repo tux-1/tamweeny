@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+void main() {
+  runApp(AddItemTestPage());
+}
+
 class AddItemTestPage extends StatelessWidget {
   AddItemTestPage({super.key});
 
   final TextEditingController priceController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
