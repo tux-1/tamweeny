@@ -16,6 +16,9 @@ class Products with ChangeNotifier {
   final String productsApi = 'http://10.0.2.2:8000/api/products?page=';
 
   void fetchAndSetProducts(int index) async {
+    if (items.isNotEmpty && index == 1) {
+      return;
+    }
     // Getting the token
     final prefs = await SharedPreferences.getInstance();
     final extractedData = json.decode(prefs.getString('userData').toString())

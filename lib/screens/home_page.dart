@@ -3,7 +3,9 @@ import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:tamweeny/generated/l10n.dart';
 
+import '../providers/categories.dart';
 import '../providers/products.dart';
+import '../widgets/category_chips.dart';
 import '../widgets/custom_search_bar.dart';
 import '../widgets/offer_item.dart';
 import '../widgets/product_item.dart';
@@ -47,6 +49,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     Provider.of<Products>(context, listen: false).fetchAndSetProducts(1);
+    Provider.of<CategoriesProvider>(context, listen: false)
+        .fetchAndSetCategories();
     super.initState();
     // Assigning controllers to widgets comes after initState
     _controller = widget.scrollController!;
@@ -69,7 +73,13 @@ class _HomePageState extends State<HomePage> {
         controller: _controller,
         slivers: [
           const CustomSearchBar(),
-          
+
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: CategoryChips(),
+            ),
+          ),
 
           SliverText(text: S.of(context).recommended_foods),
 

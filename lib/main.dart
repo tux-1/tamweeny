@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:provider/provider.dart';
 
+import 'providers/categories.dart';
 import 'screens/navigation_screen.dart';
 import 'screens/home_page.dart';
 import 'authentication/screens/app_signup_screen.dart';
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
         // ChangeNotifierProvider(
         //     create: (ctx) => Cart(),
         //   ),
+        ChangeNotifierProvider(
+          create: (context) => CategoriesProvider(),
+        ),
         ChangeNotifierProvider(
           create: (ctx) => Auth(),
         ),
