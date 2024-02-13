@@ -54,10 +54,10 @@ class Auth with ChangeNotifier {
         body: jsonEncode(userLoginData.toJson()),
       );
 
-      print('Response ${response.body}');
+      // print('Response ${response.body}');
       final responseData = jsonDecode(response.body);
       final responseToken = responseData['token'];
-      print(response);
+      // print(response);
       if (responseToken == null) {
         throw HttpException(responseData['message']);
       }

@@ -26,7 +26,8 @@ class _ProductItemState extends State<ProductItem> {
               color: Colors.white,
               child: SizedBox.expand(
                 child: Image.network(
-                  product.imageUrl,
+                  'https://media.istockphoto.com/id/153737841/photo/rice.jpg?s=612x612&w=0&k=20&c=lfO7iLT0UsDDzra0uBOsN1rvr2d5OEtrG2uwbts33_c=',
+                  // product.productImage,
                   fit: BoxFit.cover,
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
@@ -59,7 +60,7 @@ class _ProductItemState extends State<ProductItem> {
                           vertical: 0,
                         ),
                         child: Text(
-                          product.title,
+                          product.productName,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
@@ -88,7 +89,7 @@ class _ProductItemState extends State<ProductItem> {
                           vertical: 0,
                         ),
                         child: Text(
-                          '${S.of(context).unit_price} ${product.price.toString()}',
+                          '${S.of(context).unit_price} ${product.selling_price.toString()}',
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!

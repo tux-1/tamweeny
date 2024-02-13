@@ -1,47 +1,37 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'product.dart';
 
 class Products with ChangeNotifier {
   // ignore: prefer_final_fields
-  List<Product> _items = [
-    Product(
-      id: '5',
-      price: 5,
-      title: 'title5',
-      imageUrl:
-          'https://media.istockphoto.com/id/153737841/photo/rice.jpg?s=612x612&w=0&k=20&c=lfO7iLT0UsDDzra0uBOsN1rvr2d5OEtrG2uwbts33_c=',
-    ),
-    Product(
-      id: '6',
-      price: 6,
-      title: 'title6',
-      subtitle: '500g',
-      imageUrl: 'https://pngimg.com/d/rice_PNG11.png',
-    ),
-    Product(
-      id: '7',
-      price: 7,
-      title: 'Title name longer than 2 lines (Overflow)',
-      subtitle: '1 Book',
-      imageUrl:
-          'https://media.istockphoto.com/id/153737841/photo/rice.jpg?s=612x612&w=0&k=20&c=lfO7iLT0UsDDzra0uBOsN1rvr2d5OEtrG2uwbts33_c=',
-    ),
-    Product(
-      id: '7',
-      price: 7,
-      title: 'title7',
-      imageUrl:
-          'https://static.vecteezy.com/system/resources/previews/009/399/398/non_2x/old-vintage-book-clipart-design-illustration-free-png.png',
-    ),
-  ];
+  List<Product> _items = [];
 
   List<Product> get items {
     return _items;
   }
 
-  // void setFav(String id, bool favStatus) {
-  //   var test = _items.where((item) => item.id == id) as Product;
-  //   test.isFavorite = favStatus;
-  // }
+  final String productsApi = 'http://10.0.2.2:8000/api/products?page=';
+
+  void fetchAndSetProducts(int index) async {
+    // Getting the token
+    final prefs = await SharedPreferences.getInstance();
+    final extractedData = json.decode(prefs.getString('userData').toString())
+        as Map<String, dynamic>;
+    final token = extractedData['token'].toString();
+
+    // Getting the products using token in header, index appended to the Api
+    final response = await http.get(Uri.parse('$productsApi$index'),
+        headers: {'Authorization': 'Bearer $token'});
+
+    // Loading the products into my list
+    final productsData = jsonDecode(response.body)['data'] as List<dynamic>;
+
+    for (var element in productsData) {
+      _items.add(Product.fromJson(element));
+    }
+    notifyListeners();
+  }
 }

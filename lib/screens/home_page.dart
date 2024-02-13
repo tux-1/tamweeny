@@ -19,6 +19,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late ScrollController _controller;
+  late Products productsData;
   bool _isVisible = true;
 
   void _listen() {
@@ -45,7 +46,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    Provider.of<Products>(context, listen: false).fetchAndSetProducts(1);
     super.initState();
+    // Assigning controllers to widgets comes after initState
     _controller = widget.scrollController!;
     _controller.addListener(_listen);
   }
@@ -58,7 +61,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final productsData = Provider.of<Products>(context);
+    productsData = Provider.of<Products>(context);
     final products = productsData.items;
     return SafeArea(
       child: CustomScrollView(
@@ -66,6 +69,7 @@ class _HomePageState extends State<HomePage> {
         controller: _controller,
         slivers: [
           const CustomSearchBar(),
+          
 
           SliverText(text: S.of(context).recommended_foods),
 
