@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:tamweeny/generated/l10n.dart';
 
 import '../providers/products.dart';
-import '../widgets/custom_scaffold.dart';
 import '../widgets/custom_search_bar.dart';
 import '../widgets/offer_item.dart';
 import '../widgets/product_item.dart';
@@ -61,113 +60,100 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
     final products = productsData.items;
-    return CustomScaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          physics: const ClampingScrollPhysics(),
-          controller: _controller,
-          slivers: [
-            const CustomSearchBar(),
+    return SafeArea(
+      child: CustomScrollView(
+        physics: const ClampingScrollPhysics(),
+        controller: _controller,
+        slivers: [
+          const CustomSearchBar(),
 
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Text(
-                  S.of(context).recommended_foods,
-                  style: Theme.of(context)
-                      .textTheme
-                      .displaySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
+          SliverText(text: S.of(context).recommended_foods),
 
-            // Recommended (horizontal scrollable sliver)
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 225,
-                child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: products.length,
-                  itemBuilder: (context, index) {
-                    return ChangeNotifierProvider.value(
-                      value: products[index],
-                      child: Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 5),
-                          constraints: BoxConstraints(
-                            minWidth: MediaQuery.of(context).size.width * 0.45,
-                            maxWidth: MediaQuery.of(context).size.width * 0.45,
-                          ),
-                          child: const ProductItem()),
-                    );
-                  },
-                ),
-              ),
-            ),
-
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Text(
-                  S.of(context).offers,
-                  style: Theme.of(context)
-                      .textTheme
-                      .displaySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            // Offers (horizontal scrollable sliver)
-            SliverToBoxAdapter(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: 200),
-                child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: products.length,
-                  itemBuilder: (context, index) {
-                    return ChangeNotifierProvider.value(
-                      value: products[index],
-                      child: OfferItem(),
-                    );
-                  },
-                ),
-              ),
-            ),
-
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Text(
-                  S.of(context).most_popular,
-                  style: Theme.of(context)
-                      .textTheme
-                      .displaySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 11),
-              sliver: SliverGrid.builder(
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  childAspectRatio: 0.7,
-                  crossAxisSpacing: 11,
-                  mainAxisSpacing: 11,
-                  maxCrossAxisExtent: 300,
-                ),
+          // Recommended (horizontal scrollable sliver)
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 225,
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
                 itemCount: products.length,
                 itemBuilder: (context, index) {
                   return ChangeNotifierProvider.value(
                     value: products[index],
-                    child: const ProductItem(),
+                    child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        constraints: BoxConstraints(
+                          minWidth: MediaQuery.of(context).size.width * 0.45,
+                          maxWidth: MediaQuery.of(context).size.width * 0.45,
+                        ),
+                        child: const ProductItem()),
                   );
                 },
               ),
             ),
-          ],
+          ),
+
+          SliverText(text: S.of(context).offers),
+
+          // Offers (horizontal scrollable sliver)
+          SliverToBoxAdapter(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 200),
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  return ChangeNotifierProvider.value(
+                    value: products[index],
+                    child: OfferItem(),
+                  );
+                },
+              ),
+            ),
+          ),
+
+          SliverText(text: S.of(context).most_popular),
+
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            sliver: SliverGrid.builder(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                childAspectRatio: 0.7,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
+                maxCrossAxisExtent: 300,
+              ),
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                return ChangeNotifierProvider.value(
+                  value: products[index],
+                  child: const ProductItem(),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SliverText extends StatelessWidget {
+  const SliverText({super.key, required this.text});
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+        child: Text(
+          text,
+          style: Theme.of(context)
+              .textTheme
+              .displaySmall!
+              .copyWith(fontWeight: FontWeight.bold),
         ),
       ),
     );

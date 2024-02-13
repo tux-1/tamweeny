@@ -9,7 +9,7 @@ class OfferItem extends StatelessWidget {
       elevation: 0,
       clipBehavior: Clip.antiAlias,
       color: const Color(0xff335145),
-      margin: const EdgeInsets.symmetric(horizontal: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       child: InkWell(
         onTap: () {},
         child: ConstrainedBox(

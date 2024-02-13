@@ -165,6 +165,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tamween Card Password"),
         "telephone_number":
             MessageLookupByLibrary.simpleMessage("Telephone Number"),
+        "unit_price": MessageLookupByLibrary.simpleMessage("Unit Price"),
         "wallet_balance":
             MessageLookupByLibrary.simpleMessage("Wallet Balance"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome to Tamweeny"),

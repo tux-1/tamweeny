@@ -161,8 +161,7 @@ class _LocationsScreenState extends State<LocationsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: FlutterMap(
+    return FlutterMap(
         options: const MapOptions(
           initialCenter: LatLng(30.035658, 31.268681),
           initialZoom: 11.5,
@@ -202,7 +201,7 @@ class _LocationsScreenState extends State<LocationsScreen> {
             // buildTrackableMarker(const LatLng(37.423490, -122.078074)),
           ])
         ],
-      ),
-    );
+      )
+    ;
   }
 }

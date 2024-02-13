@@ -33,63 +33,6 @@ class Auth with ChangeNotifier {
     return null;
   }
 
-  // Future<void> _authenticate(
-  //     String email, String password, String urlSegment) async {
-  //   //const is a compilation time constant, final is a runtime constant
-  //   final url = Uri.parse(
-  //       //you can put https:// in the Uri.parse() string
-  //       'https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=AIzaSyAV9AosuFzvn1xTqIYWxoP55m-cLeInLro');
-  //   //https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]
-  //   try {
-  //     final response = await http.post(
-  //       url,
-  //       body: json.encode(
-  //         {
-  //           'email': email,
-  //           'password': password,
-  //           'returnSecureToken': true,
-  //         },
-  //       ),
-  //     );
-  //     final responseData = json.decode(response.body);
-  //     if (responseData['error'] != null) {
-  //       print('An error occured: ' + responseData['error']['message']);
-  //       throw HttpException(
-  //           'An error occured: ' + responseData['error']['message']);
-  //     }
-  //     if (urlSegment == 'signInWithPassword') {
-  //       _token = responseData['idToken'];
-  //       _userId = responseData['localId'];
-  //       // print(_token);
-  //       // print(_userId);
-  //       _expiryDate = DateTime.now().add(
-  //         Duration(
-  //           seconds: int.parse(responseData['expiresIn']),
-  //         ),
-  //       );
-  //       _autoLogout();
-  //       notifyListeners();
-  //       final prefs = await SharedPreferences.getInstance();
-  //       final userData = json.encode({
-  //         'token': _token,
-  //         'userId': _userId,
-  //         'expiryDate': _expiryDate?.toIso8601String(),
-  //       });
-  //       prefs.setString('userData', userData);
-  //     }
-  //   } catch (error) {
-  //     rethrow;
-  //   }
-  // }
-
-  // Future<void> signUp(String email, String password) async {
-  //   return _authenticate(email, password, 'signUp');
-  // }
-
-  // Future<void> logIn(String email, String password) async {
-  //   return _authenticate(email, password, 'signInWithPassword');
-  // }
-
   Future<void> logIn(String email, String pass,
       {String device = 'Unknown Device'}) async {
     const String apiUrl = 'http://10.0.2.2:8000/api/login';

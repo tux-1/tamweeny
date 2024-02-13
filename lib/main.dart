@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.dark,
+        theme: themeData(context),
         locale: const Locale('ar'),
         localizationsDelegates: const [
           S.delegate,
@@ -59,18 +60,17 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: S.delegate.supportedLocales,
-        theme: themeData(context),
         scrollBehavior: ScrollConfiguration.of(context).copyWith(),
         home: const SplashBody(),
         routes: {
           NavigationScreen.routeName: (ctx) => NavigationScreen(),
+          LocationsScreen.routeName: (ctx) => LocationsScreen(),
           ProfileScreen.routeName: (ctx) => ProfileScreen(),
           HomePage.routeName: (ctx) => HomePage(),
           SignUpScreen.routeName: (ctx) => SignUpScreen(),
           TamweenSignUpScreen.routeName: (ctx) => TamweenSignUpScreen(),
           TamweenInfo.routeName: (ctx) => TamweenInfo(),
           LogInScreen.routeName: (ctx) => LogInScreen(),
-          LocationsScreen.routeName: (ctx) => LocationsScreen(),
         },
       ),
     );

@@ -929,6 +929,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Unit Price`
+  String get unit_price {
+    return Intl.message(
+      'Unit Price',
+      name: 'unit_price',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

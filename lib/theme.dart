@@ -19,10 +19,20 @@ const Map<int, Color> kColorMap = {
 
 ThemeData themeData(BuildContext context) {
   return ThemeData(
+    // Define the accent color used for icons, n stuff
+    colorScheme: ColorScheme.fromSwatch(
+      primarySwatch: const MaterialColor(0x335145, kColorMap),
+      accentColor: const Color(0xffDEA568),
+      // backgroundColor: const Color(0xFF335145),
+    ),
+
     fontFamily: GoogleFonts.lateef().fontFamily,
+
     // Define the background color of the app
     scaffoldBackgroundColor: const Color(0xff1E352F),
+
     dialogBackgroundColor: const Color(0xff1E352F),
+    
     // Define text theme to control the text color
     textTheme: const TextTheme(
       displayLarge: TextStyle(
@@ -117,12 +127,6 @@ ThemeData themeData(BuildContext context) {
     // primaryColor: const Color(0xFF335145),
     iconTheme: const IconThemeData(
       color: Color(0xffDEA568),
-    ),
-    // Define the accent color used for icons, n stuff
-    colorScheme: ColorScheme.fromSwatch(
-      primarySwatch: const MaterialColor(0x335145, kColorMap),
-      accentColor: const Color(0xffDEA568),
-      // backgroundColor: const Color(0xFF335145),
     ),
     checkboxTheme: const CheckboxThemeData(
       side: BorderSide(color: Colors.white),

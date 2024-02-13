@@ -52,7 +52,7 @@ class _ProductItemState extends State<ProductItem> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Flexible(
-                      fit: FlexFit.loose,
+                      fit: FlexFit.tight,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10.0,
@@ -81,14 +81,18 @@ class _ProductItemState extends State<ProductItem> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Flexible(
-                      fit: FlexFit.loose,
+                      fit: FlexFit.tight,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10.0,
                           vertical: 0,
                         ),
                         child: Text(
-                          product.price.toString(),
+                          '${S.of(context).unit_price} ${product.price.toString()}',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),

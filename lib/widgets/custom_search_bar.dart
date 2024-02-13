@@ -10,35 +10,48 @@ class CustomSearchBar extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: TextField(
-          onTap: () {
-            showSearch(
-              context: context,
-              delegate: CustomSearchDelegate(hintText: S.of(context).search),
-            );
-          },
-          readOnly: true,
-          decoration: InputDecoration(
-            hintText: S.of(context).search,
-            hintStyle: Theme.of(context).textTheme.headlineMedium,
-            contentPadding: EdgeInsets.zero,
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
-                borderSide: const BorderSide(color: Colors.white)),
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
-                borderSide: const BorderSide(color: Colors.white)),
-            disabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
-                borderSide: const BorderSide(color: Colors.white)),
-            prefixIcon: const Icon(
-              Icons.search,
-              color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width*0.65),
+              child: TextField(
+                onTap: () {
+                  showSearch(
+                    context: context,
+                    delegate:
+                        CustomSearchDelegate(hintText: S.of(context).search),
+                  );
+                },
+                readOnly: true,
+                decoration: InputDecoration(
+                  hintText: S.of(context).search,
+                  hintStyle: Theme.of(context).textTheme.headlineMedium,
+                  contentPadding: EdgeInsets.zero,
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: const BorderSide(color: Colors.white)),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: const BorderSide(color: Colors.white)),
+                  disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: const BorderSide(color: Colors.white)),
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+              ),
             ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-          ),
+            
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.shopping_cart, size: 27, color: Colors.white,)),
+          ],
         ),
       ),
     );

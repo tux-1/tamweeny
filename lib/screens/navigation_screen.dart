@@ -4,6 +4,8 @@ import 'package:tamweeny/screens/home_page.dart';
 import 'package:tamweeny/screens/locations_screen.dart';
 import 'package:tamweeny/screens/profile_screen.dart';
 
+import '../widgets/custom_scaffold.dart';
+
 class NavigationScreen extends StatefulWidget {
   static const routeName = '/navigation-screen';
 
@@ -16,7 +18,6 @@ class NavigationScreen extends StatefulWidget {
 class _NavigationScreenState extends State<NavigationScreen>
     with TickerProviderStateMixin {
   TabController? _tabController;
-  int _currentIndex = 0;
   late ScrollController scrollController;
 
   bool _isVisible = true;
@@ -46,12 +47,7 @@ class _NavigationScreenState extends State<NavigationScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(initialIndex: 0, vsync: this, length: 4);
-    _tabController?.addListener(() {
-      setState(() {
-        _currentIndex = _tabController!.index;
-      });
-    });
+    _tabController = TabController(initialIndex: 3, vsync: this, length: 4);
     scrollController = ScrollController();
     scrollController.addListener(_listen);
   }
@@ -66,14 +62,16 @@ class _NavigationScreenState extends State<NavigationScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
       extendBody: true,
       bottomNavigationBar: AnimatedContainer(
+        width: double.infinity,
         height: _isVisible ? 50 : 0,
         duration: const Duration(milliseconds: 200),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.white),
+          color: const Color(0xffDEA568),
+          borderRadius: const BorderRadius.only(
             topRight: Radius.circular(20),
             topLeft: Radius.circular(20),
           ),
@@ -81,49 +79,31 @@ class _NavigationScreenState extends State<NavigationScreen>
         child: TabBar(
             dividerColor: Colors.transparent,
             indicatorColor: _isVisible ? Colors.black : Colors.transparent,
-            labelColor:
-                const Color.fromARGB(255, 30, 53, 47), //Selected icon color
-            unselectedLabelColor: const Color.fromARGB(255, 30, 53, 47),
+            labelColor: Colors.black, //Selected icon color
+            unselectedLabelColor: Colors.white,
             controller: _tabController,
-            tabs: [
-              Tab(
-                icon: Icon(
-                  _currentIndex == 0
-                      ? Icons.shopping_cart
-                      : Icons.shopping_cart_outlined,
-                  size: 27,
-                ),
-              ),
-              Tab(
-                icon: Icon(
-                  _currentIndex == 1 ? Icons.home : Icons.home_outlined,
-                  size: 27,
-                ),
-              ),
-              Tab(
-                icon: Icon(
-                  _currentIndex == 2
-                      ? Icons.location_on
-                      : Icons.location_on_outlined,
-                  size: 27,
-                ),
-              ),
-              Tab(
-                icon: Icon(
-                  _currentIndex == 3 ? Icons.person : Icons.person_outline,
-                  size: 27,
-                ),
-              ),
+            tabs: const [
+              Tab(icon: Icon(Icons.person, size: 27)),
+              // Profile Screen
+
+              // Locations screen
+              Tab(icon: Icon(Icons.location_on, size: 27)),
+
+              // Categories screen
+              Tab(icon: Icon(Icons.shopping_bag_rounded, size: 27)),
+
+              // HomePage
+              Tab(icon: Icon(Icons.home, size: 27)),
             ]),
       ),
       body: TabBarView(
           controller: _tabController,
           physics: const NeverScrollableScrollPhysics(),
           children: [
+            ProfileScreen(),
+            const LocationsScreen(),
             Container(),
             HomePage(scrollController: scrollController),
-            LocationsScreen(),
-            ProfileScreen(),
           ]),
     );
   }

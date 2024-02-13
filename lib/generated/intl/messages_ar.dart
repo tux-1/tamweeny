@@ -161,6 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tamween_password":
             MessageLookupByLibrary.simpleMessage("كلمة مرور بطاقة التموين"),
         "telephone_number": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "unit_price": MessageLookupByLibrary.simpleMessage("سعر الوحدة"),
         "wallet_balance": MessageLookupByLibrary.simpleMessage("رصيد محفظتك"),
         "welcome": MessageLookupByLibrary.simpleMessage("مرحباً بك فى تموينى"),
         "welcomeSubtitle":
