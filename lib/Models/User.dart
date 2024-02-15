@@ -1,3 +1,4 @@
+// ignore: file_names
 class User {
   int? id;
   String? nationalId;

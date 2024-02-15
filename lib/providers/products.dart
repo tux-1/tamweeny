@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
+import '../utils/token_manager.dart';
 import 'product.dart';
 
 class Products with ChangeNotifier {
@@ -20,10 +20,7 @@ class Products with ChangeNotifier {
       return;
     }
     // Getting the token
-    final prefs = await SharedPreferences.getInstance();
-    final extractedData = json.decode(prefs.getString('userData').toString())
-        as Map<String, dynamic>;
-    final token = extractedData['token'].toString();
+    final token = await TokenManager.getToken();
 
     // Getting the products using token in header, index appended to the Api
     final response = await http.get(Uri.parse('$productsApi$index'),

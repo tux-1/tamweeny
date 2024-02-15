@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,7 @@ import 'authentication/screens/tamween-signUp_screen.dart';
 import 'theme.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const riverpod.ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

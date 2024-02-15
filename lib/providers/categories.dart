@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import '../utils/token_manager.dart';
 
 class Category {
   final int catId;
@@ -43,10 +44,7 @@ class CategoriesProvider extends ChangeNotifier {
       return;
     }
     // Getting the token
-    final prefs = await SharedPreferences.getInstance();
-    final extractedData = json.decode(prefs.getString('userData').toString())
-        as Map<String, dynamic>;
-    final token = extractedData['token'].toString();
+    final token = await TokenManager.getToken();
 
     // Getting the categories using token in header
     final response = await http.get(Uri.parse(categoriesApi),

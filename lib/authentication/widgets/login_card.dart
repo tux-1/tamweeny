@@ -166,6 +166,7 @@ class _LogInCardState extends State<LogInCard> {
             // ),
             const SizedBox(height: 20),
 
+            // Log in button
             ElevatedButton(
               onPressed: _isLoading ? null : _submit,
               child: _isLoading
