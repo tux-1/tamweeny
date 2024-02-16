@@ -22,29 +22,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late ScrollController _controller;
   late Products productsData;
-  bool _isVisible = true;
-
-  void _listen() {
-    final ScrollDirection direction = _controller.position.userScrollDirection;
-
-    if (direction == ScrollDirection.forward) {
-      _show();
-    } else if (direction == ScrollDirection.reverse) {
-      _hide();
-    }
-  }
-
-  void _show() {
-    if (!_isVisible && mounted) {
-      setState(() => _isVisible = true);
-    }
-  }
-
-  void _hide() {
-    if (_isVisible && mounted) {
-      setState(() => _isVisible = false);
-    }
-  }
 
   @override
   void initState() {
@@ -54,12 +31,10 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     // Assigning controllers to widgets comes after initState
     _controller = widget.scrollController!;
-    _controller.addListener(_listen);
   }
 
   @override
   void dispose() {
-    _controller.removeListener(_listen);
     super.dispose();
   }
 
@@ -67,88 +42,83 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     productsData = Provider.of<Products>(context);
     final products = productsData.items;
-    return SafeArea(
-      child: CustomScrollView(
-        physics: const ClampingScrollPhysics(),
-        controller: _controller,
-        slivers: [
-          const CustomSearchBar(),
-
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: CategoryChips(),
-            ),
-          ),
-
-          SliverText(text: S.of(context).recommended_foods),
-
-          // Recommended (horizontal scrollable sliver)
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 225,
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: products.length,
-                itemBuilder: (context, index) {
-                  return ChangeNotifierProvider.value(
-                    value: products[index],
-                    child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 10),
-                        constraints: BoxConstraints(
-                          minWidth: MediaQuery.of(context).size.width * 0.45,
-                          maxWidth: MediaQuery.of(context).size.width * 0.45,
-                        ),
-                        child: const ProductItem()),
-                  );
-                },
-              ),
-            ),
-          ),
-
-          SliverText(text: S.of(context).offers),
-
-          // Offers (horizontal scrollable sliver)
-          SliverToBoxAdapter(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: 200),
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: products.length,
-                itemBuilder: (context, index) {
-                  return ChangeNotifierProvider.value(
-                    value: products[index],
-                    child: OfferItem(),
-                  );
-                },
-              ),
-            ),
-          ),
-
-          SliverText(text: S.of(context).most_popular),
-
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            sliver: SliverGrid.builder(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                childAspectRatio: 0.7,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-                maxCrossAxisExtent: 300,
-              ),
+    return CustomScrollView(
+      physics: const ClampingScrollPhysics(),
+      controller: _controller,
+      slivers: [
+        const CustomSearchBar(),
+    
+        SliverToBoxAdapter(
+          child: CategoryChips(),
+        ),
+    
+        SliverText(text: S.of(context).recommended_foods),
+    
+        // Recommended (horizontal scrollable sliver)
+        SliverToBoxAdapter(
+          child: SizedBox(
+            height: 225,
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
               itemCount: products.length,
               itemBuilder: (context, index) {
                 return ChangeNotifierProvider.value(
                   value: products[index],
-                  child: const ProductItem(),
+                  child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      constraints: BoxConstraints(
+                        minWidth: MediaQuery.of(context).size.width * 0.45,
+                        maxWidth: MediaQuery.of(context).size.width * 0.45,
+                      ),
+                      child: const ProductItem()),
                 );
               },
             ),
           ),
-        ],
-      ),
+        ),
+    
+        SliverText(text: S.of(context).offers),
+    
+        // Offers (horizontal scrollable sliver)
+        SliverToBoxAdapter(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 200),
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                return ChangeNotifierProvider.value(
+                  value: products[index],
+                  child: OfferItem(),
+                );
+              },
+            ),
+          ),
+        ),
+    
+        SliverText(text: S.of(context).most_popular),
+    
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          sliver: SliverGrid.builder(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              childAspectRatio: 0.7,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
+              maxCrossAxisExtent: 300,
+            ),
+            itemCount: products.length,
+            itemBuilder: (context, index) {
+              return ChangeNotifierProvider.value(
+                value: products[index],
+                child: const ProductItem(),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
