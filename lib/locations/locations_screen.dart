@@ -1,34 +1,35 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
 
-class LocationsScreen extends StatefulWidget {
+import 'location.dart';
+import 'locations_provider.dart';
+
+class LocationsScreen extends ConsumerStatefulWidget {
   static const routeName = '/locations-screen';
 
   const LocationsScreen({super.key});
 
   @override
-  State<LocationsScreen> createState() => _LocationsScreenState();
+  ConsumerState<LocationsScreen> createState() => _LocationsScreenState();
 }
 
-class _LocationsScreenState extends State<LocationsScreen> {
+class _LocationsScreenState extends ConsumerState<LocationsScreen> {
   List<LatLng> routePoints = [];
   LatLng? userLocation;
 
-  Widget attributionWidget = const SingleChildScrollView(
-    scrollDirection: Axis.horizontal,
-    physics: NeverScrollableScrollPhysics(),
-    child: SimpleAttributionWidget(
-      source: Text(
-        'OpenStreetMap contributors',
-        overflow: TextOverflow.fade,
-        softWrap: true,
-      ),
-      onTap: null,
+  Widget attributionWidget = const SimpleAttributionWidget(
+    alignment: Alignment.bottomCenter,
+    source: Text(
+      'OpenStreetMap contributors',
+      overflow: TextOverflow.fade,
+      softWrap: true,
     ),
+    onTap: null,
   );
 
   Future<Position> _getCurrentLocation() async {
@@ -89,11 +90,11 @@ class _LocationsScreenState extends State<LocationsScreen> {
             // Replace the LatLng above with the one below in production
             // LatLng(location.latitude, location.longitude);
 
-            //Marker location
+            // Marker location
             final LatLng endLocation = markerLocation;
 
-            //For reference, See:
-            //https://project-osrm.org/docs/v5.24.0/api/?language=cURL#general-options
+            // For reference, See:
+            // https://project-osrm.org/docs/v5.24.0/api/?language=cURL#general-options
 
             var url = Uri.parse(
                 'http://router.project-osrm.org/route/v1/driving/${startLocation.longitude},${startLocation.latitude};${endLocation.longitude},${endLocation.latitude}?steps=true&annotations=true&geometries=geojson');
@@ -160,48 +161,56 @@ class _LocationsScreenState extends State<LocationsScreen> {
   }
 
   @override
+  void initState() {
+    ref.read(locationsProvider).fetchAndSetLocations();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FlutterMap(
-        options: const MapOptions(
-          initialCenter: LatLng(30.035658, 31.268681),
-          initialZoom: 11.5,
+      options: const MapOptions(
+        initialCenter: LatLng(30.035658, 31.268681),
+        initialZoom: 11.5,
+      ),
+      children: [
+        TileLayer(
+          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          userAgentPackageName: 'com.example.app',
         ),
-        children: [
-          TileLayer(
-            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-            userAgentPackageName: 'com.example.app',
+        PolylineLayer(
+          polylineCulling: false,
+          polylines: [
+            Polyline(
+              points: routePoints,
+              color: Colors.blueGrey,
+              strokeWidth: 7,
+            )
+          ],
+        ),
+        attributionWidget,
+        MarkerLayer(markers: [
+          // For emulator this location will be at Google HQ
+          userLocationMarker(),
+
+          const Marker(  // Demo marker
+            point: LatLng(
+              30.094435768097608,
+              31.20311443602142,
+            ),
+            child: Icon(
+              Icons.person_pin_circle,
+              color: Colors.blue,
+              size: 35,
+            ),
           ),
-          PolylineLayer(
-            polylineCulling: false,
-            polylines: [
-              Polyline(
-                points: routePoints,
-                color: Colors.blueGrey,
-                strokeWidth: 7,
-              )
-            ],
-          ),
-          attributionWidget,
-          MarkerLayer(markers: [
-            // DEMO MARKERS:
 
-            // For emulator this location will be at Google HQ
-            userLocationMarker(),
-
-            // Random locations in Cairo
-            buildTrackableMarker(const LatLng(30.035658, 31.268681)),
-            buildTrackableMarker(
-                const LatLng(30.094435768097608, 31.20311443602142)),
-            buildTrackableMarker(
-                const LatLng(30.093710249529067, 31.218426854554092)),
-            buildTrackableMarker(
-                const LatLng(30.08334314582945, 31.203597825718397)),
-
-            // Random location near Google HQ
-            // buildTrackableMarker(const LatLng(37.423490, -122.078074)),
-          ])
-        ],
-      )
-    ;
+          // Loaded locations
+          for (Location location in ref.watch(locationsProvider).items)
+            buildTrackableMarker(LatLng(location.lat, location.long))
+        ])
+      ],
+    );
   }
 }

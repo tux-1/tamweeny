@@ -13,7 +13,7 @@ import 'generated/l10n.dart';
 import 'authentication/screens/splash_body.dart';
 import 'authentication/provider/auth.dart';
 import 'providers/products.dart';
-import 'screens/locations_screen.dart';
+import 'locations/locations_screen.dart';
 import 'authentication/screens/logIn_screen.dart';
 import 'screens/profile_screen.dart';
 import 'authentication/screens/tamween-signUp_screen.dart';

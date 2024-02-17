@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../utils/lang.dart';
 import '../screens/home_page.dart';
-import '../screens/locations_screen.dart';
+import '../locations/locations_screen.dart';
 import '../screens/profile_screen.dart';
 
 class NavBar extends StatelessWidget {
