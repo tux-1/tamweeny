@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../providers/filters.dart';
+import '../widgets/custom_scaffold.dart';
 import 'categories_screen.dart';
 import 'home_page.dart';
 import '../locations/locations_screen.dart';
@@ -72,7 +73,7 @@ class _NavigationScreenState extends ConsumerState<NavigationScreen>
         if (ref.read(filtersProvider).chosenCategory != null &&
             _tabController.index == 2) {
           setState(() {
-            ref.read(filtersProvider).chosenCategory = null;
+            ref.read(filtersProvider).clearCategory();
           });
           return;
         }
@@ -83,13 +84,14 @@ class _NavigationScreenState extends ConsumerState<NavigationScreen>
           _tabController.animateTo(previousIndex!);
           previousIndex = null;
         }
+
         if (_tabController.index == 3) {
           setState(() {
             canPop = true;
           });
         }
       },
-      child: Scaffold(
+      child: CustomScaffold(
         extendBody: true,
         bottomNavigationBar: AnimatedContainer(
           width: double.infinity,
@@ -109,8 +111,13 @@ class _NavigationScreenState extends ConsumerState<NavigationScreen>
               labelColor: Colors.black, //Selected icon color
               unselectedLabelColor: Colors.white,
               controller: _tabController,
-              onTap: (value) {
+              onTap: (newIndex) {
                 previousIndex = _tabController.previousIndex;
+                if (newIndex != 3) {
+                  setState(() {
+                    canPop = false;
+                  });
+                }
               },
               tabs: const [
                 // Profile Screen

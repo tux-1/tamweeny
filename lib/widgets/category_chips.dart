@@ -15,13 +15,17 @@ class CategoryChips extends ConsumerStatefulWidget {
 
 class _CategoryChipsState extends ConsumerState<CategoryChips> {
   Category? chosenCategory;
+  late final ScrollController _scrollController;
 
   @override
   void initState() {
-    if (ref.read(filtersProvider).tabController!.index == 3) {
-      ref.read(filtersProvider).chosenCategory = null;
+    if (ref.read(filtersProvider).tabController?.index == 3) {
+      ref.read(filtersProvider).clearCategory();
     }
     super.initState();
+    _scrollController = ScrollController(
+      initialScrollOffset: ref.read(filtersProvider).scrollPosition,
+    );
   }
 
   @override
@@ -33,6 +37,7 @@ class _CategoryChipsState extends ConsumerState<CategoryChips> {
         height: 60,
         padding: const EdgeInsets.symmetric(vertical: 12.0),
         child: ListView.builder(
+          controller: _scrollController,
           physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
           itemCount: categories.length,
@@ -47,7 +52,9 @@ class _CategoryChipsState extends ConsumerState<CategoryChips> {
                 onTap: () {
                   setState(() {
                     ref.read(filtersProvider).chosenCategory = category;
-                    ref.read(filtersProvider).tabController!.animateTo(2);
+                    ref.read(filtersProvider).scrollPosition =
+                        _scrollController.position.pixels;
+                    ref.read(filtersProvider).tabController?.animateTo(2);
                   });
                 },
                 child: Padding(
