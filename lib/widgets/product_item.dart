@@ -89,7 +89,7 @@ class _ProductItemState extends State<ProductItem> {
                           vertical: 0,
                         ),
                         child: Text(
-                          '${S.of(context).unit_price} ${product.selling_price.toString()}',
+                          '${S.of(context).unit_price} ${product.sellingPrice.toString()}',
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!

@@ -56,7 +56,7 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
                         children: [
                           const Expanded(child: Placeholder()),
                           Text(
-                            categories[index].catName,
+                            categories[index].categoryName,
                             style: Theme.of(context)
                                 .textTheme
                                 .displayMedium!

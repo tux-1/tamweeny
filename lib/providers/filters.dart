@@ -7,8 +7,7 @@ final filtersProvider = ChangeNotifierProvider((ref) => Filters());
 
 class Filters extends ChangeNotifier {
   
-  late final TabController tabController;
-
+  TabController? tabController;
   Category? chosenCategory;
 
 }

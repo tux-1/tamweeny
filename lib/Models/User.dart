@@ -25,30 +25,31 @@ class User {
   User._();
 
   // Named constructor for creating a User instance with required fields
-  User(
-      {this.id,
-      this.name,
-      this.email,
-      this.password,
-      this.passwordConfirmation,
-      this.deviceName,
-      this.token,
-      this.birthDate,
-      this.cardName,
-      this.cardNationalId,
-      this.cardNumber,
-      this.cardPassword,
-      this.city,
-      this.nationalId,
-      this.phoneNumber,
-      this.state,
-      this.street});
+  User({
+    this.id,
+    this.name,
+    this.email,
+    this.password,
+    this.passwordConfirmation,
+    this.deviceName,
+    this.token,
+    this.birthDate,
+    this.cardName,
+    this.cardNationalId,
+    this.cardNumber,
+    this.cardPassword,
+    this.city,
+    this.nationalId,
+    this.phoneNumber,
+    this.state,
+    this.street,
+  });
 
   //Named constructor for creating a User instance from JSON
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-        id: json['Id'],
-        name: json['Name'],
+        id: json['id'],
+        name: json['name'],
         email: json['email'],
         password: json['password'],
         deviceName: json['device_name']);

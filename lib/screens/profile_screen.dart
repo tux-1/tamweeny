@@ -6,7 +6,8 @@ import '../authentication/screens/logIn_screen.dart';
 import '../generated/l10n.dart';
 
 class ProfileScreen extends StatelessWidget {
-  static const routeName = '/profile-screen';
+  const ProfileScreen({super.key});
+
 
   void logOut() async {}
 

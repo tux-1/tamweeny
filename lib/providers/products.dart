@@ -27,7 +27,7 @@ class Products with ChangeNotifier {
         headers: {'Authorization': 'Bearer $token'});
 
     // Loading the products into my list
-    final productsData = jsonDecode(response.body)['data'] as List<dynamic>;
+    final productsData = jsonDecode(response.body) as List<dynamic>;
 
     for (var element in productsData) {
       _items.add(Product.fromJson(element));

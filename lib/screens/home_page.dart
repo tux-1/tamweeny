@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:tamweeny/generated/l10n.dart';
 
@@ -11,7 +10,6 @@ import '../widgets/offer_item.dart';
 import '../widgets/product_item.dart';
 
 class HomePage extends StatefulWidget {
-  static const routeName = '/landing-page';
   const HomePage({super.key, this.scrollController});
   final ScrollController? scrollController;
 
@@ -31,6 +29,16 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     // Assigning controllers to widgets comes after initState
     _controller = widget.scrollController!;
+    _controller.addListener(() {
+      if (_controller.position.atEdge ) {
+      bool isTop = _controller.position.pixels == 0;
+      if (isTop) {
+        print('At the top');
+      } else {
+        print('At the bottom');
+      }
+    }
+    });
   }
 
   @override
@@ -47,13 +55,13 @@ class _HomePageState extends State<HomePage> {
       controller: _controller,
       slivers: [
         const CustomSearchBar(),
-    
+
         SliverToBoxAdapter(
           child: CategoryChips(),
         ),
-    
+
         SliverText(text: S.of(context).recommended_foods),
-    
+
         // Recommended (horizontal scrollable sliver)
         SliverToBoxAdapter(
           child: SizedBox(
@@ -77,9 +85,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-    
+
         SliverText(text: S.of(context).offers),
-    
+
         // Offers (horizontal scrollable sliver)
         SliverToBoxAdapter(
           child: ConstrainedBox(
@@ -97,25 +105,27 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-    
+
         SliverText(text: S.of(context).most_popular),
-    
+
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          sliver: SliverGrid.builder(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              childAspectRatio: 0.7,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20,
-              maxCrossAxisExtent: 300,
+          sliver: NotificationListener<ScrollEndNotification>(
+            child: SliverGrid.builder(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                childAspectRatio: 0.7,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
+                maxCrossAxisExtent: 300,
+              ),
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                return ChangeNotifierProvider.value(
+                  value: products[index],
+                  child: const ProductItem(),
+                );
+              },
             ),
-            itemCount: products.length,
-            itemBuilder: (context, index) {
-              return ChangeNotifierProvider.value(
-                value: products[index],
-                child: const ProductItem(),
-              );
-            },
           ),
         ),
       ],

@@ -3,57 +3,57 @@
 import 'package:flutter/material.dart';
 
 class Product with ChangeNotifier {
-  final int productId;
+  final int id;
   final String productName;
   final String productImage;
-  final String description;
-  final double selling_price;
-  final double pointsPrice;
-  final int stock_quantity;
-  final int store_id;
-  final int cat_id;
   final int productType;
+  final String description;
+  final double sellingPrice;
+  final double pointsPrice;
+  final int stockQuantity;
+  final int storeId;
+  final int categoryId;
 
   Product({
     required this.pointsPrice,
-    required this.store_id,
-    required this.cat_id,
+    required this.storeId,
+    required this.categoryId,
     required this.productType,
-    required this.productId,
+    required this.id,
     required this.productName,
-    required this.selling_price,
+    required this.sellingPrice,
     required this.productImage,
     required this.description,
-    required this.stock_quantity,
+    required this.stockQuantity,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-      store_id: json['store_id'],
-      cat_id: json['cat_id'],
+      storeId: json['storeId'],
+      categoryId: json['categoryId'],
       productType: json['productType'],
-      productId: json['productId'],
+      id: json['id'],
       productName: json['productName'].toString(),
-      productImage: json['productImage'].toString(),
+      productImage: '',
       description: json['description'].toString(),
-      stock_quantity: json['stock_quantity'],
+      stockQuantity: json['stockQuantity'],
       pointsPrice: double.parse(json['pointsPrice']),
-      selling_price: double.parse(json['selling_price']) ,
+      sellingPrice: double.parse(json['sellingPrice']),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'pointsPrice': pointsPrice,
-      'store_id': store_id,
-      'cat_id': cat_id,
+      'storeId': storeId,
+      'categoryId': categoryId,
       'productType': productType,
-      'productId': productId,
+      'id': id,
       'productName': productName,
-      'selling_price': selling_price,
+      'sellingPrice': sellingPrice,
       'productImage': productImage,
       'description': description,
-      'stock_quantity': stock_quantity,
+      'stockQuantity': stockQuantity,
     };
   }
 }

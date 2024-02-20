@@ -6,16 +6,13 @@ import 'package:provider/provider.dart';
 
 import 'providers/categories.dart';
 import 'screens/navigation_screen.dart';
-import 'screens/home_page.dart';
 import 'authentication/screens/app_signup_screen.dart';
 import 'authentication/screens/tamween_info.dart';
 import 'generated/l10n.dart';
 import 'authentication/screens/splash_body.dart';
 import 'authentication/provider/auth.dart';
 import 'providers/products.dart';
-import 'locations/locations_screen.dart';
 import 'authentication/screens/logIn_screen.dart';
-import 'screens/profile_screen.dart';
 import 'authentication/screens/tamween-signUp_screen.dart';
 import 'theme.dart';
 
@@ -69,9 +66,6 @@ class MyApp extends StatelessWidget {
         home: const SplashBody(),
         routes: {
           NavigationScreen.routeName: (ctx) => NavigationScreen(),
-          LocationsScreen.routeName: (ctx) => LocationsScreen(),
-          ProfileScreen.routeName: (ctx) => ProfileScreen(),
-          HomePage.routeName: (ctx) => HomePage(),
           SignUpScreen.routeName: (ctx) => SignUpScreen(),
           TamweenSignUpScreen.routeName: (ctx) => TamweenSignUpScreen(),
           TamweenInfo.routeName: (ctx) => TamweenInfo(),

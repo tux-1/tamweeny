@@ -18,7 +18,7 @@ class _CategoryChipsState extends ConsumerState<CategoryChips> {
 
   @override
   void initState() {
-    if (ref.read(filtersProvider).tabController.index == 3) {
+    if (ref.read(filtersProvider).tabController!.index == 3) {
       ref.read(filtersProvider).chosenCategory = null;
     }
     super.initState();
@@ -29,36 +29,41 @@ class _CategoryChipsState extends ConsumerState<CategoryChips> {
     chosenCategory = ref.watch(filtersProvider).chosenCategory;
     final categoriesData = prov.Provider.of<CategoriesProvider>(context);
     final categories = categoriesData.items;
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: Wrap(spacing: 12, runSpacing: 10, children: [
-        for (var category in categories)
-          Card(
-            color: const Color(0xff335145),
-            margin: EdgeInsets.zero,
-            elevation: 0,
-            clipBehavior: Clip.antiAlias,
-            child: InkWell(
-              onTap: () {
-                setState(() {
-                  ref.read(filtersProvider).chosenCategory = category;
-                  ref.read(filtersProvider).tabController.animateTo(2);
-                });
-              },
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2),
-                child: Text(
-                  category.catName,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: chosenCategory == category
-                          ? const Color(0xffDEA568)
-                          : null),
+    return Container(
+        height: 60,
+        padding: const EdgeInsets.symmetric(vertical: 12.0),
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: categories.length,
+          itemBuilder: (context, index) {
+            final category = categories[index];
+            return Card(
+              color: const Color(0xff335145),
+              margin: const EdgeInsets.symmetric(horizontal: 4),
+              elevation: 0,
+              clipBehavior: Clip.antiAlias,
+              child: InkWell(
+                onTap: () {
+                  setState(() {
+                    ref.read(filtersProvider).chosenCategory = category;
+                    ref.read(filtersProvider).tabController!.animateTo(2);
+                  });
+                },
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2),
+                  child: Text(
+                    category.categoryName,
+                    maxLines: 1,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: chosenCategory == category
+                            ? const Color(0xffDEA568)
+                            : null),
+                  ),
                 ),
               ),
-            ),
-          )
-      ]),
-    );
+            );
+          },
+        ));
   }
 }
