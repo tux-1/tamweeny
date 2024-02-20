@@ -26,7 +26,9 @@ class _ProductItemState extends State<ProductItem> {
               color: Colors.white,
               child: SizedBox.expand(
                 child: Image.network(
-                  'https://media.istockphoto.com/id/153737841/photo/rice.jpg?s=612x612&w=0&k=20&c=lfO7iLT0UsDDzra0uBOsN1rvr2d5OEtrG2uwbts33_c=',
+                  product.productName == 'ابو مهنود معلب'
+                      ? 'https://cdn.discordapp.com/attachments/1080145698370113558/1209456873649078272/Mahnood.png?ex=65e6fd7d&is=65d4887d&hm=d644d0ecf864b3e7e2412eedb91cda7aadd4665cb964b81fae5b6f7af95e0829&'
+                      : 'https://media.istockphoto.com/id/153737841/photo/rice.jpg?s=612x612&w=0&k=20&c=lfO7iLT0UsDDzra0uBOsN1rvr2d5OEtrG2uwbts33_c=',
                   // product.productImage,
                   fit: BoxFit.cover,
                   loadingBuilder: (context, child, loadingProgress) {

@@ -83,6 +83,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "eligibleCategories": MessageLookupByLibrary.simpleMessage(
             "الفئات المقابلة لبطاقة الطعام الجديدة:"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكتروني"),
+        "favorite_products":
+            MessageLookupByLibrary.simpleMessage("المنتجات المفضلة"),
         "female": MessageLookupByLibrary.simpleMessage("أنثى"),
         "foodCardConditions": MessageLookupByLibrary.simpleMessage(
             "شروط الحصول على بطاقة طعام جديدة:"),

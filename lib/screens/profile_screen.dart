@@ -8,7 +8,6 @@ import '../generated/l10n.dart';
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
-
   void logOut() async {}
 
   @override
@@ -16,35 +15,36 @@ class ProfileScreen extends StatelessWidget {
     return ListView(
       physics: const ScrollPhysics(),
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-              child: CircleAvatar(
-                minRadius: 40,
-                backgroundColor: Colors.grey.shade300,
-                child: const Icon(
-                  Icons.person,
-                  color: Colors.black,
-                  size: 50,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 18.0),
+          child: Row(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                child: CircleAvatar(
+                  minRadius: 40,
+                  backgroundColor: Colors.grey.shade300,
+                  child: const Icon(
+                    Icons.person,
+                    color: Colors.black,
+                    size: 50,
+                  ),
                 ),
               ),
-            ),
-            Text('Customer Name'),
-            const SizedBox(width: 5),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.settings_outlined,
-                color: Colors.white,
-                size: 30,
+              const SizedBox(width: 5),
+              Text('Customer Name'),
+              Spacer(),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.settings_outlined,
+                  color: Colors.white,
+                  size: 30,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-        //the ListTiles are inside a 0 elevation Card to prevent the
-        // BackdropFilter from filtering the ListTile ontap ripple.
         Card(
           elevation: 0,
           color: Colors.transparent,
@@ -59,8 +59,8 @@ class ProfileScreen extends StatelessWidget {
                 title: Text(S.of(context).order_history),
               ),
               ListTile(
-                leading: const Icon(Icons.local_offer),
-                title: Text(S.of(context).offers),
+                leading: const Icon(Icons.favorite_border),
+                title: Text(S.of(context).favorite_products),
               ),
               ListTile(
                 leading: const Icon(Icons.notifications),
@@ -73,14 +73,14 @@ class ProfileScreen extends StatelessWidget {
               ListTile(
                 leading: const Icon(Icons.credit_score),
                 title: Text(S.of(context).current_month_balance),
-                trailing:
-                    Text('500'), //Numbers should be fetched from backend here
+                trailing: Text('500'),
+                //Numbers should be fetched from backend here
               ),
               ListTile(
                 leading: const Icon(Icons.credit_score),
                 title: Text(S.of(context).previous_month_balance),
-                trailing:
-                    Text('500'), //Numbers should be fetched from backend here
+                trailing: Text('500'),
+                //Numbers should be fetched from backend here
               ),
               ListTile(
                 leading: const Icon(Icons.question_mark_rounded),

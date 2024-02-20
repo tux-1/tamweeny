@@ -7,7 +7,6 @@ import 'categories_screen.dart';
 import 'home_page.dart';
 import '../locations/locations_screen.dart';
 import 'profile_screen.dart';
-import '../widgets/custom_scaffold.dart';
 
 class NavigationScreen extends ConsumerStatefulWidget {
   static const routeName = '/navigation-screen';
@@ -90,7 +89,7 @@ class _NavigationScreenState extends ConsumerState<NavigationScreen>
           });
         }
       },
-      child: CustomScaffold(
+      child: Scaffold(
         extendBody: true,
         bottomNavigationBar: AnimatedContainer(
           width: double.infinity,

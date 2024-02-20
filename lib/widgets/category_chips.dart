@@ -33,13 +33,14 @@ class _CategoryChipsState extends ConsumerState<CategoryChips> {
         height: 60,
         padding: const EdgeInsets.symmetric(vertical: 12.0),
         child: ListView.builder(
+          physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
           itemCount: categories.length,
           itemBuilder: (context, index) {
             final category = categories[index];
             return Card(
               color: const Color(0xff335145),
-              margin: const EdgeInsets.symmetric(horizontal: 4),
+              margin: const EdgeInsets.symmetric(horizontal: 5),
               elevation: 0,
               clipBehavior: Clip.antiAlias,
               child: InkWell(
@@ -51,7 +52,7 @@ class _CategoryChipsState extends ConsumerState<CategoryChips> {
                 },
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2),
+                      const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
                   child: Text(
                     category.categoryName,
                     maxLines: 1,

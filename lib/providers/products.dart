@@ -15,7 +15,7 @@ class Products with ChangeNotifier {
 
   final String productsApi = 'http://10.0.2.2:8000/api/products?page=';
 
-  void fetchAndSetProducts(int index) async {
+  Future<void> fetchAndSetProducts(int index) async {
     if (items.isNotEmpty && index == 1) {
       return;
     }

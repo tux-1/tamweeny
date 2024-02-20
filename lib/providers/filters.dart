@@ -6,8 +6,9 @@ import '../Models/category.dart';
 final filtersProvider = ChangeNotifierProvider((ref) => Filters());
 
 class Filters extends ChangeNotifier {
-  
+
   TabController? tabController;
   Category? chosenCategory;
+  int mostPopularIndex = 1;
 
 }

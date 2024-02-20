@@ -84,6 +84,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "eligibleCategories": MessageLookupByLibrary.simpleMessage(
             "Categories Eligible for the New Food Card:"),
         "email": MessageLookupByLibrary.simpleMessage("E-Mail"),
+        "favorite_products":
+            MessageLookupByLibrary.simpleMessage("Favorite Products"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "foodCardConditions": MessageLookupByLibrary.simpleMessage(
             "Conditions for Obtaining a New Food Card:"),

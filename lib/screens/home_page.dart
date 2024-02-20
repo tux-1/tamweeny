@@ -1,48 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:tamweeny/generated/l10n.dart';
 
 import '../providers/categories.dart';
+import '../providers/filters.dart';
 import '../providers/products.dart';
 import '../widgets/category_chips.dart';
 import '../widgets/custom_search_bar.dart';
 import '../widgets/offer_item.dart';
 import '../widgets/product_item.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends riverpod.ConsumerStatefulWidget {
   const HomePage({super.key, this.scrollController});
   final ScrollController? scrollController;
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  riverpod.ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends riverpod.ConsumerState<HomePage> {
   late ScrollController _controller;
   late Products productsData;
 
+  void paginate() {
+    Provider.of<Products>(context, listen: false)
+        .fetchAndSetProducts(ref.read(filtersProvider).mostPopularIndex)
+        .then((value) => ref.read(filtersProvider).mostPopularIndex++);
+  }
+
+  void _listen() {
+    if (_controller.position.atEdge && mounted) {
+      bool isTop = _controller.position.pixels == 0;
+      if (isTop) {
+        return;
+      } else {
+        paginate();
+      }
+    }
+  }
+
   @override
   void initState() {
-    Provider.of<Products>(context, listen: false).fetchAndSetProducts(1);
+    paginate();
     Provider.of<CategoriesProvider>(context, listen: false)
         .fetchAndSetCategories();
     super.initState();
     // Assigning controllers to widgets comes after initState
     _controller = widget.scrollController!;
-    _controller.addListener(() {
-      if (_controller.position.atEdge ) {
-      bool isTop = _controller.position.pixels == 0;
-      if (isTop) {
-        print('At the top');
-      } else {
-        print('At the bottom');
-      }
-    }
-    });
+    _controller.addListener(_listen);
   }
 
   @override
   void dispose() {
+    _controller.removeListener(_listen);
     super.dispose();
   }
 
@@ -109,7 +120,7 @@ class _HomePageState extends State<HomePage> {
         SliverText(text: S.of(context).most_popular),
 
         SliverPadding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
           sliver: NotificationListener<ScrollEndNotification>(
             child: SliverGrid.builder(
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(

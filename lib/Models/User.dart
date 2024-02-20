@@ -59,15 +59,14 @@ class User {
     return {
       'email': email,
       'password': password,
-      'Name': name,
-      'passwordConfirmation': passwordConfirmation,
+      'name': name,
       'device_name': deviceName,
-      'NationalId': nationalId,
-      'Phone_number': phoneNumber,
-      'City': city,
-      'State': state,
-      'Street': street,
-      'BirthDate': birthDate?.toIso8601String(), // Corrected line
+      'nationalId': nationalId,
+      'phoneNumber': phoneNumber,
+      'city': city,
+      'state': state,
+      'street': street,
+      'birthDate': birthDate?.toIso8601String(), // Corrected line
       'cardName': cardName,
       'cardNumber': cardNumber,
       'cardNationalId': cardNationalId,
