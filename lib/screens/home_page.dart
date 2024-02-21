@@ -3,10 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:tamweeny/generated/l10n.dart';
 
-import '../providers/categories.dart';
-import '../providers/filters.dart';
+import 'categories/providers/categories_provider.dart';
+import 'categories/providers/filters.dart';
 import '../providers/products.dart';
-import '../widgets/category_chips.dart';
+import 'categories/widgets/category_chips.dart';
 import '../widgets/custom_search_bar.dart';
 import '../widgets/offer_item.dart';
 import '../widgets/product_item.dart';
@@ -43,8 +43,6 @@ class _HomePageState extends riverpod.ConsumerState<HomePage> {
   @override
   void initState() {
     paginate();
-    Provider.of<CategoriesProvider>(context, listen: false)
-        .fetchAndSetCategories();
     super.initState();
     // Assigning controllers to widgets comes after initState
     _controller = widget.scrollController!;
@@ -59,6 +57,7 @@ class _HomePageState extends riverpod.ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    ref.read(categoriesFutureProvider);
     productsData = Provider.of<Products>(context);
     final products = productsData.items;
     return CustomScrollView(

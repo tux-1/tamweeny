@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 
 import 'package:provider/provider.dart';
 
-import 'providers/categories.dart';
 import 'screens/navigation_screen.dart';
 import 'authentication/screens/app_signup_screen.dart';
 import 'authentication/screens/tamween_info.dart';
@@ -30,9 +29,6 @@ class MyApp extends StatelessWidget {
         // ChangeNotifierProvider(
         //     create: (ctx) => Cart(),
         //   ),
-        ChangeNotifierProvider(
-          create: (context) => CategoriesProvider(),
-        ),
         ChangeNotifierProvider(
           create: (ctx) => Auth(),
         ),

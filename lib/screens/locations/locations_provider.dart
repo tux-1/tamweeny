@@ -3,10 +3,11 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-import '../utils/token_manager.dart';
+import '../../utils/token_manager.dart';
 import 'location.dart';
 
-final asyncLocationsProvider = FutureProvider<List<Location>>((ref) async {
+final locationsFutureProvider = FutureProvider<List<Location>>((ref) async {
+  print('starting..');
   const String locationsApi = 'http://10.0.2.2:8000/api/storesLatLong';
   final List<Location> items = [];
 
@@ -21,7 +22,6 @@ final asyncLocationsProvider = FutureProvider<List<Location>>((ref) async {
   final productsData = jsonDecode(response.body) as List<dynamic>;
 
   for (var element in productsData) {
-    print(element);
     items.add(Location.fromJson(element));
   }
   return items;

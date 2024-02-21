@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart' as prov;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../Models/category.dart';
-import '../providers/categories.dart';
+import '../model/category.dart';
+import '../providers/categories_provider.dart';
 import '../providers/filters.dart';
 
 class CategoryChips extends ConsumerStatefulWidget {
@@ -19,10 +18,10 @@ class _CategoryChipsState extends ConsumerState<CategoryChips> {
 
   @override
   void initState() {
+    super.initState();
     if (ref.read(filtersProvider).tabController?.index == 3) {
       ref.read(filtersProvider).clearCategory();
     }
-    super.initState();
     _scrollController = ScrollController(
       initialScrollOffset: ref.read(filtersProvider).scrollPosition,
     );
@@ -31,8 +30,7 @@ class _CategoryChipsState extends ConsumerState<CategoryChips> {
   @override
   Widget build(BuildContext context) {
     chosenCategory = ref.watch(filtersProvider).chosenCategory;
-    final categoriesData = prov.Provider.of<CategoriesProvider>(context);
-    final categories = categoriesData.items;
+    final categories = ref.watch(categoriesFutureProvider).value ?? [];
     return Container(
         height: 60,
         padding: const EdgeInsets.symmetric(vertical: 12.0),

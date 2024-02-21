@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../providers/filters.dart';
+import 'categories/providers/filters.dart';
 import '../widgets/custom_scaffold.dart';
-import 'categories_screen.dart';
+import 'categories/categories_screen.dart';
 import 'home_page.dart';
-import '../locations/locations_screen.dart';
+import 'locations/locations_screen.dart';
 import 'profile_screen.dart';
 
 class NavigationScreen extends ConsumerStatefulWidget {

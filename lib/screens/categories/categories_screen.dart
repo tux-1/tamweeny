@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/provider.dart' as prov;
 
-import '../providers/categories.dart';
-import '../providers/filters.dart';
-import '../widgets/category_chips.dart';
-import '../widgets/custom_search_bar.dart';
+import 'providers/categories_provider.dart';
+import 'providers/filters.dart';
+import 'widgets/category_chips.dart';
+import '../../widgets/custom_search_bar.dart';
 
 class CategoriesScreen extends ConsumerStatefulWidget {
   const CategoriesScreen({super.key, required this.scrollController});
@@ -25,8 +24,8 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     final chosenCategory = ref.watch(filtersProvider).chosenCategory;
-    final categoriesData = prov.Provider.of<CategoriesProvider>(context);
-    final categories = categoriesData.items;
+    final categories = ref.watch(categoriesFutureProvider).value ?? [];
+
     return CustomScrollView(
       physics: const ClampingScrollPhysics(),
       controller: widget.scrollController,
@@ -34,7 +33,8 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
           ? [
               const CustomSearchBar(),
               SliverGrid.builder(
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                gridDelegate:
+                    const SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 500,
                   childAspectRatio: 1.2,
                 ),
