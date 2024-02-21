@@ -138,7 +138,7 @@ class _NavigationScreenState extends ConsumerState<NavigationScreen>
               controller: _tabController,
               physics: const NeverScrollableScrollPhysics(),
               children: [
-                ProfileScreen(),
+                const ProfileScreen(),
                 const LocationsScreen(),
                 CategoriesScreen(scrollController: scrollController),
                 HomePage(scrollController: scrollController),

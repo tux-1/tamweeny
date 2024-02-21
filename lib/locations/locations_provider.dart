@@ -1,40 +1,28 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
 import '../utils/token_manager.dart';
 import 'location.dart';
 
-final locationsProvider = ChangeNotifierProvider((ref) => Locations());
+final asyncLocationsProvider = FutureProvider<List<Location>>((ref) async {
+  const String locationsApi = 'http://10.0.2.2:8000/api/storesLatLong';
+  final List<Location> items = [];
 
-class Locations extends ChangeNotifier {
-  final List<Location> _items = [];
+  // Getting the token
+  final token = await TokenManager.getToken();
 
-  List<Location> get items {
-    return _items;
+  // Getting the locations using token in header
+  final response = await http.get(Uri.parse(locationsApi),
+      headers: {'Authorization': 'Bearer $token'});
+
+  // Loading the locations into my list
+  final productsData = jsonDecode(response.body) as List<dynamic>;
+
+  for (var element in productsData) {
+    print(element);
+    items.add(Location.fromJson(element));
   }
-
-  final String locationsApi = 'http://10.0.2.2:8000/api/storesLatLong';
-
-  void fetchAndSetLocations() async {
-    if (items.isNotEmpty) {
-      return;
-    }
-    // Getting the token
-    final token = await TokenManager.getToken();
-
-    // Getting the categories using token in header
-    final response = await http.get(Uri.parse(locationsApi),
-        headers: {'Authorization': 'Bearer $token'});
-
-    // Loading the categories into my list
-    final productsData = jsonDecode(response.body) as List<dynamic>;
-
-    for (var element in productsData) {
-      _items.add(Location.fromJson(element));
-    }
-    notifyListeners();
-  }
-}
+  return items;
+});

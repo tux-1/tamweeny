@@ -141,76 +141,71 @@ class _LocationsScreenState extends ConsumerState<LocationsScreen> {
         ));
   }
 
-  Marker userLocationMarker() {
-    if (userLocation != null) {
-      return Marker(
-        point: userLocation!,
-        child: const Icon(
-          Icons.person_pin_circle,
-          color: Color(0xff335145),
-          size: 35,
-        ),
-      );
-    }
-    return const Marker(
-        point: LatLng(0, 0),
-        child: Icon(
-          Icons.abc,
-          color: Colors.transparent,
-        ));
-  }
-
   @override
   void initState() {
-    ref.read(locationsProvider).fetchAndSetLocations();
-    // TODO: implement initState
     super.initState();
+    // TODO: implement initState
   }
 
   @override
   Widget build(BuildContext context) {
-    return FlutterMap(
-      options: const MapOptions(
-        initialCenter: LatLng(30.035658, 31.268681),
-        initialZoom: 11.5,
-      ),
-      children: [
-        TileLayer(
-          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          userAgentPackageName: 'com.example.app',
-        ),
-        PolylineLayer(
-          polylineCulling: false,
-          polylines: [
-            Polyline(
-              points: routePoints,
-              color: Colors.blueGrey,
-              strokeWidth: 7,
-            )
-          ],
-        ),
-        attributionWidget,
-        MarkerLayer(markers: [
-          // For emulator this location will be at Google HQ
-          userLocationMarker(),
+    final locationsFuture = ref.watch(asyncLocationsProvider.future);
 
-          const Marker(  // Demo marker
-            point: LatLng(
-              30.094435768097608,
-              31.20311443602142,
-            ),
-            child: Icon(
-              Icons.person_pin_circle,
-              color: Colors.blue,
-              size: 35,
-            ),
+    return FutureBuilder(
+      future: locationsFuture,
+      builder: (context, snapshot) => FlutterMap(
+        options: const MapOptions(
+          initialCenter: LatLng(30.035658, 31.268681),
+          initialZoom: 11.5,
+        ),
+        children: [
+          TileLayer(
+            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            userAgentPackageName: 'com.example.app',
           ),
+          PolylineLayer(
+            polylineCulling: false,
+            polylines: [
+              Polyline(
+                points: routePoints,
+                color: Colors.blueGrey,
+                strokeWidth: 7,
+              )
+            ],
+          ),
+          attributionWidget,
+          MarkerLayer(markers: [
+            // For emulator this location will be at Google HQ
+            if (userLocation != null)
+              Marker(
+                point: userLocation!,
+                child: const Icon(
+                  Icons.person_pin_circle_sharp,
+                  color: Colors.red,
+                  size: 27,
+                ),
+              ),
 
-          // Loaded locations
-          for (Location location in ref.watch(locationsProvider).items)
-            buildTrackableMarker(LatLng(location.lat, location.long))
-        ])
-      ],
+            // const Marker(
+            //   // Demo marker
+            //   point: LatLng(
+            //     30.094435768097608,
+            //     31.20311443602142,
+            //   ),
+            //   child: Icon(
+            //     Icons.person_pin_circle,
+            //     color: Colors.blue,
+            //     size: 35,
+            //   ),
+            // ),
+
+            // Loaded locations
+            if (snapshot.hasData)
+              for (Location location in snapshot.data!)
+                buildTrackableMarker(LatLng(location.lat, location.long))
+          ])
+        ],
+      ),
     );
   }
 }
