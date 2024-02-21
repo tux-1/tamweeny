@@ -9,7 +9,7 @@ import 'authentication/screens/app_signup_screen.dart';
 import 'authentication/screens/tamween_info.dart';
 import 'generated/l10n.dart';
 import 'authentication/screens/splash_body.dart';
-import 'authentication/provider/auth.dart';
+
 import 'providers/products.dart';
 import 'authentication/screens/logIn_screen.dart';
 import 'authentication/screens/tamween-signUp_screen.dart';
@@ -26,22 +26,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        // ChangeNotifierProvider(
-        //     create: (ctx) => Cart(),
-        //   ),
-        ChangeNotifierProvider(
-          create: (ctx) => Auth(),
-        ),
-        //   ChangeNotifierProxyProvider<Auth, Orders>(
-        //     update: (ctx, auth, previousOrders) {
-        //       return Orders(
-        //         auth.token.toString(),
-        //         auth.userId,
-        //         previousOrders == null ? [] : previousOrders.orders,
-        //       );
-        //     },
-        //     create: (ctx) => Orders('', '', []),
-        //   ),
         ChangeNotifierProvider(
           create: (ctx) => Products(),
         ),

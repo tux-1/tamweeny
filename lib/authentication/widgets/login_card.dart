@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 
 import '../../screens/navigation_screen.dart';
 import '../../generated/l10n.dart';
@@ -8,16 +9,16 @@ import '../screens/tamween_info.dart';
 import 'textformfield_card.dart';
 import '../provider/auth.dart';
 
-class LogInCard extends StatefulWidget {
+class LogInCard extends ConsumerStatefulWidget {
   const LogInCard({
     super.key,
   });
 
   @override
-  State<LogInCard> createState() => _LogInCardState();
+  ConsumerState<LogInCard> createState() => _LogInCardState();
 }
 
-class _LogInCardState extends State<LogInCard> {
+class _LogInCardState extends ConsumerState<LogInCard> {
   // bool? _rememberMe = false;
 
   var _obscureText = true;
@@ -61,7 +62,7 @@ class _LogInCardState extends State<LogInCard> {
     setState(() {
       _isLoading = true;
     });
-    final auth = Provider.of<Auth>(context, listen: false);
+    final auth = ref.read(authProvider);
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     await auth
         .logIn(

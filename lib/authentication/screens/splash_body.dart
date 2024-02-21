@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 
 import '../../screens/navigation_screen.dart';
 import '../provider/auth.dart';
 import 'logIn_screen.dart';
 
-class SplashBody extends StatefulWidget {
+class SplashBody extends ConsumerStatefulWidget {
   const SplashBody({super.key});
   static const routeName = '/';
 
   @override
-  State<SplashBody> createState() => _SplashBodyState();
+  ConsumerState<SplashBody> createState() => _SplashBodyState();
 }
 
-class _SplashBodyState extends State<SplashBody>
+class _SplashBodyState extends ConsumerState<SplashBody>
     with SingleTickerProviderStateMixin {
   AnimationController? animationController;
   Animation<double>? fadingAnimation;
 
   void goToNextView() async {
-    final auth = Provider.of<Auth>(context, listen: false);
+    final auth = ref.read(authProvider);
     final navigator = Navigator.of(context);
     await auth.tryAutoLogin();
     if (auth.isAuth) {

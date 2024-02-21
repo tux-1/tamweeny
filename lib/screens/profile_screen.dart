@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 
 import '../authentication/provider/auth.dart';
 import '../authentication/screens/logIn_screen.dart';
 import '../generated/l10n.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   void logOut() async {}
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ListView(
       physics: const ScrollPhysics(),
       children: [
@@ -95,7 +96,7 @@ class ProfileScreen extends StatelessWidget {
                 title: Text(S.of(context).sign_out),
                 onTap: () async {
                   final navigator = Navigator.of(context);
-                  await Provider.of<Auth>(context, listen: false)
+                  await ref.read(authProvider)
                       .logOut()
                       .then((value) {
                     navigator.pushReplacementNamed(LogInScreen.routeName);

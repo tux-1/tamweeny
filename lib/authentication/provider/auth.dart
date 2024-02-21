@@ -1,14 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/exceptions.dart';
 import '../../models/user.dart';
 
-class Auth with ChangeNotifier {
+final authProvider = Provider<Auth>((ref) => Auth());
+
+class Auth {
   String? _token;
   String? _userId;
   // Timer? _authTimer;
@@ -63,7 +65,6 @@ class Auth with ChangeNotifier {
       _token = responseToken;
       _userId = responseData['id'].toString();
 
-      notifyListeners();
       final prefs = await SharedPreferences.getInstance();
       final userData = json.encode({'token': _token, 'userId': _userId});
       prefs.setString('userData', userData);
@@ -130,7 +131,6 @@ class Auth with ChangeNotifier {
 
     _token = extractedData['token'].toString();
     _userId = extractedData['userId'].toString();
-    notifyListeners();
   }
 
   Future<void> logOut() async {
@@ -146,7 +146,7 @@ class Auth with ChangeNotifier {
       );
       _token = null;
       _userId = null;
-      notifyListeners();
+
       final prefs = await SharedPreferences.getInstance();
       prefs.remove('userData');
       //prefs.clear(); //is also ok bc we only stored userData
