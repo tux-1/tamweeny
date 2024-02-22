@@ -1,8 +1,6 @@
-// ignore_for_file: non_constant_identifier_names
 
-import 'package:flutter/material.dart';
 
-class Product with ChangeNotifier {
+class Product  {
   final int id;
   final String productName;
   final String productImage;
@@ -42,18 +40,5 @@ class Product with ChangeNotifier {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'pointsPrice': pointsPrice,
-      'storeId': storeId,
-      'categoryId': categoryId,
-      'productType': productType,
-      'id': id,
-      'productName': productName,
-      'sellingPrice': sellingPrice,
-      'productImage': productImage,
-      'description': description,
-      'stockQuantity': stockQuantity,
-    };
-  }
+  
 }

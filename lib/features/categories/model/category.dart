@@ -17,11 +17,4 @@ class Category {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'catId': id,
-      'catName': categoryName,
-      'categoryImage' : categoryImage,
-    };
-  }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
+import 'package:flutter_riverpod/flutter_riverpod.dart' ;
 import 'package:tamweeny/generated/l10n.dart';
 
 import 'categories/providers/categories_provider.dart';
@@ -11,15 +10,15 @@ import '../widgets/custom_search_bar.dart';
 import '../widgets/offer_item.dart';
 import '../widgets/product_item.dart';
 
-class HomePage extends riverpod.ConsumerStatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key, this.scrollController});
   final ScrollController? scrollController;
 
   @override
-  riverpod.ConsumerState<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends riverpod.ConsumerState<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   late ScrollController _controller;
 
   void paginate() {
@@ -29,7 +28,6 @@ class _HomePageState extends riverpod.ConsumerState<HomePage> {
             ref.read(filtersProvider).mostPopularPaginationIndex)
         .then((value) {
       setState(() {});
-      return ref.read(filtersProvider).mostPopularPaginationIndex++;
     });
   }
 
@@ -84,16 +82,13 @@ class _HomePageState extends riverpod.ConsumerState<HomePage> {
               scrollDirection: Axis.horizontal,
               itemCount: products.length,
               itemBuilder: (context, index) {
-                return ChangeNotifierProvider.value(
-                  value: products[index],
-                  child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 10),
-                      constraints: BoxConstraints(
-                        minWidth: MediaQuery.of(context).size.width * 0.45,
-                        maxWidth: MediaQuery.of(context).size.width * 0.45,
-                      ),
-                      child: const ProductItem()),
-                );
+                return Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    constraints: BoxConstraints(
+                      minWidth: MediaQuery.of(context).size.width * 0.45,
+                      maxWidth: MediaQuery.of(context).size.width * 0.45,
+                    ),
+                    child:  ProductItem(products[index]));
               },
             ),
           ),
@@ -110,10 +105,7 @@ class _HomePageState extends riverpod.ConsumerState<HomePage> {
               scrollDirection: Axis.horizontal,
               itemCount: products.length,
               itemBuilder: (context, index) {
-                return ChangeNotifierProvider.value(
-                  value: products[index],
-                  child: OfferItem(),
-                );
+                return  OfferItem();
               },
             ),
           ),
@@ -133,10 +125,7 @@ class _HomePageState extends riverpod.ConsumerState<HomePage> {
               ),
               itemCount: products.length,
               itemBuilder: (context, index) {
-                return ChangeNotifierProvider.value(
-                  value: products[index],
-                  child: const ProductItem(),
-                );
+                return  ProductItem(products[index]);
               },
             ),
           ),

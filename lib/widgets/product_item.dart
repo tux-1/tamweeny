@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/generated/l10n.dart';
 
 import '../providers/product.dart';
 
-class ProductItem extends StatefulWidget {
-  const ProductItem({super.key});
+class ProductItem extends ConsumerStatefulWidget {
+  final Product product;
+  const ProductItem(this.product, {super.key});
 
   @override
-  State<ProductItem> createState() => _ProductItemState();
+  ConsumerState<ProductItem> createState() => _ProductItemState();
 }
 
-class _ProductItemState extends State<ProductItem> {
+class _ProductItemState extends ConsumerState<ProductItem> {
   @override
   Widget build(BuildContext context) {
-    final product = Provider.of<Product>(context);
-    // final deviceSize = MediaQuery.of(context).size;
+    final productData = Provider<Product>((ref) => widget.product);
+    final product = ref.watch(productData);
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(15),
       child: Column(

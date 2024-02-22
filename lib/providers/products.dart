@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
 import '../utils/token_manager.dart';
+import 'filters.dart';
 import 'product.dart';
 
 final asyncProductsProvider =
@@ -20,9 +21,12 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
   }
 
   final String productsApi = 'http://10.0.2.2:8000/api/products?page=';
+  int? totalPages;
 
   Future<void> fetchAndSetProducts(int index) async {
-    
+    if (totalPages != null && index > totalPages!) {
+      return;
+    }
     // Getting the token
     final token = await TokenManager.getToken();
 
@@ -32,10 +36,12 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
 
     // Loading the products into my list
     final productsData = jsonDecode(response.body) as Map<String, dynamic>;
+    totalPages = jsonDecode(response.body)['totalPages'];
 
     for (var element in productsData['products']) {
       state.value!.add(Product.fromJson(element));
     }
+    ref.read(filtersProvider).mostPopularPaginationIndex++;
   }
 
   Future<List<Product>> initializeProducts() async {
