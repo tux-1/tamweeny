@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../model/category.dart';
+import '../features/categories/model/category.dart';
 
 final filtersProvider = ChangeNotifierProvider((ref) => Filters());
 
@@ -9,7 +9,7 @@ class Filters extends ChangeNotifier {
   TabController? tabController;
   Category? chosenCategory;
   double scrollPosition = 0;
-  int mostPopularIndex = 1;
+  int mostPopularPaginationIndex = 2;
 
   void clearCategory() {
     chosenCategory = null;

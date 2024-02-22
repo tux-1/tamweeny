@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../models/exceptions.dart';
-import '../../models/user.dart';
+import '../../../models/exceptions.dart';
+import '../../../models/user.dart';
 
 final authProvider = Provider<Auth>((ref) => Auth());
 

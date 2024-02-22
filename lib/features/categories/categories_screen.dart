@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'providers/categories_provider.dart';
-import 'providers/filters.dart';
+import '../../providers/filters.dart';
 import 'widgets/category_chips.dart';
 import '../../widgets/custom_search_bar.dart';
 

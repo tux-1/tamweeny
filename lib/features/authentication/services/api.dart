@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import '../../models/user.dart';
-import '../../models/token_manager.dart';
+import '../../../models/user.dart';
+import '../../../models/token_manager.dart';
 
 class LoginResponse {
   String token;

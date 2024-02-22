@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/lang.dart';
+import '../../../utils/lang.dart';
 
 class TextFormFieldCard extends StatelessWidget {
   final IconData icon;

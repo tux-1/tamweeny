@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../generated/l10n.dart';
+import '../../../generated/l10n.dart';
 import '../widgets/login_card.dart';
-import '../../widgets/custom_scaffold.dart';
+import '../../../widgets/custom_scaffold.dart';
 
 class LogInScreen extends StatelessWidget {
   static const routeName = '/login-screen';

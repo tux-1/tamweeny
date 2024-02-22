@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:tamweeny/generated/l10n.dart';
 
 import 'categories/providers/categories_provider.dart';
-import 'categories/providers/filters.dart';
+import '../providers/filters.dart';
 import '../providers/products.dart';
 import 'categories/widgets/category_chips.dart';
 import '../widgets/custom_search_bar.dart';
@@ -21,12 +21,16 @@ class HomePage extends riverpod.ConsumerStatefulWidget {
 
 class _HomePageState extends riverpod.ConsumerState<HomePage> {
   late ScrollController _controller;
-  late Products productsData;
 
   void paginate() {
-    Provider.of<Products>(context, listen: false)
-        .fetchAndSetProducts(ref.read(filtersProvider).mostPopularIndex)
-        .then((value) => ref.read(filtersProvider).mostPopularIndex++);
+    ref
+        .read(asyncProductsProvider.notifier)
+        .fetchAndSetProducts(
+            ref.read(filtersProvider).mostPopularPaginationIndex)
+        .then((value) {
+      setState(() {});
+      return ref.read(filtersProvider).mostPopularPaginationIndex++;
+    });
   }
 
   void _listen() {
@@ -42,7 +46,6 @@ class _HomePageState extends riverpod.ConsumerState<HomePage> {
 
   @override
   void initState() {
-    paginate();
     super.initState();
     // Assigning controllers to widgets comes after initState
     _controller = widget.scrollController!;
@@ -58,8 +61,8 @@ class _HomePageState extends riverpod.ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     ref.read(categoriesFutureProvider);
-    productsData = Provider.of<Products>(context);
-    final products = productsData.items;
+    final products = ref.watch(asyncProductsProvider).value ?? [];
+
     return CustomScrollView(
       physics: const ClampingScrollPhysics(),
       controller: _controller,

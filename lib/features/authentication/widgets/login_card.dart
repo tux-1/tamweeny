@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-import '../../screens/navigation_screen.dart';
-import '../../generated/l10n.dart';
+import '../../navigation_screen.dart';
+import '../../../generated/l10n.dart';
 import '../screens/app_signup_screen.dart';
 import '../screens/tamween_info.dart';
 import 'textformfield_card.dart';

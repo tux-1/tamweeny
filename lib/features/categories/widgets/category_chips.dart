@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../model/category.dart';
 import '../providers/categories_provider.dart';
-import '../providers/filters.dart';
+import '../../../providers/filters.dart';
 
 class CategoryChips extends ConsumerStatefulWidget {
   CategoryChips({super.key});
