@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' ;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/generated/l10n.dart';
 
 import 'categories/providers/categories_provider.dart';
@@ -24,8 +24,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   void paginate() {
     ref
         .read(asyncProductsProvider.notifier)
-        .fetchAndSetProducts(
-            ref.read(filtersProvider).mostPopularPaginationIndex)
+        .addProducts(ref.read(filtersProvider).mostPopularPaginationIndex)
         .then((value) {
       setState(() {});
     });
@@ -45,7 +44,6 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   void initState() {
     super.initState();
-    // Assigning controllers to widgets comes after initState
     _controller = widget.scrollController!;
     _controller.addListener(_listen);
   }
@@ -88,7 +86,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                       minWidth: MediaQuery.of(context).size.width * 0.45,
                       maxWidth: MediaQuery.of(context).size.width * 0.45,
                     ),
-                    child:  ProductItem(products[index]));
+                    child: ProductItem(products[index]));
               },
             ),
           ),
@@ -105,7 +103,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               scrollDirection: Axis.horizontal,
               itemCount: products.length,
               itemBuilder: (context, index) {
-                return  OfferItem();
+                return OfferItem();
               },
             ),
           ),
@@ -125,7 +123,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               ),
               itemCount: products.length,
               itemBuilder: (context, index) {
-                return  ProductItem(products[index]);
+                return ProductItem(products[index]);
               },
             ),
           ),

@@ -17,7 +17,6 @@ class _ProductItemState extends ConsumerState<ProductItem> {
   Widget build(BuildContext context) {
     final productData = Provider<Product>((ref) => widget.product);
     final product = ref.watch(productData);
-
     return ClipRRect(
       borderRadius: BorderRadius.circular(15),
       child: Column(
@@ -76,9 +75,18 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                      },
                       padding: EdgeInsets.zero,
-                      icon: Icon(Icons.favorite_border, color: Colors.white),
+                      icon: product.favoriteStats
+                          ? const Icon(
+                              Icons.favorite,
+                              color: Colors.red,
+                            )
+                          : const Icon(
+                              Icons.favorite_border,
+                              color: Colors.white,
+                            ),
                     )
                   ],
                 ),
@@ -104,7 +112,8 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                     IconButton(
                       onPressed: () {},
                       padding: EdgeInsets.zero,
-                      icon: Icon(Icons.add_box_outlined, color: Colors.white),
+                      icon: const Icon(Icons.add_box_outlined,
+                          color: Colors.white),
                     )
                   ],
                 ),
@@ -127,21 +136,21 @@ class _ProductItemState extends ConsumerState<ProductItem> {
 }
 
 // IconButton(
-                      //   onPressed: () {
-                      //     product.setFavValue(!product.isFavorite);
-                      //   },
-                      //   icon: Icon(product.isFavorite
-                      //       ? Icons.favorite
-                      //       : Icons.favorite_border),
-                      // ),
-                      // IconButton(
-                      //   onPressed: () {},
-                      //   icon: const Icon(Icons.add),
-                      // ),
-                      // Text(
-                      //   '5',
-                      // ),
-                      // IconButton(
-                      //   onPressed: () {},
-                      //   icon: const Icon(Icons.remove),
-                      // ),
+//   onPressed: () {
+//     product.setFavValue(!product.isFavorite);
+//   },
+//   icon: Icon(product.isFavorite
+//       ? Icons.favorite
+//       : Icons.favorite_border),
+// ),
+// IconButton(
+//   onPressed: () {},
+//   icon: const Icon(Icons.add),
+// ),
+// Text(
+//   '5',
+// ),
+// IconButton(
+//   onPressed: () {},
+//   icon: const Icon(Icons.remove),
+// ),

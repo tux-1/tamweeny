@@ -1,6 +1,4 @@
-
-
-class Product  {
+class Product {
   final int id;
   final String productName;
   final String productImage;
@@ -11,6 +9,7 @@ class Product  {
   final int stockQuantity;
   final int storeId;
   final int categoryId;
+  bool favoriteStats;
 
   Product({
     required this.pointsPrice,
@@ -23,6 +22,7 @@ class Product  {
     required this.productImage,
     required this.description,
     required this.stockQuantity,
+    this.favoriteStats = false,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -37,8 +37,7 @@ class Product  {
       stockQuantity: json['stockQuantity'],
       pointsPrice: double.parse(json['pointsPrice']),
       sellingPrice: double.parse(json['sellingPrice']),
+      favoriteStats: json['favoriteStats'] == 1,
     );
   }
-
-  
 }

@@ -7,7 +7,7 @@ import '../widgets/custom_scaffold.dart';
 import 'categories/categories_screen.dart';
 import 'home_page.dart';
 import 'locations/locations_screen.dart';
-import 'profile_screen.dart';
+import 'profile/profile_screen.dart';
 
 class NavigationScreen extends ConsumerStatefulWidget {
   static const routeName = '/navigation-screen';

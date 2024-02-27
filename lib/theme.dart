@@ -136,11 +136,7 @@ ThemeData themeData(BuildContext context) {
       iconTheme: IconThemeData(color: Colors.orange),
       surfaceTintColor: Colors.transparent,
       centerTitle: true,
-      titleTextStyle: TextStyle(
-        color: Colors.black,
-        fontSize: 22,
-        fontWeight: FontWeight.w500,
-      ),
+      
       color: Colors.transparent,
       // actionsIconTheme: const IconThemeData(color: Colors.black),
     ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
 
-
-import 'authentication/provider/auth.dart';
-import 'authentication/screens/logIn_screen.dart';
-import '../generated/l10n.dart';
+import '../authentication/provider/auth.dart';
+import '../authentication/screens/logIn_screen.dart';
+import '../../generated/l10n.dart';
+import 'screens/account_information_screen.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -51,32 +52,53 @@ class ProfileScreen extends ConsumerWidget {
           color: Colors.transparent,
           child: Column(
             children: [
+              // Account information
               ListTile(
                 leading: const Icon(Icons.co_present_outlined),
                 title: Text(S.of(context).account_information),
+                onTap: () async {
+                  final response2 = await http
+                      .get(Uri.parse('http://10.0.2.2:8000/api/favorites'));
+                  print(response2.body);
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => AccountInformationScreen(),
+                  ));
+                },
               ),
+
+              // Order history
               ListTile(
                 leading: const Icon(Icons.history),
                 title: Text(S.of(context).order_history),
               ),
+
+              // Favorite products
               ListTile(
                 leading: const Icon(Icons.favorite_border),
                 title: Text(S.of(context).favorite_products),
               ),
+
+              // Notifs
               ListTile(
                 leading: const Icon(Icons.notifications),
                 title: Text(S.of(context).notifications),
               ),
+
+              // Wallet ??
               ListTile(
                 leading: const Icon(Icons.wallet),
                 title: Text(S.of(context).wallet_balance),
               ),
+
+              // Current balance
               ListTile(
                 leading: const Icon(Icons.credit_score),
                 title: Text(S.of(context).current_month_balance),
                 trailing: Text('500'),
                 //Numbers should be fetched from backend here
               ),
+
+              // Previous month balance
               ListTile(
                 leading: const Icon(Icons.credit_score),
                 title: Text(S.of(context).previous_month_balance),
@@ -96,9 +118,7 @@ class ProfileScreen extends ConsumerWidget {
                 title: Text(S.of(context).sign_out),
                 onTap: () async {
                   final navigator = Navigator.of(context);
-                  await ref.read(authProvider)
-                      .logOut()
-                      .then((value) {
+                  await ref.read(authProvider).logOut().then((value) {
                     navigator.pushReplacementNamed(LogInScreen.routeName);
                   }).onError((error, _) {
                     showDialog(

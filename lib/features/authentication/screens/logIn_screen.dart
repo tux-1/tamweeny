@@ -37,7 +37,7 @@ class LogInScreen extends StatelessWidget {
                   S.of(context).logInTitle,
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 8.5),
                 //Login Card + Login Button
                 const LogInCard(),
               ],
