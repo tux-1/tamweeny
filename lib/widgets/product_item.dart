@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/generated/l10n.dart';
 
 import '../providers/product.dart';
+import '../providers/products.dart';
 
 class ProductItem extends ConsumerStatefulWidget {
   final Product product;
@@ -76,6 +77,9 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                     ),
                     IconButton(
                       onPressed: () {
+                        ref
+                            .read(asyncProductsProvider.notifier)
+                            .editFavoriteStatus(product.id);
                       },
                       padding: EdgeInsets.zero,
                       icon: product.favoriteStats
@@ -134,23 +138,3 @@ class _ProductItemState extends ConsumerState<ProductItem> {
     );
   }
 }
-
-// IconButton(
-//   onPressed: () {
-//     product.setFavValue(!product.isFavorite);
-//   },
-//   icon: Icon(product.isFavorite
-//       ? Icons.favorite
-//       : Icons.favorite_border),
-// ),
-// IconButton(
-//   onPressed: () {},
-//   icon: const Icon(Icons.add),
-// ),
-// Text(
-//   '5',
-// ),
-// IconButton(
-//   onPressed: () {},
-//   icon: const Icon(Icons.remove),
-// ),

@@ -9,7 +9,7 @@ class Product {
   final int stockQuantity;
   final int storeId;
   final int categoryId;
-  bool favoriteStats;
+  final bool favoriteStats;
 
   Product({
     required this.pointsPrice,
@@ -22,7 +22,7 @@ class Product {
     required this.productImage,
     required this.description,
     required this.stockQuantity,
-    this.favoriteStats = false,
+    required this.favoriteStats,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -38,6 +38,34 @@ class Product {
       pointsPrice: double.parse(json['pointsPrice']),
       sellingPrice: double.parse(json['sellingPrice']),
       favoriteStats: json['favoriteStats'] == 1,
+    );
+  }
+
+  Product copyWith({
+    int? id,
+    String? productName,
+    String? productImage,
+    int? productType,
+    String? description,
+    double? sellingPrice,
+    double? pointsPrice,
+    int? stockQuantity,
+    int? storeId,
+    int? categoryId,
+    bool? favoriteStats,
+  }) {
+    return Product(
+      id: id ?? this.id,
+      productName: productName ?? this.productName,
+      productImage: productImage ?? this.productImage,
+      productType: productType ?? this.productType,
+      description: description ?? this.description,
+      sellingPrice: sellingPrice ?? this.sellingPrice,
+      pointsPrice: pointsPrice ?? this.pointsPrice,
+      stockQuantity: stockQuantity ?? this.stockQuantity,
+      storeId: storeId ?? this.storeId,
+      categoryId: categoryId ?? this.categoryId,
+      favoriteStats: favoriteStats ?? this.favoriteStats,
     );
   }
 }

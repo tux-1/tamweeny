@@ -48,10 +48,11 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
     final token = await TokenManager.getToken();
 
     // Getting the products using token in header, index appended to the Api
-    final response = await http.get(Uri.parse('${_productsApi}1'),
-        headers: {'Authorization': 'Bearer $token'});
-    
-    
+    final response = await http.get(
+      Uri.parse('${_productsApi}1'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+
     // Loading the products into my list
     final productsData = jsonDecode(response.body) as Map<String, dynamic>;
 
@@ -59,5 +60,27 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
       items.add(Product.fromJson(element));
     }
     return items;
+  }
+
+  Future<void> editFavoriteStatus(int id) async {
+    const favoriteApi = 'http://10.0.2.2:8000/api/favorite';
+
+    final token = await TokenManager.getToken();
+
+    await http.post(
+      Uri.parse('$favoriteApi/$id'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+      },
+    ).then((response) {
+      // if(message.contains('Added')) then add item to favorites??
+      List<Product> myList = state.value!;
+      final product = state.value!.firstWhere((element) => id == element.id);
+      final indexOf = state.value!.indexOf(product);
+      myList[indexOf] = product.copyWith(favoriteStats: !product.favoriteStats);
+
+      state = state.copyWithPrevious(AsyncValue.data(myList));
+    });
   }
 }
