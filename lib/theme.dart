@@ -132,13 +132,11 @@ ThemeData themeData(BuildContext context) {
       side: BorderSide(color: Colors.white),
     ),
     appBarTheme: const AppBarTheme(
-      systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.white),
       iconTheme: IconThemeData(color: Colors.orange),
       surfaceTintColor: Colors.transparent,
       centerTitle: true,
       
       color: Colors.transparent,
-      // actionsIconTheme: const IconThemeData(color: Colors.black),
     ),
     listTileTheme: ListTileThemeData(
       iconColor: Colors.white,

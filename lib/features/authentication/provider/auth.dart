@@ -76,13 +76,11 @@ class Auth {
   Future<void> register({
     required String email,
     required String pass,
-    required String pass2,
     required String name,
     required String nationalId,
     required DateTime bdate,
     required String cardName,
     required String city,
-    required String state,
     required String street,
     required String phone,
     required String cardNumber,
@@ -92,10 +90,9 @@ class Auth {
   }) async {
     const String registerApiUrl = 'http://10.0.2.2:8000/api/register';
 
-    User adduser = User(
+    User addUser = User(
       email: email.trim(),
       password: pass.trim(),
-      passwordConfirmation: pass2.trim(),
       deviceName: "android", // Replace with the actual device name
       birthDate: bdate,
       cardName: cardName.trim(),
@@ -106,7 +103,6 @@ class Auth {
       name: name.trim(),
       nationalId: nationalId.trim(),
       phoneNumber: phone.trim(),
-      state: state.trim(),
       street: street.trim(),
     );
 
@@ -116,9 +112,14 @@ class Auth {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      body: jsonEncode(adduser.toJson()),
+      body: jsonEncode(addUser.toJson()),
     );
-    print(response);
+    print(response.body);
+    if (jsonDecode(response.body)['errors'] != null ||
+        response.body.contains('error')) {
+      print(response.body);
+      throw HttpException('Error occured');
+    }
   }
 
   Future<void> tryAutoLogin() async {
@@ -154,9 +155,6 @@ class Auth {
       rethrow;
     }
   }
-
-// afas200sda@gmail.com
-// pass12345
 
   // void _autoLogout() {
   //   if (_authTimer != null) {

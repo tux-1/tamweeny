@@ -1,4 +1,3 @@
-// ignore: file_names
 class User {
   int? id;
   String? nationalId;
@@ -17,6 +16,7 @@ class User {
   String? cardNumber;
   String? cardNationalId;
   String? cardPassword;
+  String? socialStatus;
 
   // Singleton instance
   static final User _instance = User._();
@@ -66,6 +66,7 @@ class User {
       'city': city,
       'state': state,
       'street': street,
+      'socialStatus': socialStatus,
       'birthDate': birthDate?.toIso8601String(), // Corrected line
       'cardName': cardName,
       'cardNumber': cardNumber,

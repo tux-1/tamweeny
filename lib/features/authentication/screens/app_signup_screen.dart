@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../../generated/l10n.dart';
+import '../provider/auth.dart';
 import '../widgets/textformfield_card.dart';
 import '../../../widgets/custom_scaffold.dart';
 
-class SignUpScreen extends StatefulWidget {
+class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
   static const routeName = '/signup-screen';
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  ConsumerState<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpScreenState extends ConsumerState<SignUpScreen> {
+  DateTime? _pickedDate;
   final GlobalKey<FormState> _formKey = GlobalKey();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
-  final TextEditingController _date = TextEditingController();
+  final TextEditingController _birthDay = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _nationalNumberController =
       TextEditingController();
@@ -58,31 +61,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
     if (_formKey.currentState?.validate() == true) {
       // sign up function that'll send data to backend
-      print("Name: ${_nameController.text}");
-      print("National Number: ${_nationalNumberController.text}");
-      print("Telephone Number: ${_telephoneNumberController.text}");
-      print("City: ${_cityController.text}");
-      print(
-          "Building Number/Street Name: ${_buildingNumberStreetNameController.text}");
-      print("Date: ${_date.text}");
-      print("Name on Tamween Card: ${_nameOnTamweenCardController.text}");
-      print("Tamween Card Number: ${_tamweenCardNumberController.text}");
-      print(
-          "National Number on Tamween Card: ${_nationalNumberOnTamweenCardController.text}");
-      print("Tamween Password: ${_tamweenPasswordController.text}");
-      print("Email: ${_emailController.text}");
-      print("Password: ${_password.text}");
-      print("Confirm Password: ${_confirmPassword.text}");
-      await showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text(
-                'Successful',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            );
-          }).then((_) => navigator.pop());
+
+      ref
+          .read(authProvider)
+          .register(
+            email: _emailController.text,
+            bdate: _pickedDate!,
+            pass: _password.text,
+            cardName: _nameOnTamweenCardController.text,
+            cardNationalId: _nationalNumberOnTamweenCardController.text,
+            cardNumber: _tamweenCardNumberController.text,
+            cardPassword: _tamweenPasswordController.text,
+            city: _cityController.text,
+            name: _nameController.text,
+            street: _buildingNumberStreetNameController.text,
+            nationalId: _nationalNumberController.text,
+            phone: _telephoneNumberController.text,
+          )
+          .then((value) async {
+        await showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text(
+                  'Successful',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              );
+            }).then((_) => navigator.pop());
+      }).onError((error, stackTrace) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('Error occured.')));
+      });
     }
   }
 
@@ -152,7 +162,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
               //BIRTH DATE FIELD
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
-                controller: _date,
+                controller: _birthDay,
+                validator: (p0) {
+                  if (_pickedDate == null) return 'No date picked';
+                  return null;
+                },
                 onTap: () async {
                   DateTime? pickedDate = await showDatePicker(
                       context: context,
@@ -160,9 +174,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       firstDate: DateTime(1900),
                       lastDate: DateTime.now());
                   if (pickedDate != null) {
-                    setState(() {
-                      _date.text = DateFormat.yMd('en').format(pickedDate);
-                    });
+                    _pickedDate = pickedDate;
+
+                    _birthDay.text = DateFormat.yMd('en').format(pickedDate);
                   }
                 },
                 labelText: S.of(context).birth_date,
@@ -229,10 +243,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 labelText: S.of(context).password,
                 controller: _password,
                 icon: Icons.lock,
+                obscureText: true,
               ),
 
               // CONFIRM PASSWORD FIELD
               TextFormFieldCard(
+                obscureText: true,
                 controller: _confirmPassword,
                 textInputAction: TextInputAction.done,
                 labelText: S.of(context).confirm_password,

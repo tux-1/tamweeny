@@ -44,6 +44,7 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
 
   Future<List<Product>> fetchInitialProducts() async {
     List<Product> items = [];
+
     // Getting the token
     final token = await TokenManager.getToken();
 
@@ -74,13 +75,18 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
         'Accept': 'application/json',
       },
     ).then((response) {
-      // if(message.contains('Added')) then add item to favorites??
-      List<Product> myList = state.value!;
-      final product = state.value!.firstWhere((element) => id == element.id);
-      final indexOf = state.value!.indexOf(product);
-      myList[indexOf] = product.copyWith(favoriteStats: !product.favoriteStats);
+      List<Product> myList = state.value ?? [];
+      final product = myList.firstWhere((element) => id == element.id);
+      final productIndex = myList.indexOf(product);
+      myList[productIndex] =
+          product.copyWith(favoriteStats: !product.favoriteStats);
 
       state = state.copyWithPrevious(AsyncValue.data(myList));
     });
   }
 }
+
+final Map<int, int> cart = {
+  1:1,
+  2:1,
+};
