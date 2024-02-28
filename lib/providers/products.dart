@@ -56,7 +56,14 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
 
     // Loading the products into my list
     final productsData = jsonDecode(response.body) as Map<String, dynamic>;
-
+    // final response2 = await http.get(
+    //   Uri.parse('http://10.0.2.2:8000/api/favorites'),
+    //   headers: {
+    //     'Authorization': 'Bearer $token',
+    //     'Accept': 'application/json',
+    //   },
+    // );
+    // print(response2.body);
     for (var element in productsData['products']) {
       items.add(Product.fromJson(element));
     }
@@ -85,8 +92,3 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
     });
   }
 }
-
-final Map<int, int> cart = {
-  1:1,
-  2:1,
-};

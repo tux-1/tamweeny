@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "about_the_app": MessageLookupByLibrary.simpleMessage("About the App"),
         "account_information":
             MessageLookupByLibrary.simpleMessage("Account Information"),
+        "address": MessageLookupByLibrary.simpleMessage("Address"),
         "apply_for_tamween_card":
             MessageLookupByLibrary.simpleMessage("Apply for Tamween Card"),
         "birth_date": MessageLookupByLibrary.simpleMessage("Birth Date"),
@@ -81,6 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "4) The cardholder must attach a copy of the salary statement if there is any document indicating the monthly salary."),
         "document5": MessageLookupByLibrary.simpleMessage(
             "5) Attach birth certificates for minor children."),
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "eligibleCategories": MessageLookupByLibrary.simpleMessage(
             "Categories Eligible for the New Food Card:"),
         "email": MessageLookupByLibrary.simpleMessage("E-Mail"),

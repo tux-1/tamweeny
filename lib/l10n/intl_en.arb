@@ -88,5 +88,7 @@
     "recommended_foods": "Recommended Foods",
     "most_popular": "Most Popular",
     "unit_price": "Unit Price",
-    "favorite_products": "Favorite Products"
+    "favorite_products": "Favorite Products",
+    "edit": "Edit",
+    "address": "Address"
 }

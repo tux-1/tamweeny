@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'features/navigation_screen.dart';
 import 'features/authentication/screens/app_signup_screen.dart';
 import 'features/authentication/screens/tamween_info.dart';
+import 'features/profile/screens/account_information_screen.dart';
+import 'features/profile/screens/favorites_screen.dart';
 import 'generated/l10n.dart';
 import 'features/authentication/screens/splash_body.dart';
 
@@ -36,11 +38,14 @@ class MyApp extends StatelessWidget {
       scrollBehavior: ScrollConfiguration.of(context).copyWith(),
       home: const SplashBody(),
       routes: {
-        NavigationScreen.routeName: (ctx) => NavigationScreen(),
-        SignUpScreen.routeName: (ctx) => SignUpScreen(),
-        TamweenSignUpScreen.routeName: (ctx) => TamweenSignUpScreen(),
-        TamweenInfo.routeName: (ctx) => TamweenInfo(),
-        LogInScreen.routeName: (ctx) => LogInScreen(),
+        NavigationScreen.routeName: (ctx) => const NavigationScreen(),
+        SignUpScreen.routeName: (ctx) => const SignUpScreen(),
+        TamweenSignUpScreen.routeName: (ctx) => const TamweenSignUpScreen(),
+        TamweenInfo.routeName: (ctx) => const TamweenInfo(),
+        LogInScreen.routeName: (ctx) => const LogInScreen(),
+        AccountInformationScreen.routeName: (ctx) =>
+            const AccountInformationScreen(),
+        FavoritesScreen.routeName: (ctx) => const FavoritesScreen(),
       },
     );
   }

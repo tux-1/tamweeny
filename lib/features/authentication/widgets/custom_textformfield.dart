@@ -6,13 +6,17 @@ class CustomTextField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final int? maxLength;
   final String? Function(String?)? validator;
-
-  CustomTextField({
+  final bool readOnly;
+  final String? initialValue;
+  const CustomTextField({
+    super.key,
     this.onSaved,
     this.keyboardType = TextInputType.emailAddress,
     this.textInputAction = TextInputAction.next,
     this.maxLength,
     this.validator,
+    this.readOnly = false,
+    this.initialValue,
   });
 
   @override
@@ -23,6 +27,8 @@ class CustomTextField extends StatelessWidget {
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: const Color(0xffDEA568),
             ),
+        initialValue: initialValue,
+        readOnly: readOnly,
         validator: validator,
         onSaved: onSaved,
         keyboardType: keyboardType,
@@ -31,10 +37,7 @@ class CustomTextField extends StatelessWidget {
         maxLength: maxLength,
         onTapOutside: (event) => FocusScope.of(context).unfocus(),
         decoration: InputDecoration(
-          errorStyle: const TextStyle(
-            fontSize: 20,
-            height: 0.1
-          ),
+          errorStyle: const TextStyle(fontSize: 20, height: 0.1),
           counterText: "",
           constraints: const BoxConstraints(maxHeight: 70),
           contentPadding:

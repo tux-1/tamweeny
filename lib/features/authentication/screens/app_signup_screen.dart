@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:intl/intl.dart';
 
 import '../../../generated/l10n.dart';
@@ -38,12 +39,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final TextEditingController _tamweenPasswordController =
       TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-
-  //the Map that'll contain the data we'll take from form
-  // Map<String, String> _signUpData = {
-  //   'email': '',
-  //   'password': '',
-  // };
 
   Future<void> register(BuildContext context) async {
     final navigator = Navigator.of(context);
@@ -159,6 +154,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 icon: Icons.location_on,
                 controller: _buildingNumberStreetNameController,
               ),
+
               //BIRTH DATE FIELD
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
@@ -183,6 +179,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 readOnly: true,
                 icon: Icons.calendar_month_outlined,
               ),
+
               const Divider(
                 color: Colors.white,
                 height: 20,
@@ -193,6 +190,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 S.of(context).tamween_card_information,
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
+
               const SizedBox(height: 20),
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
@@ -223,18 +221,21 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 icon: Icons.lock,
                 controller: _tamweenPasswordController,
               ),
+
               const Divider(
                 color: Colors.white,
                 height: 20,
                 thickness: 3,
               ),
               const SizedBox(height: 10),
+
               // EMAIL FIELD
               TextFormFieldCard(
                 textInputAction: TextInputAction.next,
                 labelText: S.of(context).email,
                 icon: Icons.email_rounded,
                 controller: _emailController,
+                validator: ValidationBuilder().email().build(),
               ),
 
               // PASSWORD FIELD
@@ -244,6 +245,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 controller: _password,
                 icon: Icons.lock,
                 obscureText: true,
+                validator: ValidationBuilder().minLength(8).build(),
               ),
 
               // CONFIRM PASSWORD FIELD
@@ -260,6 +262,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   return null;
                 },
               ),
+
               const SizedBox(height: 10),
               ElevatedButton(
                   onPressed: () {

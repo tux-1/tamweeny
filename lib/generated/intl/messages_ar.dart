@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "about_the_app": MessageLookupByLibrary.simpleMessage("حول التطبيق"),
         "account_information":
             MessageLookupByLibrary.simpleMessage("معلومات الحساب"),
+        "address": MessageLookupByLibrary.simpleMessage("العنوان"),
         "apply_for_tamween_card":
             MessageLookupByLibrary.simpleMessage("التقديم على بطاقة التموين"),
         "birth_date": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
@@ -80,6 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "4) يجب على مصدر البطاقة إرفاق صورة من بيانات الراتب في حال وجود أي مستند يوضح الراتب الشهري."),
         "document5": MessageLookupByLibrary.simpleMessage(
             "5) إرفاق شهادات ميلاد الأطفال القصر."),
+        "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
         "eligibleCategories": MessageLookupByLibrary.simpleMessage(
             "الفئات المقابلة لبطاقة الطعام الجديدة:"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكتروني"),
