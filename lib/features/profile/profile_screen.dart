@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../authentication/provider/auth.dart';
 import '../authentication/screens/logIn_screen.dart';
 import '../../generated/l10n.dart';
-import 'providers/account_info_provider.dart';
+import 'providers/account_info.dart';
 import 'screens/account_information_screen.dart';
 import 'screens/favorites_screen.dart';
 
@@ -62,7 +62,7 @@ class ProfileScreen extends ConsumerWidget {
                     title: Text(S.of(context).account_information),
                     onTap: () {
                       Navigator.of(context)
-                          .pushNamed(AccountInformationScreen.routeName);
+                          .pushNamed(AccountInfoScreen.routeName);
                     },
                   ),
 

@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tamweeny/features/authentication/widgets/custom_textformfield.dart';
+import 'package:tamweeny/widgets/custom_textformfield.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../widgets/custom_scaffold.dart';
-import '../providers/account_info_provider.dart';
+import '../providers/account_info.dart';
+import 'edit_account_screen.dart';
 
-class AccountInformationScreen extends ConsumerWidget {
-  const AccountInformationScreen({super.key});
+class AccountInfoScreen extends ConsumerWidget {
+  const AccountInfoScreen({super.key});
   static const routeName = 'account-information';
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userData = ref.watch(accountInfoProvider.future);
-
     return CustomScaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
         title: Text(
@@ -24,13 +25,16 @@ class AccountInformationScreen extends ConsumerWidget {
       body: FutureBuilder(
         future: userData,
         builder: (context, userDataSnapshot) {
-          if (userDataSnapshot.hasData) {
+          if (userDataSnapshot.data != null) {
             return ListView(
               physics: const BouncingScrollPhysics(),
               padding: const EdgeInsets.symmetric(horizontal: 15),
               children: [
                 TextButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushNamed(EditAccountScreen.routeName);
+                  },
                   icon: const Icon(Icons.edit),
                   label: Text(S.of(context).edit),
                 ),
@@ -39,7 +43,9 @@ class AccountInformationScreen extends ConsumerWidget {
                 Text(S.of(context).name),
                 CustomTextField(
                   readOnly: true,
-                  initialValue: userDataSnapshot.data?['name'],
+                  controller: TextEditingController(
+                    text: userDataSnapshot.data?['name'],
+                  ),
                 ),
                 const SizedBox(height: 7),
 
@@ -47,7 +53,9 @@ class AccountInformationScreen extends ConsumerWidget {
                 Text(S.of(context).email),
                 CustomTextField(
                   readOnly: true,
-                  initialValue: userDataSnapshot.data?['email'],
+                  controller: TextEditingController(
+                    text: userDataSnapshot.data?['email'],
+                  ),
                 ),
                 const SizedBox(height: 7),
 
@@ -55,7 +63,9 @@ class AccountInformationScreen extends ConsumerWidget {
                 Text(S.of(context).national_number),
                 CustomTextField(
                   readOnly: true,
-                  initialValue: userDataSnapshot.data?['nationalId'].toString(),
+                  controller: TextEditingController(
+                    text: userDataSnapshot.data?['nationalId'].toString(),
+                  ),
                 ),
                 const SizedBox(height: 7),
 
@@ -63,8 +73,9 @@ class AccountInformationScreen extends ConsumerWidget {
                 Text(S.of(context).telephone_number),
                 CustomTextField(
                   readOnly: true,
-                  initialValue:
-                      userDataSnapshot.data?['phoneNumber'].toString(),
+                  controller: TextEditingController(
+                    text: userDataSnapshot.data?['phoneNumber'].toString(),
+                  ),
                 ),
                 const SizedBox(height: 7),
 
@@ -72,7 +83,9 @@ class AccountInformationScreen extends ConsumerWidget {
                 Text(S.of(context).birth_date),
                 CustomTextField(
                   readOnly: true,
-                  initialValue: userDataSnapshot.data?['birthDate'].toString(),
+                  controller: TextEditingController(
+                    text: userDataSnapshot.data?['birthDate'].toString(),
+                  ),
                 ),
                 const SizedBox(height: 7),
 
@@ -80,7 +93,9 @@ class AccountInformationScreen extends ConsumerWidget {
                 Text(S.of(context).address),
                 CustomTextField(
                   readOnly: true,
-                  initialValue: userDataSnapshot.data?['street'].toString(),
+                  controller: TextEditingController(
+                    text: userDataSnapshot.data?['street'].toString(),
+                  ),
                 ),
                 const SizedBox(height: 7),
 
@@ -88,9 +103,18 @@ class AccountInformationScreen extends ConsumerWidget {
                 Text(S.of(context).tamween_card_number),
                 CustomTextField(
                   readOnly: true,
-                  initialValue: userDataSnapshot.data?['cardNumber'].toString(),
+                  controller: TextEditingController(
+                    text: userDataSnapshot.data?['cardNumber'].toString(),
+                  ),
                 ),
                 const SizedBox(height: 7),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 25, top: 12),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text(S.of(context).delete_account),
+                  ),
+                )
               ],
             );
           } else {

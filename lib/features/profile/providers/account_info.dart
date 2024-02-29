@@ -17,6 +17,6 @@ final accountInfoProvider = FutureProvider<Map<String, dynamic>>((ref) async {
     },
   );
   final userData = json.decode(response.body) as Map<String, dynamic>;
-  print(userData);
+  
   return userData;
 });

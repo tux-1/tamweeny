@@ -8,6 +8,8 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool readOnly;
   final String? initialValue;
+  final TextEditingController? controller;
+  final Function()? onTap;
   const CustomTextField({
     super.key,
     this.onSaved,
@@ -17,6 +19,8 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.readOnly = false,
     this.initialValue,
+    this.controller,
+    this.onTap,
   });
 
   @override
@@ -27,12 +31,15 @@ class CustomTextField extends StatelessWidget {
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: const Color(0xffDEA568),
             ),
+        controller: controller,
         initialValue: initialValue,
         readOnly: readOnly,
         validator: validator,
+        cursorColor: Colors.white,
         onSaved: onSaved,
         keyboardType: keyboardType,
         textInputAction: textInputAction,
+        onTap: onTap,
         maxLines: 1,
         maxLength: maxLength,
         onTapOutside: (event) => FocusScope.of(context).unfocus(),

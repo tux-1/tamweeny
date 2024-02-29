@@ -59,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "2) كن متقاعدًا يعمل في القطاع العام أو قطاع الأعمال العام أو القطاع الخاص الذي يتقاضى راتبًا أقصى يصل إلى 1200 جنيه مصري شهريًا."),
         "condition3": MessageLookupByLibrary.simpleMessage(
             "3) العمل في القطاع العام أو في القطاع العام أو الخاص الذين يتقاضون راتبًا شهريًا يصل إلى 1500 جنيه مصري."),
+        "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
         "confirm_password":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
         "current_month_balance":
@@ -67,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("معلومات عن العميل"),
         "data_entry_error":
             MessageLookupByLibrary.simpleMessage("خطأ في إدخال البيانات"),
+        "delete_account": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
         "dependents_id_and_birth_certificate":
             MessageLookupByLibrary.simpleMessage(
                 "بطاقة هوية وشهادة ميلاد التابعين"),

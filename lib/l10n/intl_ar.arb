@@ -90,5 +90,7 @@
     "unit_price": "سعر الوحدة",
     "favorite_products": "المنتجات المفضلة",
     "edit": "تعديل",
-    "address": "العنوان"
+    "address": "العنوان",
+    "confirm": "تأكيد",
+    "delete_account": "حذف الحساب"
 }

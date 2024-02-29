@@ -969,6 +969,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Account`
+  String get delete_account {
+    return Intl.message(
+      'Delete Account',
+      name: 'delete_account',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

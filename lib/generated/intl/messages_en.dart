@@ -60,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "2) Be a retiree working in the public sector or private sector receiving a maximum salary of 1200 Egyptian Pounds monthly."),
         "condition3": MessageLookupByLibrary.simpleMessage(
             "3) Work in the public sector or private sector with a monthly salary of up to 1500 Egyptian Pounds."),
+        "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirm_password":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "current_month_balance":
@@ -68,6 +69,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Customer Information"),
         "data_entry_error":
             MessageLookupByLibrary.simpleMessage("Error in entering data"),
+        "delete_account":
+            MessageLookupByLibrary.simpleMessage("Delete Account"),
         "dependents_id_and_birth_certificate":
             MessageLookupByLibrary.simpleMessage(
                 "Dependents\' ID and Birth Certificate"),

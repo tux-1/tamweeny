@@ -90,5 +90,7 @@
     "unit_price": "Unit Price",
     "favorite_products": "Favorite Products",
     "edit": "Edit",
-    "address": "Address"
+    "address": "Address",
+    "confirm": "Confirm",
+    "delete_account": "Delete Account"
 }

@@ -6,6 +6,7 @@ import 'features/navigation_screen.dart';
 import 'features/authentication/screens/app_signup_screen.dart';
 import 'features/authentication/screens/tamween_info.dart';
 import 'features/profile/screens/account_information_screen.dart';
+import 'features/profile/screens/edit_account_screen.dart';
 import 'features/profile/screens/favorites_screen.dart';
 import 'generated/l10n.dart';
 import 'features/authentication/screens/splash_body.dart';
@@ -43,9 +44,9 @@ class MyApp extends StatelessWidget {
         TamweenSignUpScreen.routeName: (ctx) => const TamweenSignUpScreen(),
         TamweenInfo.routeName: (ctx) => const TamweenInfo(),
         LogInScreen.routeName: (ctx) => const LogInScreen(),
-        AccountInformationScreen.routeName: (ctx) =>
-            const AccountInformationScreen(),
+        AccountInfoScreen.routeName: (ctx) => const AccountInfoScreen(),
         FavoritesScreen.routeName: (ctx) => const FavoritesScreen(),
+        EditAccountScreen.routeName: (ctx) => const EditAccountScreen(),
       },
     );
   }
