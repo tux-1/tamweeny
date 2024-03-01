@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "about_the_app": MessageLookupByLibrary.simpleMessage("About the App"),
         "account_information":
             MessageLookupByLibrary.simpleMessage("Account Information"),
+        "action_cannot_be_undone": MessageLookupByLibrary.simpleMessage(
+            "This action cannot be undone."),
         "address": MessageLookupByLibrary.simpleMessage("Address"),
         "apply_for_tamween_card":
             MessageLookupByLibrary.simpleMessage("Apply for Tamween Card"),
@@ -61,6 +63,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "condition3": MessageLookupByLibrary.simpleMessage(
             "3) Work in the public sector or private sector with a monthly salary of up to 1500 Egyptian Pounds."),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "confirm_delete_account": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete your account?"),
         "confirm_password":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "current_month_balance":

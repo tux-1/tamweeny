@@ -989,6 +989,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Are you sure you want to delete your account?`
+  String get confirm_delete_account {
+    return Intl.message(
+      'Are you sure you want to delete your account?',
+      name: 'confirm_delete_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This action cannot be undone.`
+  String get action_cannot_be_undone {
+    return Intl.message(
+      'This action cannot be undone.',
+      name: 'action_cannot_be_undone',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

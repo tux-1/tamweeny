@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 import '../../../utils/token_manager.dart';
 
-final accountInfoProvider = FutureProvider<Map<String, dynamic>>((ref) async {
+final accountInfoProvider = FutureProvider.autoDispose<Map<String, dynamic>>((ref) async {
   // Getting the token
   final token = await TokenManager.getToken();
 

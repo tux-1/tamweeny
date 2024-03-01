@@ -1,12 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/exceptions.dart';
 import '../../../models/user.dart';
+
+import '../../../utils/token_manager.dart';
 
 final authProvider = Provider<Auth>((ref) => Auth());
 
@@ -21,17 +24,7 @@ class Auth {
   }
 
   bool get isAuth {
-    return token != null;
-  }
-
-  String? get token {
-    if (
-        // _expiryDate != null &&
-        //   _expiryDate!.isAfter(DateTime.now()) &&
-        _token != null) {
-      return _token;
-    }
-    return null;
+    return _token != null;
   }
 
   Future<void> logIn(String email, String pass,
@@ -55,10 +48,9 @@ class Auth {
         body: jsonEncode(userLoginData.toJson()),
       );
 
-      // print('Response ${response.body}');
       final responseData = jsonDecode(response.body);
       final responseToken = responseData['token'];
-      // print(response);
+
       if (responseToken == null) {
         throw HttpException(responseData['message']);
       }
@@ -114,10 +106,14 @@ class Auth {
       },
       body: jsonEncode(addUser.toJson()),
     );
-    print(response.body);
+    if (kDebugMode) {
+      print(response.body);
+    }
     if (jsonDecode(response.body)['errors'] != null ||
         response.body.contains('error')) {
-      print(response.body);
+      if (kDebugMode) {
+        print(response.body);
+      }
       throw HttpException('Error occured');
     }
   }
@@ -142,18 +138,63 @@ class Auth {
         Uri.parse(apiUrl),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token', // Include the user's access token
+          'Authorization': 'Bearer $_token', // Include the user's access token
         },
       );
       _token = null;
       _userId = null;
-
       final prefs = await SharedPreferences.getInstance();
       prefs.remove('userData');
+
       //prefs.clear(); //is also ok bc we only stored userData
     } catch (error) {
       rethrow;
     }
+  }
+
+  Future<void> updateAccountInfo({
+    required String name,
+    required String phoneNumber,
+    required String birthDate,
+    required String street,
+  }) async {
+    // Getting the token
+    final token = await TokenManager.getToken();
+
+    final response = await http
+        .patch(Uri.parse('http://10.0.2.2:8000/api/updateAccInfo'), headers: {
+      'Authorization': 'Bearer $token',
+      'Accept': 'application/json',
+    }, body: {
+      'name': name,
+      'phoneNumber': phoneNumber,
+      'birthDate': birthDate,
+      'street': street,
+    });
+
+    if (!response.body.contains('successful')) {
+      throw HttpException('Error occured');
+    }
+  }
+
+  Future<void> deleteAccount() async {
+    // Getting the token
+    final token = await TokenManager.getToken();
+
+    final response = await http.delete(
+      Uri.parse('http://10.0.2.2:8000/api/deleteAccount'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+      },
+    );
+    if (!response.body.contains('successful')) {
+      throw HttpException('Error occured');
+    }
+
+    _token = null;
+    _userId = null;
+    TokenManager.clearToken();
   }
 
   // void _autoLogout() {

@@ -92,5 +92,7 @@
     "edit": "Edit",
     "address": "Address",
     "confirm": "Confirm",
-    "delete_account": "Delete Account"
+    "delete_account": "Delete Account",
+    "confirm_delete_account": "Are you sure you want to delete your account?",
+    "action_cannot_be_undone": "This action cannot be undone."
 }

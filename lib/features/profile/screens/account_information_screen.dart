@@ -3,7 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/widgets/custom_textformfield.dart';
 
 import '../../../generated/l10n.dart';
+import '../../../providers/filters.dart';
+import '../../../providers/products.dart';
 import '../../../widgets/custom_scaffold.dart';
+import '../../authentication/provider/auth.dart';
+import '../../authentication/screens/logIn_screen.dart';
 import '../providers/account_info.dart';
 import 'edit_account_screen.dart';
 
@@ -111,7 +115,43 @@ class AccountInfoScreen extends ConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 25, top: 12),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text(S.of(context).confirm_delete_account),
+                            content:
+                                Text(S.of(context).action_cannot_be_undone),
+                            actionsAlignment: MainAxisAlignment.spaceAround,
+                            actions: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text(S.of(context).no),
+                              ),
+                              ElevatedButton(
+                                onPressed: () async {
+                                  final nav = Navigator.of(context);
+
+                                  await ref
+                                      .read(authProvider)
+                                      .deleteAccount()
+                                      .then((value) {
+                                    ref.invalidate(filtersProvider);
+                                    ref.invalidate(asyncProductsProvider);
+                                    return nav.pushReplacementNamed(
+                                        LogInScreen.routeName);
+                                  });
+                                },
+                                child: Text(S.of(context).yes),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
                     child: Text(S.of(context).delete_account),
                   ),
                 )

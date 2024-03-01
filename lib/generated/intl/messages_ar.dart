@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "about_the_app": MessageLookupByLibrary.simpleMessage("حول التطبيق"),
         "account_information":
             MessageLookupByLibrary.simpleMessage("معلومات الحساب"),
+        "action_cannot_be_undone": MessageLookupByLibrary.simpleMessage(
+            "لا يمكن التراجع عن هذا الإجراء."),
         "address": MessageLookupByLibrary.simpleMessage("العنوان"),
         "apply_for_tamween_card":
             MessageLookupByLibrary.simpleMessage("التقديم على بطاقة التموين"),
@@ -60,6 +62,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "condition3": MessageLookupByLibrary.simpleMessage(
             "3) العمل في القطاع العام أو في القطاع العام أو الخاص الذين يتقاضون راتبًا شهريًا يصل إلى 1500 جنيه مصري."),
         "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
+        "confirm_delete_account": MessageLookupByLibrary.simpleMessage(
+            "هل أنت متأكد أنك تريد حذف حسابك؟"),
         "confirm_password":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
         "current_month_balance":

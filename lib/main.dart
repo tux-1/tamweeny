@@ -15,8 +15,11 @@ import 'features/authentication/screens/logIn_screen.dart';
 import 'features/authentication/screens/tamween-signUp_screen.dart';
 import 'theme.dart';
 
-void main() {
+void main() async {
   runApp(const ProviderScope(child: MyApp()));
+  // WidgetsFlutterBinding.ensureInitialized();
+  // final prefs = await SharedPreferences.getInstance();
+  // prefs.remove('userData');
 }
 
 class MyApp extends StatelessWidget {

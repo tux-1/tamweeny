@@ -6,9 +6,9 @@ import 'package:tamweeny/generated/l10n.dart';
 
 import '../../../widgets/custom_scaffold.dart';
 import '../../../widgets/custom_textformfield.dart';
-import '../../navigation_screen.dart';
+import '../../authentication/provider/auth.dart';
 import '../providers/account_info.dart';
-import '../providers/account_updater.dart';
+import 'account_information_screen.dart';
 
 class EditAccountScreen extends ConsumerStatefulWidget {
   const EditAccountScreen({super.key});
@@ -73,6 +73,7 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                 Text(S.of(context).telephone_number),
                 CustomTextField(
                   controller: telephoneNumberController,
+                  maxLength: 11,
                   validator: ValidationBuilder().maxLength(11).build(),
                 ),
 
@@ -103,57 +104,71 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-              bottom: 25,
-              top: 12,
-            ),
-            child: ElevatedButton(
-              onPressed: isLoading
-                  ? null
-                  : () async {
-                      final nav = Navigator.of(context);
-                      setState(() {
-                        isLoading = true;
-                      });
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (context) => const Dialog(
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Center(
-                              heightFactor: 2,
-                              widthFactor: 2,
-                              child: CircularProgressIndicator(
-                                color: Colors.amber,
+          Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 25,
+                    top: 12,
+                    left: 15,
+                    right: 15,
+                  ),
+                  child: ElevatedButton(
+                    onPressed: isLoading
+                        ? null
+                        : () async {
+                            final nav = Navigator.of(context);
+                            setState(() {
+                              isLoading = true;
+                            });
+                            showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (context) => const Dialog(
+                                child: Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Center(
+                                    heightFactor: 2,
+                                    widthFactor: 2,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.amber,
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
-                      );
+                            );
 
-                      await updateAccountInfo(
-                        name: nameController.text,
-                        phoneNumber: telephoneNumberController.text,
-                        birthDate: birthDateController.text,
-                        street: addressController.text,
-                      ).then((value) async {
-                        ref.invalidate(accountInfoProvider);
-                        nav.popUntil(
-                            ModalRoute.withName(NavigationScreen.routeName));
-                      }).onError((error, stackTrace) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('An error occured')));
-                      });
-                      if (mounted) {
-                        setState(() {
-                          isLoading = false;
-                        });
-                      }
-                    },
-              child: Text(S.of(context).confirm),
-            ),
+                            await ref
+                                .read(authProvider)
+                                .updateAccountInfo(
+                                  name: nameController.text,
+                                  phoneNumber: telephoneNumberController.text,
+                                  birthDate: birthDateController.text,
+                                  street: addressController.text,
+                                )
+                                .then((value) async {
+                              ref.invalidate(accountInfoProvider);
+                              if (mounted) {
+                                nav.popUntil(ModalRoute.withName(
+                                    AccountInfoScreen.routeName));
+                              }
+                            }).onError((error, stackTrace) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('An error occured')));
+                            });
+                            if (mounted) {
+                              setState(() {
+                                isLoading = false;
+                              });
+                            }
+                          },
+                    child: Text(S.of(context).confirm),
+                  ),
+                ),
+              ),
+            ],
           )
         ],
       ),

@@ -92,5 +92,7 @@
     "edit": "تعديل",
     "address": "العنوان",
     "confirm": "تأكيد",
-    "delete_account": "حذف الحساب"
+    "delete_account": "حذف الحساب",
+    "confirm_delete_account": "هل أنت متأكد أنك تريد حذف حسابك؟",
+    "action_cannot_be_undone": "لا يمكن التراجع عن هذا الإجراء."
 }

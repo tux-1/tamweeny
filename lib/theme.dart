@@ -100,8 +100,6 @@ ThemeData themeData(BuildContext context) {
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
-        fixedSize: MaterialStatePropertyAll<Size>(
-            Size(MediaQuery.of(context).size.width * 0.69, 45)),
       ),
     ),
     // Define the primary color for the app buttons

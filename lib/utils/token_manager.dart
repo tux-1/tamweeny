@@ -12,5 +12,9 @@ class TokenManager {
     return token;
   }
   
-  
+
+  static Future<void> clearToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('userData');
+  }
 }

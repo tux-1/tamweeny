@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../providers/filters.dart';
+import '../../providers/products.dart';
 import '../authentication/provider/auth.dart';
 import '../authentication/screens/logIn_screen.dart';
 import '../../generated/l10n.dart';
@@ -123,6 +125,8 @@ class ProfileScreen extends ConsumerWidget {
                     onTap: () async {
                       final navigator = Navigator.of(context);
                       await ref.read(authProvider).logOut().then((value) {
+                        ref.invalidate(filtersProvider);
+                        ref.invalidate(asyncProductsProvider);
                         navigator.pushReplacementNamed(LogInScreen.routeName);
                       }).onError((error, _) {
                         showDialog(

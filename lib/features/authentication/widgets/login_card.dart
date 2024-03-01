@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 import '../../navigation_screen.dart';
 import '../../../generated/l10n.dart';
 import '../screens/app_signup_screen.dart';
@@ -168,13 +167,16 @@ class _LogInCardState extends ConsumerState<LogInCard> {
             const SizedBox(height: 20),
 
             // Log in button
-            ElevatedButton(
-              onPressed: _isLoading ? null : _submit,
-              child: _isLoading
-                  ? const LinearProgressIndicator(
-                      color: Colors.orange,
-                    )
-                  : Text(S.of(context).logIn),
+            SizedBox(
+              width: deviceSize.width * 0.7,
+              child: ElevatedButton(
+                onPressed: _isLoading ? null : _submit,
+                child: _isLoading
+                    ? const LinearProgressIndicator(
+                        color: Colors.orange,
+                      )
+                    : Text(S.of(context).logIn),
+              ),
             ),
 
             const SizedBox(height: 10),
