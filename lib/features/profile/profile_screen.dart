@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../providers/filters.dart';
-import '../../providers/products.dart';
 import '../authentication/provider/auth.dart';
 import '../authentication/screens/logIn_screen.dart';
 import '../../generated/l10n.dart';
@@ -100,7 +98,7 @@ class ProfileScreen extends ConsumerWidget {
                   ListTile(
                     leading: const Icon(Icons.credit_score),
                     title: Text(S.of(context).current_month_balance),
-                    trailing: Text('500'),
+                    trailing: const Text('500'),
                     //Numbers should be fetched from backend here
                   ),
 
@@ -108,7 +106,7 @@ class ProfileScreen extends ConsumerWidget {
                   ListTile(
                     leading: const Icon(Icons.credit_score),
                     title: Text(S.of(context).previous_month_balance),
-                    trailing: Text('500'),
+                    trailing: const Text('500'),
                     //Numbers should be fetched from backend here
                   ),
                   ListTile(
@@ -125,8 +123,6 @@ class ProfileScreen extends ConsumerWidget {
                     onTap: () async {
                       final navigator = Navigator.of(context);
                       await ref.read(authProvider).logOut().then((value) {
-                        ref.invalidate(filtersProvider);
-                        ref.invalidate(asyncProductsProvider);
                         navigator.pushReplacementNamed(LogInScreen.routeName);
                       }).onError((error, _) {
                         showDialog(

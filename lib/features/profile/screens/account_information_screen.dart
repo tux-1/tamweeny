@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/widgets/custom_textformfield.dart';
 
 import '../../../generated/l10n.dart';
-import '../../../providers/filters.dart';
-import '../../../providers/products.dart';
 import '../../../widgets/custom_scaffold.dart';
 import '../../authentication/provider/auth.dart';
 import '../../authentication/screens/logIn_screen.dart';
@@ -139,8 +137,6 @@ class AccountInfoScreen extends ConsumerWidget {
                                       .read(authProvider)
                                       .deleteAccount()
                                       .then((value) {
-                                    ref.invalidate(filtersProvider);
-                                    ref.invalidate(asyncProductsProvider);
                                     return nav.pushReplacementNamed(
                                         LogInScreen.routeName);
                                   });

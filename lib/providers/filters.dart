@@ -11,6 +11,11 @@ class Filters extends ChangeNotifier {
   double scrollPosition = 0;
   int mostPopularPaginationIndex = 2;
 
+  void setCategory(Category category) {
+    chosenCategory = category;
+    notifyListeners();
+  }
+
   void clearCategory() {
     chosenCategory = null;
     scrollPosition = 0;

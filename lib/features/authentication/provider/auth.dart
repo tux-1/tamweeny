@@ -5,15 +5,21 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tamweeny/providers/products.dart';
 
 import '../../../models/exceptions.dart';
 import '../../../models/user.dart';
 
+import '../../../providers/filters.dart';
 import '../../../utils/token_manager.dart';
 
-final authProvider = Provider<Auth>((ref) => Auth());
+final authProvider = Provider<Auth>((ref) => Auth(ref));
 
 class Auth {
+  ProviderRef ref;
+
+  Auth(this.ref);
+
   String? _token;
   String? _userId;
   // Timer? _authTimer;
@@ -145,11 +151,38 @@ class Auth {
       _userId = null;
       final prefs = await SharedPreferences.getInstance();
       prefs.remove('userData');
-
       //prefs.clear(); //is also ok bc we only stored userData
+
+      ref.invalidate(filtersProvider);
+      ref.invalidate(asyncProductsProvider);
     } catch (error) {
+      if (kDebugMode) {
+        print(error);
+      }
       rethrow;
     }
+  }
+
+  Future<void> deleteAccount() async {
+    // Getting the token
+    final token = await TokenManager.getToken();
+
+    final response = await http.delete(
+      Uri.parse('http://10.0.2.2:8000/api/deleteAccount'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+      },
+    );
+    if (!response.body.contains('successful')) {
+      throw HttpException('Error occured');
+    }
+
+    _token = null;
+    _userId = null;
+    TokenManager.clearToken();
+    ref.invalidate(filtersProvider);
+    ref.invalidate(asyncProductsProvider);
   }
 
   Future<void> updateAccountInfo({
@@ -175,26 +208,6 @@ class Auth {
     if (!response.body.contains('successful')) {
       throw HttpException('Error occured');
     }
-  }
-
-  Future<void> deleteAccount() async {
-    // Getting the token
-    final token = await TokenManager.getToken();
-
-    final response = await http.delete(
-      Uri.parse('http://10.0.2.2:8000/api/deleteAccount'),
-      headers: {
-        'Authorization': 'Bearer $token',
-        'Accept': 'application/json',
-      },
-    );
-    if (!response.body.contains('successful')) {
-      throw HttpException('Error occured');
-    }
-
-    _token = null;
-    _userId = null;
-    TokenManager.clearToken();
   }
 
   // void _autoLogout() {

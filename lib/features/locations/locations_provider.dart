@@ -7,7 +7,6 @@ import '../../utils/token_manager.dart';
 import 'location.dart';
 
 final locationsFutureProvider = FutureProvider<List<Location>>((ref) async {
-  print('starting..');
   const String locationsApi = 'http://10.0.2.2:8000/api/storesLatLong';
   final List<Location> items = [];
 

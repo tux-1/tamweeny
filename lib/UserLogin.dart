@@ -1,10 +1,7 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 import 'features/authentication/services/api.dart';
 import 'UserList.dart';
-
 
 class AuthPage extends StatefulWidget {
   @override
