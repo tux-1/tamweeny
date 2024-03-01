@@ -15,13 +15,13 @@ final asyncProductsProvider =
 class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
   @override
   Future<List<Product>> build() {
-    return fetchInitialProducts();
+    return getInitialProducts();
   }
 
   final String _productsApi = 'http://10.0.2.2:8000/api/products?page=';
   int? _totalPages;
 
-  Future<void> addProducts(int index) async {
+  Future<void> getNextProducts(int index) async {
     if (_totalPages != null && index > _totalPages!) {
       return;
     }
@@ -42,7 +42,7 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
     ref.read(filtersProvider).mostPopularPaginationIndex++;
   }
 
-  Future<List<Product>> fetchInitialProducts() async {
+  Future<List<Product>> getInitialProducts() async {
     List<Product> items = [];
 
     // Getting the token
@@ -56,21 +56,13 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
 
     // Loading the products into my list
     final productsData = jsonDecode(response.body) as Map<String, dynamic>;
-    // final response2 = await http.get(
-    //   Uri.parse('http://10.0.2.2:8000/api/favorites'),
-    //   headers: {
-    //     'Authorization': 'Bearer $token',
-    //     'Accept': 'application/json',
-    //   },
-    // );
-    // print(response2.body);
     for (var element in productsData['products']) {
       items.add(Product.fromJson(element));
     }
     return items;
   }
 
-  Future<void> editFavoriteStatus(int id) async {
+  Future<void> toggleFavoriteStatus(int id) async {
     const favoriteApi = 'http://10.0.2.2:8000/api/favorite';
 
     final token = await TokenManager.getToken();

@@ -79,7 +79,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                       onPressed: () {
                         ref
                             .read(asyncProductsProvider.notifier)
-                            .editFavoriteStatus(product.id);
+                            .toggleFavoriteStatus(product.id);
                       },
                       padding: EdgeInsets.zero,
                       icon: product.favoriteStats

@@ -5,20 +5,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/filters.dart';
 import '../widgets/custom_scaffold.dart';
 import 'categories/categories_screen.dart';
-import 'home_page.dart';
+import 'home_screen.dart';
 import 'locations/locations_screen.dart';
 import 'profile/profile_screen.dart';
 
-class NavigationScreen extends ConsumerStatefulWidget {
+class NavigationView extends ConsumerStatefulWidget {
   static const routeName = '/navigation-screen';
 
-  const NavigationScreen({super.key});
+  const NavigationView({super.key});
 
   @override
-  ConsumerState<NavigationScreen> createState() => _NavigationScreenState();
+  ConsumerState<NavigationView> createState() => _NavigationScreenState();
 }
 
-class _NavigationScreenState extends ConsumerState<NavigationScreen>
+class _NavigationScreenState extends ConsumerState<NavigationView>
     with TickerProviderStateMixin {
   late TabController _tabController;
   late ScrollController scrollController;
@@ -141,7 +141,7 @@ class _NavigationScreenState extends ConsumerState<NavigationScreen>
                 const ProfileScreen(),
                 const LocationsScreen(),
                 CategoriesScreen(scrollController: scrollController),
-                HomePage(scrollController: scrollController),
+                HomeScreen(scrollController: scrollController),
               ]),
         ),
       ),

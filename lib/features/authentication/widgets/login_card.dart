@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../navigation_screen.dart';
+import '../../navigation_view.dart';
 import '../../../generated/l10n.dart';
 import '../screens/app_signup_screen.dart';
 import '../screens/tamween_info.dart';
 import 'textformfield_card.dart';
-import '../provider/auth.dart';
+import '../../../providers/auth.dart';
 
 class LogInCard extends ConsumerStatefulWidget {
   const LogInCard({
@@ -72,7 +72,7 @@ class _LogInCardState extends ConsumerState<LogInCard> {
       scaffoldMessenger.showSnackBar(const SnackBar(
         content: Text('Successful Login'),
       ));
-      Navigator.of(context).pushReplacementNamed(NavigationScreen.routeName);
+      Navigator.of(context).pushReplacementNamed(NavigationView.routeName);
     }).onError((error, _) {
       showDialog(
           context: context,

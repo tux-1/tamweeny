@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Account Information"),
         "action_cannot_be_undone": MessageLookupByLibrary.simpleMessage(
             "This action cannot be undone."),
+        "add_more": MessageLookupByLibrary.simpleMessage("Add More"),
         "address": MessageLookupByLibrary.simpleMessage("Address"),
         "apply_for_tamween_card":
             MessageLookupByLibrary.simpleMessage("Apply for Tamween Card"),
@@ -55,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "8) Employee\'s salary not exceeding 1500 Egyptian Pounds monthly."),
         "category9": MessageLookupByLibrary.simpleMessage(
             "9) Citizens with chronic illnesses and disabilities."),
+        "checkout": MessageLookupByLibrary.simpleMessage("Checkout"),
         "city": MessageLookupByLibrary.simpleMessage("City"),
         "condition1": MessageLookupByLibrary.simpleMessage(
             "1) According to sociological research, the applicant for the new food card must be educated, unemployed, and have a monthly income not exceeding 800 Egyptian Pounds."),
@@ -164,6 +166,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Required Documents for a New Food Card:"),
         "resume": MessageLookupByLibrary.simpleMessage("Continue"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
+        "shopping_cart": MessageLookupByLibrary.simpleMessage("Shopping Cart"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
         "sign_out": MessageLookupByLibrary.simpleMessage("Sign Out"),
         "single": MessageLookupByLibrary.simpleMessage("Single"),
@@ -176,6 +179,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tamween Card Password"),
         "telephone_number":
             MessageLookupByLibrary.simpleMessage("Telephone Number"),
+        "total_payments":
+            MessageLookupByLibrary.simpleMessage("Total Payments"),
         "unit_price": MessageLookupByLibrary.simpleMessage("Unit Price"),
         "wallet_balance":
             MessageLookupByLibrary.simpleMessage("Wallet Balance"),

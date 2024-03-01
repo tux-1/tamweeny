@@ -4,7 +4,7 @@ import 'package:form_validator/form_validator.dart';
 import 'package:intl/intl.dart';
 
 import '../../../generated/l10n.dart';
-import '../provider/auth.dart';
+import '../../../providers/auth.dart';
 import '../widgets/textformfield_card.dart';
 import '../../../widgets/custom_scaffold.dart';
 

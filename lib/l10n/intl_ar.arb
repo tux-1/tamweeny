@@ -94,5 +94,9 @@
     "confirm": "تأكيد",
     "delete_account": "حذف الحساب",
     "confirm_delete_account": "هل أنت متأكد أنك تريد حذف حسابك؟",
-    "action_cannot_be_undone": "لا يمكن التراجع عن هذا الإجراء."
+    "action_cannot_be_undone": "لا يمكن التراجع عن هذا الإجراء.",
+    "shopping_cart": "عربة المشتريات",
+    "add_more": "أضف المزيد",
+    "checkout": "تنفيذ الطلب",
+    "total_payments": "إجمالى المدفوعات"
 }

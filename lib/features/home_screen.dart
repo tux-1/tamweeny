@@ -10,21 +10,21 @@ import '../widgets/custom_search_bar.dart';
 import '../widgets/offer_item.dart';
 import '../widgets/product_item.dart';
 
-class HomePage extends ConsumerStatefulWidget {
-  const HomePage({super.key, this.scrollController});
+class HomeScreen extends ConsumerStatefulWidget {
+  const HomeScreen({super.key, this.scrollController});
   final ScrollController? scrollController;
 
   @override
-  ConsumerState<HomePage> createState() => _HomePageState();
+  ConsumerState<HomeScreen> createState() => _HomePageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage> {
+class _HomePageState extends ConsumerState<HomeScreen> {
   late ScrollController _controller;
 
   void paginate() {
     ref
         .read(asyncProductsProvider.notifier)
-        .addProducts(ref.read(filtersProvider).mostPopularPaginationIndex)
+        .getNextProducts(ref.read(filtersProvider).mostPopularPaginationIndex)
         .then((value) {
       setState(() {});
     });

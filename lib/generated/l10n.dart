@@ -1009,6 +1009,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Shopping Cart`
+  String get shopping_cart {
+    return Intl.message(
+      'Shopping Cart',
+      name: 'shopping_cart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add More`
+  String get add_more {
+    return Intl.message(
+      'Add More',
+      name: 'add_more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Checkout`
+  String get checkout {
+    return Intl.message(
+      'Checkout',
+      name: 'checkout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Payments`
+  String get total_payments {
+    return Intl.message(
+      'Total Payments',
+      name: 'total_payments',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

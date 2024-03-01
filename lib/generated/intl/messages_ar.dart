@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("معلومات الحساب"),
         "action_cannot_be_undone": MessageLookupByLibrary.simpleMessage(
             "لا يمكن التراجع عن هذا الإجراء."),
+        "add_more": MessageLookupByLibrary.simpleMessage("أضف المزيد"),
         "address": MessageLookupByLibrary.simpleMessage("العنوان"),
         "apply_for_tamween_card":
             MessageLookupByLibrary.simpleMessage("التقديم على بطاقة التموين"),
@@ -54,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "8) لا يتجاوز راتب الموظف 1500 جنيه مصري شهريًا."),
         "category9": MessageLookupByLibrary.simpleMessage(
             "9) المواطنون المصابون بأمراض وعجز مزمنة."),
+        "checkout": MessageLookupByLibrary.simpleMessage("تنفيذ الطلب"),
         "city": MessageLookupByLibrary.simpleMessage("المدينة"),
         "condition1": MessageLookupByLibrary.simpleMessage(
             "1) وفقا لبحث علم الاجتماع ، يجب أن يكون المتقدم للحصول على البطاقة التموينية الجديدة متعلما وعاطلًا عن العمل ولديه دخل شهري بحد أقصى 800 جنيه مصري شهريًا."),
@@ -160,6 +162,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "هناك بعض الأوراق والمستندات المعتمدة من وزارة التموين لبطاقة غذائية جديدة ، ويجب على أخصائي استرجاع البطاقات معرفتها وإعدادها قبل التقديم ، وهذه الأوراق والمستندات هي:"),
         "resume": MessageLookupByLibrary.simpleMessage("متابعة"),
         "search": MessageLookupByLibrary.simpleMessage("بحث"),
+        "shopping_cart": MessageLookupByLibrary.simpleMessage("عربة المشتريات"),
         "signUp": MessageLookupByLibrary.simpleMessage("إنشاء حساب جديد"),
         "sign_out": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
         "single": MessageLookupByLibrary.simpleMessage("أعزب"),
@@ -171,6 +174,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tamween_password":
             MessageLookupByLibrary.simpleMessage("كلمة مرور بطاقة التموين"),
         "telephone_number": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "total_payments":
+            MessageLookupByLibrary.simpleMessage("إجمالى المدفوعات"),
         "unit_price": MessageLookupByLibrary.simpleMessage("سعر الوحدة"),
         "wallet_balance": MessageLookupByLibrary.simpleMessage("رصيد محفظتك"),
         "welcome": MessageLookupByLibrary.simpleMessage("مرحباً بك فى تموينى"),

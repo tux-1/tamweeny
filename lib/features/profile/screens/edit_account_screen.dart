@@ -6,7 +6,7 @@ import 'package:tamweeny/generated/l10n.dart';
 
 import '../../../widgets/custom_scaffold.dart';
 import '../../../widgets/custom_textformfield.dart';
-import '../../authentication/provider/auth.dart';
+import '../../../providers/auth.dart';
 import '../providers/account_info.dart';
 import 'account_information_screen.dart';
 

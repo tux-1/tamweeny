@@ -32,7 +32,7 @@ ThemeData themeData(BuildContext context) {
     scaffoldBackgroundColor: const Color(0xff1E352F),
 
     dialogBackgroundColor: const Color(0xff1E352F),
-    
+
     // Define text theme to control the text color
     textTheme: const TextTheme(
       displayLarge: TextStyle(
@@ -133,7 +133,6 @@ ThemeData themeData(BuildContext context) {
       iconTheme: IconThemeData(color: Colors.orange),
       surfaceTintColor: Colors.transparent,
       centerTitle: true,
-      
       color: Colors.transparent,
     ),
     listTileTheme: ListTileThemeData(

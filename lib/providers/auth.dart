@@ -7,11 +7,11 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tamweeny/providers/products.dart';
 
-import '../../../models/exceptions.dart';
-import '../../../models/user.dart';
+import '../models/exceptions.dart';
+import '../models/user.dart';
 
-import '../../../providers/filters.dart';
-import '../../../utils/token_manager.dart';
+import 'filters.dart';
+import '../utils/token_manager.dart';
 
 final authProvider = Provider<Auth>((ref) => Auth(ref));
 

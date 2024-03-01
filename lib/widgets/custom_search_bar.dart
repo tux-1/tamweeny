@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../features/cart/cart_screen.dart';
 import '../generated/l10n.dart';
 
 class CustomSearchBar extends StatelessWidget {
@@ -14,7 +15,8 @@ class CustomSearchBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width*0.65),
+              constraints: BoxConstraints(
+                  maxWidth: MediaQuery.of(context).size.width * 0.65),
               child: TextField(
                 onTap: () {
                   showSearch(
@@ -47,10 +49,19 @@ class CustomSearchBar extends StatelessWidget {
                 ),
               ),
             ),
-            
             IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.shopping_cart, size: 27, color: Colors.white,)),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => const CartScreen(),
+                    ),
+                  );
+                },
+                icon: const Icon(
+                  Icons.shopping_cart,
+                  size: 27,
+                  color: Colors.white,
+                )),
           ],
         ),
       ),

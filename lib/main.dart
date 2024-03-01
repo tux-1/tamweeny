@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'features/navigation_screen.dart';
+import 'features/navigation_view.dart';
 import 'features/authentication/screens/app_signup_screen.dart';
 import 'features/authentication/screens/tamween_info.dart';
 import 'features/profile/screens/account_information_screen.dart';
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       scrollBehavior: ScrollConfiguration.of(context).copyWith(),
       home: const SplashBody(),
       routes: {
-        NavigationScreen.routeName: (ctx) => const NavigationScreen(),
+        NavigationView.routeName: (ctx) => const NavigationView(),
         SignUpScreen.routeName: (ctx) => const SignUpScreen(),
         TamweenSignUpScreen.routeName: (ctx) => const TamweenSignUpScreen(),
         TamweenInfo.routeName: (ctx) => const TamweenInfo(),

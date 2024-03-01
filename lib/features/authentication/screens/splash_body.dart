@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
-import '../../navigation_screen.dart';
-import '../provider/auth.dart';
+import '../../navigation_view.dart';
+import '../../../providers/auth.dart';
 import 'logIn_screen.dart';
 
 class SplashBody extends ConsumerStatefulWidget {
@@ -24,7 +23,7 @@ class _SplashBodyState extends ConsumerState<SplashBody>
     final navigator = Navigator.of(context);
     await auth.tryAutoLogin();
     if (auth.isAuth) {
-      navigator.pushReplacementNamed(NavigationScreen.routeName);
+      navigator.pushReplacementNamed(NavigationView.routeName);
     } else {
       navigator.pushReplacementNamed(LogInScreen.routeName);
     }
