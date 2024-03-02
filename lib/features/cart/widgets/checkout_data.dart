@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../generated/l10n.dart';
-import '../../../providers/cart.dart';
 
-class CheckoutData extends ConsumerWidget {
-  const CheckoutData({super.key});
+class CheckoutData extends StatelessWidget {
+  final double totalAmount;
+  const CheckoutData({super.key, required this.totalAmount});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return SliverFillRemaining(
       hasScrollBody: false,
       child: Column(
@@ -26,7 +25,7 @@ class CheckoutData extends ConsumerWidget {
                     ?.copyWith(color: const Color(0xffDEA568)),
               ),
               Text(
-                ref.watch(asyncCartProvider.notifier).getTotal().toString(),
+                totalAmount.toString(),
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall
@@ -41,7 +40,9 @@ class CheckoutData extends ConsumerWidget {
               Flexible(
                 fit: FlexFit.tight,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                   child: Text(S.of(context).add_more),
                 ),
               ),

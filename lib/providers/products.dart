@@ -75,6 +75,7 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
       },
     ).then((response) {
       List<Product> myList = state.value ?? [];
+      
       final product = myList.firstWhere((element) => id == element.id);
       final productIndex = myList.indexOf(product);
       myList[productIndex] =

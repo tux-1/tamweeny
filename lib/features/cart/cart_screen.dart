@@ -23,8 +23,13 @@ class CartScreen extends ConsumerWidget {
       body: FutureBuilder(
         future: cartData,
         builder: (context, cartDataSnapshot) {
-          if (cartDataSnapshot.connectionState == ConnectionState.done) {
+          if (cartDataSnapshot.connectionState == ConnectionState.done ||
+              cartDataSnapshot.connectionState == ConnectionState.waiting) {
             final checkoutItems = cartDataSnapshot.data ?? [];
+            double sum = 0;
+            for (var element in checkoutItems) {
+              sum += element.totalPrice;
+            }
             return CustomScrollView(slivers: [
               SliverList.builder(
                 itemCount: checkoutItems.length,
@@ -32,7 +37,7 @@ class CartScreen extends ConsumerWidget {
                   cartItem: checkoutItems[index],
                 ),
               ),
-              const CheckoutData(),
+              CheckoutData(totalAmount: sum),
             ]);
           } else {
             return const Center(child: CircularProgressIndicator());

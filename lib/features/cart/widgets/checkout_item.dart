@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../Models/cart_item.dart';
+import '../../../providers/cart.dart';
 
-class CheckoutItem extends StatelessWidget {
+class CheckoutItem extends ConsumerWidget {
   const CheckoutItem({super.key, required this.cartItem});
   final CartItem cartItem;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Dismissible(
       direction: DismissDirection.startToEnd,
       background: Container(
@@ -43,7 +44,12 @@ class CheckoutItem extends StatelessWidget {
                       spacing: 10,
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            ref.read(asyncCartProvider.notifier).postCartItem(
+                                  productId: cartItem.productId,
+                                  isAdding: true,
+                                );
+                          },
                           icon: const Icon(
                             Icons.add_circle_outline,
                             color: Colors.white,
@@ -56,7 +62,12 @@ class CheckoutItem extends StatelessWidget {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            ref.read(asyncCartProvider.notifier).postCartItem(
+                                  productId: cartItem.productId,
+                                  isAdding: false,
+                                );
+                          },
                           icon: const Icon(
                             Icons.remove_circle_outline,
                             color: Colors.white,

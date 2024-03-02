@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/generated/l10n.dart';
 
+import '../providers/cart.dart';
 import '../providers/product.dart';
 import '../providers/products.dart';
 
@@ -114,7 +115,12 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        ref.read(asyncCartProvider.notifier).postCartItem(
+                              productId: widget.product.id,
+                              isAdding: true,
+                            );
+                      },
                       padding: EdgeInsets.zero,
                       icon: const Icon(Icons.add_box_outlined,
                           color: Colors.white),
