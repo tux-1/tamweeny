@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "action_cannot_be_undone": MessageLookupByLibrary.simpleMessage(
             "لا يمكن التراجع عن هذا الإجراء."),
         "add_more": MessageLookupByLibrary.simpleMessage("أضف المزيد"),
+        "added_to_cart":
+            MessageLookupByLibrary.simpleMessage("تمت الإضافة إلى العربة"),
         "address": MessageLookupByLibrary.simpleMessage("العنوان"),
         "apply_for_tamween_card":
             MessageLookupByLibrary.simpleMessage("التقديم على بطاقة التموين"),

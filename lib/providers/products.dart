@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
+import '../features/profile/providers/favorites.dart';
 import '../utils/token_manager.dart';
 import 'filters.dart';
 import 'product.dart';
@@ -75,13 +76,14 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
       },
     ).then((response) {
       List<Product> myList = state.value ?? [];
-      
+
       final product = myList.firstWhere((element) => id == element.id);
       final productIndex = myList.indexOf(product);
       myList[productIndex] =
           product.copyWith(favoriteStats: !product.favoriteStats);
 
       state = state.copyWithPrevious(AsyncValue.data(myList));
+      ref.invalidate(favoritesProvider);
     });
   }
 }

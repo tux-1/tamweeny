@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "action_cannot_be_undone": MessageLookupByLibrary.simpleMessage(
             "This action cannot be undone."),
         "add_more": MessageLookupByLibrary.simpleMessage("Add More"),
+        "added_to_cart": MessageLookupByLibrary.simpleMessage("Added to Cart"),
         "address": MessageLookupByLibrary.simpleMessage("Address"),
         "apply_for_tamween_card":
             MessageLookupByLibrary.simpleMessage("Apply for Tamween Card"),

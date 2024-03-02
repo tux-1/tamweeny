@@ -116,10 +116,22 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                     ),
                     IconButton(
                       onPressed: () {
-                        ref.read(asyncCartProvider.notifier).postCartItem(
+                        ref
+                            .read(asyncCartProvider.notifier)
+                            .postCartItem(
                               productId: widget.product.id,
                               isAdding: true,
+                            )
+                            .then(
+                          (value) {
+                            ScaffoldMessenger.of(context).clearSnackBars();
+                            return ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(S.of(context).added_to_cart),
+                              ),
                             );
+                          },
+                        );
                       },
                       padding: EdgeInsets.zero,
                       icon: const Icon(Icons.add_box_outlined,
