@@ -99,6 +99,9 @@
     "add_more": "Add More",
     "checkout": "Checkout",
     "total_payments": "Total Payments",
-    "added_to_cart": "Added to Cart"
-    
+    "added_to_cart": "Added to Cart",
+    "order_success": "Order made successfully",
+    "operation_number": "Operation number ",
+    "success": "completed successfully",
+    "date": "Date "
 }

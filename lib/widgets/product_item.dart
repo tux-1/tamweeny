@@ -50,7 +50,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
             ),
           ),
           ColoredBox(
-            color: const Color(0xffDEA568).withOpacity(0.85),
+            color: const Color(0xff609966).withOpacity(0.85),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -139,15 +139,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                     )
                   ],
                 ),
-                Center(
-                  child: Text(
-                    S.of(context).remaining,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(color: const Color(0xff335145)),
-                  ),
-                )
+                
               ],
             ),
           ),

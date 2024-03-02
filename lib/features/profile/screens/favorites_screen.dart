@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tamweeny/generated/l10n.dart';
 import 'package:tamweeny/widgets/custom_scaffold.dart';
 
 import '../../../widgets/product_item.dart';
@@ -13,7 +14,12 @@ class FavoritesScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final favoritesData = ref.watch(favoritesProvider.future);
     return CustomScaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(
+          S.of(context).favorite_products,
+          style: Theme.of(context).textTheme.displaySmall,
+        ),
+      ),
       body: FutureBuilder(
         future: favoritesData,
         builder: (context, snapshot) {

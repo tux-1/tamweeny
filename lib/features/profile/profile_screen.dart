@@ -7,6 +7,7 @@ import '../../generated/l10n.dart';
 import 'providers/account_info.dart';
 import 'screens/account_information_screen.dart';
 import 'screens/favorites_screen.dart';
+import 'screens/orders_history.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -18,38 +19,36 @@ class ProfileScreen extends ConsumerWidget {
       future: userData,
       builder: (context, userDataSnapshot) {
         return ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 18.0),
           physics: const ScrollPhysics(),
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18.0),
-              child: Row(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-                    child: CircleAvatar(
-                      minRadius: 40,
-                      backgroundColor: Colors.grey.shade300,
-                      child: const Icon(
-                        Icons.person,
-                        color: Colors.black,
-                        size: 50,
-                      ),
+            Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                  child: CircleAvatar(
+                    minRadius: 40,
+                    backgroundColor: Colors.grey.shade300,
+                    child: const Icon(
+                      Icons.person,
+                      color: Colors.black,
+                      size: 50,
                     ),
                   ),
-                  const SizedBox(width: 5),
-                  if (userDataSnapshot.data != null)
-                    Text(userDataSnapshot.data!['name']),
-                  const Spacer(),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.settings_outlined,
-                      color: Colors.white,
-                      size: 30,
-                    ),
+                ),
+                const SizedBox(width: 5),
+                if (userDataSnapshot.data != null)
+                  Text(userDataSnapshot.data!['name']),
+                const Spacer(),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.settings_outlined,
+                    color: Colors.white,
+                    size: 30,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             Card(
               elevation: 0,
@@ -70,6 +69,11 @@ class ProfileScreen extends ConsumerWidget {
                   ListTile(
                     leading: const Icon(Icons.history),
                     title: Text(S.of(context).order_history),
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const OrdersHistoryScreen(),
+                      ));
+                    },
                   ),
 
                   // Favorite products

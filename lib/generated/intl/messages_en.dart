@@ -76,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Customer Information"),
         "data_entry_error":
             MessageLookupByLibrary.simpleMessage("Error in entering data"),
+        "date": MessageLookupByLibrary.simpleMessage("Date "),
         "delete_account":
             MessageLookupByLibrary.simpleMessage("Delete Account"),
         "dependents_id_and_birth_certificate":
@@ -129,7 +130,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "offers": MessageLookupByLibrary.simpleMessage("Offers"),
+        "operation_number":
+            MessageLookupByLibrary.simpleMessage("Operation number "),
         "order_history": MessageLookupByLibrary.simpleMessage("Order History"),
+        "order_success":
+            MessageLookupByLibrary.simpleMessage("Order made successfully"),
         "ownCard":
             MessageLookupByLibrary.simpleMessage("Do you own a Tamween card?"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
@@ -172,6 +177,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_out": MessageLookupByLibrary.simpleMessage("Sign Out"),
         "single": MessageLookupByLibrary.simpleMessage("Single"),
         "staySignedIn": MessageLookupByLibrary.simpleMessage("Remember me"),
+        "success":
+            MessageLookupByLibrary.simpleMessage("completed successfully"),
         "tamween_card_information":
             MessageLookupByLibrary.simpleMessage("Tamween Card Information"),
         "tamween_card_number":

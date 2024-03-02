@@ -99,5 +99,9 @@
     "add_more": "أضف المزيد",
     "checkout": "تنفيذ الطلب",
     "total_payments": "إجمالى المدفوعات",
-    "added_to_cart": "تمت الإضافة إلى العربة"
+    "added_to_cart": "تمت الإضافة إلى العربة",
+    "order_success": "تم إجراء الطلب بنجاح",
+    "operation_number": "عملية رقم ",
+    "success": "تمت بنجاح",
+    "date": "التاريخ "
 }

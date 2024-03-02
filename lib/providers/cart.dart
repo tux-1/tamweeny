@@ -110,9 +110,7 @@ class AsyncCartProvider extends AsyncNotifier<List<CartItem>> {
       'Authorization': 'Bearer $token',
       'Accept': 'application/json',
     }).then((value) {
-      ref.invalidate(asyncCartProvider);
+      ref.invalidateSelf();
     });
   }
-
-  
 }

@@ -11,7 +11,7 @@ class CategoryCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
-      color: const Color(0xffDEA568).withOpacity(0.85),
+      color: const Color(0xff609966).withOpacity(0.85),
       margin: const EdgeInsets.all(22),
       clipBehavior: Clip.antiAlias,
       child: InkWell(

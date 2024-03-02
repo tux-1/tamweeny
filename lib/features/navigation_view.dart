@@ -99,7 +99,7 @@ class _NavigationScreenState extends ConsumerState<NavigationView>
           duration: const Duration(milliseconds: 200),
           decoration: BoxDecoration(
             border: Border.all(color: Colors.white),
-            color: const Color(0xffDEA568),
+            color: const Color(0xff609966),
             borderRadius: const BorderRadius.only(
               topRight: Radius.circular(20),
               topLeft: Radius.circular(20),
@@ -134,6 +134,7 @@ class _NavigationScreenState extends ConsumerState<NavigationView>
               ]),
         ),
         body: SafeArea(
+          bottom: false,
           child: TabBarView(
               controller: _tabController,
               physics: const NeverScrollableScrollPhysics(),

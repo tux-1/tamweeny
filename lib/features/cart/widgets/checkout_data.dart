@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../generated/l10n.dart';
+import '../../../providers/cart.dart';
 
-class CheckoutData extends StatelessWidget {
+class CheckoutData extends ConsumerWidget {
   final double totalAmount;
   const CheckoutData({super.key, required this.totalAmount});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SliverFillRemaining(
       hasScrollBody: false,
       child: Column(
@@ -50,7 +52,18 @@ class CheckoutData extends StatelessWidget {
               Flexible(
                 fit: FlexFit.tight,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ref
+                        .read(asyncCartProvider.notifier)
+                        .createOrder()
+                        .then((value) {
+                      return ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(S.of(context).order_success),
+                        ),
+                      );
+                    });
+                  },
                   child: Text(S.of(context).checkout),
                 ),
               ),

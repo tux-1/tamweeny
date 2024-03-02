@@ -1059,6 +1059,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Order made successfully`
+  String get order_success {
+    return Intl.message(
+      'Order made successfully',
+      name: 'order_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Operation number `
+  String get operation_number {
+    return Intl.message(
+      'Operation number ',
+      name: 'operation_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `completed successfully`
+  String get success {
+    return Intl.message(
+      'completed successfully',
+      name: 'success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date `
+  String get date {
+    return Intl.message(
+      'Date ',
+      name: 'date',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

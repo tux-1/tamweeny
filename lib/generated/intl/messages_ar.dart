@@ -76,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("معلومات عن العميل"),
         "data_entry_error":
             MessageLookupByLibrary.simpleMessage("خطأ في إدخال البيانات"),
+        "date": MessageLookupByLibrary.simpleMessage("التاريخ "),
         "delete_account": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
         "dependents_id_and_birth_certificate":
             MessageLookupByLibrary.simpleMessage(
@@ -126,7 +127,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "noAccount": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
         "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
         "offers": MessageLookupByLibrary.simpleMessage("العروض"),
+        "operation_number": MessageLookupByLibrary.simpleMessage("عملية رقم "),
         "order_history": MessageLookupByLibrary.simpleMessage("سجل الطلبات"),
+        "order_success":
+            MessageLookupByLibrary.simpleMessage("تم إجراء الطلب بنجاح"),
         "ownCard":
             MessageLookupByLibrary.simpleMessage("هل تمتلك بطاقة تموين؟"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة السر"),
@@ -169,6 +173,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_out": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
         "single": MessageLookupByLibrary.simpleMessage("أعزب"),
         "staySignedIn": MessageLookupByLibrary.simpleMessage("تذكرني"),
+        "success": MessageLookupByLibrary.simpleMessage("تمت بنجاح"),
         "tamween_card_information":
             MessageLookupByLibrary.simpleMessage("معلومات عن بطاقة التموين"),
         "tamween_card_number":
