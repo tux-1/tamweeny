@@ -23,6 +23,7 @@ class CustomScaffold extends StatelessWidget {
   final Widget? bottomNavigationBar;
   final bool fadeBackground;
   final Color? backgroundColor;
+  final bool showLogo;
 
   const CustomScaffold({
     Key? key,
@@ -44,6 +45,7 @@ class CustomScaffold extends StatelessWidget {
     this.drawerEdgeDragWidth,
     this.bottomNavigationBar,
     this.fadeBackground = true,
+    this.showLogo = true,
   }) : super(key: key);
 
   @override
@@ -66,6 +68,7 @@ class CustomScaffold extends StatelessWidget {
       drawerEdgeDragWidth: drawerEdgeDragWidth,
       body: Stack(
         children: [
+          if(showLogo)
           Container(
             alignment: Alignment.topCenter,
             padding: EdgeInsets.only(

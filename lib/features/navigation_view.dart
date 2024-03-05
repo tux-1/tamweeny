@@ -92,6 +92,7 @@ class _NavigationScreenState extends ConsumerState<NavigationView>
         }
       },
       child: CustomScaffold(
+        showLogo: _tabController.index == 0 ? true : false,
         extendBody: true,
         bottomNavigationBar: AnimatedContainer(
           width: double.infinity,

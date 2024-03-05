@@ -103,7 +103,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
               scrollDirection: Axis.horizontal,
               itemCount: products.length,
               itemBuilder: (context, index) {
-                return OfferItem();
+                return const OfferItem();
               },
             ),
           ),

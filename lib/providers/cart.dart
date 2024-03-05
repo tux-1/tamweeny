@@ -91,6 +91,9 @@ class AsyncCartProvider extends AsyncNotifier<List<CartItem>> {
           quantity: product.quantity - 1,
           totalPrice: product.totalPrice - product.sellingPrice,
         );
+        if (newCartList[productIndex].quantity == 0) {
+          newCartList.removeAt(productIndex);
+        }
         state = state.copyWithPrevious(
           AsyncValue.data(newCartList),
           isRefresh: true,
