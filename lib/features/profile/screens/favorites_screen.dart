@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/generated/l10n.dart';
-import 'package:tamweeny/widgets/custom_scaffold.dart';
 
 import '../../../widgets/product_item.dart';
 import '../providers/favorites.dart';
@@ -13,7 +12,7 @@ class FavoritesScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final favoritesData = ref.watch(favoritesProvider.future);
-    return CustomScaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text(
           S.of(context).favorite_products,
@@ -25,7 +24,12 @@ class FavoritesScreen extends ConsumerWidget {
         builder: (context, snapshot) {
           final favorites = snapshot.data ?? [];
           return GridView.builder(
-            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+            padding: const EdgeInsets.only(
+              left: 20,
+              right: 20,
+              bottom: 20,
+              top: 15,
+            ),
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               childAspectRatio: 0.7,
               crossAxisSpacing: 20,

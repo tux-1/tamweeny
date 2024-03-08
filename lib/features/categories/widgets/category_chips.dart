@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../model/category.dart';
-import '../providers/categories_provider.dart';
+import '../../../Models/category.dart';
+import '../../../providers/categories.dart';
+import '../../../providers/category_products.dart';
 import '../../../providers/filters.dart';
 
 class CategoryChips extends ConsumerStatefulWidget {
-  CategoryChips({super.key});
+  const CategoryChips({super.key});
 
   @override
   ConsumerState<CategoryChips> createState() => _CategoryChipsState();
@@ -32,8 +34,8 @@ class _CategoryChipsState extends ConsumerState<CategoryChips> {
     chosenCategory = ref.watch(filtersProvider).chosenCategory;
     final categories = ref.watch(categoriesFutureProvider).value ?? [];
     return Container(
-        height: 60,
-        padding: const EdgeInsets.symmetric(vertical: 12.0),
+        margin: const EdgeInsets.symmetric(vertical: 15),
+        height: 80,
         child: ListView.builder(
           controller: _scrollController,
           physics: const BouncingScrollPhysics(),
@@ -41,31 +43,49 @@ class _CategoryChipsState extends ConsumerState<CategoryChips> {
           itemCount: categories.length,
           itemBuilder: (context, index) {
             final category = categories[index];
-            return Card(
-              color: const Color(0xff335145),
+            return Container(
+              width: 75,
+              decoration: const BoxDecoration(),
               margin: const EdgeInsets.symmetric(horizontal: 5),
-              elevation: 0,
               clipBehavior: Clip.antiAlias,
-              child: InkWell(
+              child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    ref.read(filtersProvider).chosenCategory = category;
+                    ref.read(filtersProvider).setCategory(category);
                     ref.read(filtersProvider).scrollPosition =
                         _scrollController.position.pixels;
-                    ref.read(filtersProvider).tabController?.animateTo(2);
+                    ref.read(filtersProvider).tabController?.index = 2;
                   });
+                  ref
+                      .read(asyncCategoryItemsProvider.notifier)
+                      .getCategoryProducts(category.categoryName);
                 },
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
-                  child: Text(
-                    category.categoryName,
-                    maxLines: 1,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: chosenCategory == category
-                            ? const Color(0xffDEA568)
-                            : null),
-                  ),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        clipBehavior: Clip.antiAlias,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Image.network(
+                          category.categoryIcon,
+                          fit: BoxFit.scaleDown,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      category.categoryName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: chosenCategory == category
+                                ? const Color(0xffDEA568)
+                                : null,
+                          ),
+                    ),
+                  ],
                 ),
               ),
             );

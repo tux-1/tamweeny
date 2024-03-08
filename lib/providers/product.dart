@@ -32,7 +32,7 @@ class Product {
       productType: json['productType'],
       id: json['id'],
       productName: json['productName'].toString(),
-      productImage: '',
+      productImage: json['productImage'].toString(),
       description: json['description'].toString(),
       stockQuantity: json['stockQuantity'],
       pointsPrice: double.parse(json['pointsPrice']),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../providers/category_products.dart';
 import '../../../providers/filters.dart';
-import '../model/category.dart';
+import '../../../Models/category.dart';
 
 class CategoryCard extends ConsumerWidget {
   final Category category;
@@ -19,9 +20,22 @@ class CategoryCard extends ConsumerWidget {
       child: InkWell(
         onTap: () {
           ref.read(filtersProvider).setCategory(category);
+          ref
+              .read(asyncCategoryItemsProvider.notifier)
+              .getCategoryProducts(category.categoryName);
         },
         child: Stack(
           children: [
+            SizedBox.expand(
+              child: Image.network(
+                category.categoryImage,
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) {
+                  return const SizedBox();
+                },
+                
+              ),
+            ),
             const SizedBox.expand(
               child: ColoredBox(
                 color: Color.fromARGB(78, 0, 0, 0),

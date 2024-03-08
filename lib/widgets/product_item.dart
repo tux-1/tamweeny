@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/generated/l10n.dart';
 
 import '../providers/cart.dart';
 import '../providers/product.dart';
 import '../providers/products.dart';
+import '../utils/lang.dart';
 
 class ProductItem extends ConsumerStatefulWidget {
   final Product product;
@@ -31,10 +33,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
               color: Colors.white,
               child: SizedBox.expand(
                 child: Image.network(
-                  product.productName == 'ابو مهنود معلب'
-                      ? 'https://cdn.discordapp.com/attachments/1080145698370113558/1209456873649078272/Mahnood.png?ex=65e6fd7d&is=65d4887d&hm=d644d0ecf864b3e7e2412eedb91cda7aadd4665cb964b81fae5b6f7af95e0829&'
-                      : 'https://media.istockphoto.com/id/153737841/photo/rice.jpg?s=612x612&w=0&k=20&c=lfO7iLT0UsDDzra0uBOsN1rvr2d5OEtrG2uwbts33_c=',
-                  // product.productImage,
+                  product.productImage,
                   fit: BoxFit.cover,
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
@@ -119,10 +118,16 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                       ),
                     ),
                     DecoratedBox(
-                      decoration: const BoxDecoration(
-                        color: Color(0xffE4EFCD),
-                        borderRadius:
-                            BorderRadius.only(topRight: Radius.circular(22)),
+                      decoration: BoxDecoration(
+                        color: const Color(0xffE4EFCD),
+                        borderRadius: BorderRadius.only(
+                          topRight: Language.isArabic()
+                              ? const Radius.circular(22)
+                              : Radius.zero,
+                          topLeft: Language.isArabic()
+                              ? Radius.zero
+                              : const Radius.circular(22),
+                        ),
                       ),
                       child: IconButton(
                         onPressed: () {
@@ -157,6 +162,6 @@ class _ProductItemState extends ConsumerState<ProductItem> {
           ),
         ],
       ),
-    );
+    ).animate().fadeIn(curve: Curves.easeIn, delay: Durations.short1);
   }
 }

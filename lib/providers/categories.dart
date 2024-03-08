@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
 
-import '../model/category.dart';
-import '../../../utils/token_manager.dart';
+import '../Models/category.dart';
+import '../utils/token_manager.dart';
 
 final categoriesFutureProvider = FutureProvider<List<Category>>((ref) async {
   const String categoriesApi = 'http://10.0.2.2:8000/api/categories';

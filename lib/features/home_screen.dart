@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/generated/l10n.dart';
 
-import 'categories/providers/categories_provider.dart';
+import '../providers/categories.dart';
 import '../providers/filters.dart';
 import '../providers/products.dart';
 import 'categories/widgets/category_chips.dart';
