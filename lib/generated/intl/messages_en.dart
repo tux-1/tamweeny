@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "birth_date": MessageLookupByLibrary.simpleMessage("Birth Date"),
         "building_number_street_name":
             MessageLookupByLibrary.simpleMessage("Building Number/Street Name"),
+        "categories": MessageLookupByLibrary.simpleMessage("Categories"),
         "categoriesList": MessageLookupByLibrary.simpleMessage(
             "There are several categories deserving of the new food card, and these are the following:"),
         "category1": MessageLookupByLibrary.simpleMessage(
@@ -99,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("E-Mail"),
         "favorite_products":
             MessageLookupByLibrary.simpleMessage("Favorite Products"),
+        "favorites": MessageLookupByLibrary.simpleMessage("Favorites"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "foodCardConditions": MessageLookupByLibrary.simpleMessage(
             "Conditions for Obtaining a New Food Card:"),
@@ -106,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "gender": MessageLookupByLibrary.simpleMessage("Gender"),
         "get_help": MessageLookupByLibrary.simpleMessage("Get Help"),
+        "home": MessageLookupByLibrary.simpleMessage("Home"),
         "id_and_birth_certificate":
             MessageLookupByLibrary.simpleMessage("ID and Birth Certificate"),
         "logIn": MessageLookupByLibrary.simpleMessage("Log in"),
@@ -154,6 +157,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "3) Wait until the card is received."),
         "proceduresForNewCard": MessageLookupByLibrary.simpleMessage(
             "Procedures at the Office to Obtain a New Card:"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "recommended_foods":
             MessageLookupByLibrary.simpleMessage("Recommended Foods"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),

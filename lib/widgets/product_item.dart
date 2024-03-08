@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/generated/l10n.dart';
 
@@ -20,7 +21,8 @@ class _ProductItemState extends ConsumerState<ProductItem> {
     final productData = Provider<Product>((ref) => widget.product);
     final product = ref.watch(productData);
     return ClipRRect(
-      borderRadius: BorderRadius.circular(15),
+      borderRadius: BorderRadius.circular(22),
+      clipBehavior: Clip.antiAlias,
       child: Column(
         children: [
           Flexible(
@@ -50,7 +52,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
             ),
           ),
           ColoredBox(
-            color: const Color(0xff609966).withOpacity(0.85),
+            color: const Color(0xff345E37),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -86,7 +88,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                       icon: product.favoriteStats
                           ? const Icon(
                               Icons.favorite,
-                              color: Colors.red,
+                              color: Color(0xffFF0000),
                             )
                           : const Icon(
                               Icons.favorite_border,
@@ -111,35 +113,45 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                               .textTheme
                               .bodyMedium!
                               .copyWith(fontWeight: FontWeight.bold),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        ref
-                            .read(asyncCartProvider.notifier)
-                            .postCartItem(
-                              productId: widget.product.id,
-                              isAdding: true,
-                            )
-                            .then(
-                          (value) {
-                            ScaffoldMessenger.of(context).clearSnackBars();
-                            return ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(S.of(context).added_to_cart),
-                              ),
-                            );
-                          },
-                        );
-                      },
-                      padding: EdgeInsets.zero,
-                      icon: const Icon(Icons.add_box_outlined,
-                          color: Colors.white),
+                    DecoratedBox(
+                      decoration: const BoxDecoration(
+                        color: Color(0xffE4EFCD),
+                        borderRadius:
+                            BorderRadius.only(topRight: Radius.circular(22)),
+                      ),
+                      child: IconButton(
+                        onPressed: () {
+                          ref
+                              .read(asyncCartProvider.notifier)
+                              .postCartItem(
+                                productId: widget.product.id,
+                                isAdding: true,
+                              )
+                              .then(
+                            (value) {
+                              ScaffoldMessenger.of(context).clearSnackBars();
+                              return ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(S.of(context).added_to_cart),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        padding: EdgeInsets.zero,
+                        icon: const Icon(
+                          Icons.add_circle_outline_outlined,
+                          color: Colors.black,
+                        ),
+                      ),
                     )
                   ],
                 ),
-                
               ],
             ),
           ),

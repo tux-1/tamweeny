@@ -52,7 +52,7 @@ class CustomScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: backgroundColor ?? const Color(0xff1E352F),
       bottomNavigationBar: bottomNavigationBar,
       appBar: appBar,
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
@@ -68,22 +68,22 @@ class CustomScaffold extends StatelessWidget {
       drawerEdgeDragWidth: drawerEdgeDragWidth,
       body: Stack(
         children: [
-          if(showLogo)
-          Container(
-            alignment: Alignment.topCenter,
-            padding: EdgeInsets.only(
-              top: deviceSize.height / 10,
-              left: 20,
-              right: 20,
-            ),
-            child: Opacity(
-              opacity: 0.4,
-              child: Image.asset(
-                'assets/images/Logo.png',
-                fit: BoxFit.cover,
+          if (showLogo)
+            Container(
+              alignment: Alignment.topCenter,
+              padding: EdgeInsets.only(
+                top: deviceSize.height / 10,
+                left: 20,
+                right: 20,
+              ),
+              child: Opacity(
+                opacity: 0.4,
+                child: Image.asset(
+                  'assets/images/Logo.png',
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
           if (fadeBackground)
             BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 2.5, sigmaY: 2.5),

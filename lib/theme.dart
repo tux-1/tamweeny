@@ -20,16 +20,15 @@ const Map<int, Color> kColorMap = {
 ThemeData themeData(BuildContext context) {
   return ThemeData(
     // Define the accent color used for icons, n stuff
-    colorScheme: ColorScheme.fromSwatch(
-      primarySwatch: const MaterialColor(0x335145, kColorMap),
-      accentColor: const Color(0xffDEA568),
-      // backgroundColor: const Color(0xFF335145),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: const Color(0xff345E37),
+      
     ),
 
     fontFamily: GoogleFonts.lateef().fontFamily,
 
     // Define the background color of the app
-    scaffoldBackgroundColor: const Color(0xff1E352F),
+    scaffoldBackgroundColor: const Color(0xFF1E1E1E),
 
     dialogBackgroundColor: const Color(0xff1E352F),
 

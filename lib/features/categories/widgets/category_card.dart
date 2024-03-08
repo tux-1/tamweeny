@@ -11,24 +11,35 @@ class CategoryCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
-      color: const Color(0xff609966).withOpacity(0.85),
-      margin: const EdgeInsets.all(22),
+      color: const Color(0xff345E37),
+      margin: const EdgeInsets.all(13),
+      elevation: 6,
+      shadowColor: const Color(0xff70B5FF).withOpacity(0.3),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: () {
           ref.read(filtersProvider).setCategory(category);
         },
-        child: Column(
+        child: Stack(
           children: [
-            const Expanded(child: Placeholder()),
-            Text(
-              category.categoryName,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context)
-                  .textTheme
-                  .displayMedium!
-                  .copyWith(fontWeight: FontWeight.bold),
+            const SizedBox.expand(
+              child: ColoredBox(
+                color: Color.fromARGB(78, 0, 0, 0),
+              ),
+            ),
+            Positioned(
+              child: Center(
+                child: Text(
+                  category.categoryName,
+                  maxLines: 2,
+                  textWidthBasis: TextWidthBasis.longestLine,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displayMedium!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
           ],
         ),

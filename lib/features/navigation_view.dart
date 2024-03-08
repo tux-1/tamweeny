@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ionicons/ionicons.dart';
 
 import '../providers/filters.dart';
-import '../widgets/custom_scaffold.dart';
 import 'categories/categories_screen.dart';
 import 'home_screen.dart';
 import 'locations/locations_screen.dart';
@@ -67,6 +67,18 @@ class _NavigationScreenState extends ConsumerState<NavigationView>
 
   @override
   Widget build(BuildContext context) {
+    const tabDecoratedBox = DecoratedBox(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Color(0xFF70B5FF),
+            blurRadius: 15,
+            offset: Offset(0, -25),
+            spreadRadius: -8,
+          )
+        ],
+      ),
+    );
     return PopScope(
       canPop: canPop,
       onPopInvoked: (didPop) {
@@ -91,48 +103,73 @@ class _NavigationScreenState extends ConsumerState<NavigationView>
           });
         }
       },
-      child: CustomScaffold(
-        showLogo: _tabController.index == 0 ? true : false,
+      child: Scaffold(
+        backgroundColor: const Color(0xff1E1E1E),
+        // showLogo: _tabController.index == 0 ? true : false,
         extendBody: true,
-        bottomNavigationBar: AnimatedContainer(
-          width: double.infinity,
-          height: _isVisible ? 50 : 0,
+        bottomNavigationBar: AnimatedSize(
           duration: const Duration(milliseconds: 200),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.white),
-            color: const Color(0xff609966),
-            borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(20),
-              topLeft: Radius.circular(20),
+          child: Container(
+            clipBehavior: Clip.antiAlias,
+            height: _isVisible ? null : 0,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              color: Color(0xff1E1E1E),
             ),
+            child: TabBar(
+                dividerColor: Colors.transparent,
+                indicatorColor:
+                    _isVisible ? const Color(0xff61BC84) : Colors.transparent,
+                labelColor: const Color(0xff61BC84), //Selected icon color
+                unselectedLabelColor: Colors.white,
+                controller: _tabController,
+                onTap: (newIndex) {
+                  previousIndex = _tabController.previousIndex;
+                  if (newIndex != 3) {
+                    setState(() {
+                      canPop = false;
+                    });
+                  } else {
+                    setState(() {});
+                  }
+                },
+                padding: EdgeInsets.zero,
+                labelPadding: EdgeInsets.zero,
+                indicatorPadding: EdgeInsets.zero,
+                tabs: [
+                  // Profile Screen
+                  Tab(
+                    icon: const Icon(Ionicons.person_outline),
+                    iconMargin: EdgeInsets.zero,
+                    height: 55,
+                    child: _tabController.index == 0 ? tabDecoratedBox : null,
+                  ),
+
+                  // Locations screen
+                  Tab(
+                    icon: const Icon(Ionicons.location_outline, size: 27),
+                    iconMargin: EdgeInsets.zero,
+                    height: 55,
+                    child: _tabController.index == 1 ? tabDecoratedBox : null,
+                  ),
+
+                  // Categories screen
+                  Tab(
+                    icon: const Icon(Ionicons.fast_food_outline, size: 27),
+                    iconMargin: EdgeInsets.zero,
+                    height: 55,
+                    child: _tabController.index == 2 ? tabDecoratedBox : null,
+                  ),
+
+                  // HomePage
+                  Tab(
+                    icon: const Icon(Ionicons.home_outline, size: 27),
+                    iconMargin: EdgeInsets.zero,
+                    height: 55,
+                    child: _tabController.index == 3 ? tabDecoratedBox : null,
+                  ),
+                ]),
           ),
-          child: TabBar(
-              dividerColor: Colors.transparent,
-              indicatorColor: _isVisible ? Colors.black : Colors.transparent,
-              labelColor: Colors.black, //Selected icon color
-              unselectedLabelColor: Colors.white,
-              controller: _tabController,
-              onTap: (newIndex) {
-                previousIndex = _tabController.previousIndex;
-                if (newIndex != 3) {
-                  setState(() {
-                    canPop = false;
-                  });
-                }
-              },
-              tabs: const [
-                // Profile Screen
-                Tab(icon: Icon(Icons.person, size: 27)),
-
-                // Locations screen
-                Tab(icon: Icon(Icons.location_on, size: 27)),
-
-                // Categories screen
-                Tab(icon: Icon(Icons.shopping_bag_rounded, size: 27)),
-
-                // HomePage
-                Tab(icon: Icon(Icons.home, size: 27)),
-              ]),
         ),
         body: SafeArea(
           bottom: false,

@@ -20,7 +20,8 @@ final ordersHistoryProvider = FutureProvider.autoDispose<List<HistoryOrder>>(
         'Accept': 'application/json',
       },
     );
-    final historyData = jsonDecode(response.body)[0] as List<dynamic>;
+
+    final historyData = jsonDecode(response.body) as List<dynamic>;
 
     for (final item in historyData) {
       items.add(HistoryOrder.fromJson(item));

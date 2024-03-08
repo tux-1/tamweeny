@@ -103,5 +103,9 @@
     "order_success": "تم إجراء الطلب بنجاح",
     "operation_number": "عملية رقم ",
     "success": "تمت بنجاح",
-    "date": "التاريخ "
+    "date": "التاريخ ",
+    "home": "الصفحة الرئيسية",
+    "categories": "الفئات",
+    "favorites": "المفضلة",
+    "profile": "الملف الشخصي"
 }

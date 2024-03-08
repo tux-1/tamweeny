@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 
 import '../features/cart/cart_screen.dart';
 import '../generated/l10n.dart';
@@ -10,58 +11,67 @@ class CustomSearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width * 0.65),
-              child: TextField(
-                onTap: () {
-                  showSearch(
-                    context: context,
-                    delegate:
-                        CustomSearchDelegate(hintText: S.of(context).search),
-                  );
-                },
-                readOnly: true,
-                decoration: InputDecoration(
-                  hintText: S.of(context).search,
-                  hintStyle: Theme.of(context).textTheme.headlineMedium,
-                  contentPadding: EdgeInsets.zero,
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.white)),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.white)),
-                  disabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.white)),
-                  prefixIcon: const Icon(
-                    Icons.search,
-                    color: Colors.white,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
+            Expanded(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(11),
+                    color: const Color(0xff2D2D2D)),
+                child: TextField(
+                  onTap: () {
+                    showSearch(
+                      context: context,
+                      delegate:
+                          CustomSearchDelegate(hintText: S.of(context).search),
+                    );
+                  },
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    fillColor: const Color(0xff2D2D2D),
+                    hintText: S.of(context).search,
+                    hintStyle: Theme.of(context).textTheme.headlineMedium,
+                    contentPadding: EdgeInsets.zero,
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                    disabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                    prefixIcon: const Icon(
+                      Ionicons.search,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
             ),
-            IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const CartScreen(),
-                    ),
-                  );
-                },
-                icon: const Icon(
-                  Icons.shopping_cart,
-                  size: 27,
-                  color: Colors.white,
-                )),
+            const SizedBox(
+              width: 15,
+            ),
+            DecoratedBox(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(11),
+                  color: const Color(0xff2D2D2D)),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) => const CartScreen(),
+                      ),
+                    );
+                  },
+                  icon: const Icon(
+                    Ionicons.cart,
+                    size: 27,
+                    color: Colors.white,
+                  )),
+            ),
           ],
         ),
       ),

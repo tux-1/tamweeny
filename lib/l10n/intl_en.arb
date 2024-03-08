@@ -103,5 +103,9 @@
     "order_success": "Order made successfully",
     "operation_number": "Operation number ",
     "success": "completed successfully",
-    "date": "Date "
+    "date": "Date ",
+    "home": "Home",
+    "categories": "Categories",
+    "favorites": "Favorites",
+    "profile": "Profile"
 }

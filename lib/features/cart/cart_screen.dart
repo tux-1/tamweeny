@@ -4,7 +4,6 @@ import 'package:tamweeny/features/cart/widgets/checkout_item.dart';
 import 'package:tamweeny/generated/l10n.dart';
 
 import '../../providers/cart.dart';
-import '../../widgets/custom_scaffold.dart';
 import 'widgets/checkout_data.dart';
 
 class CartScreen extends ConsumerWidget {
@@ -13,7 +12,8 @@ class CartScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cartData = ref.watch(asyncCartProvider.future);
-    return CustomScaffold(
+    return Scaffold(
+      // backgroundColor: ,
       appBar: AppBar(
         title: Text(
           S.of(context).shopping_cart,

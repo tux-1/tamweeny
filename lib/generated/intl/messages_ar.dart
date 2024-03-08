@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "birth_date": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
         "building_number_street_name":
             MessageLookupByLibrary.simpleMessage("رقم المبنى / اسم الشارع"),
+        "categories": MessageLookupByLibrary.simpleMessage("الفئات"),
         "categoriesList": MessageLookupByLibrary.simpleMessage(
             "هناك عدة فئات تستحق أن تصدر البطاقة التموينية الجديدة ، وهذه هي الفئات التالية:"),
         "category1": MessageLookupByLibrary.simpleMessage(
@@ -98,6 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكتروني"),
         "favorite_products":
             MessageLookupByLibrary.simpleMessage("المنتجات المفضلة"),
+        "favorites": MessageLookupByLibrary.simpleMessage("المفضلة"),
         "female": MessageLookupByLibrary.simpleMessage("أنثى"),
         "foodCardConditions": MessageLookupByLibrary.simpleMessage(
             "شروط الحصول على بطاقة طعام جديدة:"),
@@ -105,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("هل نسيت كلمة السر؟"),
         "gender": MessageLookupByLibrary.simpleMessage("النوع"),
         "get_help": MessageLookupByLibrary.simpleMessage("احصل على المساعدة"),
+        "home": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
         "id_and_birth_certificate":
             MessageLookupByLibrary.simpleMessage("بطاقة الهوية وشهادة الميلاد"),
         "logIn": MessageLookupByLibrary.simpleMessage("تسجيل دخول"),
@@ -150,6 +153,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "3) انتظر حتى يتم استلام البطاقة."),
         "proceduresForNewCard": MessageLookupByLibrary.simpleMessage(
             "إجراءات المكتب للحصول على بطاقة جديدة:"),
+        "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
         "recommended_foods":
             MessageLookupByLibrary.simpleMessage("الأغذية المقترحة"),
         "register": MessageLookupByLibrary.simpleMessage("تسجيل"),

@@ -22,17 +22,20 @@ class CategoriesScreen extends ConsumerWidget {
       slivers: chosenCategory == null
           ? [
               const CustomSearchBar(),
-              SliverGrid.builder(
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 500,
-                  childAspectRatio: 1.2,
+              SliverPadding(
+                padding: const EdgeInsets.only(top: 11),
+                sliver: SliverGrid.builder(
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 300,
+                    childAspectRatio: 0.75,
+                  ),
+                  itemCount: categories.length,
+                  itemBuilder: (context, index) {
+                    return CategoryCard(
+                      category: categories[index],
+                    );
+                  },
                 ),
-                itemCount: categories.length,
-                itemBuilder: (context, index) {
-                  return CategoryCard(
-                    category: categories[index],
-                  );
-                },
               ),
             ]
           : [
