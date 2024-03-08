@@ -77,28 +77,33 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
     ).then((response) {
       List<Product> myList = state.value ?? [];
 
-      final product = myList.firstWhere(
-        (element) => id == element.id,
-        orElse: () => Product(
-            pointsPrice: -1,
-            storeId: -1,
-            categoryId: -1,
-            productType: -1,
-            id: -1,
-            productName: '-1',
-            sellingPrice: -1,
-            productImage: '-1',
-            description: '-1',
-            stockQuantity: -1,
-            favoriteStats: false),
-      );
-      final productIndex = myList.indexOf(product);
+      if (myList.any((element) => element.id == id)) {
+        final product = myList.firstWhere(
+          (element) => id == element.id,
+          orElse: () => Product(
+              pointsPrice: -1,
+              storeId: -1,
+              categoryId: -1,
+              productType: -1,
+              id: -1,
+              productName: '-1',
+              sellingPrice: -1,
+              productImage: '-1',
+              description: '-1',
+              stockQuantity: -1,
+              favoriteStats: false),
+        );
+        final productIndex = myList.indexOf(product);
 
-      if (productIndex != -1 && product.id != -1) {
-        myList[productIndex] =
-            product.copyWith(favoriteStats: !product.favoriteStats);
+        if (productIndex != -1 && product.id != -1) {
+          myList[productIndex] = product.copyWith(
+            favoriteStats: !product.favoriteStats,
+          );
 
-        state = state.copyWithPrevious(AsyncValue.data(myList));
+          state = state.copyWithPrevious(AsyncValue.data(myList));
+          ref.invalidate(favoritesProvider);
+        }
+      } else {
         ref.invalidate(favoritesProvider);
       }
     });

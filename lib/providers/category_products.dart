@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../utils/token_manager.dart';
+
 import 'product.dart';
 
 final asyncCategoryItemsProvider =
@@ -15,6 +16,7 @@ final asyncCategoryItemsProvider =
 class AsyncCategoryProducts extends AsyncNotifier<List<Product>> {
   @override
   Future<List<Product>> build() {
+    
     return Future.value(List<Product>.empty());
   }
 
@@ -37,5 +39,6 @@ class AsyncCategoryProducts extends AsyncNotifier<List<Product>> {
       items.add(Product.fromJson(element));
     }
     state = AsyncValue.data(items);
+    
   }
 }

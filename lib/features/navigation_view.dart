@@ -95,9 +95,11 @@ class _NavigationScreenState extends ConsumerState<NavigationView>
 
         if (previousIndex == null) {
           _tabController.animateTo(3);
+          setState(() {});
         } else if (previousIndex != null) {
           _tabController.animateTo(previousIndex!);
           previousIndex = null;
+          setState(() {});
         }
 
         if (_tabController.index == 3) {
@@ -108,7 +110,6 @@ class _NavigationScreenState extends ConsumerState<NavigationView>
       },
       child: Scaffold(
         backgroundColor: const Color(0xff1E1E1E),
-        // showLogo: _tabController.index == 0 ? true : false,
         extendBody: true,
         bottomNavigationBar: AnimatedSize(
           duration: const Duration(milliseconds: 200),
@@ -154,7 +155,7 @@ class _NavigationScreenState extends ConsumerState<NavigationView>
                       ? tabDecoratedBox
                       : null,
                 ),
-            
+
                 // Locations screen
                 Tab(
                   icon: const Icon(Ionicons.location_outline, size: 27),
@@ -164,7 +165,7 @@ class _NavigationScreenState extends ConsumerState<NavigationView>
                       ? tabDecoratedBox
                       : null,
                 ),
-            
+
                 // Categories screen
                 Tab(
                   icon: const Icon(Ionicons.fast_food_outline, size: 27),
@@ -174,7 +175,7 @@ class _NavigationScreenState extends ConsumerState<NavigationView>
                       ? tabDecoratedBox
                       : null,
                 ),
-            
+
                 // HomePage
                 Tab(
                   icon: const Icon(Ionicons.home_outline, size: 27),

@@ -20,8 +20,7 @@ class ProductItem extends ConsumerStatefulWidget {
 class _ProductItemState extends ConsumerState<ProductItem> {
   @override
   Widget build(BuildContext context) {
-    final productData = Provider<Product>((ref) => widget.product);
-    final product = ref.watch(productData);
+    
     return ClipRRect(
       borderRadius: BorderRadius.circular(22),
       clipBehavior: Clip.antiAlias,
@@ -33,7 +32,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
               color: Colors.white,
               child: SizedBox.expand(
                 child: Image.network(
-                  product.productImage,
+                  widget.product.productImage,
                   fit: BoxFit.cover,
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
@@ -66,7 +65,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                           vertical: 0,
                         ),
                         child: Text(
-                          product.productName,
+                          widget.product.productName,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
@@ -81,10 +80,10 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                       onPressed: () {
                         ref
                             .read(asyncProductsProvider.notifier)
-                            .toggleFavoriteStatus(product.id);
+                            .toggleFavoriteStatus(widget.product.id);
                       },
                       padding: EdgeInsets.zero,
-                      icon: product.favoriteStats
+                      icon: widget.product.favoriteStats
                           ? const Icon(
                               Icons.favorite,
                               color: Color(0xffFF0000),
@@ -107,7 +106,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                           vertical: 0,
                         ),
                         child: Text(
-                          '${S.of(context).unit_price} ${product.sellingPrice.toString()}',
+                          '${S.of(context).unit_price} ${widget.product.sellingPrice.toString()}',
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!
