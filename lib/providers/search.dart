@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:tamweeny/providers/filters.dart';
 
 import '../utils/token_manager.dart';
-import 'product.dart';
+import '../Models/product.dart';
 
 final searchProvider = FutureProvider<List<Product>>(
   (ref) async {
@@ -21,13 +21,12 @@ final searchProvider = FutureProvider<List<Product>>(
       'Authorization': 'Bearer $token',
       'Accept': 'application/json',
     });
-    print('here1');
-    print(response.body);
+    
     final resultsData = jsonDecode(response.body) as List<dynamic>;
-    print('here2');
+    
     for (final result in resultsData) {
       items.add(Product.fromJson(result));
-      print(result);
+      
     }
 
     return items;

@@ -7,7 +7,7 @@ import 'package:tamweeny/providers/filters.dart';
 
 import '../utils/token_manager.dart';
 
-import 'product.dart';
+import '../Models/product.dart';
 
 final asyncCategoryItemsProvider =
     AsyncNotifierProvider<AsyncCategoryProducts, List<Product>>(

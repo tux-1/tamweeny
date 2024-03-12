@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
-import '../../../providers/product.dart';
+import '../../../Models/product.dart';
 import '../../../utils/token_manager.dart';
 
 final favoritesProvider =

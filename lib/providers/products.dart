@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import '../features/profile/providers/favorites.dart';
 import '../utils/token_manager.dart';
 import 'filters.dart';
-import 'product.dart';
+import '../Models/product.dart';
 
 final asyncProductsProvider =
     AsyncNotifierProvider<AsyncProductsProvider, List<Product>>(

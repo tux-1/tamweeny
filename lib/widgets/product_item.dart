@@ -5,7 +5,8 @@ import 'package:tamweeny/generated/l10n.dart';
 
 import '../providers/cart.dart';
 import '../providers/category_products.dart';
-import '../providers/product.dart';
+import '../Models/product.dart';
+import '../providers/filters.dart';
 import '../providers/products.dart';
 import '../utils/lang.dart';
 
@@ -70,26 +71,27 @@ class ProductItem extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        ref
-                            .read(asyncProductsProvider.notifier)
-                            .toggleFavoriteStatus(product.id);
-                        ref
-                            .read(asyncCategoryItemsProvider.notifier)
-                            .toggleFavoriteStatus(product.id);
-                      },
-                      padding: EdgeInsets.zero,
-                      icon: product.favoriteStats
-                          ? const Icon(
-                              Icons.favorite,
-                              color: Color(0xffFF0000),
-                            )
-                          : const Icon(
-                              Icons.favorite_border,
-                              color: Colors.white,
-                            ),
-                    )
+                    if (ref.read(filtersProvider).searchQuery.isEmpty)
+                      IconButton(
+                        onPressed: () {
+                          ref
+                              .read(asyncProductsProvider.notifier)
+                              .toggleFavoriteStatus(product.id);
+                          ref
+                              .read(asyncCategoryItemsProvider.notifier)
+                              .toggleFavoriteStatus(product.id);
+                        },
+                        padding: EdgeInsets.zero,
+                        icon: product.favoriteStats
+                            ? const Icon(
+                                Icons.favorite,
+                                color: Color(0xffFF0000),
+                              )
+                            : const Icon(
+                                Icons.favorite_border,
+                                color: Colors.white,
+                              ),
+                      )
                   ],
                 ),
                 Row(

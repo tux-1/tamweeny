@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:tamweeny/providers/filters.dart';
 import 'package:tamweeny/providers/search.dart';
+import 'package:tamweeny/widgets/product_item.dart';
 
 import '../features/cart/cart_screen.dart';
 import '../generated/l10n.dart';
-import '../providers/product.dart';
 
 class CustomSearchBar extends ConsumerWidget {
   const CustomSearchBar({super.key});
@@ -29,7 +29,9 @@ class CustomSearchBar extends ConsumerWidget {
                     showSearch(
                       context: context,
                       delegate: CustomSearchDelegate(
-                          ref: ref, hintText: S.of(context).search),
+                        ref: ref,
+                        hintText: S.of(context).search,
+                      ),
                     );
                   },
                   readOnly: true,
@@ -83,6 +85,8 @@ class CustomSearchBar extends ConsumerWidget {
   }
 }
 
+final x = GlobalKey();
+
 class CustomSearchDelegate extends SearchDelegate {
   final WidgetRef ref;
 
@@ -101,6 +105,7 @@ class CustomSearchDelegate extends SearchDelegate {
       IconButton(
         onPressed: () {
           query = '';
+          ref.read(filtersProvider).searchQuery = '';
         },
         icon: const Icon(
           Icons.clear,
@@ -114,29 +119,42 @@ class CustomSearchDelegate extends SearchDelegate {
     return IconButton(
         onPressed: () {
           close(context, null);
+          ref.read(filtersProvider).searchQuery = '';
         },
         icon: const Icon(Icons.arrow_back));
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    List<Product> matchQuery = [];
     ref.read(filtersProvider).searchQuery = query;
-    final searchTerms = ref.watch(searchProvider).value ?? [];
 
-    for (var item in searchTerms) {
-      if (item.productName.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(item);
-      }
-    }
-    return ListView.builder(
-        itemCount: matchQuery.length,
-        itemBuilder: (context, index) {
-          final result = matchQuery[index];
-          return ListTile(
-            title: Text(result.productName),
-          );
-        });
+    final searchTermsFuture = ref.refresh(searchProvider.future);
+
+    return PopScope(
+      onPopInvoked: (didPop) {
+        ref.read(filtersProvider).searchQuery = '';
+      },
+      child: FutureBuilder(
+        future: searchTermsFuture,
+        builder: (context, snapshot) => GridView.builder(
+          padding:
+              const EdgeInsets.only(left: 15, right: 15, bottom: 15, top: 15),
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            childAspectRatio: 0.7,
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 20,
+            maxCrossAxisExtent: 300,
+          ),
+          itemCount: snapshot.data?.length ?? 1,
+          itemBuilder: (context, index) {
+            if (snapshot.hasData) {
+              return ProductItem(snapshot.requireData[index]);
+            }
+            return null;
+          },
+        ),
+      ),
+    );
   }
 
   @override
