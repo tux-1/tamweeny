@@ -160,6 +160,7 @@ class _LocationsScreenState extends ConsumerState<LocationsScreen> {
               options: const MapOptions(
                 initialCenter: LatLng(30.035658, 31.268681),
                 initialZoom: 11.5,
+                
               ),
               children: [
                 TileLayer(

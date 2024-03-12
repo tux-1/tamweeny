@@ -2,12 +2,11 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-
 import '../Models/category.dart';
 import '../utils/token_manager.dart';
 
 final categoriesFutureProvider = FutureProvider<List<Category>>((ref) async {
-  const String categoriesApi = 'http://10.0.2.2:8000/api/categories';
+  const String categoriesApi = 'http://192.168.1.188:8000/api/categories';
   List<Category> items = [];
   // Getting the token
   final token = await TokenManager.getToken();
@@ -24,4 +23,3 @@ final categoriesFutureProvider = FutureProvider<List<Category>>((ref) async {
   }
   return items;
 });
-

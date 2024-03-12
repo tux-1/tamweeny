@@ -18,7 +18,7 @@ class Api {
   // Function to get the stored token
   Future<void> loginUser(String email, String pass,
       {String device = 'android'}) async {
-    const String apiUrl = 'http://10.0.2.2:8000/api/login';
+    const String apiUrl = 'http://192.168.1.188:8000/api/login';
 
     User userLoginData = User(
       email: email.trim(),
@@ -88,7 +88,7 @@ class Api {
     required String cardPassword,
     String device = 'android',
   }) async {
-    const String registerApiUrl = 'http://10.0.2.2:8000/api/register';
+    const String registerApiUrl = 'http://192.168.1.188:8000/api/register';
 
     User adduser = User(
       email: email.trim(),
@@ -138,7 +138,7 @@ class Api {
 
     http.Response response = await http.get(
         Uri.parse(
-          'http://10.0.2.2:8000/api/userss?page=2',
+          'http://192.168.1.188:8000/api/userss?page=2',
         ),
         headers: {
           'Authorization': 'Bearer $token',
@@ -159,7 +159,7 @@ class Api {
   }
 
   Future<void> logout() async {
-    final String apiUrl = 'http://10.0.2.2:8000/api/logout';
+    final String apiUrl = 'http://192.168.1.188:8000/api/logout';
     String? token = TokenManager().getToken();
 
     final http.Response response = await http.post(

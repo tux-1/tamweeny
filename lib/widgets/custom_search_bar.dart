@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:tamweeny/providers/filters.dart';
+import 'package:tamweeny/providers/search.dart';
 
 import '../features/cart/cart_screen.dart';
 import '../generated/l10n.dart';
+import '../providers/product.dart';
 
-class CustomSearchBar extends StatelessWidget {
+class CustomSearchBar extends ConsumerWidget {
   const CustomSearchBar({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -24,8 +28,8 @@ class CustomSearchBar extends StatelessWidget {
                   onTap: () {
                     showSearch(
                       context: context,
-                      delegate:
-                          CustomSearchDelegate(hintText: S.of(context).search),
+                      delegate: CustomSearchDelegate(
+                          ref: ref, hintText: S.of(context).search),
                     );
                   },
                   readOnly: true,
@@ -80,18 +84,10 @@ class CustomSearchBar extends StatelessWidget {
 }
 
 class CustomSearchDelegate extends SearchDelegate {
-  List<String> searchTerms = [
-    //Should be queried from database
-    'Apple',
-    'Banana',
-    'Pear',
-    'Salama',
-    'Mahnod',
-    'Strawberry',
-    'Watermelon',
-  ];
+  final WidgetRef ref;
 
   CustomSearchDelegate({
+    required this.ref,
     hintText,
   }) : super(
           searchFieldLabel: hintText,
@@ -103,12 +99,13 @@ class CustomSearchDelegate extends SearchDelegate {
   List<Widget>? buildActions(BuildContext context) {
     return [
       IconButton(
-          onPressed: () {
-            query = '';
-          },
-          icon: const Icon(
-            Icons.clear,
-          )),
+        onPressed: () {
+          query = '';
+        },
+        icon: const Icon(
+          Icons.clear,
+        ),
+      ),
     ];
   }
 
@@ -123,44 +120,27 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    List<String> matchQuery = [];
+    List<Product> matchQuery = [];
+    ref.read(filtersProvider).searchQuery = query;
+    final searchTerms = ref.watch(searchProvider).value ?? [];
 
     for (var item in searchTerms) {
-      if (item.toLowerCase().contains(query.toLowerCase())) {
+      if (item.productName.toLowerCase().contains(query.toLowerCase())) {
         matchQuery.add(item);
       }
     }
     return ListView.builder(
         itemCount: matchQuery.length,
         itemBuilder: (context, index) {
-          var result = matchQuery[index];
+          final result = matchQuery[index];
           return ListTile(
-            title: Text(result),
+            title: Text(result.productName),
           );
         });
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
-
-    for (var item in searchTerms) {
-      if (item.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(item);
-      }
-    }
-    return ListView.builder(
-        itemCount: matchQuery.length,
-        itemBuilder: (context, index) {
-          var result = matchQuery[index];
-          if (query.isNotEmpty) {
-            return ListTile(
-              title: Text(result),
-            );
-          } else {
-            return null;
-            // Add recent searches here ??
-          }
-        });
+    return const SizedBox.shrink();
   }
 }

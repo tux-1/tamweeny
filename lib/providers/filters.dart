@@ -10,6 +10,7 @@ class Filters extends ChangeNotifier {
   Category? chosenCategory;
   double scrollPosition = 0;
   int mostPopularPaginationIndex = 2;
+  String searchQuery = '';
 
   void setCategory(Category category) {
     chosenCategory = category;

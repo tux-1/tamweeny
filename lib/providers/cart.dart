@@ -18,7 +18,7 @@ class AsyncCartProvider extends AsyncNotifier<List<CartItem>> {
     return getCart();
   }
 
-  final _cartApi = 'http://10.0.2.2:8000/api/cart';
+  final _cartApi = 'http://192.168.1.188:8000/api/cart';
 
   Future<List<CartItem>> getCart() async {
     // Getting the token
@@ -62,48 +62,17 @@ class AsyncCartProvider extends AsyncNotifier<List<CartItem>> {
     if (kDebugMode) {
       print(response.body);
     }
-    if (response.body.contains('successful') && state.value != null) {
-      List<CartItem> newCartList = state.value ?? [];
-
-      if (!newCartList.any((element) => element.productId == productId)) {
-        state = const AsyncValue.loading();
-        state = await AsyncValue.guard(() async {
-          return getCart();
-        });
-        return;
-      }
-
-      final CartItem product =
-          newCartList.firstWhere((element) => element.productId == productId);
-      final productIndex = newCartList.indexOf(product);
-
-      if (isAdding) {
-        newCartList[productIndex] = product.copyWith(
-            quantity: product.quantity + 1,
-            totalPrice: product.totalPrice + product.sellingPrice);
-
-        state = state.copyWithPrevious(
-          AsyncValue.data(newCartList),
-          isRefresh: true,
-        );
-      } else {
-        newCartList[productIndex] = product.copyWith(
-          quantity: product.quantity - 1,
-          totalPrice: product.totalPrice - product.sellingPrice,
-        );
-        if (newCartList[productIndex].quantity == 0) {
-          newCartList.removeAt(productIndex);
-        }
-        state = state.copyWithPrevious(
-          AsyncValue.data(newCartList),
-          isRefresh: true,
-        );
-      }
+    if (response.body.contains('successful')) {
+      state = const AsyncValue.loading();
+      state = await AsyncValue.guard(() async {
+        return getCart();
+      });
+      return;
     }
   }
 
   Future<void> createOrder() async {
-    const createOrderApi = 'http://10.0.2.2:8000/api/createOrder';
+    const createOrderApi = 'http://192.168.1.188:8000/api/createOrder';
 
     // Getting the token
     final token = await TokenManager.getToken();

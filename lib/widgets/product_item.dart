@@ -1,26 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/generated/l10n.dart';
 
 import '../providers/cart.dart';
+import '../providers/category_products.dart';
 import '../providers/product.dart';
 import '../providers/products.dart';
 import '../utils/lang.dart';
 
-class ProductItem extends ConsumerStatefulWidget {
+class ProductItem extends ConsumerWidget {
   final Product product;
   const ProductItem(this.product, {super.key});
 
   @override
-  ConsumerState<ProductItem> createState() => _ProductItemState();
-}
-
-class _ProductItemState extends ConsumerState<ProductItem> {
-  @override
-  Widget build(BuildContext context) {
-    
+  Widget build(BuildContext context, WidgetRef ref) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(22),
       clipBehavior: Clip.antiAlias,
@@ -32,7 +26,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
               color: Colors.white,
               child: SizedBox.expand(
                 child: Image.network(
-                  widget.product.productImage,
+                  product.productImage,
                   fit: BoxFit.cover,
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
@@ -65,7 +59,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                           vertical: 0,
                         ),
                         child: Text(
-                          widget.product.productName,
+                          product.productName,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
@@ -80,10 +74,13 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                       onPressed: () {
                         ref
                             .read(asyncProductsProvider.notifier)
-                            .toggleFavoriteStatus(widget.product.id);
+                            .toggleFavoriteStatus(product.id);
+                        ref
+                            .read(asyncCategoryItemsProvider.notifier)
+                            .toggleFavoriteStatus(product.id);
                       },
                       padding: EdgeInsets.zero,
-                      icon: widget.product.favoriteStats
+                      icon: product.favoriteStats
                           ? const Icon(
                               Icons.favorite,
                               color: Color(0xffFF0000),
@@ -106,7 +103,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                           vertical: 0,
                         ),
                         child: Text(
-                          '${S.of(context).unit_price} ${widget.product.sellingPrice.toString()}',
+                          '${S.of(context).unit_price} ${product.sellingPrice.toString()}',
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!
@@ -133,7 +130,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                           ref
                               .read(asyncCartProvider.notifier)
                               .postCartItem(
-                                productId: widget.product.id,
+                                productId: product.id,
                                 isAdding: true,
                               )
                               .then(

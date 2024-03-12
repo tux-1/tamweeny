@@ -19,7 +19,7 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
     return getInitialProducts();
   }
 
-  final String _productsApi = 'http://10.0.2.2:8000/api/products?page=';
+  final String _productsApi = 'http://192.168.1.188:8000/api/products?page=';
   int? _totalPages;
 
   Future<void> getNextProducts(int index) async {
@@ -64,7 +64,7 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
   }
 
   Future<void> toggleFavoriteStatus(int id) async {
-    const favoriteApi = 'http://10.0.2.2:8000/api/favorite';
+    const favoriteApi = 'http://192.168.1.188:8000/api/favorite';
 
     final token = await TokenManager.getToken();
 

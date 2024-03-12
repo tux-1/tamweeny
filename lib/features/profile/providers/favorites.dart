@@ -5,12 +5,13 @@ import 'package:http/http.dart' as http;
 import '../../../providers/product.dart';
 import '../../../utils/token_manager.dart';
 
-final favoritesProvider = FutureProvider.autoDispose<List<Product>>((ref) async {
+final favoritesProvider =
+    FutureProvider.autoDispose<List<Product>>((ref) async {
   // Getting the token
   final token = await TokenManager.getToken();
 
   final response = await http.get(
-    Uri.parse('http://10.0.2.2:8000/api/favorites'),
+    Uri.parse('http://192.168.1.188:8000/api/favorites'),
     headers: {
       'Authorization': 'Bearer $token',
       'Accept': 'application/json',
@@ -22,6 +23,6 @@ final favoritesProvider = FutureProvider.autoDispose<List<Product>>((ref) async 
   for (final item in favoritesData) {
     items.add(Product.fromJson(item));
   }
-  
+
   return items;
 });
