@@ -7,7 +7,7 @@ import 'package:tamweeny/providers/filters.dart';
 import '../utils/token_manager.dart';
 import '../Models/product.dart';
 
-final searchProvider = FutureProvider<List<Product>>(
+final searchProvider = FutureProvider.autoDispose<List<Product>>(
   (ref) async {
     final searchQuery = ref.read(filtersProvider).searchQuery;
     final searchApi = 'http://192.168.1.188:8000/api/productName/$searchQuery';

@@ -85,8 +85,6 @@ class CustomSearchBar extends ConsumerWidget {
   }
 }
 
-final x = GlobalKey();
-
 class CustomSearchDelegate extends SearchDelegate {
   final WidgetRef ref;
 
@@ -126,34 +124,37 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    ref.read(filtersProvider).searchQuery = query;
-
-    final searchTermsFuture = ref.refresh(searchProvider.future);
-
-    return PopScope(
-      onPopInvoked: (didPop) {
-        ref.read(filtersProvider).searchQuery = '';
-      },
-      child: FutureBuilder(
-        future: searchTermsFuture,
-        builder: (context, snapshot) => GridView.builder(
-          padding:
-              const EdgeInsets.only(left: 15, right: 15, bottom: 15, top: 15),
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            childAspectRatio: 0.7,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20,
-            maxCrossAxisExtent: 300,
-          ),
-          itemCount: snapshot.data?.length ?? 1,
-          itemBuilder: (context, index) {
-            if (snapshot.hasData) {
-              return ProductItem(snapshot.requireData[index]);
-            }
-            return null;
+    return Consumer(
+      builder: (context, ref, child) {
+        ref.read(filtersProvider).searchQuery = query;
+        ref.invalidate(searchProvider);
+        final searchTermsFuture = ref.watch(searchProvider.future);
+        return PopScope(
+          onPopInvoked: (didPop) {
+            ref.read(filtersProvider).searchQuery = '';
           },
-        ),
-      ),
+          child: FutureBuilder(
+            future: searchTermsFuture,
+            builder: (context, snapshot) => GridView.builder(
+              padding: const EdgeInsets.only(
+                  left: 15, right: 15, bottom: 15, top: 15),
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                childAspectRatio: 0.7,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
+                maxCrossAxisExtent: 300,
+              ),
+              itemCount: snapshot.data?.length ?? 1,
+              itemBuilder: (context, index) {
+                if (snapshot.hasData) {
+                  return ProductItem(snapshot.requireData[index]);
+                }
+                return null;
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 
