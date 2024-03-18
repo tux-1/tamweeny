@@ -4,10 +4,10 @@ import 'package:tamweeny/generated/l10n.dart';
 
 import '../providers/categories.dart';
 import '../providers/filters.dart';
+import '../providers/offers.dart';
 import '../providers/products.dart';
 import 'categories/widgets/category_chips.dart';
 import '../widgets/custom_search_bar.dart';
-import '../widgets/offer_item.dart';
 import '../widgets/product_item.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -58,6 +58,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     ref.read(categoriesFutureProvider);
     final products = ref.watch(asyncProductsProvider).value ?? [];
+    final offersData = ref.watch(offersProvider.future);
 
     return CustomScrollView(
       physics: const ClampingScrollPhysics(),
@@ -65,7 +66,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
       slivers: [
         const CustomSearchBar(),
 
-        SliverToBoxAdapter(
+        const SliverToBoxAdapter(
           child: CategoryChips(),
         ),
 
@@ -96,14 +97,27 @@ class _HomePageState extends ConsumerState<HomeScreen> {
 
         // Offers (horizontal scrollable sliver)
         SliverToBoxAdapter(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxHeight: 200),
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                return const OfferItem();
+          child: SizedBox(
+            height: 225,
+            child: FutureBuilder(
+              future: offersData,
+              builder: (context, snapshot) {
+                final offers = snapshot.data ?? [];
+                return ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: offers.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      constraints: BoxConstraints(
+                        minWidth: MediaQuery.of(context).size.width * 0.45,
+                        maxWidth: MediaQuery.of(context).size.width * 0.45,
+                      ),
+                      child: ProductItem(offers[index]),
+                    );
+                  },
+                );
               },
             ),
           ),

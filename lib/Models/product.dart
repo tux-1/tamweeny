@@ -10,6 +10,7 @@ class Product {
   final int storeId;
   final int categoryId;
   final bool favoriteStats;
+  final num discount;
 
   Product({
     required this.pointsPrice,
@@ -23,6 +24,7 @@ class Product {
     required this.description,
     required this.stockQuantity,
     required this.favoriteStats,
+    required this.discount,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -38,6 +40,7 @@ class Product {
       pointsPrice: double.parse(json['pointsPrice']),
       sellingPrice: double.parse(json['sellingPrice']),
       favoriteStats: json['favoriteStats'] == 1,
+      discount: json['discount'] as num,
     );
   }
 
@@ -53,6 +56,7 @@ class Product {
     int? storeId,
     int? categoryId,
     bool? favoriteStats,
+    num? discount,
   }) {
     return Product(
       id: id ?? this.id,
@@ -66,6 +70,7 @@ class Product {
       storeId: storeId ?? this.storeId,
       categoryId: categoryId ?? this.categoryId,
       favoriteStats: favoriteStats ?? this.favoriteStats,
+      discount: discount ?? this.discount,
     );
   }
 }

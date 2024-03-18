@@ -23,25 +23,48 @@ class ProductItem extends ConsumerWidget {
         children: [
           Flexible(
             fit: FlexFit.loose,
-            child: ColoredBox(
-              color: Colors.white,
-              child: SizedBox.expand(
-                child: Image.network(
-                  product.productImage,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return const Center(child: CircularProgressIndicator());
-                  },
-                  errorBuilder: (context, error, stackTrace) {
-                    return const Center(
-                        child: Text(
-                      "Couldn't load image",
-                      textAlign: TextAlign.center,
-                    ));
-                  },
+            child: Stack(
+              children: [
+                ColoredBox(
+                  color: Colors.white,
+                  child: SizedBox.expand(
+                    child: Image.network(
+                      product.productImage,
+                      fit: BoxFit.cover,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return const Center(child: CircularProgressIndicator());
+                      },
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Center(
+                            child: Text(
+                          "Couldn't load image",
+                          textAlign: TextAlign.center,
+                        ));
+                      },
+                    ),
+                  ),
                 ),
-              ),
+                if (product.discount > 0)
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 4,
+                        vertical: 0.5,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xffDE1010),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Text(
+                        '-${product.discount}%',
+                        textDirection: TextDirection.ltr,
+                      ),
+                    ),
+                  ),
+              ],
             ),
           ),
           ColoredBox(

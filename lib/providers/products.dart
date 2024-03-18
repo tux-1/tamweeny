@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:tamweeny/providers/offers.dart';
 
 import '../features/profile/providers/favorites.dart';
 import '../utils/token_manager.dart';
@@ -81,17 +82,19 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
         final product = myList.firstWhere(
           (element) => id == element.id,
           orElse: () => Product(
-              pointsPrice: -1,
-              storeId: -1,
-              categoryId: -1,
-              productType: -1,
-              id: -1,
-              productName: '-1',
-              sellingPrice: -1,
-              productImage: '-1',
-              description: '-1',
-              stockQuantity: -1,
-              favoriteStats: false),
+            pointsPrice: -1,
+            storeId: -1,
+            categoryId: -1,
+            productType: -1,
+            id: -1,
+            productName: '-1',
+            sellingPrice: -1,
+            productImage: '-1',
+            description: '-1',
+            stockQuantity: -1,
+            discount: -1,
+            favoriteStats: false,
+          ),
         );
         final productIndex = myList.indexOf(product);
 
@@ -102,9 +105,11 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
 
           state = state.copyWithPrevious(AsyncValue.data(myList));
           ref.invalidate(favoritesProvider);
+          ref.invalidate(offersProvider);
         }
       } else {
         ref.invalidate(favoritesProvider);
+        ref.invalidate(offersProvider);
       }
     });
   }
