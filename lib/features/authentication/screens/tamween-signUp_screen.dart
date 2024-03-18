@@ -1,6 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tamweeny/features/authentication/screens/logIn_screen.dart';
+import 'package:tamweeny/features/authentication/services/tamween_register.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../utils/utils.dart';
@@ -17,6 +20,11 @@ class TamweenSignUpScreen extends StatefulWidget {
 
 class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _wageController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  bool isLoading = false;
   List<String> genders = [
     'Male',
     'Female',
@@ -29,10 +37,12 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
     'Divorced',
   ];
   String? chosenMaritalStatus;
-  
+
   final List<Uint8List> _dependentsImages = [];
-  
   final List<Uint8List> _ownerImages = [];
+
+  final List<List<int>> _uploadDependentsImages = [];
+  final List<List<int>> _uploadOwnerImages = [];
 
   final Map<String, String> _signUpData = {
     'name': '',
@@ -45,15 +55,22 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
 
   void pickDependentsImages() async {
     Uint8List? img = await pickImage(ImageSource.gallery);
+
     setState(() {
-      if (img != null) _dependentsImages.add(img);
+      if (img != null) {
+        _dependentsImages.add(img);
+        _uploadDependentsImages.add(img.toList());
+      }
     });
   }
 
   void pickOwnerImages() async {
     Uint8List? img = await pickImage(ImageSource.gallery);
     setState(() {
-      if (img != null) _ownerImages.add(img);
+      if (img != null) {
+        _ownerImages.add(img);
+        _uploadOwnerImages.add(img.toList());
+      }
     });
   }
 
@@ -73,12 +90,18 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                 onPressed: () {
                   setState(() {
                     imagesList.clear();
+                    if (picker.toString().contains('Owner')) {
+                      _uploadOwnerImages.clear();
+                    } else {
+                      _uploadDependentsImages.clear();
+                    }
                   });
                 },
                 icon: const Icon(Icons.delete))
           ],
         ),
-        Container(  //images holder
+        Container(
+            //images holder
             constraints:
                 const BoxConstraints(minHeight: 50, minWidth: double.infinity),
             decoration: BoxDecoration(
@@ -106,40 +129,51 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
     );
   }
 
+  void showErrorDialog({String? message}) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            message ?? S.of(context).data_entry_error,
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+        );
+      },
+    );
+  }
+
   Future<void> register(BuildContext context) async {
     final navigator = Navigator.of(context);
     if (chosenGender == null ||
         chosenMaritalStatus == null ||
         _ownerImages.isEmpty) {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text(
-                S.of(context).data_entry_error,
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            );
-          });
+      showErrorDialog();
       return;
     }
     if (_formKey.currentState?.validate() == false) {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text(
-                S.of(context).data_entry_error,
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            );
-          });
+      showErrorDialog();
     }
     if (_formKey.currentState?.validate() == true) {
       _formKey.currentState?.save();
-      // print(_signUpData);
+      if (kDebugMode) {
+        print("sign up date from widget: $_signUpData");
+      }
+      setState(() {
+        isLoading = true;
+      });
       // sign up function that'll send data to backend
-      await showDialog(
+      await registerToTamween(
+        name: _nameController.text,
+        gender: chosenGender.toString(),
+        email: _emailController.text,
+        socialStatus: chosenMaritalStatus.toString(),
+        salary: num.parse(_wageController.text),
+        phoneNumber: int.parse(_phoneNumberController.text),
+        nationalIdCardAndBirthCertificate: _uploadOwnerImages,
+        followersNationalIdCardsAndBirthCertificates: _uploadDependentsImages,
+      ).then((value) {
+        showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
@@ -148,9 +182,18 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
             );
-          }).then((_) {
-        navigator.pop();
-        navigator.pop();
+          },
+        ).then((_) {
+          navigator.popUntil(ModalRoute.withName(LogInScreen.routeName));
+        }).onError((error, stackTrace) {
+          setState(() {
+            isLoading = false;
+          });
+          if (kDebugMode) {
+            print(error);
+          }
+          showErrorDialog(message: 'An error occured');
+        });
       });
     }
   }
@@ -180,6 +223,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                     Text(S.of(context).name),
                     CustomTextField(
                       textInputAction: TextInputAction.next,
+                      controller: _nameController,
                       onSaved: (name) => _signUpData['name'] = name.toString(),
                       validator: (name) {
                         if (name!.isEmpty) {
@@ -235,6 +279,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                     ),
                     Text(S.of(context).email),
                     CustomTextField(
+                      controller: _emailController,
                       onSaved: (email) =>
                           _signUpData['email'] = email.toString(),
                       validator: (emailText) {
@@ -248,6 +293,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                     CustomTextField(
                       keyboardType: TextInputType.number,
                       maxLength: 11,
+                      controller: _phoneNumberController,
                       onSaved: (telephoneNumber) =>
                           _signUpData['telephoneNumber'] =
                               telephoneNumber.toString(),
@@ -337,6 +383,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                     Text(S.of(context).minimum_salary),
                     CustomTextField(
                       keyboardType: TextInputType.number,
+                      controller: _wageController,
                       textInputAction: TextInputAction.done,
                       onSaved: (minimumSalary) {
                         _signUpData['minimumSalary'] = minimumSalary.toString();
@@ -367,13 +414,19 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                       pickDependentsImages,
                     ),
                     const SizedBox(height: 30),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          register(context);
-                        },
-                        child: Text(S.of(context).register),
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: isLoading
+                                ? null
+                                : () {
+                                    register(context);
+                                  },
+                            child: Text(S.of(context).register),
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 30),
                   ],
