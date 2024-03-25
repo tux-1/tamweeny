@@ -85,7 +85,7 @@ class CheckoutItem extends ConsumerWidget {
             height: 100,
             width: 120,
             child: Image.network(
-              'https://media.istockphoto.com/id/153737841/photo/rice.jpg?s=612x612&w=0&k=20&c=lfO7iLT0UsDDzra0uBOsN1rvr2d5OEtrG2uwbts33_c=',
+              cartItem.productImage,
               fit: BoxFit.cover,
             ),
           ),
