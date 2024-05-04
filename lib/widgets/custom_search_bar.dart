@@ -5,7 +5,7 @@ import 'package:tamweeny/providers/filters.dart';
 import 'package:tamweeny/providers/search.dart';
 import 'package:tamweeny/widgets/product_item.dart';
 
-import '../features/cart/cart_screen.dart';
+import '../features/user/cart/cart_screen.dart';
 import '../generated/l10n.dart';
 
 class CustomSearchBar extends ConsumerWidget {

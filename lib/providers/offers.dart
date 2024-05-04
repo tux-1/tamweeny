@@ -10,7 +10,7 @@ final offersProvider = FutureProvider.autoDispose<List<Product>>((ref) async {
   final token = await TokenManager.getToken();
 
   final response = await http.get(
-    Uri.parse('http://192.168.1.188:8000/api/offers'),
+    Uri.parse('http://10.0.2.2:8000/api/offers'),
     headers: {
       'Authorization': 'Bearer $token',
       'Accept': 'application/json',

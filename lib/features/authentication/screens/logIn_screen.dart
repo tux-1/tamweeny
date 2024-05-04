@@ -22,20 +22,21 @@ class LogInScreen extends StatelessWidget {
                 SafeArea(
                   child: Text(
                     S.of(context).welcome,
-                    style: Theme.of(context).textTheme.displayMedium,
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ),
                 Text(
                   S.of(context).welcomeSubtitle,
-                  style: Theme.of(context).textTheme.displaySmall,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ],
             ),
+            
             Column(
               children: [
                 Text(
                   S.of(context).logInTitle,
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const SizedBox(height: 8.5),
                 //Login Card + Login Button

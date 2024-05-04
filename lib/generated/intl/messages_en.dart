@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_more": MessageLookupByLibrary.simpleMessage("Add More"),
         "added_to_cart": MessageLookupByLibrary.simpleMessage("Added to Cart"),
         "address": MessageLookupByLibrary.simpleMessage("Address"),
+        "an_error_occurred":
+            MessageLookupByLibrary.simpleMessage("An error occurred"),
         "apply_for_tamween_card":
             MessageLookupByLibrary.simpleMessage("Apply for Tamween Card"),
         "birth_date": MessageLookupByLibrary.simpleMessage("Birth Date"),
@@ -135,6 +137,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "offers": MessageLookupByLibrary.simpleMessage("Offers"),
         "operation_number":
             MessageLookupByLibrary.simpleMessage("Operation number "),
+        "order_details": MessageLookupByLibrary.simpleMessage("Order Details"),
         "order_history": MessageLookupByLibrary.simpleMessage("Order History"),
         "order_success":
             MessageLookupByLibrary.simpleMessage("Order made successfully"),
@@ -191,6 +194,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tamween Card Password"),
         "telephone_number":
             MessageLookupByLibrary.simpleMessage("Telephone Number"),
+        "today_orders_list":
+            MessageLookupByLibrary.simpleMessage("Today\'s Orders List"),
         "total_payments":
             MessageLookupByLibrary.simpleMessage("Total Payments"),
         "unit_price": MessageLookupByLibrary.simpleMessage("Unit Price"),

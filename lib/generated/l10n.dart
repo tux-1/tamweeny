@@ -1139,6 +1139,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Today's Orders List`
+  String get today_orders_list {
+    return Intl.message(
+      'Today\'s Orders List',
+      name: 'today_orders_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Details`
+  String get order_details {
+    return Intl.message(
+      'Order Details',
+      name: 'order_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An error occurred`
+  String get an_error_occurred {
+    return Intl.message(
+      'An error occurred',
+      name: 'an_error_occurred',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

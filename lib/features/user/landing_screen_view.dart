@@ -5,22 +5,22 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../providers/filters.dart';
+import '../../providers/filters.dart';
 import 'categories/categories_screen.dart';
 import 'home_screen.dart';
 import 'locations/locations_screen.dart';
-import 'profile/profile_screen.dart';
+import '../profile/profile_screen.dart';
 
-class NavigationView extends ConsumerStatefulWidget {
+class LandingScreenView extends ConsumerStatefulWidget {
   static const routeName = '/navigation-screen';
 
-  const NavigationView({super.key});
+  const LandingScreenView({super.key});
 
   @override
-  ConsumerState<NavigationView> createState() => _NavigationScreenState();
+  ConsumerState<LandingScreenView> createState() => _NavigationScreenState();
 }
 
-class _NavigationScreenState extends ConsumerState<NavigationView>
+class _NavigationScreenState extends ConsumerState<LandingScreenView>
     with TickerProviderStateMixin {
   late TabController _tabController;
   late ScrollController scrollController;

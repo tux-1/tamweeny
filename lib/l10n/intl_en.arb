@@ -107,5 +107,9 @@
     "home": "Home",
     "categories": "Categories",
     "favorites": "Favorites",
-    "profile": "Profile"
+    "profile": "Profile",
+    "today_orders_list": "Today's Orders List",
+    "order_details": "Order Details",
+    "an_error_occurred": "An error occurred"
+    
 }

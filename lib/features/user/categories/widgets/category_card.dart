@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../providers/category_products.dart';
-import '../../../providers/filters.dart';
-import '../../../Models/category.dart';
+import '../../../../providers/category_products.dart';
+import '../../../../providers/filters.dart';
+import '../../../../Models/category.dart';
 
 class CategoryCard extends ConsumerWidget {
   final Category category;

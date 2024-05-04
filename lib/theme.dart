@@ -22,10 +22,9 @@ ThemeData themeData(BuildContext context) {
     // Define the accent color used for icons, n stuff
     colorScheme: ColorScheme.fromSeed(
       seedColor: const Color(0xff345E37),
-      
     ),
 
-    fontFamily: GoogleFonts.lateef().fontFamily,
+    fontFamily: GoogleFonts.lateef.toString(),
 
     // Define the background color of the app
     scaffoldBackgroundColor: const Color(0xFF1E1E1E),
@@ -56,12 +55,13 @@ ThemeData themeData(BuildContext context) {
         fontWeight: FontWeight.w500,
       ),
       bodyLarge: TextStyle(
+        fontSize: 21,
         color: Colors.white,
         fontWeight: FontWeight.w500,
       ),
       bodyMedium: TextStyle(
+        fontSize: 18,
         color: Colors.white,
-        fontSize: 22,
         fontWeight: FontWeight.w500,
       ),
     ),

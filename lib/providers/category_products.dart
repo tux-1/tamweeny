@@ -20,7 +20,7 @@ class AsyncCategoryProducts extends AsyncNotifier<List<Product>> {
     return Future.value(List<Product>.empty());
   }
 
-  final _categoryApi = 'http://192.168.1.188:8000/api/categories/';
+  final _categoryApi = 'http://10.0.2.2:8000/api/categories/';
 
   Future<void> getCategoryProducts(String category) async {
     // ref.invalidateSelf();

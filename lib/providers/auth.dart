@@ -35,7 +35,7 @@ class Auth {
 
   Future<void> logIn(String email, String pass,
       {String device = 'Unknown Device'}) async {
-    const String apiUrl = 'http://192.168.1.188:8000/api/login';
+    const String apiUrl = 'http://10.0.2.2:8000/api/login';
 
     try {
       User userLoginData = User(
@@ -86,7 +86,7 @@ class Auth {
     required String cardPassword,
     String device = 'android',
   }) async {
-    const String registerApiUrl = 'http://192.168.1.188:8000/api/register';
+    const String registerApiUrl = 'http://10.0.2.2:8000/api/register';
 
     User addUser = User(
       email: email.trim(),
@@ -137,7 +137,7 @@ class Auth {
   }
 
   Future<void> logOut() async {
-    const String apiUrl = 'http://192.168.1.188:8000/api/logout';
+    const String apiUrl = 'http://10.0.2.2:8000/api/logout';
 
     try {
       await http.post(
@@ -168,7 +168,7 @@ class Auth {
     final token = await TokenManager.getToken();
 
     final response = await http.delete(
-      Uri.parse('http://192.168.1.188:8000/api/deleteAccount'),
+      Uri.parse('http://10.0.2.2:8000/api/deleteAccount'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',
@@ -194,18 +194,16 @@ class Auth {
     // Getting the token
     final token = await TokenManager.getToken();
 
-    final response = await http.patch(
-        Uri.parse('http://192.168.1.188:8000/api/updateAccInfo'),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Accept': 'application/json',
-        },
-        body: {
-          'name': name,
-          'phoneNumber': phoneNumber,
-          'birthDate': birthDate,
-          'street': street,
-        });
+    final response = await http
+        .patch(Uri.parse('http://10.0.2.2:8000/api/updateAccInfo'), headers: {
+      'Authorization': 'Bearer $token',
+      'Accept': 'application/json',
+    }, body: {
+      'name': name,
+      'phoneNumber': phoneNumber,
+      'birthDate': birthDate,
+      'street': street,
+    });
 
     if (!response.body.contains('successful')) {
       throw HttpException('Error occured');

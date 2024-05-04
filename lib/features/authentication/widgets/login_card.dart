@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tamweeny/features/driver/driver_landing_view.dart';
 
-import '../../navigation_view.dart';
+import '../../user/landing_screen_view.dart';
 import '../../../generated/l10n.dart';
 import '../screens/app_signup_screen.dart';
 import '../screens/tamween_info.dart';
@@ -72,7 +73,12 @@ class _LogInCardState extends ConsumerState<LogInCard> {
       scaffoldMessenger.showSnackBar(const SnackBar(
         content: Text('Successful Login'),
       ));
-      Navigator.of(context).pushReplacementNamed(NavigationView.routeName);
+      const bool isUser = false;
+      if (isUser) {
+        Navigator.of(context).pushReplacementNamed(LandingScreenView.routeName);
+      } else {
+        Navigator.of(context).pushReplacementNamed(DriverLandingView.routeName);
+      }
     }).onError((error, _) {
       showDialog(
           context: context,
@@ -164,7 +170,7 @@ class _LogInCardState extends ConsumerState<LogInCard> {
             //         }),
             //   ],
             // ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 17),
 
             // Log in button
             SizedBox(
@@ -179,11 +185,11 @@ class _LogInCardState extends ConsumerState<LogInCard> {
               ),
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 7),
             TextButton(
               child: Text(
                 S.of(context).forgotPassword,
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               onPressed: () {},
             ),
@@ -192,7 +198,7 @@ class _LogInCardState extends ConsumerState<LogInCard> {
               children: [
                 Text(
                   S.of(context).noAccount,
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 const SizedBox(width: 10),
                 TextButton(
@@ -201,9 +207,10 @@ class _LogInCardState extends ConsumerState<LogInCard> {
                   },
                   child: Text(
                     S.of(context).signUp,
-                    style: const TextStyle(
-                        fontSize: 25,
-                        color: Color.fromARGB(255, 225, 170, 108)),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge
+                        ?.copyWith(color: const Color(0xffDEA568)),
                   ),
                 ),
               ],

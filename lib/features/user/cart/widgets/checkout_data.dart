@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../generated/l10n.dart';
-import '../../../providers/cart.dart';
+import '../../../../generated/l10n.dart';
+import '../../../../providers/cart.dart';
 
 class CheckoutData extends ConsumerWidget {
   final double totalAmount;

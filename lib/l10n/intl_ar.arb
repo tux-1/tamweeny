@@ -107,5 +107,9 @@
     "home": "الصفحة الرئيسية",
     "categories": "الفئات",
     "favorites": "المفضلة",
-    "profile": "الملف الشخصي"
+    "profile": "الملف الشخصي",
+    "today_orders_list": "قائمة طلبات اليوم",
+    "order_details": "تفاصيل الطلب",
+    "an_error_occurred": "حدث خطأ"
+    
 }

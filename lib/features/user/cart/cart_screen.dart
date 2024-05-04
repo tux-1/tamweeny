@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tamweeny/features/cart/widgets/checkout_item.dart';
+import 'package:tamweeny/features/user/cart/widgets/checkout_item.dart';
 import 'package:tamweeny/generated/l10n.dart';
 
-import '../../providers/cart.dart';
+import '../../../providers/cart.dart';
 import 'widgets/checkout_data.dart';
 
 class CartScreen extends ConsumerWidget {

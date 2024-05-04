@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../navigation_view.dart';
+import '../../user/landing_screen_view.dart';
 import '../../../providers/auth.dart';
 import 'logIn_screen.dart';
 
@@ -23,7 +23,7 @@ class _SplashBodyState extends ConsumerState<SplashBody>
     final navigator = Navigator.of(context);
     await auth.tryAutoLogin();
     if (auth.isAuth) {
-      navigator.pushReplacementNamed(NavigationView.routeName);
+      navigator.pushReplacementNamed(LandingScreenView.routeName);
     } else {
       navigator.pushReplacementNamed(LogInScreen.routeName);
     }

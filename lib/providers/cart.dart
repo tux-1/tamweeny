@@ -18,7 +18,7 @@ class AsyncCartProvider extends AsyncNotifier<List<CartItem>> {
     return getCart();
   }
 
-  final _cartApi = 'http://192.168.1.188:8000/api/cart';
+  final _cartApi = 'http://10.0.2.2:8000/api/cart';
 
   Future<List<CartItem>> getCart() async {
     // Getting the token
@@ -72,7 +72,7 @@ class AsyncCartProvider extends AsyncNotifier<List<CartItem>> {
   }
 
   Future<void> createOrder() async {
-    const createOrderApi = 'http://192.168.1.188:8000/api/createOrder';
+    const createOrderApi = 'http://10.0.2.2:8000/api/createOrder';
 
     // Getting the token
     final token = await TokenManager.getToken();

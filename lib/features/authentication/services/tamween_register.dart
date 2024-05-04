@@ -11,7 +11,7 @@ Future<void> registerToTamween({
   required List<List<int>> followersNationalIdCardsAndBirthCertificates,
 }) async {
   final registerUrl = Uri.parse(
-    'http://192.168.1.188:8000/api/cardRegistration',
+    'http://10.0.2.2:8000/api/cardRegistration',
   );
 
   final request = http.MultipartRequest('POST', registerUrl)

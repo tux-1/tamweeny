@@ -10,7 +10,7 @@ import '../Models/product.dart';
 final searchProvider = FutureProvider.autoDispose<List<Product>>(
   (ref) async {
     final searchQuery = ref.read(filtersProvider).searchQuery;
-    final searchApi = 'http://192.168.1.188:8000/api/productName/$searchQuery';
+    final searchApi = 'http://10.0.2.2:8000/api/productName/$searchQuery';
 
     final token = await TokenManager.getToken();
 
@@ -21,12 +21,11 @@ final searchProvider = FutureProvider.autoDispose<List<Product>>(
       'Authorization': 'Bearer $token',
       'Accept': 'application/json',
     });
-    
+
     final resultsData = jsonDecode(response.body) as List<dynamic>;
-    
+
     for (final result in resultsData) {
       items.add(Product.fromJson(result));
-      
     }
 
     return items;

@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "added_to_cart":
             MessageLookupByLibrary.simpleMessage("تمت الإضافة إلى العربة"),
         "address": MessageLookupByLibrary.simpleMessage("العنوان"),
+        "an_error_occurred": MessageLookupByLibrary.simpleMessage("حدث خطأ"),
         "apply_for_tamween_card":
             MessageLookupByLibrary.simpleMessage("التقديم على بطاقة التموين"),
         "birth_date": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
@@ -131,6 +132,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
         "offers": MessageLookupByLibrary.simpleMessage("العروض"),
         "operation_number": MessageLookupByLibrary.simpleMessage("عملية رقم "),
+        "order_details": MessageLookupByLibrary.simpleMessage("تفاصيل الطلب"),
         "order_history": MessageLookupByLibrary.simpleMessage("سجل الطلبات"),
         "order_success":
             MessageLookupByLibrary.simpleMessage("تم إجراء الطلب بنجاح"),
@@ -185,6 +187,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tamween_password":
             MessageLookupByLibrary.simpleMessage("كلمة مرور بطاقة التموين"),
         "telephone_number": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "today_orders_list":
+            MessageLookupByLibrary.simpleMessage("قائمة طلبات اليوم"),
         "total_payments":
             MessageLookupByLibrary.simpleMessage("إجمالى المدفوعات"),
         "unit_price": MessageLookupByLibrary.simpleMessage("سعر الوحدة"),

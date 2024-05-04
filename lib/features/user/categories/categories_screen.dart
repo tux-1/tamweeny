@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../providers/categories.dart';
-import '../../providers/category_products.dart';
-import '../../providers/filters.dart';
-import '../../widgets/product_item.dart';
+import '../../../providers/categories.dart';
+import '../../../providers/category_products.dart';
+import '../../../providers/filters.dart';
+import '../../../widgets/product_item.dart';
 import 'widgets/category_card.dart';
 import 'widgets/category_chips.dart';
-import '../../widgets/custom_search_bar.dart';
+import '../../../widgets/custom_search_bar.dart';
 
 class CategoriesScreen extends ConsumerWidget {
   const CategoriesScreen({super.key, required this.scrollController});

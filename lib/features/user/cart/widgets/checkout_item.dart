@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../Models/cart_item.dart';
-import '../../../providers/cart.dart';
+import '../../../../Models/cart_item.dart';
+import '../../../../providers/cart.dart';
 
 class CheckoutItem extends ConsumerWidget {
   const CheckoutItem({super.key, required this.cartItem});

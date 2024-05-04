@@ -14,7 +14,7 @@ final ordersHistoryProvider = FutureProvider.autoDispose<List<HistoryOrder>>(
     final token = await TokenManager.getToken();
 
     final response = await http.get(
-      Uri.parse('http://192.168.1.188:8000/api/orders'),
+      Uri.parse('http://10.0.2.2:8000/api/orders'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',

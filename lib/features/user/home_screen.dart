@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/generated/l10n.dart';
 
-import '../providers/categories.dart';
-import '../providers/filters.dart';
-import '../providers/offers.dart';
-import '../providers/products.dart';
+import '../../providers/categories.dart';
+import '../../providers/filters.dart';
+import '../../providers/offers.dart';
+import '../../providers/products.dart';
 import 'categories/widgets/category_chips.dart';
-import '../widgets/custom_search_bar.dart';
-import '../widgets/product_item.dart';
+import '../../widgets/custom_search_bar.dart';
+import '../../widgets/product_item.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key, this.scrollController});
