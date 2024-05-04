@@ -199,7 +199,19 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
   }
 
   @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _wageController.dispose();
+    _phoneNumberController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final orangeTextTheme = Theme.of(context).textTheme.bodyLarge?.copyWith(
+          color: const Color(0xffDEA568),
+        );
     return CustomScaffold(
       body: SingleChildScrollView(
         child: Form(
@@ -209,7 +221,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
               AppBar(
                 title: Text(
                   S.of(context).apply_for_tamween_card,
-                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         color: const Color(0xffDEA568),
                       ),
                 ),
@@ -249,12 +261,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                             }),
                             child: Text(
                               S.of(context).male,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall
-                                  ?.copyWith(
-                                    color: const Color(0xffDEA568),
-                                  ),
+                              style: orangeTextTheme,
                             ),
                           ),
                           RadioMenuButton(
@@ -266,12 +273,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                             }),
                             child: Text(
                               S.of(context).female,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall
-                                  ?.copyWith(
-                                    color: const Color(0xffDEA568),
-                                  ),
+                              style: orangeTextTheme,
                             ),
                           ),
                         ],
@@ -328,12 +330,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                             }),
                             child: Text(
                               S.of(context).single,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall
-                                  ?.copyWith(
-                                    color: const Color(0xffDEA568),
-                                  ),
+                              style: orangeTextTheme,
                             ),
                           ),
                           RadioMenuButton(
@@ -348,12 +345,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                             },
                             child: Text(
                               S.of(context).married,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall
-                                  ?.copyWith(
-                                    color: const Color(0xffDEA568),
-                                  ),
+                              style: orangeTextTheme,
                             ),
                           ),
                           RadioMenuButton(
@@ -368,12 +360,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                             },
                             child: Text(
                               S.of(context).divorced,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall
-                                  ?.copyWith(
-                                    color: const Color(0xffDEA568),
-                                  ),
+                              style: orangeTextTheme,
                             ),
                           ),
                         ],

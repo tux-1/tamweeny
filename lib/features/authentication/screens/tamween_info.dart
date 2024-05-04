@@ -11,9 +11,10 @@ class TamweenInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SingleChildScrollView(
         child: DefaultTextStyle(
-          style: Theme.of(context).textTheme.headlineMedium!,
+          style: Theme.of(context).textTheme.bodyLarge!,
           child: Column(
             children: [
               AppBar(),

@@ -6,6 +6,7 @@ import 'package:tamweeny/features/driver/home/driver_home_page.dart';
 import 'package:tamweeny/features/profile/profile_screen.dart';
 
 import '../../providers/orders.dart';
+import '../profile/providers/account_info.dart';
 
 class DriverLandingView extends ConsumerStatefulWidget {
   const DriverLandingView({super.key});
@@ -36,6 +37,7 @@ class _DriverLandingViewState extends ConsumerState<DriverLandingView>
   @override
   Widget build(BuildContext context) {
     ref.watch(ordersProvider);
+    ref.watch(accountInfoProvider);
     final tabDecoratedBox = const DecoratedBox(
       decoration: BoxDecoration(
         boxShadow: [

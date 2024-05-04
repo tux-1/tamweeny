@@ -21,7 +21,7 @@ class OrderWidget extends StatelessWidget {
             BoxShadow(
               color: Colors.grey.shade400,
               blurRadius: 11,
-              spreadRadius: -7,
+              spreadRadius: -8,
             ),
           ]),
       padding: const EdgeInsets.all(15),
