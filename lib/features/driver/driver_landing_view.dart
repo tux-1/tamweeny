@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:tamweeny/features/driver/driver_locations_page.dart';
 import 'package:tamweeny/features/driver/home/driver_home_page.dart';
 import 'package:tamweeny/features/profile/profile_screen.dart';
 
@@ -95,10 +96,10 @@ class _DriverLandingViewState extends ConsumerState<DriverLandingView>
         child: TabBarView(
             controller: _tabController,
             physics: const NeverScrollableScrollPhysics(),
-            children: [
-              const ProfileScreen(),
-              Container(),
-              const DriverHomePage(),
+            children: const [
+              ProfileScreen(),
+              DriverLocationsPage(),
+              DriverHomePage(),
             ]),
       ),
     );
