@@ -1,56 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../providers/auth.dart';
-import '../authentication/screens/logIn_screen.dart';
-import '../../generated/l10n.dart';
-import 'providers/account_info.dart';
+import 'package:tamweeny/features/user/profile/widgets/log_out_listtile.dart';
+import 'package:tamweeny/features/user/profile/widgets/username_widget.dart';
+
+import '../../../generated/l10n.dart';
+
 import 'screens/account_information_screen.dart';
 import 'screens/favorites_screen.dart';
 import 'screens/orders_history.dart';
 
-class ProfileScreen extends ConsumerWidget {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final userData = ref.watch(accountInfoProvider);
-
+  Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 18.0),
       physics: const ScrollPhysics(),
       children: [
-        Row(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-              child: CircleAvatar(
-                minRadius: 40,
-                backgroundColor: Colors.grey.shade300,
-                child: const Icon(
-                  Icons.person,
-                  color: Colors.black,
-                  size: 50,
-                ),
-              ),
-            ),
-            const SizedBox(width: 5),
-            userData.when(
-              data: (data) => Text(data['name']),
-              error: (error, stackTrace) => const SizedBox(),
-              loading: () => const SizedBox(),
-            ),
-            const Spacer(),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.settings_outlined,
-                color: Colors.white,
-                size: 30,
-              ),
-            ),
-          ],
-        ),
+        const UsernameWidget(),
         Card(
           elevation: 0,
           color: Colors.transparent,
@@ -120,24 +88,7 @@ class ProfileScreen extends ConsumerWidget {
                 leading: const Icon(Icons.info_outline),
                 title: Text(S.of(context).about_the_app),
               ),
-              ListTile(
-                leading: const Icon(Icons.logout),
-                title: Text(S.of(context).sign_out),
-                onTap: () async {
-                  final navigator = Navigator.of(context);
-                  await ref.read(authProvider).logOut().then((value) {
-                    navigator.pushReplacementNamed(LogInScreen.routeName);
-                  }).onError((error, _) {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return const AlertDialog(
-                            title: Text('Request timed out.'),
-                          );
-                        });
-                  });
-                },
-              ),
+              const LogOutListTile(),
             ],
           ),
         ),

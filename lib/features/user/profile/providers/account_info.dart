@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../utils/token_manager.dart';
+import '../../../../utils/token_manager.dart';
 
 final accountInfoProvider =
     FutureProvider.autoDispose<Map<String, dynamic>>((ref) async {

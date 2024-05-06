@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/generated/l10n.dart';
 
-import '../../../widgets/custom_scaffold.dart';
+import '../../../../widgets/custom_scaffold.dart';
 import '../providers/history.dart';
 
 class OrdersHistoryScreen extends ConsumerWidget {

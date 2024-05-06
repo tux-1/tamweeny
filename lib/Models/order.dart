@@ -8,6 +8,7 @@ class Order {
   final String customerAddress;
   final String userLat;
   final String userLong;
+  final String deliveryStatus;
   final int customerId;
   final List<OrderItem> ordersMade;
 
@@ -19,6 +20,7 @@ class Order {
     required this.customerName,
     required this.customerPhone,
     required this.customerAddress,
+    required this.deliveryStatus,
     required this.userLat,
     required this.userLong,
     required this.customerId,
@@ -27,10 +29,12 @@ class Order {
 
   factory Order.fromJson(Map<String, dynamic> json) {
     List<dynamic> ordersJson = json['ordersMade'];
-    List<OrderItem> orders = ordersJson.map((orderJson) => OrderItem.fromJson(orderJson)).toList();
+    List<OrderItem> orders =
+        ordersJson.map((orderJson) => OrderItem.fromJson(orderJson)).toList();
 
     return Order(
       id: json['id'],
+      deliveryStatus: json['deliveryStatus'],
       orderPrice: json['orderPrice'],
       transactionNumber: json['transactionNumber'],
       transactionDate: json['transactionDate'],
@@ -48,14 +52,14 @@ class Order {
 class OrderItem {
   final int productId;
   final String productName;
-  final String description;
+  final String categoryName;
   final int quantity;
   final double totalPrice;
 
   OrderItem({
     required this.productId,
     required this.productName,
-    required this.description,
+    required this.categoryName,
     required this.quantity,
     required this.totalPrice,
   });
@@ -64,7 +68,7 @@ class OrderItem {
     return OrderItem(
       productId: json['productId'],
       productName: json['productName'],
-      description: json['description'],
+      categoryName: json['categoryName'],
       quantity: json['quantity'],
       totalPrice: json['totalPrice'].toDouble(),
     );

@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:tamweeny/providers/orders.dart';
+import 'package:tamweeny/providers/pending_orders.dart';
 
 class DriverLocationsPage extends ConsumerWidget {
   const DriverLocationsPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final orders = ref.watch(ordersProvider);
+    final orders = ref.watch(pendingOrdersProvider);
     return FlutterMap(
       options: const MapOptions(
-        initialCenter: LatLng(10.2, 10.2),
+        initialCenter: LatLng(30.035658, 31.268681),
         initialZoom: 11.5,
       ),
       children: [

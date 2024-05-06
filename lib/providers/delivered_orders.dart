@@ -5,12 +5,13 @@ import 'package:http/http.dart' as http;
 import 'package:tamweeny/Models/order.dart';
 import '../../../utils/token_manager.dart';
 
-final ordersProvider = FutureProvider.autoDispose<List<Order>>((ref) async {
+final deliveredOrdersProvider =
+    FutureProvider.autoDispose<List<Order>>((ref) async {
   // Getting the token
   final token = await TokenManager.getToken();
 
   final response = await http.get(
-    Uri.parse('http://10.0.2.2:8000/api/fullorders'),
+    Uri.parse('http://10.0.2.2:8000/api/fullDeliveredOrders'),
     headers: {
       'Authorization': 'Bearer $token',
       'Accept': 'application/json',
@@ -22,7 +23,6 @@ final ordersProvider = FutureProvider.autoDispose<List<Order>>((ref) async {
 
   for (final item in offersData) {
     orders.add(Order.fromJson(item));
-    
   }
 
   return orders;

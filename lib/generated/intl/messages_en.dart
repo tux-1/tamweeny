@@ -152,6 +152,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please fill out this field."),
         "previous_month_balance":
             MessageLookupByLibrary.simpleMessage("Previous Month Balance"),
+        "price": MessageLookupByLibrary.simpleMessage("Price"),
         "procedure1": MessageLookupByLibrary.simpleMessage(
             "1) Head to the nearest Ministry of Supply office to obtain the card."),
         "procedure2": MessageLookupByLibrary.simpleMessage(
@@ -160,7 +161,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "3) Wait until the card is received."),
         "proceduresForNewCard": MessageLookupByLibrary.simpleMessage(
             "Procedures at the Office to Obtain a New Card:"),
+        "product_name": MessageLookupByLibrary.simpleMessage("Product Name"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "quantity": MessageLookupByLibrary.simpleMessage("Quantity"),
         "recommended_foods":
             MessageLookupByLibrary.simpleMessage("Recommended Foods"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),

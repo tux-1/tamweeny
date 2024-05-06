@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:tamweeny/providers/offers.dart';
 
-import '../features/profile/providers/favorites.dart';
+import '../features/user/profile/providers/favorites.dart';
 import '../utils/token_manager.dart';
 import 'filters.dart';
 import '../Models/product.dart';

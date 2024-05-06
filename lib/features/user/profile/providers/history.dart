@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../Models/history_order.dart';
-import '../../../utils/token_manager.dart';
+import '../../../../Models/history_order.dart';
+import '../../../../utils/token_manager.dart';
 
 final ordersHistoryProvider = FutureProvider.autoDispose<List<HistoryOrder>>(
   (ref) async {

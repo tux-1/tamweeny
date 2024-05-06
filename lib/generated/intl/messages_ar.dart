@@ -147,6 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الرجاء تعبئة هذا البيان"),
         "previous_month_balance":
             MessageLookupByLibrary.simpleMessage("رصيد الشهر السابق"),
+        "price": MessageLookupByLibrary.simpleMessage("السعر"),
         "procedure1": MessageLookupByLibrary.simpleMessage(
             "1) التوجه لأقرب مكتب لوزارة التم"),
         "procedure2": MessageLookupByLibrary.simpleMessage(
@@ -155,7 +156,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "3) انتظر حتى يتم استلام البطاقة."),
         "proceduresForNewCard": MessageLookupByLibrary.simpleMessage(
             "إجراءات المكتب للحصول على بطاقة جديدة:"),
+        "product_name": MessageLookupByLibrary.simpleMessage("اسم المنتج"),
         "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
+        "quantity": MessageLookupByLibrary.simpleMessage("الكمية"),
         "recommended_foods":
             MessageLookupByLibrary.simpleMessage("الأغذية المقترحة"),
         "register": MessageLookupByLibrary.simpleMessage("تسجيل"),

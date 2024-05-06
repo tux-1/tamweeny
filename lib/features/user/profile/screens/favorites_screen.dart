@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/generated/l10n.dart';
 
-import '../../../widgets/product_item.dart';
+import '../../../../widgets/product_item.dart';
 import '../providers/favorites.dart';
 
 class FavoritesScreen extends ConsumerWidget {

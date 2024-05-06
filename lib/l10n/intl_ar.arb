@@ -110,6 +110,9 @@
     "profile": "الملف الشخصي",
     "today_orders_list": "قائمة طلبات اليوم",
     "order_details": "تفاصيل الطلب",
-    "an_error_occurred": "حدث خطأ"
+    "an_error_occurred": "حدث خطأ",
+    "product_name": "اسم المنتج",
+    "quantity": "الكمية",
+    "price": "السعر"
     
 }

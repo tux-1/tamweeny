@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:tamweeny/features/driver/driver_locations_page.dart';
+import 'package:tamweeny/features/driver/driver_locations/driver_locations_page.dart';
+import 'package:tamweeny/features/driver/driver_profile/driver_profile_screen.dart';
 import 'package:tamweeny/features/driver/home/driver_home_page.dart';
-import 'package:tamweeny/features/profile/profile_screen.dart';
 
-import '../../providers/orders.dart';
-import '../profile/providers/account_info.dart';
+import '../../providers/pending_orders.dart';
+import '../user/profile/providers/account_info.dart';
 
 class DriverLandingView extends ConsumerStatefulWidget {
   const DriverLandingView({super.key});
@@ -37,7 +37,7 @@ class _DriverLandingViewState extends ConsumerState<DriverLandingView>
 
   @override
   Widget build(BuildContext context) {
-    ref.watch(ordersProvider);
+    ref.watch(pendingOrdersProvider);
     ref.watch(accountInfoProvider);
     final tabDecoratedBox = const DecoratedBox(
       decoration: BoxDecoration(
@@ -97,7 +97,7 @@ class _DriverLandingViewState extends ConsumerState<DriverLandingView>
             controller: _tabController,
             physics: const NeverScrollableScrollPhysics(),
             children: const [
-              ProfileScreen(),
+              DriverProfilePage(),
               DriverLocationsPage(),
               DriverHomePage(),
             ]),

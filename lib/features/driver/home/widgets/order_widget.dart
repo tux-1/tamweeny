@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tamweeny/features/driver/home/widgets/deliver_order_button.dart';
+import 'package:tamweeny/features/driver/order_details/order_details_view.dart';
 
-import '../../../Models/order.dart';
-import '../../../generated/l10n.dart';
+import '../../../../Models/order.dart';
+import '../../../../generated/l10n.dart';
 
 class OrderWidget extends StatelessWidget {
   const OrderWidget({
@@ -91,16 +93,17 @@ class OrderWidget extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   elevation: 2,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => OrderDetailsView(order: order),
+                    ),
+                  );
+                },
                 child: Text(S.of(context).order_details),
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  elevation: 2,
-                ),
-                onPressed: () {},
-                child: Text(S.of(context).success),
-              ),
+              if (order.deliveryStatus == "Pending")
+                DeliverOrderButton(orderId: order.id),
             ],
           )
         ],

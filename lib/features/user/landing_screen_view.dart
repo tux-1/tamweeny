@@ -9,7 +9,7 @@ import '../../providers/filters.dart';
 import 'categories/categories_screen.dart';
 import 'home_screen.dart';
 import 'locations/locations_screen.dart';
-import '../profile/profile_screen.dart';
+import 'profile/profile_screen.dart';
 
 class LandingScreenView extends ConsumerStatefulWidget {
   static const routeName = '/navigation-screen';

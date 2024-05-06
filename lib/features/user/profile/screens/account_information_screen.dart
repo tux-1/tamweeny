@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/widgets/custom_textformfield.dart';
 
-import '../../../generated/l10n.dart';
-import '../../../widgets/custom_scaffold.dart';
-import '../../../providers/auth.dart';
-import '../../authentication/screens/logIn_screen.dart';
+import '../../../../generated/l10n.dart';
+import '../../../../widgets/custom_scaffold.dart';
+import '../../../../providers/auth.dart';
+import '../../../authentication/screens/logIn_screen.dart';
 import '../providers/account_info.dart';
 import 'edit_account_screen.dart';
 
