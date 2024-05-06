@@ -123,16 +123,17 @@ class OrderDetailsView extends StatelessWidget {
               ],
             ),
           ),
-          Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: DeliverOrderButton(orderId: order.id),
+          if (order.deliveryStatus == "Pending")
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: DeliverOrderButton(orderId: order.id),
+                  ),
                 ),
-              ),
-            ],
-          )
+              ],
+            )
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tamweeny/features/driver/driver_profile/screens/delivered_orders_screen.dart';
 import 'package:tamweeny/features/user/profile/widgets/log_out_listtile.dart';
 import 'package:tamweeny/features/user/profile/widgets/username_widget.dart';
 
@@ -25,15 +26,15 @@ class DriverProfilePage extends StatelessWidget {
           },
         ),
         // Order history
-        // ListTile(
-        //   leading: const Icon(Icons.history),
-        //   title: Text(S.of(context).order_history),
-        //   onTap: () {
-        //     Navigator.of(context).push(MaterialPageRoute(
-        //       builder: (context) => const OrdersHistoryScreen(),
-        //     ));
-        //   },
-        // ),
+        ListTile(
+          leading: const Icon(Icons.history),
+          title: Text(S.of(context).order_history),
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const DeliveredOrdersScreen(),
+            ));
+          },
+        ),
         const LogOutListTile()
       ],
     );

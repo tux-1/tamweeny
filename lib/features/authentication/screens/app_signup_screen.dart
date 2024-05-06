@@ -264,11 +264,17 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
               ),
 
               const SizedBox(height: 10),
-              ElevatedButton(
-                  onPressed: () {
-                    register(context);
-                  },
-                  child: Text(S.of(context).register)),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                        onPressed: () {
+                          register(context);
+                        },
+                        child: Text(S.of(context).register)),
+                  ),
+                ],
+              ),
               const SizedBox(height: 20),
             ],
           ),
