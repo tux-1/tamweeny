@@ -151,77 +151,89 @@ class _LocationsScreenState extends ConsumerState<LocationsScreen> {
   Widget build(BuildContext context) {
     final locationsFuture = ref.watch(locationsFutureProvider.future);
 
-    return FutureBuilder(
-      future: locationsFuture,
-      builder: (context, snapshot) {
-        return Stack(
-          children: [
-            FlutterMap(
-              options: const MapOptions(
-                initialCenter: LatLng(30.035658, 31.268681),
-                initialZoom: 11.5,
-                
-              ),
-              children: [
-                TileLayer(
-                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                  userAgentPackageName: 'com.example.app',
+    return Scaffold(
+      body: FutureBuilder(
+        future: locationsFuture,
+        builder: (context, snapshot) {
+          return Stack(
+            children: [
+              FlutterMap(
+                options: const MapOptions(
+                  initialCenter: LatLng(30.035658, 31.268681),
+                  initialZoom: 11.5,
                 ),
-                PolylineLayer(
-                  polylineCulling: false,
-                  polylines: [
-                    Polyline(
-                      points: routePoints,
-                      color: Colors.blueGrey,
-                      strokeWidth: 7,
-                    )
-                  ],
-                ),
-                attributionWidget,
-                MarkerLayer(markers: [
-                  // For emulator this location will be at Google HQ
-                  if (userLocation != null)
-                    Marker(
-                      point: userLocation!,
-                      child: const Icon(
-                        Icons.person_pin_circle_sharp,
-                        color: Colors.red,
-                        size: 27,
+                children: [
+                  TileLayer(
+                    urlTemplate:
+                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    userAgentPackageName: 'com.example.app',
+                  ),
+                  PolylineLayer(
+                    polylineCulling: false,
+                    polylines: [
+                      Polyline(
+                        points: routePoints,
+                        color: Colors.blueGrey,
+                        strokeWidth: 7,
+                      )
+                    ],
+                  ),
+                  // attributionWidget,
+                  MarkerLayer(markers: [
+                    // For emulator this location will be at Google HQ
+                    if (userLocation != null)
+                      Marker(
+                        point: userLocation!,
+                        child: const Icon(
+                          Icons.person_pin_circle_sharp,
+                          color: Colors.red,
+                          size: 27,
+                        ),
                       ),
-                    ),
 
-                  // const Marker(
-                  //   // Demo marker
-                  //   point: LatLng(
-                  //     30.094435768097608,
-                  //     31.20311443602142,
-                  //   ),
-                  //   child: Icon(
-                  //     Icons.person_pin_circle,
-                  //     color: Colors.blue,
-                  //     size: 35,
-                  //   ),
-                  // ),
+                    // const Marker(
+                    //   // Demo marker
+                    //   point: LatLng(
+                    //     30.094435768097608,
+                    //     31.20311443602142,
+                    //   ),
+                    //   child: Icon(
+                    //     Icons.person_pin_circle,
+                    //     color: Colors.blue,
+                    //     size: 35,
+                    //   ),
+                    // ),
 
-                  // Loaded locations
-                  if (snapshot.hasData)
-                    for (Location location in snapshot.data!)
-                      buildTrackableMarker(LatLng(location.lat, location.long))
-                ])
-              ],
-            ),
-            if (snapshot.hasError)
-              IconButton(
+                    // Loaded locations
+                    if (snapshot.hasData)
+                      for (Location location in snapshot.data!)
+                        buildTrackableMarker(
+                            LatLng(location.lat, location.long))
+                  ])
+                ],
+              ),
+              if (snapshot.hasError)
+                IconButton(
                   onPressed: () {
                     ref.invalidate(locationsFutureProvider);
                   },
                   icon: const Icon(
                     Icons.replay,
                     color: Colors.black,
-                  )),
-          ],
-        );
-      },
+                  ),
+                ),
+              const Positioned(
+                top: 15,
+                child: SafeArea(
+                  child: BackButton(
+                    color: Colors.black,
+                  ),
+                ),
+              )
+            ],
+          );
+        },
+      ),
     );
   }
 }

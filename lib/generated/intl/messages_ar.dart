@@ -136,6 +136,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "order_history": MessageLookupByLibrary.simpleMessage("سجل الطلبات"),
         "order_success":
             MessageLookupByLibrary.simpleMessage("تم إجراء الطلب بنجاح"),
+        "our_branches": MessageLookupByLibrary.simpleMessage("فروعنا"),
         "ownCard":
             MessageLookupByLibrary.simpleMessage("هل تمتلك بطاقة تموين؟"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة السر"),

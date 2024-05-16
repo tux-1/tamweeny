@@ -22,6 +22,7 @@ class Auth {
 
   String? _token;
   String? _userId;
+  String? _userType;
   // Timer? _authTimer;
   // DateTime? _expiryDate;
 
@@ -31,6 +32,10 @@ class Auth {
 
   bool get isAuth {
     return _token != null;
+  }
+
+  bool get isUser {
+    return _userType == 'Customer';
   }
 
   Future<void> logIn(String email, String pass,
@@ -62,9 +67,14 @@ class Auth {
       }
       _token = responseToken;
       _userId = responseData['id'].toString();
+      _userType = responseData['userType'].toString();
 
       final prefs = await SharedPreferences.getInstance();
-      final userData = json.encode({'token': _token, 'userId': _userId});
+      final userData = json.encode({
+        'token': _token,
+        'userId': _userId,
+        'userType': _userType,
+      });
       prefs.setString('userData', userData);
     } catch (error) {
       rethrow;
@@ -134,6 +144,7 @@ class Auth {
 
     _token = extractedData['token'].toString();
     _userId = extractedData['userId'].toString();
+    _userType = extractedData['userType'].toString();
   }
 
   Future<void> logOut() async {
@@ -149,6 +160,7 @@ class Auth {
       );
       _token = null;
       _userId = null;
+      _userType = null;
       final prefs = await SharedPreferences.getInstance();
       prefs.remove('userData');
       //prefs.clear(); //is also ok bc we only stored userData
@@ -180,6 +192,7 @@ class Auth {
 
     _token = null;
     _userId = null;
+    _userType = null;
     TokenManager.clearToken();
     ref.invalidate(filtersProvider);
     ref.invalidate(asyncProductsProvider);

@@ -1199,6 +1199,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Our branches`
+  String get our_branches {
+    return Intl.message(
+      'Our branches',
+      name: 'our_branches',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

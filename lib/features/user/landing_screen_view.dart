@@ -4,11 +4,12 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:tamweeny/features/user/profile/screens/favorites_screen.dart';
 
 import '../../providers/filters.dart';
 import 'categories/categories_screen.dart';
 import 'home_screen.dart';
-import 'locations/locations_screen.dart';
+
 import 'profile/profile_screen.dart';
 
 class LandingScreenView extends ConsumerStatefulWidget {
@@ -156,9 +157,9 @@ class _NavigationScreenState extends ConsumerState<LandingScreenView>
                       : null,
                 ),
 
-                // Locations screen
+                // Favorites screen
                 Tab(
-                  icon: const Icon(Ionicons.location_outline, size: 27),
+                  icon: const Icon(Ionicons.heart_outline, size: 27),
                   iconMargin: EdgeInsets.zero,
                   height: 55,
                   child: tabControllerProvider?.index == 1
@@ -196,7 +197,7 @@ class _NavigationScreenState extends ConsumerState<LandingScreenView>
               physics: const NeverScrollableScrollPhysics(),
               children: [
                 const ProfileScreen(),
-                const LocationsScreen(),
+                const FavoritesScreen(),
                 CategoriesScreen(scrollController: scrollController),
                 HomeScreen(scrollController: scrollController),
               ]),

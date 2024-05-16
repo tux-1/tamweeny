@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/features/driver/driver_landing_view.dart';
+import 'package:tamweeny/features/user/locations/locations_screen.dart';
 
 import 'features/user/landing_screen_view.dart';
 import 'features/authentication/screens/app_signup_screen.dart';
 import 'features/authentication/screens/tamween_info.dart';
 import 'features/user/profile/screens/account_information_screen.dart';
 import 'features/user/profile/screens/edit_account_screen.dart';
-import 'features/user/profile/screens/favorites_screen.dart';
 import 'generated/l10n.dart';
 import 'features/authentication/screens/splash_body.dart';
 
@@ -49,9 +49,9 @@ class MyApp extends StatelessWidget {
         TamweenInfo.routeName: (ctx) => const TamweenInfo(),
         LogInScreen.routeName: (ctx) => const LogInScreen(),
         AccountInfoScreen.routeName: (ctx) => const AccountInfoScreen(),
-        FavoritesScreen.routeName: (ctx) => const FavoritesScreen(),
         EditAccountScreen.routeName: (ctx) => const EditAccountScreen(),
         DriverLandingView.routeName: (ctx) => const DriverLandingView(),
+        LocationsScreen.routeName: (ctx) => const LocationsScreen(),
       },
     );
   }

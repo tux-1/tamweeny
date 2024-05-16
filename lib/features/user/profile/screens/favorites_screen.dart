@@ -12,37 +12,41 @@ class FavoritesScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final favoritesData = ref.watch(favoritesProvider.future);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          S.of(context).favorite_products,
-          style: Theme.of(context).textTheme.displaySmall,
+    return Column(
+      children: [
+        AppBar(
+          title: Text(
+            S.of(context).favorite_products,
+            style: Theme.of(context).textTheme.displaySmall,
+          ),
         ),
-      ),
-      body: FutureBuilder(
-        future: favoritesData,
-        builder: (context, snapshot) {
-          final favorites = snapshot.data ?? [];
-          return GridView.builder(
-            padding: const EdgeInsets.only(
-              left: 20,
-              right: 20,
-              bottom: 20,
-              top: 15,
-            ),
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              childAspectRatio: 0.7,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20,
-              maxCrossAxisExtent: 300,
-            ),
-            itemCount: favorites.length,
-            itemBuilder: (context, index) {
-              return ProductItem(favorites[index]);
+        Expanded(
+          child: FutureBuilder(
+            future: favoritesData,
+            builder: (context, snapshot) {
+              final favorites = snapshot.data ?? [];
+              return GridView.builder(
+                padding: const EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                  bottom: 20,
+                  top: 15,
+                ),
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  childAspectRatio: 0.7,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                  maxCrossAxisExtent: 300,
+                ),
+                itemCount: favorites.length,
+                itemBuilder: (context, index) {
+                  return ProductItem(favorites[index]);
+                },
+              );
             },
-          );
-        },
-      ),
+          ),
+        ),
+      ],
     );
   }
 }

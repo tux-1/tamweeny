@@ -25,7 +25,7 @@ class UsernameWidget extends ConsumerWidget {
         ),
         const SizedBox(width: 5),
         userData.when(
-          data: (data) => Text(data['name']),
+          data: (data) => Text(data['name'].toString()),
           error: (error, stackTrace) => const SizedBox(),
           loading: () => const SizedBox(),
         ),

@@ -62,7 +62,7 @@ class _LogInCardState extends ConsumerState<LogInCard> {
     setState(() {
       _isLoading = true;
     });
-    final auth = ref.read(authProvider);
+    final auth = ref.watch(authProvider);
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     await auth
         .logIn(
@@ -73,8 +73,8 @@ class _LogInCardState extends ConsumerState<LogInCard> {
       scaffoldMessenger.showSnackBar(const SnackBar(
         content: Text('Successful Login'),
       ));
-      const bool isUser = false;
-      if (isUser) {
+
+      if (auth.isUser) {
         Navigator.of(context).pushReplacementNamed(LandingScreenView.routeName);
       } else {
         Navigator.of(context).pushReplacementNamed(DriverLandingView.routeName);

@@ -141,6 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "order_history": MessageLookupByLibrary.simpleMessage("Order History"),
         "order_success":
             MessageLookupByLibrary.simpleMessage("Order made successfully"),
+        "our_branches": MessageLookupByLibrary.simpleMessage("Our branches"),
         "ownCard":
             MessageLookupByLibrary.simpleMessage("Do you own a Tamween card?"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),

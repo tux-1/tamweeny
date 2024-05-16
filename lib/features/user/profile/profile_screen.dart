@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tamweeny/features/user/locations/locations_screen.dart';
 
 import 'package:tamweeny/features/user/profile/widgets/log_out_listtile.dart';
 import 'package:tamweeny/features/user/profile/widgets/username_widget.dart';
@@ -6,7 +7,7 @@ import 'package:tamweeny/features/user/profile/widgets/username_widget.dart';
 import '../../../generated/l10n.dart';
 
 import 'screens/account_information_screen.dart';
-import 'screens/favorites_screen.dart';
+
 import 'screens/orders_history.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -46,10 +47,10 @@ class ProfileScreen extends StatelessWidget {
 
               // Favorite products
               ListTile(
-                leading: const Icon(Icons.favorite_border),
-                title: Text(S.of(context).favorite_products),
+                leading: const Icon(Icons.location_on_outlined),
+                title: Text(S.of(context).our_branches),
                 onTap: () {
-                  Navigator.of(context).pushNamed(FavoritesScreen.routeName);
+                  Navigator.of(context).pushNamed(LocationsScreen.routeName);
                 },
               ),
 
