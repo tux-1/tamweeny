@@ -84,7 +84,7 @@ class ProductItem extends ConsumerWidget {
                         ),
                         child: Text(
                           product.productName,
-                          maxLines: 1,
+                          maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
                           style: Theme.of(context)
@@ -130,7 +130,7 @@ class ProductItem extends ConsumerWidget {
                           vertical: 0,
                         ),
                         child: Text(
-                          '${S.of(context).unit_price} ${product.sellingPrice.toString()}',
+                          '${S.of(context).price} ${product.sellingPrice.toString()}',
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!
