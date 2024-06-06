@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/generated/l10n.dart';
+import 'package:tamweeny/providers/recommended_products.dart';
 
 import '../../providers/categories.dart';
 import '../../providers/filters.dart';
@@ -59,6 +60,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
     ref.read(categoriesFutureProvider);
     final products = ref.watch(asyncProductsProvider).value ?? [];
     final offersData = ref.watch(offersProvider.future);
+    final recommendedProducts = ref.watch(recommendedProductsProvder);
 
     return CustomScrollView(
       physics: const ClampingScrollPhysics(),
@@ -73,22 +75,33 @@ class _HomePageState extends ConsumerState<HomeScreen> {
         SliverText(text: S.of(context).recommended_foods),
 
         // Recommended (horizontal scrollable sliver)
-        SliverToBoxAdapter(
-          child: SizedBox(
-            height: 225,
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                return Container(
+        recommendedProducts.when(
+          data: (data) => SliverToBoxAdapter(
+            child: SizedBox(
+              height: 225,
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemCount: data.length,
+                itemBuilder: (context, index) {
+                  return Container(
                     margin: const EdgeInsets.symmetric(horizontal: 10),
                     constraints: BoxConstraints(
                       minWidth: MediaQuery.of(context).size.width * 0.45,
                       maxWidth: MediaQuery.of(context).size.width * 0.45,
                     ),
-                    child: ProductItem(products[index]));
-              },
+                    child: ProductItem(data[index]),
+                  );
+                },
+              ),
+            ),
+          ),
+          error: (error, stackTrace) => Center(
+            child: SliverText(text: S.of(context).an_error_occurred),
+          ),
+          loading: () => const SliverToBoxAdapter(
+            child: Center(
+              child: CircularProgressIndicator(),
             ),
           ),
         ),

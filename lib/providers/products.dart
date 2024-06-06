@@ -62,6 +62,7 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
     for (var element in productsData['products']) {
       items.add(Product.fromJson(element));
     }
+
     return items;
   }
 

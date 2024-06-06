@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/generated/l10n.dart';
+import 'package:tamweeny/providers/recommended_products.dart';
 import 'package:tamweeny/providers/search.dart';
 
 import '../providers/cart.dart';
@@ -105,6 +106,13 @@ class ProductItem extends ConsumerWidget {
 
                         // to refresh the searched items
                         ref.invalidate(searchProvider);
+                        for (final item
+                            in ref.read(recommendedProductsProvder).value ??
+                                []) {
+                          if (product.id == item.id) {
+                            ref.invalidate(recommendedProductsProvder);
+                          }
+                        }
                       },
                       padding: EdgeInsets.zero,
                       icon: product.favoriteStats
