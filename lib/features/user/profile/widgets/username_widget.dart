@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:tamweeny/features/user/profile/providers/account_info.dart';
 
 class UsernameWidget extends ConsumerWidget {
@@ -9,6 +10,7 @@ class UsernameWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userData = ref.watch(accountInfoProvider);
+
     return Row(
       children: [
         Container(
@@ -30,14 +32,6 @@ class UsernameWidget extends ConsumerWidget {
           loading: () => const SizedBox(),
         ),
         const Spacer(),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.settings_outlined,
-            color: Colors.white,
-            size: 30,
-          ),
-        ),
       ],
     );
   }

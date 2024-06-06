@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tamweeny/features/user/locations/locations_screen.dart';
+import 'package:tamweeny/features/user/profile/widgets/locale_switch_tile.dart';
 
 import 'package:tamweeny/features/user/profile/widgets/log_out_listtile.dart';
 import 'package:tamweeny/features/user/profile/widgets/username_widget.dart';
@@ -89,7 +90,9 @@ class ProfileScreen extends StatelessWidget {
                 leading: const Icon(Icons.info_outline),
                 title: Text(S.of(context).about_the_app),
               ),
+              const LocaleSwitchTile(),
               const LogOutListTile(),
+              const SizedBox(height: 55),
             ],
           ),
         ),

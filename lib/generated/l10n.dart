@@ -510,10 +510,10 @@ class S {
     );
   }
 
-  /// `Telephone Number`
+  /// `Telephone No.`
   String get telephone_number {
     return Intl.message(
-      'Telephone Number',
+      'Telephone No.',
       name: 'telephone_number',
       desc: '',
       args: [],
@@ -1070,20 +1070,20 @@ class S {
     );
   }
 
-  /// `Operation number `
+  /// `Operation no.`
   String get operation_number {
     return Intl.message(
-      'Operation number ',
+      'Operation no.',
       name: 'operation_number',
       desc: '',
       args: [],
     );
   }
 
-  /// `completed successfully`
+  /// `Success`
   String get success {
     return Intl.message(
-      'completed successfully',
+      'Success',
       name: 'success',
       desc: '',
       args: [],

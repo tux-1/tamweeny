@@ -5,6 +5,7 @@ import 'package:tamweeny/features/user/profile/widgets/username_widget.dart';
 
 import '../../../generated/l10n.dart';
 import '../../user/profile/screens/account_information_screen.dart';
+import '../../user/profile/widgets/locale_switch_tile.dart';
 
 class DriverProfilePage extends StatelessWidget {
   const DriverProfilePage({super.key});
@@ -35,6 +36,7 @@ class DriverProfilePage extends StatelessWidget {
             ));
           },
         ),
+        const LocaleSwitchTile(),
         const LogOutListTile()
       ],
     );

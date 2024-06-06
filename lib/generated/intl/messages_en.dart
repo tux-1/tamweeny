@@ -136,7 +136,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "offers": MessageLookupByLibrary.simpleMessage("Offers"),
         "operation_number":
-            MessageLookupByLibrary.simpleMessage("Operation number "),
+            MessageLookupByLibrary.simpleMessage("Operation no."),
         "order_details": MessageLookupByLibrary.simpleMessage("Order Details"),
         "order_history": MessageLookupByLibrary.simpleMessage("Order History"),
         "order_success":
@@ -188,8 +188,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_out": MessageLookupByLibrary.simpleMessage("Sign Out"),
         "single": MessageLookupByLibrary.simpleMessage("Single"),
         "staySignedIn": MessageLookupByLibrary.simpleMessage("Remember me"),
-        "success":
-            MessageLookupByLibrary.simpleMessage("completed successfully"),
+        "success": MessageLookupByLibrary.simpleMessage("Success"),
         "tamween_card_information":
             MessageLookupByLibrary.simpleMessage("Tamween Card Information"),
         "tamween_card_number":
@@ -197,7 +196,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tamween_password":
             MessageLookupByLibrary.simpleMessage("Tamween Card Password"),
         "telephone_number":
-            MessageLookupByLibrary.simpleMessage("Telephone Number"),
+            MessageLookupByLibrary.simpleMessage("Telephone No."),
         "today_orders_list":
             MessageLookupByLibrary.simpleMessage("Today\'s Orders List"),
         "total_payments":

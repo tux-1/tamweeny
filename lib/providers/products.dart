@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:tamweeny/providers/offers.dart';
@@ -79,27 +80,16 @@ class AsyncProductsProvider extends AsyncNotifier<List<Product>> {
       List<Product> myList = state.value ?? [];
 
       if (myList.any((element) => element.id == id)) {
-        final product = myList.firstWhere(
+        final product = myList.firstWhereOrNull(
           (element) => id == element.id,
-          orElse: () => Product(
-            pointsPrice: -1,
-            storeId: -1,
-            categoryId: -1,
-            productType: -1,
-            id: -1,
-            productName: '-1',
-            sellingPrice: -1,
-            productImage: '-1',
-            description: '-1',
-            stockQuantity: -1,
-            discount: -1,
-            favoriteStats: false,
-          ),
         );
-        final productIndex = myList.indexOf(product);
+        int productIndex = -1;
+        if (product != null) {
+          productIndex = myList.indexOf(product);
+        }
 
-        if (productIndex != -1 && product.id != -1) {
-          myList[productIndex] = product.copyWith(
+        if (productIndex != -1) {
+          myList[productIndex] = product!.copyWith(
             favoriteStats: !product.favoriteStats,
           );
 

@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  collection: ^1.18.0
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
@@ -45,6 +46,7 @@ dependencies:
   ionicons: ^0.2.2
   latlong2: ^0.9.0
   shared_preferences: ^2.2.2
+  tsp_route_finder: ^0.0.3
 
 dev_dependencies:
   flutter_lints: ^2.0.0

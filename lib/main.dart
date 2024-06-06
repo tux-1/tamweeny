@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamweeny/features/driver/driver_landing_view.dart';
 import 'package:tamweeny/features/user/locations/locations_screen.dart';
+import 'package:tamweeny/providers/locale.dart';
 
 import 'features/user/landing_screen_view.dart';
 import 'features/authentication/screens/app_signup_screen.dart';
@@ -23,16 +24,17 @@ void main() async {
   // prefs.remove('userData');
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(localeProvider);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,
       theme: themeData(context),
-      locale: const Locale('ar'),
+      locale: Locale(locale.value?? 'ar'),
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
