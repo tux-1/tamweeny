@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:tamweeny/features/driver/driver_landing_view.dart';
+import 'package:tamweeny/features/driver/driver_locations/tsp_locations.dart';
 import 'package:tamweeny/providers/pending_orders.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../utils/token_manager.dart';
@@ -29,6 +30,7 @@ class DeliverOrderButton extends ConsumerWidget {
         ).then((value) {
           // ignore: unused_result
           ref.refresh(pendingOrdersProvider);
+          ref.invalidate(tspIndexesProvider);
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(S.of(context).success)));
