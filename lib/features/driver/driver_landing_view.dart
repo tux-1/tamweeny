@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:tamweeny/features/driver/driver_locations/driver_locations_page.dart';
+import 'package:tamweeny/features/driver/driver_locations/tsp_locations.dart';
 import 'package:tamweeny/features/driver/driver_profile/driver_profile_screen.dart';
 import 'package:tamweeny/features/driver/home/driver_home_page.dart';
 
@@ -37,6 +38,7 @@ class _DriverLandingViewState extends ConsumerState<DriverLandingView>
 
   @override
   Widget build(BuildContext context) {
+    ref.watch(tspIndexesProvider);
     ref.watch(pendingOrdersProvider);
     ref.watch(accountInfoProvider);
     final tabDecoratedBox = const DecoratedBox(

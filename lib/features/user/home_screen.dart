@@ -59,7 +59,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     ref.read(categoriesFutureProvider);
     final products = ref.watch(asyncProductsProvider).value ?? [];
-    final offersData = ref.watch(offersProvider.future);
+    final offersData = ref.watch(offersProvider);
     final recommendedProducts = ref.watch(recommendedProductsProvder);
 
     return CustomScrollView(
@@ -96,43 +96,51 @@ class _HomePageState extends ConsumerState<HomeScreen> {
               ),
             ),
           ),
-          error: (error, stackTrace) => Center(
-            child: SliverText(text: S.of(context).an_error_occurred),
-          ),
+          error: (error, stackTrace) {
+            return SliverToBoxAdapter(
+              child: Text(
+                S.of(context).an_error_occurred,
+                textAlign: TextAlign.center,
+              ),
+            );
+          },
           loading: () => const SliverToBoxAdapter(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
+            child: Center(child: CircularProgressIndicator()),
           ),
         ),
 
         SliverText(text: S.of(context).offers),
 
         // Offers (horizontal scrollable sliver)
-        SliverToBoxAdapter(
-          child: SizedBox(
-            height: 225,
-            child: FutureBuilder(
-              future: offersData,
-              builder: (context, snapshot) {
-                final offers = snapshot.data ?? [];
-                return ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: offers.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 10),
-                      constraints: BoxConstraints(
-                        minWidth: MediaQuery.of(context).size.width * 0.45,
-                        maxWidth: MediaQuery.of(context).size.width * 0.45,
-                      ),
-                      child: ProductItem(offers[index]),
-                    );
-                  },
-                );
-              },
+        offersData.when(
+          data: (offers) => SliverToBoxAdapter(
+            child: SizedBox(
+              height: 225,
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemCount: offers.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    constraints: BoxConstraints(
+                      minWidth: MediaQuery.of(context).size.width * 0.45,
+                      maxWidth: MediaQuery.of(context).size.width * 0.45,
+                    ),
+                    child: ProductItem(offers[index]),
+                  );
+                },
+              ),
             ),
+          ),
+          error: (error, stackTrace) => SliverToBoxAdapter(
+            child: Text(
+              S.of(context).an_error_occurred,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          loading: () => const SliverToBoxAdapter(
+            child: Center(child: CircularProgressIndicator()),
           ),
         ),
 

@@ -191,19 +191,6 @@ class _LocationsScreenState extends ConsumerState<LocationsScreen> {
                         ),
                       ),
 
-                    // const Marker(
-                    //   // Demo marker
-                    //   point: LatLng(
-                    //     30.094435768097608,
-                    //     31.20311443602142,
-                    //   ),
-                    //   child: Icon(
-                    //     Icons.person_pin_circle,
-                    //     color: Colors.blue,
-                    //     size: 35,
-                    //   ),
-                    // ),
-
                     // Loaded locations
                     if (snapshot.hasData)
                       for (Location location in snapshot.data!)

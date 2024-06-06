@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:tamweeny/features/driver/driver_locations/tsp_locations.dart';
 import 'package:tamweeny/providers/pending_orders.dart';
 
 class DriverLocationsPage extends ConsumerWidget {
@@ -27,14 +28,24 @@ class DriverLocationsPage extends ConsumerWidget {
               ordersData.length,
               (index) {
                 final order = ordersData[index];
+                final ordersOrder = ref.read(tspIndexesProvider).value ?? [];
+                int orderIndex = -1;
+                for (var i in ordersOrder) {
+                  if (i == index) {
+                    orderIndex = i;
+                  }
+                }
                 return Marker(
                   point: LatLng(
                     double.parse(order.userLat),
                     double.parse(order.userLong),
                   ),
-                  child: const Icon(
-                    Icons.location_on,
-                    color: Colors.red,
+                  child: Badge(
+                    label: Text(orderIndex.toString()),
+                    child: const Icon(
+                      Icons.location_on,
+                      color: Colors.red,
+                    ),
                   ),
                 );
               },

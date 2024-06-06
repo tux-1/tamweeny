@@ -61,27 +61,27 @@ class ProfileScreen extends StatelessWidget {
                 title: Text(S.of(context).notifications),
               ),
 
-              // Wallet ??
-              ListTile(
-                leading: const Icon(Icons.wallet),
-                title: Text(S.of(context).wallet_balance),
-              ),
+              // // Wallet ??
+              // ListTile(
+              //   leading: const Icon(Icons.wallet),
+              //   title: Text(S.of(context).wallet_balance),
+              // ),
 
-              // Current balance
-              ListTile(
-                leading: const Icon(Icons.credit_score),
-                title: Text(S.of(context).current_month_balance),
-                trailing: const Text('500'),
-                //Numbers should be fetched from backend here
-              ),
+              // // Current balance
+              // ListTile(
+              //   leading: const Icon(Icons.credit_score),
+              //   title: Text(S.of(context).current_month_balance),
+              //   trailing: const Text('500'),
+              //   //Numbers should be fetched from backend here
+              // ),
 
-              // Previous month balance
-              ListTile(
-                leading: const Icon(Icons.credit_score),
-                title: Text(S.of(context).previous_month_balance),
-                trailing: const Text('500'),
-                //Numbers should be fetched from backend here
-              ),
+              // // Previous month balance
+              // ListTile(
+              //   leading: const Icon(Icons.credit_score),
+              //   title: Text(S.of(context).previous_month_balance),
+              //   trailing: const Text('500'),
+              //   //Numbers should be fetched from backend here
+              // ),
               ListTile(
                 leading: const Icon(Icons.question_mark_rounded),
                 title: Text(S.of(context).get_help),

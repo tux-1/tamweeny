@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tamweeny/providers/offers.dart';
+import 'package:tamweeny/providers/recommended_products.dart';
 
 import '../../../../generated/l10n.dart';
 import '../../../../providers/auth.dart';
@@ -16,6 +18,8 @@ class LogOutListTile extends ConsumerWidget {
       onTap: () async {
         final navigator = Navigator.of(context);
         await ref.read(authProvider).logOut().then((value) {
+          ref.invalidate(offersProvider);
+          ref.invalidate(recommendedProductsProvder);
           navigator.pushReplacementNamed(LogInScreen.routeName);
         }).onError((error, _) {
           showDialog(
