@@ -116,5 +116,6 @@
     "price": "السعر",
     "our_branches": "فروعنا",
     "out_of_tamween": "منتجات خارج التموين",
-    "tamween_products": "منتجات تموينية"
+    "tamween_products": "منتجات تموينية",
+    "no_orders_at_moment": "لا يوجد طلبات حاليا"
 }

@@ -1229,6 +1229,16 @@ class S {
       args: [],
     );
   }
+
+  /// `No orders at the moment`
+  String get no_orders_at_moment {
+    return Intl.message(
+      'No orders at the moment',
+      name: 'no_orders_at_moment',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -32,7 +32,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
   }
 
   void _paginationListener() {
-    if (_controller.position.atEdge && mounted) {
+    if (_controller.position.extentAfter < 100 && mounted) {
       bool isTop = _controller.position.pixels == 0;
       if (isTop) {
         return;

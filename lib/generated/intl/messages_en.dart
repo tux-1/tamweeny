@@ -133,6 +133,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "no": MessageLookupByLibrary.simpleMessage("no"),
         "noAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
+        "no_orders_at_moment":
+            MessageLookupByLibrary.simpleMessage("No orders at the moment"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "offers": MessageLookupByLibrary.simpleMessage("Offers"),
         "operation_number":

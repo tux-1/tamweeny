@@ -5,7 +5,7 @@ import 'package:tsp_route_finder/tsp_route_finder.dart';
 final tspIndexesProvider = FutureProvider.autoDispose<List<int>>((ref) async {
   final orders = await ref.read(pendingOrdersProvider.future);
   final List<CitiesLocations> points = [];
-
+  final List<int> tspRoute = [];
   for (final order in orders) {
     points.add(CitiesLocations(
       cityName: order.customerAddress,
@@ -14,11 +14,15 @@ final tspIndexesProvider = FutureProvider.autoDispose<List<int>>((ref) async {
     ));
   }
 
-  final tspRoute = await TspPackage.calculateTspRoute(
-    locations: points,
-    startingLocationIndex: 0,
-  );
-  
+  if (points.isNotEmpty) {
+    final routePoints = await TspPackage.calculateTspRoute(
+      locations: points,
+      startingLocationIndex: 0,
+    );
+    for (final point in routePoints) {
+      tspRoute.add(point);
+    }
+  }
+
   return tspRoute;
 });
-

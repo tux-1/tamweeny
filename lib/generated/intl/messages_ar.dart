@@ -129,6 +129,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "الرقم القومي على بطاقة التموين"),
         "no": MessageLookupByLibrary.simpleMessage("لا"),
         "noAccount": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
+        "no_orders_at_moment":
+            MessageLookupByLibrary.simpleMessage("لا يوجد طلبات حاليا"),
         "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
         "offers": MessageLookupByLibrary.simpleMessage("العروض"),
         "operation_number": MessageLookupByLibrary.simpleMessage("عملية رقم "),

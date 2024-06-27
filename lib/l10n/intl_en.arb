@@ -116,5 +116,6 @@
     "price": "Price",
     "our_branches": "Our branches",
     "out_of_tamween": "Uncovered Products",
-    "tamween_products": "Tamween Products"
+    "tamween_products": "Tamween Products",
+    "no_orders_at_moment": "No orders at the moment"
 }

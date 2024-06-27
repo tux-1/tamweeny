@@ -21,6 +21,11 @@ class DriverHomePage extends ConsumerWidget {
         Expanded(
           child: orders.when(
             data: (orderData) {
+              if (orderData.isEmpty) {
+                return Center(
+                  child: Text(S.of(context).no_orders_at_moment),
+                );
+              }
               return ListView.builder(
                 itemCount: orderData.length,
                 itemBuilder: (context, index) {
