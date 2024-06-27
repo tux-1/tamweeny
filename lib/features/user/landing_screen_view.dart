@@ -24,14 +24,25 @@ class LandingScreenView extends ConsumerStatefulWidget {
 class _NavigationScreenState extends ConsumerState<LandingScreenView>
     with TickerProviderStateMixin {
   late TabController _tabController;
-  late ScrollController scrollController;
+  late ScrollController homeScrollController;
+  late ScrollController categoriesScrollController;
   int? previousIndex;
   bool _isVisible = true;
   bool canPop = false;
 
   void _listen() {
     final ScrollDirection direction =
-        scrollController.position.userScrollDirection;
+        homeScrollController.position.userScrollDirection;
+    if (direction == ScrollDirection.forward) {
+      _show();
+    } else if (direction == ScrollDirection.reverse) {
+      _hide();
+    }
+  }
+
+  void _listen2() {
+    final ScrollDirection direction =
+        categoriesScrollController.position.userScrollDirection;
     if (direction == ScrollDirection.forward) {
       _show();
     } else if (direction == ScrollDirection.reverse) {
@@ -55,16 +66,20 @@ class _NavigationScreenState extends ConsumerState<LandingScreenView>
   void initState() {
     super.initState();
     _tabController = TabController(initialIndex: 3, vsync: this, length: 4);
-    scrollController = ScrollController();
-    scrollController.addListener(_listen);
+    homeScrollController = ScrollController();
+    homeScrollController.addListener(_listen);
+    categoriesScrollController = ScrollController();
+    categoriesScrollController.addListener(_listen2);
     ref.read(filtersProvider).tabController = _tabController;
   }
 
   @override
   void dispose() {
     _tabController.dispose();
-    scrollController.removeListener(_listen);
-    scrollController.dispose();
+    homeScrollController.removeListener(_listen);
+    homeScrollController.dispose();
+    categoriesScrollController.removeListener(_listen2);
+    categoriesScrollController.dispose();
     super.dispose();
   }
 
@@ -198,8 +213,8 @@ class _NavigationScreenState extends ConsumerState<LandingScreenView>
               children: [
                 const ProfileScreen(),
                 const FavoritesScreen(),
-                CategoriesScreen(scrollController: scrollController),
-                HomeScreen(scrollController: scrollController),
+                CategoriesScreen(scrollController: categoriesScrollController),
+                HomeScreen(scrollController: homeScrollController),
               ]),
         ),
       ),

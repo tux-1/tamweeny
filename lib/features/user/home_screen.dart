@@ -31,7 +31,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
     });
   }
 
-  void _listen() {
+  void _paginationListener() {
     if (_controller.position.atEdge && mounted) {
       bool isTop = _controller.position.pixels == 0;
       if (isTop) {
@@ -46,12 +46,12 @@ class _HomePageState extends ConsumerState<HomeScreen> {
   void initState() {
     super.initState();
     _controller = widget.scrollController!;
-    _controller.addListener(_listen);
+    _controller.addListener(_paginationListener);
   }
 
   @override
   void dispose() {
-    _controller.removeListener(_listen);
+    _controller.removeListener(_paginationListener);
     super.dispose();
   }
 
@@ -109,7 +109,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
           ),
         ),
 
-        SliverText(text: S.of(context).offers),
+        SliverText(text: S.of(context).out_of_tamween),
 
         // Offers (horizontal scrollable sliver)
         offersData.when(
@@ -144,7 +144,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
           ),
         ),
 
-        SliverText(text: S.of(context).most_popular),
+        SliverText(text: S.of(context).tamween_products),
 
         SliverPadding(
           padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),

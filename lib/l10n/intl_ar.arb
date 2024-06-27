@@ -114,6 +114,7 @@
     "product_name": "اسم المنتج",
     "quantity": "الكمية",
     "price": "السعر",
-    "our_branches": "فروعنا"
-    
+    "our_branches": "فروعنا",
+    "out_of_tamween": "منتجات خارج التموين",
+    "tamween_products": "منتجات تموينية"
 }

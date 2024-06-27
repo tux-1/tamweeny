@@ -13,73 +13,72 @@ class CustomSearchBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(11),
-                    color: const Color(0xff2D2D2D)),
-                child: TextField(
-                  onTap: () {
-                    showSearch(
-                      context: context,
-                      delegate: CustomSearchDelegate(
-                        ref: ref,
-                        hintText: S.of(context).search,
-                      ),
-                    );
-                  },
-                  readOnly: true,
-                  decoration: InputDecoration(
-                    fillColor: const Color(0xff2D2D2D),
-                    hintText: S.of(context).search,
-                    hintStyle: Theme.of(context).textTheme.headlineMedium,
-                    contentPadding: EdgeInsets.zero,
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide.none,
+    return SliverAppBar(
+      backgroundColor: const Color(0xff1E1E1E),
+      floating: true,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(11),
+                  color: const Color(0xff2D2D2D)),
+              child: TextField(
+                onTap: () {
+                  showSearch(
+                    context: context,
+                    delegate: CustomSearchDelegate(
+                      ref: ref,
+                      hintText: S.of(context).search,
                     ),
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                    ),
-                    disabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                    ),
-                    prefixIcon: const Icon(
-                      Ionicons.search,
-                      color: Colors.white,
-                    ),
+                  );
+                },
+                readOnly: true,
+                decoration: InputDecoration(
+                  fillColor: const Color(0xff2D2D2D),
+                  hintText: S.of(context).search,
+                  hintStyle: Theme.of(context).textTheme.headlineMedium,
+                  contentPadding: EdgeInsets.zero,
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                  ),
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                  ),
+                  disabledBorder: const OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                  ),
+                  prefixIcon: const Icon(
+                    Ionicons.search,
+                    color: Colors.white,
                   ),
                 ),
               ),
             ),
-            const SizedBox(
-              width: 15,
-            ),
-            DecoratedBox(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(11),
-                  color: const Color(0xff2D2D2D)),
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute<void>(
-                        builder: (BuildContext context) => const CartScreen(),
-                      ),
-                    );
-                  },
-                  icon: const Icon(
-                    Ionicons.cart,
-                    size: 27,
-                    color: Colors.white,
-                  )),
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(
+            width: 15,
+          ),
+          DecoratedBox(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(11),
+                color: const Color(0xff2D2D2D)),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => const CartScreen(),
+                    ),
+                  );
+                },
+                icon: const Icon(
+                  Ionicons.cart,
+                  size: 27,
+                  color: Colors.white,
+                )),
+          ),
+        ],
       ),
     );
   }
@@ -114,12 +113,7 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget? buildLeading(BuildContext context) {
-    return IconButton(
-        onPressed: () {
-          close(context, null);
-          ref.read(filtersProvider).searchQuery = '';
-        },
-        icon: const Icon(Icons.arrow_back));
+    return const BackButton();
   }
 
   @override

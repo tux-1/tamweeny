@@ -120,9 +120,10 @@ class _LogInCardState extends ConsumerState<LogInCard> {
                 color: Colors.white,
               ));
 
-    return SizedBox(
-      width: deviceSize.width * 0.95,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal:8.0),
       child: Form(
+        
         key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -136,7 +137,7 @@ class _LogInCardState extends ConsumerState<LogInCard> {
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
             ),
-
+      
             TextFormFieldCard(
               obscureText: _obscureText,
               suffixIcon: iconButton,
@@ -146,7 +147,7 @@ class _LogInCardState extends ConsumerState<LogInCard> {
                 _logInData['password'] = value.toString();
               },
             ),
-
+      
             //CheckBox
             // Row(
             //   children: [
@@ -170,8 +171,8 @@ class _LogInCardState extends ConsumerState<LogInCard> {
             //         }),
             //   ],
             // ),
-            const SizedBox(height: 17),
-
+            const SizedBox(height: 30),
+      
             // Log in button
             SizedBox(
               width: deviceSize.width * 0.7,
@@ -184,7 +185,7 @@ class _LogInCardState extends ConsumerState<LogInCard> {
                     : Text(S.of(context).logIn),
               ),
             ),
-
+      
             const SizedBox(height: 7),
             TextButton(
               child: Text(
@@ -193,6 +194,7 @@ class _LogInCardState extends ConsumerState<LogInCard> {
               ),
               onPressed: () {},
             ),
+      
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

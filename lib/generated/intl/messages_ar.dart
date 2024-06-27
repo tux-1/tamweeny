@@ -137,6 +137,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "order_success":
             MessageLookupByLibrary.simpleMessage("تم إجراء الطلب بنجاح"),
         "our_branches": MessageLookupByLibrary.simpleMessage("فروعنا"),
+        "out_of_tamween":
+            MessageLookupByLibrary.simpleMessage("منتجات خارج التموين"),
         "ownCard":
             MessageLookupByLibrary.simpleMessage("هل تمتلك بطاقة تموين؟"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة السر"),
@@ -190,6 +192,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("رقم بطاقة التموين"),
         "tamween_password":
             MessageLookupByLibrary.simpleMessage("كلمة مرور بطاقة التموين"),
+        "tamween_products":
+            MessageLookupByLibrary.simpleMessage("منتجات تموينية"),
         "telephone_number": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
         "today_orders_list":
             MessageLookupByLibrary.simpleMessage("قائمة طلبات اليوم"),

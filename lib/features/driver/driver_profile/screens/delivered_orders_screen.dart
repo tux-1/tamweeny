@@ -12,7 +12,10 @@ class DeliveredOrdersScreen extends ConsumerWidget {
     final deliveredOrders = ref.watch(deliveredOrdersProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).order_history),
+        title: Text(
+          S.of(context).order_history,
+          style: const TextStyle(color: Colors.white),
+        ),
       ),
       body: deliveredOrders.when(
         data: (deliveredOrdersData) {

@@ -114,5 +114,7 @@
     "product_name": "Product Name",
     "quantity": "Quantity",
     "price": "Price",
-    "our_branches": "Our branches"
+    "our_branches": "Our branches",
+    "out_of_tamween": "Uncovered Products",
+    "tamween_products": "Tamween Products"
 }

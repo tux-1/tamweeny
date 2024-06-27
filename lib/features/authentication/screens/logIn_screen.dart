@@ -13,38 +13,31 @@ class LogInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScaffold(
       fadeBackground: false,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                SafeArea(
-                  child: Text(
-                    S.of(context).welcome,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                ),
-                Text(
-                  S.of(context).welcomeSubtitle,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-              ],
-            ),
-            
-            Column(
-              children: [
-                Text(
-                  S.of(context).logInTitle,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                const SizedBox(height: 8.5),
-                //Login Card + Login Button
-                const LogInCard(),
-              ],
-            ),
-          ],
-        ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SafeArea(child: SizedBox(height: 15)),
+          Text(
+            S.of(context).welcome,
+            style: Theme.of(context)
+                .textTheme
+                .headlineMedium
+                ?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          Text(
+            S.of(context).welcomeSubtitle,
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          const Spacer(flex: 3,),
+          Text(
+            S.of(context).logInTitle,
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          const SizedBox(height: 14),
+          //Login Card + Login Button
+          const LogInCard(),
+          const Spacer(),
+        ],
       ),
     );
   }

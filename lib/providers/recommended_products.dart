@@ -5,8 +5,7 @@ import 'package:http/http.dart' as http;
 import '../../../../Models/product.dart';
 import '../../../../utils/token_manager.dart';
 
-final recommendedProductsProvder =
-    FutureProvider<List<Product>>((ref) async {
+final recommendedProductsProvder = FutureProvider<List<Product>>((ref) async {
   // Getting the token
   final token = await TokenManager.getToken();
 

@@ -24,10 +24,7 @@ class DriverHomePage extends ConsumerWidget {
               return ListView.builder(
                 itemCount: orderData.length,
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: OrderWidget(order: orderData[index]),
-                  );
+                  return OrderWidget(order: orderData[index]);
                 },
               );
             },

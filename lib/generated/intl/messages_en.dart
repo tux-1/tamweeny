@@ -142,6 +142,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "order_success":
             MessageLookupByLibrary.simpleMessage("Order made successfully"),
         "our_branches": MessageLookupByLibrary.simpleMessage("Our branches"),
+        "out_of_tamween":
+            MessageLookupByLibrary.simpleMessage("Uncovered Products"),
         "ownCard":
             MessageLookupByLibrary.simpleMessage("Do you own a Tamween card?"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
@@ -195,6 +197,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tamween Card Number"),
         "tamween_password":
             MessageLookupByLibrary.simpleMessage("Tamween Card Password"),
+        "tamween_products":
+            MessageLookupByLibrary.simpleMessage("Tamween Products"),
         "telephone_number":
             MessageLookupByLibrary.simpleMessage("Telephone No."),
         "today_orders_list":

@@ -1209,6 +1209,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Uncovered Products`
+  String get out_of_tamween {
+    return Intl.message(
+      'Uncovered Products',
+      name: 'out_of_tamween',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tamween Products`
+  String get tamween_products {
+    return Intl.message(
+      'Tamween Products',
+      name: 'tamween_products',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

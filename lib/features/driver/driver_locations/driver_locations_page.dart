@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:flutter_map/flutter_map.dart';
@@ -33,48 +32,46 @@ class _DriverLocationsPageState extends ConsumerState<DriverLocationsPage> {
             initialZoom: 11.5,
           ),
           children: [
+            // CurrentLocationLayer(),
             TileLayer(
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
               userAgentPackageName: 'com.example.app',
             ),
             orders.when(
-              data: (ordersData) {
-                return MarkerLayer(
-                  markers: List.generate(
-                    ordersData.length,
-                    (index) {
-                      final order = ordersData[index];
-
-                      int orderIndex = -1;
-                      for (final i in ordersOrder) {
-                        if (i == index) {
-                          orderIndex = ordersOrder.indexOf(i);
-                        }
+              data: (ordersData) => MarkerLayer(
+                markers: List.generate(
+                  ordersData.length,
+                  (index) {
+                    final order = ordersData[index];
+                    int orderIndex = -1;
+                    for (final i in ordersOrder) {
+                      if (i == index) {
+                        orderIndex = ordersOrder.indexOf(i);
                       }
-                      return Marker(
-                        point: LatLng(
-                          double.parse(order.userLat),
-                          double.parse(order.userLong),
+                    }
+                    return Marker(
+                      point: LatLng(
+                        double.parse(order.userLat),
+                        double.parse(order.userLong),
+                      ),
+                      child: Badge(
+                        label: Text('${orderIndex + 1}'),
+                        child: IconButton(
+                          icon: const Icon(Icons.location_on),
+                          splashColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onPressed: () {
+                            setState(() {
+                              currentOrder = order;
+                            });
+                          },
+                          color: Colors.red,
                         ),
-                        child: Badge(
-                          label: Text('${orderIndex + 1}'),
-                          child: IconButton(
-                            icon: const Icon(Icons.location_on),
-                            splashColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onPressed: () {
-                              setState(() {
-                                currentOrder = order;
-                              });
-                            },
-                            color: Colors.red,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                );
-              },
+                      ),
+                    );
+                  },
+                ),
+              ),
               error: (_, __) => const SizedBox.shrink(),
               loading: () => const SizedBox.shrink(),
             ),
