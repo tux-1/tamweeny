@@ -3,6 +3,7 @@ import 'package:tamweeny/features/user/locations/locations_screen.dart';
 import 'package:tamweeny/features/user/profile/widgets/locale_switch_tile.dart';
 
 import 'package:tamweeny/features/user/profile/widgets/log_out_listtile.dart';
+import 'package:tamweeny/features/user/profile/widgets/tamween_points_tile.dart';
 import 'package:tamweeny/features/user/profile/widgets/username_widget.dart';
 
 import '../../../generated/l10n.dart';
@@ -61,11 +62,8 @@ class ProfileScreen extends StatelessWidget {
                 title: Text(S.of(context).notifications),
               ),
 
-              // // Wallet ??
-              // ListTile(
-              //   leading: const Icon(Icons.wallet),
-              //   title: Text(S.of(context).wallet_balance),
-              // ),
+              // Wallet ??
+              const TamweenPointsTile(),
 
               // // Current balance
               // ListTile(
