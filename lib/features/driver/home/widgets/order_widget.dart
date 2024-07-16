@@ -76,13 +76,10 @@ class OrderWidget extends StatelessWidget {
           Text(S.of(context).address),
           _TextDecorator(
             shouldConstrain: false,
-            text: Row(
-              children: [
-                Text(
-                  order.customerAddress,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+            text: Text(
+              order.customerAddress,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 3,
             ),
           ),
           const SizedBox(height: 7),
@@ -131,9 +128,7 @@ class _TextDecorator extends StatelessWidget {
       padding: const EdgeInsets.all(5),
       child: Row(
         children: [
-          Flexible(
-            child: text,
-          ),
+          Flexible(child: text),
         ],
       ),
     );

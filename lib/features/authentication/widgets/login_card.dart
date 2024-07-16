@@ -89,8 +89,13 @@ class _LogInCardState extends ConsumerState<LogInCard> {
             } else {
               errorText = error.toString();
             }
-            return AlertDialog(
-              title: Text(errorText),
+            return Directionality(
+              textDirection: TextDirection.ltr,
+              child: AlertDialog(
+                title: Text(
+                  errorText,
+                ),
+              ),
             );
           });
       return null;
@@ -121,9 +126,8 @@ class _LogInCardState extends ConsumerState<LogInCard> {
               ));
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal:8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Form(
-        
         key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -137,7 +141,7 @@ class _LogInCardState extends ConsumerState<LogInCard> {
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
             ),
-      
+
             TextFormFieldCard(
               obscureText: _obscureText,
               suffixIcon: iconButton,
@@ -147,7 +151,7 @@ class _LogInCardState extends ConsumerState<LogInCard> {
                 _logInData['password'] = value.toString();
               },
             ),
-      
+
             //CheckBox
             // Row(
             //   children: [
@@ -172,7 +176,7 @@ class _LogInCardState extends ConsumerState<LogInCard> {
             //   ],
             // ),
             const SizedBox(height: 30),
-      
+
             // Log in button
             SizedBox(
               width: deviceSize.width * 0.7,
@@ -185,16 +189,16 @@ class _LogInCardState extends ConsumerState<LogInCard> {
                     : Text(S.of(context).logIn),
               ),
             ),
-      
+
             const SizedBox(height: 7),
-            TextButton(
-              child: Text(
-                S.of(context).forgotPassword,
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              onPressed: () {},
-            ),
-      
+            // TextButton(
+            //   child: Text(
+            //     S.of(context).forgotPassword,
+            //     style: Theme.of(context).textTheme.bodyLarge,
+            //   ),
+            //   onPressed: () {},
+            // ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

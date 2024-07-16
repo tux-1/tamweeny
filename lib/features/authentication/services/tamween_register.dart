@@ -9,6 +9,7 @@ Future<void> registerToTamween({
   required int phoneNumber,
   required List<List<int>> nationalIdCardAndBirthCertificate,
   required List<List<int>> followersNationalIdCardsAndBirthCertificates,
+  required String nationalIdNumber,
 }) async {
   final registerUrl = Uri.parse(
     'http://10.0.2.2:8000/api/cardRegistration',
@@ -21,6 +22,7 @@ Future<void> registerToTamween({
     ..fields['socialStatus'] = socialStatus
     ..fields['salary'] = salary.toString()
     ..fields['phoneNumber'] = phoneNumber.toString()
+    ..fields['nationalId'] = nationalIdNumber
     ..files.addAll([
       for (final file in nationalIdCardAndBirthCertificate)
         http.MultipartFile.fromBytes(

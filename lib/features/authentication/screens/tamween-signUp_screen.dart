@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tamweeny/features/authentication/screens/logIn_screen.dart';
 import 'package:tamweeny/features/authentication/services/tamween_register.dart';
@@ -24,6 +25,9 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _wageController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _nationalIdNumberController =
+      TextEditingController();
+
   bool isLoading = false;
   List<String> genders = [
     'Male',
@@ -170,6 +174,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
         socialStatus: chosenMaritalStatus.toString(),
         salary: num.parse(_wageController.text),
         phoneNumber: int.parse(_phoneNumberController.text),
+        nationalIdNumber: _nationalIdNumberController.text,
         nationalIdCardAndBirthCertificate: _uploadOwnerImages,
         followersNationalIdCardsAndBirthCertificates: _uploadDependentsImages,
       ).then((value) {
@@ -204,6 +209,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
     _emailController.dispose();
     _wageController.dispose();
     _phoneNumberController.dispose();
+    _nationalIdNumberController.dispose();
     super.dispose();
   }
 
@@ -310,8 +316,17 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                         return null;
                       },
                     ),
-                    Text(S.of(context).marital_status),
 
+                    Text(S.of(context).national_number),
+                    CustomTextField(
+                      keyboardType: TextInputType.number,
+                      controller: _nationalIdNumberController,
+                      maxLength: 14,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      validator: ValidationBuilder().minLength(14).build(),
+                    ),
+
+                    Text(S.of(context).marital_status),
                     DecoratedBox(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
@@ -372,6 +387,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
                       keyboardType: TextInputType.number,
                       controller: _wageController,
                       textInputAction: TextInputAction.done,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       onSaved: (minimumSalary) {
                         _signUpData['minimumSalary'] = minimumSalary.toString();
                       },

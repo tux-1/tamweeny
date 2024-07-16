@@ -6,7 +6,7 @@ import 'package:tamweeny/Models/order.dart';
 import '../../../utils/token_manager.dart';
 
 final pendingOrdersProvider =
-    FutureProvider.autoDispose<List<Order>>((ref) async {
+    StreamProvider.autoDispose<List<Order>>((ref) async* {
   // Getting the token
   final token = await TokenManager.getToken();
 
@@ -25,5 +25,5 @@ final pendingOrdersProvider =
     orders.add(Order.fromJson(item));
   }
 
-  return orders;
+  yield orders;
 });

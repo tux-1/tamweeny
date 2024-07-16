@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextField extends StatelessWidget {
   final void Function(String?)? onSaved;
@@ -10,6 +11,8 @@ class CustomTextField extends StatelessWidget {
   final String? initialValue;
   final TextEditingController? controller;
   final Function()? onTap;
+  final List<TextInputFormatter>? inputFormatters;
+
   const CustomTextField({
     super.key,
     this.onSaved,
@@ -21,6 +24,7 @@ class CustomTextField extends StatelessWidget {
     this.initialValue,
     this.controller,
     this.onTap,
+    this.inputFormatters,
   });
 
   @override
@@ -40,6 +44,7 @@ class CustomTextField extends StatelessWidget {
         keyboardType: keyboardType,
         textInputAction: textInputAction,
         onTap: onTap,
+        inputFormatters: inputFormatters,
         maxLines: 1,
         maxLength: maxLength,
         onTapOutside: (event) => FocusScope.of(context).unfocus(),
