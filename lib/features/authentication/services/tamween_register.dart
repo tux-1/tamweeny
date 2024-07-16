@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 Future<void> registerToTamween({
@@ -43,6 +44,15 @@ Future<void> registerToTamween({
     ]);
 
   await request.send().then((response) {
-    if (response.statusCode == 200) print("Uploaded!");
-  });
+    // if (response.statusCode == 200) print("Uploaded!");
+    if (kDebugMode) {
+      print(response.toString());
+    }
+  }).onError(
+    (error, stackTrace) {
+      if (kDebugMode) {
+        print('An error occured');
+      }
+    },
+  );
 }
