@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,6 +19,10 @@ Future<void> registerToTamween({
   );
 
   final request = http.MultipartRequest('POST', registerUrl)
+    ..headers.addAll({
+      'Accept': 'application/json',
+      "Content-Type": "application/x-www-form-urlencoded",
+    })
     ..fields['name'] = name
     ..fields['gender'] = gender
     ..fields['email'] = email
@@ -27,7 +33,7 @@ Future<void> registerToTamween({
     ..files.addAll([
       for (final file in nationalIdCardAndBirthCertificate)
         http.MultipartFile.fromBytes(
-          'nationalIdCardAndBirthCertificate',
+          'nationalIdCardAndBirthCertificate[]',
           file,
           filename:
               'nationalIdCardAndBirthCertificate${nationalIdCardAndBirthCertificate.indexOf(file)}',
@@ -43,16 +49,56 @@ Future<void> registerToTamween({
         ),
     ]);
 
-  await request.send().then((response) {
-    // if (response.statusCode == 200) print("Uploaded!");
-    if (kDebugMode) {
-      print(response.toString());
-    }
-  }).onError(
-    (error, stackTrace) {
+  final streamedResponse = await request.send();
+  final response = await http.Response.fromStream(streamedResponse);
+  final responseJson = jsonDecode(response.body);
+
+  if (bool.parse(responseJson['success']) == false) {
+    throw Exception(responseJson['message']);
+  }
+
+  if (kDebugMode) {
+    print('Status Code: ${response.statusCode}');
+    print('Response Headers: ${response.headers}');
+    print('Response Body: ${response.body}');
+  }
+
+  if (response.statusCode == 302) {
+    final redirectUrl = response.headers['location'];
+    if (redirectUrl != null) {
+      final redirectRequest =
+          http.MultipartRequest('POST', Uri.parse(redirectUrl))
+            ..fields['name'] = name
+            ..fields['gender'] = gender
+            ..fields['email'] = email
+            ..fields['socialStatus'] = socialStatus
+            ..fields['salary'] = salary.toString()
+            ..fields['phoneNumber'] = phoneNumber.toString()
+            ..fields['nationalId'] = nationalIdNumber
+            ..files.addAll([
+              for (final file in nationalIdCardAndBirthCertificate)
+                http.MultipartFile.fromBytes(
+                  'nationalIdCardAndBirthCertificate',
+                  file,
+                  filename:
+                      'nationalIdCardAndBirthCertificate${nationalIdCardAndBirthCertificate.indexOf(file)}',
+                ),
+            ])
+            ..files.addAll([
+              for (final file in followersNationalIdCardsAndBirthCertificates)
+                http.MultipartFile.fromBytes(
+                  'followersNationalIdCardsAndBirthCertificates[]',
+                  file,
+                  filename:
+                      'followersNationalIdCardsAndBirthCertificates${followersNationalIdCardsAndBirthCertificates.indexOf(file)}',
+                ),
+            ]);
+
+      final redirectResponse = await redirectRequest.send();
       if (kDebugMode) {
-        print('An error occured');
+        print('Redirect Status Code: ${redirectResponse.statusCode}');
+        print('Redirect Response: ${redirectResponse.toString()}');
       }
-    },
-  );
+    }
+  }
 }

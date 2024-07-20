@@ -197,7 +197,7 @@ class _TamweenSignUpScreenState extends State<TamweenSignUpScreen> {
           if (kDebugMode) {
             print(error);
           }
-          showErrorDialog(message: 'An error occured');
+          showErrorDialog(message: 'Error: ${error.toString()}' );
         });
       });
     }
